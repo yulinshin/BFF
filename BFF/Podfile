@@ -8,5 +8,7 @@ target 'BFF' do
   # Pods for BFF
 
  pod 'SwiftLint'
+ pod 'Firebase/Analytics'
+ pod 'FirebaseFirestoreSwift', '> 7.0-beta'
 
 end
