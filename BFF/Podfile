@@ -10,5 +10,6 @@ target 'BFF' do
  pod 'SwiftLint'
  pod 'Firebase/Analytics'
  pod 'FirebaseFirestoreSwift', '> 7.0-beta'
+ pod 'IQKeyboardManagerSwift'
 
 end
