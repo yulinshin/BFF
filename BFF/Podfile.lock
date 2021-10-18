@@ -459,6 +459,7 @@ PODS:
     - gRPC-Core/Interface (= 1.28.2)
   - gRPC-Core/Interface (1.28.2)
   - IQKeyboardManagerSwift (6.5.6)
+  - Kingfisher (6.3.1)
   - leveldb-library (1.22.1)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
@@ -472,6 +473,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - FirebaseFirestoreSwift (> 7.0-beta)
   - IQKeyboardManagerSwift
+  - Kingfisher
   - SwiftLint
 
 SPEC REPOS:
@@ -491,6 +493,7 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - IQKeyboardManagerSwift
+    - Kingfisher
     - leveldb-library
     - nanopb
     - PromisesObjC
@@ -512,11 +515,12 @@ SPEC CHECKSUMS:
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
 
-PODFILE CHECKSUM: 4599d3c9594e380b4830bdc21a4fd54188555343
+PODFILE CHECKSUM: 8aa754f7c7e07aa3adea5f44258ad325c9d9d99b
 
 COCOAPODS: 1.11.2
