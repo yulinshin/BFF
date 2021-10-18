@@ -14,3 +14,10 @@ file_length:
 type_body_length:
   - 500 # warning
   - 700 # error
+
+line_length:
+    warning: 250
+    ignores_comments: true
+
+cyclomatic_complexity:
+  ignores_case_statements: true
