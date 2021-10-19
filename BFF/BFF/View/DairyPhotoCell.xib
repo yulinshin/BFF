@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DiaryCollectionViewCell" id="gTV-IL-0wX" customClass="DiaryCollectionViewCell" customModule="BFF" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DairyPhotoCell" id="gTV-IL-0wX" customClass="DairyPhotoCell" customModule="BFF" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="178" height="178"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -31,7 +31,7 @@
             </constraints>
             <size key="customSize" width="178" height="178"/>
             <connections>
-                <outlet property="image" destination="jmY-aM-JeN" id="Hr2-8v-JVw"/>
+                <outlet property="image" destination="jmY-aM-JeN" id="4Uk-pe-hFH"/>
             </connections>
             <point key="canvasLocation" x="224.63768115942031" y="174.77678571428569"/>
         </collectionViewCell>

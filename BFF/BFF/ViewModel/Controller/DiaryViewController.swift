@@ -27,7 +27,7 @@ class DiaryViewController: UIViewController {
     enum Item: Hashable {
 
         case pet(Pet)
-        case diary(String)
+        case diary(Diary)
 
         var pet: Pet? {
             if case .pet(let pet) = self {
@@ -37,7 +37,7 @@ class DiaryViewController: UIViewController {
             }
         }
 
-        var diary: String? {
+        var diary: Diary? {
             if case .diary(let diary) = self {
                 return diary
             } else {
@@ -46,32 +46,34 @@ class DiaryViewController: UIViewController {
         }
 
         static func == (lhs: Item, rhs: Item) -> Bool {
-            return lhs.diary == rhs.diary && lhs.pet?.petId == rhs.pet?.petId
+            return lhs.diary?.diaryId == rhs.diary?.diaryId && lhs.pet?.petId == rhs.pet?.petId
           }
 
         func hash(into hasher: inout Hasher) {
            hasher.combine(pet?.petId)
-           hasher.combine(diary)
+            hasher.combine(diary?.diaryId)
         }
-
     }
 
-//    var diaries = [Item]()
-    var diaries =  [
-        Item.diary("https://images.pexels.com/photos/160846/french-bulldog-summer-smile-joy-160846.jpeg?cs=srgb&dl=pexels-pixabay-160846.jpg&fm=jpg/"),
-        Item.diary("https://images.pexels.com/photos/4587998/pexels-photo-4587998.jpeg?cs=srgb&dl=pexels-anna-shvets-4587998.jpg&fm=jpg"),
-        Item.diary("https://images.pexels.com/photos/2449536/pexels-photo-2449536.jpeg?cs=srgb&dl=pexels-megan-markham-2449536.jpg&fm=jpg"),
-        Item.diary("https://images.pexels.com/photos/4730048/pexels-photo-4730048.jpeg?cs=srgb&dl=pexels-maria-perez-4730048.jpg&fm=jpg"),
-        Item.diary("https://images.pexels.com/photos/4079375/pexels-photo-4079375.jpeg?cs=srgb&dl=pexels-kelatout-4079375.jpg&fm=jpg")
+    var diaries = [Item]() {
+        didSet {
+            applySnapshot()
+            diariesCollectionView.reloadData()
+        }
+    }
 
-    ]
-
+    // from HomePageVC
     var myPets = [
         // swiftlint:disable:next line_length
-        Item.pet(Pet(petId: "lnx5II0UzFrDF53H9OSz", name: "豆豆", userId: "", healthInfo: HealthInfo(allergy: "", birthday: "", chipId: "", gender: "", note: "", type: "", weight: 0), medicalRecords: [MedicalRecord](), petThumbnail: "https://images.pexels.com/photos/4587971/pexels-photo-4587971.jpeg?cs=srgb&dl=pexels-anna-shvets-4587971.jpg&fm=jpg")),
+        Item.pet(Pet(petId: "2", name: "豆豆", userId: "1", healthInfo: HealthInfo(allergy: "", birthday: "", chipId: "", gender: "", note: "", type: "", weight: 0), medicalRecords: [MedicalRecord](), petThumbnail: "https://images.pexels.com/photos/4587971/pexels-photo-4587971.jpeg?cs=srgb&dl=pexels-anna-shvets-4587971.jpg&fm=jpg")),
         // swiftlint:disable:next line_length
-        Item.pet(Pet(petId: "1111111111", name: "豆2222豆", userId: "22", healthInfo: HealthInfo(allergy: "22", birthday: "22", chipId: "", gender: "222", note: "222", type: "222", weight: 0), medicalRecords: [MedicalRecord](), petThumbnail: "https://images.pexels.com/photos/4079375/pexels-photo-4079375.jpeg?cs=srgb&dl=pexels-kelatout-4079375.jpg&fm=jpg"))
+        Item.pet(Pet(petId: "lnx5II0UzFrDF53H9OSz", name: "豆2222豆", userId: "2", healthInfo: HealthInfo(allergy: "22", birthday: "22", chipId: "", gender: "222", note: "222", type: "222", weight: 0), medicalRecords: [MedicalRecord](), petThumbnail: "https://images.pexels.com/photos/4079375/pexels-photo-4079375.jpeg?cs=srgb&dl=pexels-kelatout-4079375.jpg&fm=jpg"))
     ]
+    var showPets = ["1", "2"] {
+        didSet {
+            diariesCollectionView.reloadData()
+        }
+    }
 
     private lazy var diariesDataSource = makeDiariesDataSource()
     private lazy var petsDataSource = makePetsDataSource()
@@ -81,18 +83,41 @@ class DiaryViewController: UIViewController {
 
         selectedPetsCollectionView.delegate = self
         diariesCollectionView.delegate = self
-        let diaryNib = UINib(nibName: "DiaryCollectionViewCell", bundle: nil)
-        diariesCollectionView.register(diaryNib, forCellWithReuseIdentifier: "DiaryCollectionViewCell")
+        let diaryNib = UINib(nibName: "DairyPhotoCell", bundle: nil)
+        diariesCollectionView.register(diaryNib, forCellWithReuseIdentifier: DairyPhotoCell.identifier)
         let petNib = UINib(nibName: "SelectedPetsCollectionViewCell", bundle: nil)
-        selectedPetsCollectionView.register(petNib, forCellWithReuseIdentifier: "SelectedPetsCollectionViewCell")
+        selectedPetsCollectionView.register(petNib, forCellWithReuseIdentifier: SelectedPetsCollectionViewCell.identifier)
         diariesCollectionView.dataSource = diariesDataSource
         selectedPetsCollectionView.dataSource = petsDataSource
         diariesCollectionView.collectionViewLayout = creatLayout(type: .single)
+        selectedPetsCollectionView.allowsMultipleSelection = true
         fetchData()
-
     }
 
     func fetchData() {
+
+        FirebaseManager.shared.fetchDiaries(userId: "7QBGUfSDqPPjfJXRpQAI") { result in
+
+            switch result {
+
+            case .success(let diaries):
+
+                var diaryItems = [Item]()
+
+                diaries.forEach { diary in
+                    diaryItems.append(Item.diary(diary))
+                }
+                self.diaries = diaryItems
+
+            case .failure(let error):
+                print("fetchData.failure\(error)")
+
+            }
+        }
+
+    }
+
+    func applySnapshot(animatingDifferences: Bool = true) {
         var diariesSnapshot = Snapshot()
         diariesSnapshot.appendSections([.all])
         diariesSnapshot.appendItems(diaries, toSection: .all)
@@ -102,7 +127,20 @@ class DiaryViewController: UIViewController {
         myPetsSnapshot.appendSections([.all])
         myPetsSnapshot.appendItems(myPets, toSection: .all)
         petsDataSource.apply(myPetsSnapshot, animatingDifferences: false)
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+
+        for (index, item) in myPets.enumerated() {
+            guard let petId = item.pet?.petId,
+                  let cell = selectedPetsCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SelectedPetsCollectionViewCell else { return }
+            if showPets.contains(petId) {
+                selectedPetsCollectionView.selectItem(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: [])
+                cell.selectBackground.layer.borderColor = UIColor.orange.cgColor
+                cell.selectBackground.layer.borderWidth = 1
+            }
+        }
     }
 
     // MARK: - dataSource
@@ -111,13 +149,12 @@ class DiaryViewController: UIViewController {
 
         let dataSource = DataSource(collectionView: diariesCollectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
 
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiaryCollectionViewCell", for: indexPath) as? DiaryCollectionViewCell
-            guard let imageStr = item.diary else { return cell }
-            print (imageStr)
-            cell?.image.loadImage(imageStr)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DairyPhotoCell.identifier, for: indexPath) as? DairyPhotoCell
+
+            guard let imageStr = item.diary?.images.first else { return cell }
+            cell?.configure(with: PhotoCellViewlModel(with: imageStr))
 
             return cell
-
         }
 
         return dataSource
@@ -128,11 +165,11 @@ class DiaryViewController: UIViewController {
 
         let dataSource = DataSource(collectionView: selectedPetsCollectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
 
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectedPetsCollectionViewCell", for: indexPath) as? SelectedPetsCollectionViewCell
-            guard let imageStr = item.pet?.petThumbnail else { return cell }
-            print (imageStr)
-            cell?.image.loadImage(imageStr)
-            cell?.isSelected = true
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedPetsCollectionViewCell.identifier, for: indexPath) as? SelectedPetsCollectionViewCell
+
+            guard let imageStr = item.pet?.petThumbnail,
+                  let petId = item.pet?.petId else { return cell }
+            cell?.congfigure(with: PhotoCellViewlModel(with: imageStr), petId: petId)
             return cell
 
         }
@@ -140,8 +177,6 @@ class DiaryViewController: UIViewController {
         return dataSource
 
     }
-
-
 
     // MARK: - diariesCollectionViewCompostionLayout
 
@@ -190,6 +225,12 @@ extension DiaryViewController: UICollectionViewDelegate {
             guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
             cell.selectBackground.layer.borderColor = UIColor.orange.cgColor
             cell.selectBackground.layer.borderWidth = 1
+            guard let petId = cell.petId else { return }
+            if showPets.contains(petId) {
+               return
+            } else {
+                showPets.insert(petId, at: indexPath.item)
+            }
         }
     }
 
@@ -198,6 +239,13 @@ extension DiaryViewController: UICollectionViewDelegate {
             guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
             cell.selectBackground.layer.borderColor = UIColor.orange.cgColor
             cell.selectBackground.layer.borderWidth = 0
+
+            guard let petId = cell.petId else { return }
+            if showPets.contains(petId) {
+                showPets.remove(at: indexPath.item)
+            } else {
+                return
+            }
         }
     }
 

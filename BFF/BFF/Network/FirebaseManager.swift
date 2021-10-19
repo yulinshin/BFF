@@ -79,4 +79,29 @@ class FirebaseManager {
               }
         }
     }
+
+    func fetchDiaries(userId: String, completion: @escaping (Result<[Diary], Error>) -> Void) {
+
+        dateBase.collection("Diaries").whereField("userId", in: [userId]).getDocuments { (querySnapshot, error) in
+
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                var diaries = [Diary]()
+                for doucment in querySnapshot!.documents {
+
+                    do {
+                        if let diary = try doucment.data(as: Diary.self, decoder: Firestore.Decoder()) {
+                            diaries.append(diary)
+                        }
+
+                    } catch {
+
+                        completion(.failure(error))
+                    }
+                }
+                completion(.success(diaries))
+            }
+        }
+    }
 }

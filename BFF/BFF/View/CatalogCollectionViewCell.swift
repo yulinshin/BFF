@@ -17,6 +17,6 @@ class CatalogCollectionViewCell: UICollectionViewCell {
         iconImageView.layer.shadowOffset = CGSize(width: 1, height: 1)
         titleLabel.text = title
         iconImageView.image = UIImage(named: iconName)
-
     }
+    
 }
