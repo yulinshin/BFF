@@ -11,7 +11,7 @@ class SelectedPetsCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var selectBackground: UIView!
     @IBOutlet weak var image: UIImageView!
-    var petId : String?
+    var petId: String?
 
     static let identifier = "SelectedPetsCollectionViewCell"
 
@@ -19,7 +19,6 @@ class SelectedPetsCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    // MVVM
 
     func congfigure(with viewModel: PhotoCellViewlModel, petId: String) {
         

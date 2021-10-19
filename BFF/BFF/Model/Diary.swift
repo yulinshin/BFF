@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
+import UIKit
 
 struct Diary: Codable {
 
@@ -18,5 +19,23 @@ struct Diary: Codable {
     var isPublic: Bool
     var petTags: [String]
     var userId: String
+
+    init(
+    content: String,
+    diaryId: String,
+    images: [String],
+    isPublic: Bool,
+    petTags: [String],
+    userId: String
+    ) {
+        self.comments = [String]()
+        self.content = content
+        self.createdTime = Timestamp.init(date: Date())
+        self.diaryId = diaryId
+        self.images = images
+        self.isPublic = isPublic
+        self.petTags =  petTags
+        self.userId = userId
+    }
 
 }

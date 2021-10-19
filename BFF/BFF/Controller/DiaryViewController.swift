@@ -98,7 +98,7 @@ class DiaryViewController: UIViewController {
 
     func fetchData() {
 
-        FirebaseManager.shared.fetchDiaries(userId: "7QBGUfSDqPPjfJXRpQAI") { result in
+        FirebaseManager.shared.fetchDiaries { result in
 
             switch result {
 
