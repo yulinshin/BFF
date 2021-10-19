@@ -11,6 +11,7 @@ target 'BFF' do
  pod 'Firebase/Analytics'
  pod 'FirebaseFirestoreSwift', '> 7.0-beta'
  pod 'IQKeyboardManagerSwift'
+ pod 'Firebase/Storage'
  pod 'Kingfisher'
 
 end

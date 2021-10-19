@@ -208,7 +208,12 @@ extension HomePageViewController: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WellcomeCollectionViewCell", for: indexPath)as? WellcomeCollectionViewCell else { fatalError() }
 
             cell.setup(userName: user.userName, petsCount: user.petsIds?.count ?? 0)
-
+            cell.creatButtonTap = {
+                let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatDiaryViewController") as? CreatDiaryViewController else { return }
+                self.present(controller, animated: true, completion: nil)
+            }
+            
             return cell
 
         case 1:
@@ -267,5 +272,4 @@ extension HomePageViewController: UICollectionViewDataSource {
         }
 
     }
-
 }

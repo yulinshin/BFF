@@ -12,10 +12,11 @@ struct Diary: Codable {
 
     var comments: [String]
     var content: String
-//    var createdTime: Timestamp
+    var createdTime: Timestamp
     var diaryId: String
     var images: [String]
     var isPublic: Bool
     var petTags: [String]
+    var userId: String
 
 }

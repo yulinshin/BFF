@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -99,10 +100,102 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bki-Rp-2tk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2813.04347826087" y="116.51785714285714"/>
+            <point key="canvasLocation" x="2793" y="70"/>
+        </scene>
+        <!--Creat Diary View Controller-->
+        <scene sceneID="h2F-Vs-ngi">
+            <objects>
+                <viewController storyboardIdentifier="CreatDiaryViewController" id="2Yt-Iq-d73" customClass="CreatDiaryViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="52a-l7-tsw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ccg-iP-7oX">
+                                <rect key="frame" x="0.0" y="45" width="414" height="411.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ccg-iP-7oX" secondAttribute="height" multiplier="1:1" id="MxG-yd-PKN"/>
+                                </constraints>
+                                <imageReference key="image" image="plus.app.fill" catalog="system" symbolScale="default"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="i1r-F3-bFx">
+                                <rect key="frame" x="16" y="544" width="382" height="246"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSZ-Rg-ZJb">
+                                <rect key="frame" x="16" y="806" width="382" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="cX4-x6-vmI"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="createDiary:" destination="2Yt-Iq-d73" eventType="touchUpInside" id="hHq-R2-Be4"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gbk-V5-nR0">
+                                <rect key="frame" x="16" y="458" width="382" height="70"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="baF-29-Ezf"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5RT-hz-VMg">
+                                    <size key="itemSize" width="68" height="68"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="jcb-62-xWM">
+                                        <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="G5i-U4-DVi">
+                                            <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="68" height="68"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZTR-OX-FlQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gSZ-Rg-ZJb" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="16" id="4uM-B7-RRs"/>
+                            <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="i1r-F3-bFx" secondAttribute="trailing" constant="16" id="5tg-4c-awI"/>
+                            <constraint firstItem="ccg-iP-7oX" firstAttribute="trailing" secondItem="ZTR-OX-FlQ" secondAttribute="trailing" id="91g-xn-diP"/>
+                            <constraint firstItem="ccg-iP-7oX" firstAttribute="top" secondItem="ZTR-OX-FlQ" secondAttribute="top" id="BjR-g7-BwN"/>
+                            <constraint firstItem="ZTR-OX-FlQ" firstAttribute="bottom" secondItem="gSZ-Rg-ZJb" secondAttribute="bottom" constant="16" id="EEE-w1-kF5"/>
+                            <constraint firstItem="ccg-iP-7oX" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" id="Kbx-34-jlX"/>
+                            <constraint firstItem="gbk-V5-nR0" firstAttribute="top" secondItem="ccg-iP-7oX" secondAttribute="bottom" id="PAp-2h-yCr"/>
+                            <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="gSZ-Rg-ZJb" secondAttribute="trailing" constant="16" id="a1y-Sj-Sdz"/>
+                            <constraint firstItem="i1r-F3-bFx" firstAttribute="top" secondItem="gbk-V5-nR0" secondAttribute="bottom" constant="16" id="atY-Lk-xoc"/>
+                            <constraint firstItem="i1r-F3-bFx" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="16" id="bzf-2E-0PO"/>
+                            <constraint firstItem="gbk-V5-nR0" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="16" id="j7R-Bg-S4P"/>
+                            <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="gbk-V5-nR0" secondAttribute="trailing" constant="16" id="l0q-HU-u2I"/>
+                            <constraint firstItem="gSZ-Rg-ZJb" firstAttribute="top" secondItem="i1r-F3-bFx" secondAttribute="bottom" constant="16" id="pz5-ON-FNn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="creatButton" destination="gSZ-Rg-ZJb" id="Ff1-yb-ahp"/>
+                        <outlet property="diaryTextView" destination="i1r-F3-bFx" id="roC-F7-DHe"/>
+                        <outlet property="imageView" destination="ccg-iP-7oX" id="AbK-U2-TUQ"/>
+                        <outlet property="selectedPetsCollectionView" destination="gbk-V5-nR0" id="Vyx-b9-EJk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3tt-Ut-X6h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3533.3333333333335" y="69.642857142857139"/>
         </scene>
     </scenes>
     <resources>
+        <image name="plus.app.fill" catalog="system" width="128" height="114"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

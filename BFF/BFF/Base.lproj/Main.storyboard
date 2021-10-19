@@ -64,7 +64,7 @@
                                                         </backgroundConfiguration>
                                                     </buttonConfiguration>
                                                     <connections>
-                                                        <action selector="action:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vte-JY-uc5"/>
+                                                        <action selector="creatButtonTap:" destination="7CE-Yu-MqL" eventType="touchUpInside" id="ZZL-fE-HvZ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
