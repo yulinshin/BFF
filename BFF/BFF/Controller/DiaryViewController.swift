@@ -253,6 +253,13 @@ extension DiaryViewController: UICollectionViewDelegate {
             } else {
                 showPets.insert(petId, at: indexPath.item)
             }
+        } else {
+
+            let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
+            controller.viewModel = DetialViewModel(from: diaries[indexPath.row].diary!)
+            self.navigationController?.show(controller, sender: nil)
+
         }
     }
 

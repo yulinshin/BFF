@@ -19,6 +19,7 @@ struct Diary: Codable {
     var isPublic: Bool
     var petTags: [String]
     var userId: String
+    var petId: String
 
     init(
     content: String,
@@ -26,7 +27,8 @@ struct Diary: Codable {
     images: [String],
     isPublic: Bool,
     petTags: [String],
-    userId: String
+    userId: String,
+    petId: String
     ) {
         self.comments = [String]()
         self.content = content
@@ -36,6 +38,7 @@ struct Diary: Codable {
         self.isPublic = isPublic
         self.petTags =  petTags
         self.userId = userId
+        self.petId = petId
     }
 
 }

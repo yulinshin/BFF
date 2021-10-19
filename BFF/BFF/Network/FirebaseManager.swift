@@ -80,7 +80,7 @@ class FirebaseManager {
                     completion(.failure(error))
                 }
             } else {
-                fatalError()
+                return
             }
         }
     }
@@ -164,7 +164,7 @@ class FirebaseManager {
         let diariesRef = dateBase.collection("Diaries")
         let document = diariesRef.document()
 
-        let diary = Diary(content: content, diaryId: document.documentID, images: imageUrls, isPublic: isPublic, petTags: petTags, userId: userId)
+        let diary = Diary(content: content, diaryId: document.documentID, images: imageUrls, isPublic: isPublic, petTags: petTags, userId: userId, petId: petTags[0])
 
         do {
             try document.setData(from: diary)
