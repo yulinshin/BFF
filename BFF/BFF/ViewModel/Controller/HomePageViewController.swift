@@ -17,6 +17,7 @@ class HomePageViewController: UIViewController {
         case petNotifycation
         case pets
     }
+
     var sections = [Section.hero, Section.catalog, Section.petNotifycation, Section.pets]
 
     var catalogIcon = ["diary", "supply", "heart", "goal"]
@@ -142,6 +143,26 @@ class HomePageViewController: UIViewController {
 
 // MARK: - CollectionViewDelegate
 extension HomePageViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        if indexPath.section == 1 {
+            switch indexPath.row {
+
+            case 0: // Diary
+
+                let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryViewController") as? DiaryViewController else { return }
+                guard let userPetsId = user.petsIds else { return }
+                controller.userPetIds = userPetsId
+                self.navigationController?.show(controller, sender: nil)
+
+            default:
+                return
+            }
+        }
+
+    }
 
 }
 

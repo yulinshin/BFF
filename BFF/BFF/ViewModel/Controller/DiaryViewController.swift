@@ -62,13 +62,15 @@ class DiaryViewController: UIViewController {
         }
     }
 
+    var userPetIds = [String]()
+
     // from HomePageVC
-    var myPets = [
-        // swiftlint:disable:next line_length
-        Item.pet(Pet(petId: "2", name: "豆豆", userId: "1", healthInfo: HealthInfo(allergy: "", birthday: "", chipId: "", gender: "", note: "", type: "", weight: 0), medicalRecords: [MedicalRecord](), petThumbnail: "https://images.pexels.com/photos/4587971/pexels-photo-4587971.jpeg?cs=srgb&dl=pexels-anna-shvets-4587971.jpg&fm=jpg")),
-        // swiftlint:disable:next line_length
-        Item.pet(Pet(petId: "lnx5II0UzFrDF53H9OSz", name: "豆2222豆", userId: "2", healthInfo: HealthInfo(allergy: "22", birthday: "22", chipId: "", gender: "222", note: "222", type: "222", weight: 0), medicalRecords: [MedicalRecord](), petThumbnail: "https://images.pexels.com/photos/4079375/pexels-photo-4079375.jpeg?cs=srgb&dl=pexels-kelatout-4079375.jpg&fm=jpg"))
-    ]
+    var userPetsData = [Item]() {
+        didSet {
+            applySnapshot()
+            selectedPetsCollectionView.reloadData()
+        }
+    }
     var showPets = ["1", "2"] {
         didSet {
             diariesCollectionView.reloadData()
@@ -115,6 +117,26 @@ class DiaryViewController: UIViewController {
             }
         }
 
+        FirebaseManager.shared.fetchPets(petIds: userPetIds) { result in
+
+            switch result {
+
+            case .success(let pets):
+
+                var petsDataItem = [Item]()
+                pets.forEach { pet in
+                    petsDataItem.append(Item.pet(pet))
+                    print("Pet = \(pet)")
+                }
+                self.userPetsData = petsDataItem
+
+            case .failure(let error):
+                print("fetchData.failure\(error)")
+
+            }
+
+        }
+
     }
 
     func applySnapshot(animatingDifferences: Bool = true) {
@@ -125,14 +147,14 @@ class DiaryViewController: UIViewController {
 
         var myPetsSnapshot = Snapshot()
         myPetsSnapshot.appendSections([.all])
-        myPetsSnapshot.appendItems(myPets, toSection: .all)
+        myPetsSnapshot.appendItems(userPetsData, toSection: .all)
         petsDataSource.apply(myPetsSnapshot, animatingDifferences: false)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
 
-        for (index, item) in myPets.enumerated() {
+        for (index, item) in userPetsData.enumerated() {
             guard let petId = item.pet?.petId,
                   let cell = selectedPetsCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SelectedPetsCollectionViewCell else { return }
             if showPets.contains(petId) {

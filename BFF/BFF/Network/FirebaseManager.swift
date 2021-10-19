@@ -80,6 +80,31 @@ class FirebaseManager {
         }
     }
 
+    func fetchPets(petIds: [String], completion: @escaping (Result<[Pet], Error>) -> Void) {
+
+        dateBase.collection("Pets").whereField(Firebase.FieldPath.documentID(), in: petIds).getDocuments { (querySnapshot, error) in
+
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                var pets = [Pet]()
+                for doucment in querySnapshot!.documents {
+
+                    do {
+                        if let pet = try doucment.data(as: Pet.self, decoder: Firestore.Decoder()) {
+                            pets.append(pet)
+                        }
+
+                    } catch {
+
+                        completion(.failure(error))
+                    }
+                }
+                completion(.success(pets))
+            }
+        }
+    }
+
     func fetchDiaries(userId: String, completion: @escaping (Result<[Diary], Error>) -> Void) {
 
         dateBase.collection("Diaries").whereField("userId", in: [userId]).getDocuments { (querySnapshot, error) in
