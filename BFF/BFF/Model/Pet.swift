@@ -28,6 +28,7 @@ struct HealthInfo: Codable {
     var note: String
     var type: String
     var weight: Double
+    var weightUnit: String
 
 }
 

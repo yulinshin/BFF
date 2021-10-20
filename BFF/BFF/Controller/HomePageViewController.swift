@@ -127,7 +127,7 @@ class HomePageViewController: UIViewController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(300))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .fractionalHeight(0.6))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
                 let layoutSection = NSCollectionLayoutSection(group: group)
@@ -190,7 +190,7 @@ extension HomePageViewController: UICollectionViewDataSource {
 
         case 3:
 
-            return user.petsIds?.count ?? 0
+            return (user.petsIds?.count ?? 0) + 1
 
         default:
 
@@ -211,7 +211,9 @@ extension HomePageViewController: UICollectionViewDataSource {
             cell.creatButtonTap = {
                 let storyboard = UIStoryboard(name: "Diary", bundle: nil)
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatDiaryViewController") as? CreatDiaryViewController else { return }
-                self.present(controller, animated: true, completion: nil)
+                var nav = UINavigationController(rootViewController: controller)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
             }
             
             return cell
@@ -248,21 +250,27 @@ extension HomePageViewController: UICollectionViewDataSource {
         case 3:
 
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PetCollectionViewCell", for: indexPath)as? PetCollectionViewCell else { fatalError() }
+            if indexPath.row == user.petsIds?.count {
 
-            guard let petId = user.petsIds?[indexPath.row] else { return cell }
+                cell.setupBlankDiaryBook()
 
-            FirebaseManager.shared.fetchPet(petId: petId) { result in
-                switch result {
+            }else{
+                guard let petId = user.petsIds?[indexPath.row] else { return cell }
 
-                case .success(let pet):
+                FirebaseManager.shared.fetchPet(petId: petId) { result in
+                    switch result {
 
-                    cell.setup(petImage: pet.petThumbnail)
+                    case .success(let pet):
 
-                case .failure(let error):
+                        cell.setup(petImage: pet.petThumbnail)
 
-                    print("fetchData.failure\(error)")
+                    case .failure(let error):
 
+                        print("fetchData.failure\(error)")
+
+                    }
                 }
+
             }
 
             return cell

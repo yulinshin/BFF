@@ -134,6 +134,27 @@ class FirebaseManager {
         }
     }
 
+
+    func creatPets(newPet: Pet) {
+
+        let diariesRef = dateBase.collection("Pets")
+        let document = diariesRef.document()
+
+        var pet = newPet
+        pet.petId = document.documentID
+        pet.userId = userId
+
+        do {
+            try document.setData(from: pet)
+            print(document)
+        } catch {
+            print(error)
+        }
+    }
+
+
+
+
     func fetchDiaries(completion: @escaping (Result<[Diary], Error>) -> Void) {
 
         dateBase.collection("Diaries").whereField("userId", isEqualTo: userId).getDocuments { (querySnapshot, error) in
@@ -174,9 +195,16 @@ class FirebaseManager {
         }
     }
 
-    func uploadDiaryPhoto(image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
 
-        let storageRef = storage.reference().child("DairyPhotos").child("\(NSUUID().uuidString).jpg")
+
+    enum FilePathName : String {
+        case dairyPhotos = "DairyPhotos"
+        case petPhotos = "PetPhotoss"
+    }
+
+    func uploadDiaryPhoto(image: UIImage, filePath: FilePathName, completion: @escaping (Result<String, Error>) -> Void) {
+
+        let storageRef = storage.reference().child(filePath.rawValue).child("\(NSUUID().uuidString).jpg")
 
         guard let data = image.pngData() else { return }
 
