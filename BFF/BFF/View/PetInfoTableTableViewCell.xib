@@ -35,13 +35,6 @@
                             <action selector="tapButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BnV-E2-acW"/>
                         </connections>
                     </button>
-                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="39w-5n-0sn">
-                        <rect key="frame" x="232" y="8" width="85" height="40"/>
-                        <segments>
-                            <segment title="Boy"/>
-                            <segment title="Girl"/>
-                        </segments>
-                    </segmentedControl>
                 </subviews>
                 <constraints>
                     <constraint firstItem="vTf-A0-bhQ" firstAttribute="leading" secondItem="GII-ip-ziL" secondAttribute="trailing" constant="8" id="9OG-pn-Daa"/>
@@ -50,21 +43,16 @@
                     <constraint firstAttribute="bottom" secondItem="vTf-A0-bhQ" secondAttribute="bottom" constant="8" id="Nnp-XC-aGV"/>
                     <constraint firstAttribute="bottom" secondItem="GII-ip-ziL" secondAttribute="bottom" constant="8" id="Qor-Ct-WlI"/>
                     <constraint firstAttribute="bottom" secondItem="i9j-4f-IM6" secondAttribute="bottom" constant="8" id="Uva-c5-uZk"/>
-                    <constraint firstAttribute="bottom" secondItem="39w-5n-0sn" secondAttribute="bottom" constant="8" id="d2t-wK-8MY"/>
                     <constraint firstItem="GII-ip-ziL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="kFy-1U-QXh"/>
                     <constraint firstItem="i9j-4f-IM6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GII-ip-ziL" secondAttribute="trailing" constant="8" id="oNB-Py-HRg"/>
                     <constraint firstItem="vTf-A0-bhQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="oPj-eB-yUq"/>
-                    <constraint firstItem="39w-5n-0sn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GII-ip-ziL" secondAttribute="trailing" constant="8" id="pd6-bG-MtY"/>
-                    <constraint firstItem="39w-5n-0sn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="qhh-eK-ksV"/>
                     <constraint firstAttribute="trailing" secondItem="i9j-4f-IM6" secondAttribute="trailing" constant="8" id="ret-dM-dSH"/>
                     <constraint firstAttribute="trailing" secondItem="vTf-A0-bhQ" secondAttribute="trailing" constant="8" id="tOG-3w-76Y"/>
-                    <constraint firstAttribute="trailing" secondItem="39w-5n-0sn" secondAttribute="trailing" constant="8" id="vgw-H8-80n"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="button" destination="i9j-4f-IM6" id="7xS-Ix-ehj"/>
-                <outlet property="segmented" destination="39w-5n-0sn" id="znT-GW-bVt"/>
                 <outlet property="textField" destination="vTf-A0-bhQ" id="kec-5j-Nph"/>
                 <outlet property="titleLabel" destination="GII-ip-ziL" id="Ozb-5P-TYr"/>
             </connections>

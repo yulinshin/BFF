@@ -143,9 +143,9 @@ class FirebaseManager {
         var pet = newPet
         pet.petId = document.documentID
         pet.userId = userId
-
         do {
             try document.setData(from: pet)
+            self.addPetToUser(petId: pet.petId)
             print(document)
         } catch {
             print(error)
@@ -202,7 +202,7 @@ class FirebaseManager {
         case petPhotos = "PetPhotoss"
     }
 
-    func uploadDiaryPhoto(image: UIImage, filePath: FilePathName, completion: @escaping (Result<String, Error>) -> Void) {
+    func uploadPhoto(image: UIImage, filePath: FilePathName, completion: @escaping (Result<String, Error>) -> Void) {
 
         let storageRef = storage.reference().child(filePath.rawValue).child("\(NSUUID().uuidString).jpg")
 

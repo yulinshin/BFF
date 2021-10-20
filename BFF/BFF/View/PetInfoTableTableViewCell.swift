@@ -8,26 +8,27 @@
 import UIKit
 
 class PetInfoTableTableViewCell: UITableViewCell {
+
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var button: UIButton!
-    @IBOutlet weak var segmented: UISegmentedControl!
 
     static let identifier = "PetInfoTableTableViewCell"
 
     var callback: ((_ text: String) -> Void)?
-  
+    var moreButtonTap: (() -> Void)?
     let datePicker = UIDatePicker()
     let picker = UIPickerView()
     var pickerData = [String]() {
-        didSet{
+
+        didSet {
             picker.reloadAllComponents()
         }
+
     }
 
     enum CellStyle {
         case textfield
-        case segment
         case more
     }
 
@@ -36,7 +37,6 @@ class PetInfoTableTableViewCell: UITableViewCell {
 
         textField.isHidden = true
         textField.borderStyle = .none
-        segmented.isHidden = true
         button.isHidden = true
         // Initialization code
     }
@@ -51,8 +51,7 @@ class PetInfoTableTableViewCell: UITableViewCell {
         case .textfield:
             self.textField.isHidden = false
             self.textField.placeholder = title
-        case .segment:
-            self.segmented.isHidden = false
+
         case .more:
             self.button.isHidden = false
             self.button.setImage(UIImage(systemName: "pencil"), for: .normal)
@@ -60,28 +59,16 @@ class PetInfoTableTableViewCell: UITableViewCell {
 
     }
 
-    override func prepareForReuse() {
-        textField.isHidden = true
-        textField.borderStyle = .none
-        segmented.isHidden = true
-        button.isHidden = true
-        textField.text = ""
-    }
-
     @IBAction func tapButton(_ sender: Any) {
-
-
+        moreButtonTap?()
     }
 
-
-    func creatDatePicker (){
+    func creatDatePicker () {
 
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
 
-
         let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressedFromDate))
-
 
         toolbar.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
@@ -92,6 +79,8 @@ class PetInfoTableTableViewCell: UITableViewCell {
         textField.inputAccessoryView = toolbar
 
         textField.inputView = datePicker
+
+        textField.textContentType = .dateTime
 
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
@@ -114,13 +103,12 @@ class PetInfoTableTableViewCell: UITableViewCell {
 
       }
 
-    func creatPicker (pickerData: [String]){
+    func creatPicker(pickerData: [String]) {
 
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
 
         let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressedFromPicker))
-
 
         toolbar.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
@@ -138,7 +126,6 @@ class PetInfoTableTableViewCell: UITableViewCell {
     }
 
 }
-
 
 extension PetInfoTableTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -164,7 +151,6 @@ extension PetInfoTableTableViewCell: UIPickerViewDelegate, UIPickerViewDataSourc
 }
 
 extension PetInfoTableTableViewCell: UITextFieldDelegate {
-
 
     func textFieldDidEndEditing(_ textField: UITextField) {
 

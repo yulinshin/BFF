@@ -50,14 +50,13 @@ class CreatDiaryViewController: UIViewController {
         
     }
 
-
-    @objc func saveDiary(){
+    @objc func saveDiary() {
 
         guard let petsId = petsData.first?.petId,
               let image = imageView.image else {
                   return
               }
-        FirebaseManager.shared.uploadDiaryPhoto(image: image, filePath: .dairyPhotos) { result in
+        FirebaseManager.shared.uploadPhoto(image: image, filePath: .dairyPhotos) { result in
 
             switch result {
 
@@ -83,10 +82,9 @@ class CreatDiaryViewController: UIViewController {
 
     }
 
-    @objc func cancelEditDiary(){
+    @objc func cancelEditDiary() {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
-
     
     func fetchData() {
         

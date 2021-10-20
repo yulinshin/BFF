@@ -13,6 +13,8 @@ class CreatPetViewController: UIViewController {
 
     @IBOutlet weak var petInfoTableView: UITableView!
 
+    var viewModel = CreatPetViewModel()
+
     var fields  = [
         "Name",
         "Type",
@@ -21,47 +23,36 @@ class CreatPetViewController: UIViewController {
         "WeightUnit",
         "Gender",
         "ChipId",
-        "Allergy",
-        "Note",
+        "Note"
     ]
-
-
-    var pet = Pet(petId: "", name: "", userId: "", healthInfo: HealthInfo(allergy: "", birthday: "", chipId: "", gender: "boy", note: "", type: "", weight: 0, weightUnit: "kg") , petThumbnail: "")
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
         petInfoTableView.delegate = self
         petInfoTableView.dataSource = self
-    let petInfoNib = UINib(nibName: "PetInfoTableTableViewCell", bundle: nil)
+
+        let petInfoNib = UINib(nibName: "PetInfoTableTableViewCell", bundle: nil)
         petInfoTableView.register(petInfoNib, forCellReuseIdentifier: PetInfoTableTableViewCell.identifier)
+
+        // ImagePicker
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.handleSelectedPetImage))
         petImage.addGestureRecognizer(tapGR)
         petImage.isUserInteractionEnabled = true
+
     }
 
-
-
     @IBAction func creatPet(_ sender: Any) {
-        
-        print(pet)
 
-        guard let image = petImage.image else {
-                  return
-              }
-        FirebaseManager.shared.uploadDiaryPhoto(image: image, filePath: .petPhotos) { result in
+        guard let image = petImage.image else { return }
+
+        viewModel.creatPet(image: image) { result in
 
             switch result {
 
-            case .success(let urlString):
+            case .success(let message):
 
-                self.pet.petThumbnail = urlString
-
-                FirebaseManager.shared.creatPets(newPet: self.pet)
-
-
-                self.navigationController?.dismiss(animated: true, completion: nil)
-
+                print(message)
+                self.dismiss(animated: true, completion: nil)
 
             case .failure(let error):
                 print("fetchData.failure\(error)")
@@ -69,15 +60,12 @@ class CreatPetViewController: UIViewController {
             }
 
         }
-
     }
-
 }
 
 extension CreatPetViewController: UITableViewDelegate {
 
 }
-
 
 extension CreatPetViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -92,83 +80,117 @@ extension CreatPetViewController: UITableViewDataSource {
 
         case "Name" :
 
-            cell.configur(cellStyle: .textfield, title: fields[indexPath.row] )
-            cell.callback = { text in
-                self.pet.name = text
+            viewModel.name.bind { name in
+
+                cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
+                cell.textField.text = name
+
             }
 
+            cell.callback = { text in
+                self.viewModel.updateData(name: text)
+            }
 
         case "Type" :
 
-            cell.configur(cellStyle: .textfield, title: fields[indexPath.row] )
+            viewModel.type.bind { type in
+
+                cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
+                cell.textField.text = type
+
+            }
 
             cell.callback = { text in
-                self.pet.healthInfo.type = text
+                self.viewModel.updateData(type: text)
             }
 
         case "Birthday" :
 
-
-            let dateFormatterPrint = DateFormatter()
-            dateFormatterPrint.dateFormat = "MMM/dd/yyyy"
-            let str = dateFormatterPrint.string(from: Date())
-            cell.configur(cellStyle: .textfield, title: fields[indexPath.row], button: str )
-            cell.textField.textContentType = .dateTime
-
             cell.creatDatePicker()
 
+            viewModel.birthday.bind { birthday in
+
+                cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
+                cell.textField.text = birthday
+
+            }
+
             cell.callback = { text in
-                self.pet.healthInfo.birthday = text
+                self.viewModel.updateData(birthday: text)
             }
 
         case "Weight" :
 
-            cell.configur(cellStyle: .textfield, title: fields[indexPath.row] )
-            cell.textField.keyboardType = .numberPad
+            viewModel.weight.bind { weight in
+
+                cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
+                cell.textField.text = "\(weight)"
+
+            }
 
             cell.callback = { text in
-                guard let weight = Double(text) else { return }
-                self.pet.healthInfo.weight = weight
+                self.viewModel.updateData(weight: text)
             }
 
         case "WeightUnit" :
 
-            cell.configur(cellStyle: .textfield, title: fields[indexPath.row] )
+            viewModel.weightUnit.bind { weightUnit in
 
-            cell.creatPicker(pickerData: ["kg","g"])
+                cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
+                cell.textField.text = weightUnit
+                cell.creatPicker(pickerData: ["kg", "g"])
 
-            cell.callback = { text in
-                self.pet.healthInfo.weightUnit = text
             }
 
-
+            cell.callback = { text in
+                self.viewModel.updateData(weightUnit: text)
+            }
 
         case "Gender" :
 
-            cell.configur(cellStyle: .textfield, title: fields[indexPath.row] )
+            viewModel.gender.bind { gender in
 
-            cell.creatPicker(pickerData: ["boy","girl"])
+                cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
+                cell.textField.text = gender
+                cell.creatPicker(pickerData: ["boy", "girl"])
+
+            }
 
             cell.callback = { text in
-                self.pet.healthInfo.gender = text
+                self.viewModel.updateData(gender: text)
             }
-            
-            
+
         case "ChipId" :
 
-            cell.configur(cellStyle: .textfield, title: fields[indexPath.row] )
-            cell.callback = { text in
-                self.pet.healthInfo.chipId = text
+            viewModel.chipId.bind { chipId in
+
+                cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
+                cell.textField.text = chipId
+
             }
 
-        case "Allergy" :
-
-            cell.configur(cellStyle: .more, title: fields[indexPath.row] )
-
+            cell.callback = { text in
+                self.viewModel.updateData(chipId: text)
+            }
 
         case "Note" :
 
             cell.configur(cellStyle: .more, title: fields[indexPath.row] )
+
+            cell.moreButtonTap = {
+
+                let storyboard = UIStoryboard(name: "Pet", bundle: nil)
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "NoteViewController") as? NoteViewController else { return }
+                self.viewModel.note.bind { text in
+                    controller.note = text
+                    controller.callBack = { [weak self] text in
+                        self?.viewModel.updateData(note: text)
+                    }
+                }
+
+                self.navigationController?.show(controller, sender: nil)
+
+            }
 
         default:
             return cell
@@ -177,6 +199,4 @@ extension CreatPetViewController: UITableViewDataSource {
         return cell
     }
 
-
 }
-

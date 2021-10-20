@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2GD-A5-Bmm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3dv-ly-ybE">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
@@ -286,83 +286,10 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="116.51785714285714"/>
         </scene>
-        <!--Creat Pet View Controller-->
-        <scene sceneID="TQH-vv-BA2">
-            <objects>
-                <viewController id="2GD-A5-Bmm" customClass="CreatPetViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1oO-0G-YF9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n26-Rm-y5M">
-                                <rect key="frame" x="16" y="806" width="382" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="ksf-0I-75X"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Create"/>
-                                <connections>
-                                    <action selector="creatPet:" destination="2GD-A5-Bmm" eventType="touchUpInside" id="A2B-kQ-wBh"/>
-                                </connections>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus.app" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tob-Kd-Imd">
-                                <rect key="frame" x="107" y="61" width="200" height="197.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="js0-Mr-oDA"/>
-                                    <constraint firstAttribute="width" constant="200" id="wcx-yA-C28"/>
-                                </constraints>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4uh-Is-NGP">
-                                <rect key="frame" x="0.0" y="276" width="414" height="530"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="15j-sx-99R">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="15j-sx-99R" id="biS-4P-asi">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="MCj-fw-rur">
-                                        <rect key="frame" x="0.0" y="88" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MCj-fw-rur" id="idp-ve-fQ7">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="rDH-ub-dG7"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="tob-Kd-Imd" firstAttribute="top" secondItem="rDH-ub-dG7" secondAttribute="top" constant="16" id="0gf-YI-PnR"/>
-                            <constraint firstItem="rDH-ub-dG7" firstAttribute="trailing" secondItem="4uh-Is-NGP" secondAttribute="trailing" id="7G5-JL-zKQ"/>
-                            <constraint firstItem="tob-Kd-Imd" firstAttribute="centerX" secondItem="1oO-0G-YF9" secondAttribute="centerX" id="9Av-Q2-Dfd"/>
-                            <constraint firstItem="n26-Rm-y5M" firstAttribute="leading" secondItem="rDH-ub-dG7" secondAttribute="leading" constant="16" id="DXn-Hf-VNK"/>
-                            <constraint firstItem="rDH-ub-dG7" firstAttribute="trailing" secondItem="n26-Rm-y5M" secondAttribute="trailing" constant="16" id="T0a-FQ-V62"/>
-                            <constraint firstItem="n26-Rm-y5M" firstAttribute="bottom" secondItem="rDH-ub-dG7" secondAttribute="bottom" constant="-16" id="Xhq-CE-b83"/>
-                            <constraint firstItem="n26-Rm-y5M" firstAttribute="top" secondItem="4uh-Is-NGP" secondAttribute="bottom" id="aDG-lZ-7Kj"/>
-                            <constraint firstItem="4uh-Is-NGP" firstAttribute="top" secondItem="tob-Kd-Imd" secondAttribute="bottom" constant="16" id="cJt-6H-QNj"/>
-                            <constraint firstItem="4uh-Is-NGP" firstAttribute="leading" secondItem="rDH-ub-dG7" secondAttribute="leading" id="fC3-Kz-6i0"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="petImage" destination="tob-Kd-Imd" id="A1o-gt-Au8"/>
-                        <outlet property="petInfoTableView" destination="4uh-Is-NGP" id="uzP-Uv-FTb"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iCt-te-s9T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="849.77678571428567"/>
-        </scene>
     </scenes>
     <resources>
         <image name="123" width="720" height="1280"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
-        <image name="plus.app" catalog="system" width="128" height="114"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
         <image name="square.and.arrow.up.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">

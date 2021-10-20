@@ -21,7 +21,6 @@ struct Pet: Codable {
 
 struct HealthInfo: Codable {
 
-    var allergy: String
     var birthday: String
     var chipId: String
     var gender: String
