@@ -30,6 +30,7 @@ class DiaryDetailViewController: UIViewController {
     var viewModel = DetialViewModel()
     var comments = [String]()
     var petTags = [String]()
+    var diaryId = ""
     private var oldContent = ""
 
     override func viewDidLoad() {
@@ -68,6 +69,11 @@ class DiaryDetailViewController: UIViewController {
         viewModel.petTags.bind {  [weak self] petTags in
             self?.petTags = petTags
         }
+
+        viewModel.diaryId.bind {  [weak self] diaryId in
+            self?.diaryId = diaryId
+        }
+
 
         setPetsTag()
 
@@ -163,7 +169,20 @@ class DiaryDetailViewController: UIViewController {
         }
 
         func deleteDiary(_ action: UIAlertAction) {
+
+            FirebaseManager.shared.delateDiary(diaryId: diaryId) { result in
+                switch result {
+                case .success(let sucessMessage):
+                    print(sucessMessage)
+
+                case .failure(let error):
+                    print("fetchData.failure\(error)")
+                }
+            }
+
             print("tapped \(action.title!)")
+
+            self.navigationController?.popViewController(animated: true)
 
         }
 

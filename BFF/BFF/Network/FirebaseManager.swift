@@ -209,4 +209,15 @@ class FirebaseManager {
     func updateDiaryContent(diaryId: String, content: String) {
         dateBase.collection("Diaries").document(diaryId).updateData(["content": content])
     }
+
+    func delateDiary(diaryId: String, completion: @escaping (Result<String, Error>) -> Void){
+        dateBase.collection("Diaries").document(diaryId).delete() { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let sucessMessage = "Deleate sucess"
+                completion(.success(sucessMessage))
+            }
+        }
+    }
 }

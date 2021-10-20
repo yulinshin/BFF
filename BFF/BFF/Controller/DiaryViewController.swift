@@ -96,6 +96,11 @@ class DiaryViewController: UIViewController {
         fetchData()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        fetchData()
+    }
+
     func fetchData() {
 
         FirebaseManager.shared.fetchDiaries { result in
