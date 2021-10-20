@@ -42,7 +42,8 @@ class HomePageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        FirebaseManager.shared.fetchUser { result in
+
+        FirebaseManager.shared.listenUser { result in
             switch result {
 
             case .success(let user):
@@ -54,7 +55,7 @@ class HomePageViewController: UIViewController {
             }
         }
 
-        FirebaseManager.shared.fetchNotifications { result in
+        FirebaseManager.shared.listenNotifications { result in
             switch result {
 
             case .success(let notifications):
@@ -161,7 +162,6 @@ extension HomePageViewController: UICollectionViewDelegate {
                 return
             }
         }
-
     }
 
 }
@@ -253,6 +253,13 @@ extension HomePageViewController: UICollectionViewDataSource {
             if indexPath.row == user.petsIds?.count {
 
                 cell.setupBlankDiaryBook()
+                cell.didTapBlankCard = {
+                    let storyboard = UIStoryboard(name: "Pet", bundle: nil)
+                    guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatPetViewController") as? CreatPetViewController else { return }
+                    var nav = UINavigationController(rootViewController: controller)
+                    nav.modalPresentationStyle = .fullScreen
+                    self.present(nav, animated: true, completion: nil)
+                }
 
             }else{
                 guard let petId = user.petsIds?[indexPath.row] else { return cell }

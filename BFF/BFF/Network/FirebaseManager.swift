@@ -38,6 +38,30 @@ class FirebaseManager {
         }
     }
 
+
+
+    func listenUser(completion: @escaping (Result<User, Error>) -> Void){
+        dateBase.collection("Users").document(userId).addSnapshotListener { documentSnapshot, error in
+            if let error = error{
+                print(error.localizedDescription)
+            } else {
+                if let documentSnapshot = documentSnapshot {
+
+                    do {
+                        if let user = try documentSnapshot.data(as: User.self, decoder: Firestore.Decoder()) {
+                            completion(.success(user))
+                        }
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }else {
+                    fatalError()
+                }
+            }
+        }
+    }
+
+
     func fetchNotifications(completion: @escaping (Result<[Notification], Error>) -> Void) {
 
         dateBase.collection("Users").document(userId).collection("Notifications").getDocuments { (querySnapshot, error) in
@@ -66,6 +90,35 @@ class FirebaseManager {
             }
         }
     }
+
+    func listenNotifications(completion: @escaping (Result<[Notification], Error>) -> Void) {
+        dateBase.collection("Users").document(userId).collection("Notifications").addSnapshotListener { querySnapshot, error in
+            if let error = error{
+                completion(.failure(error))
+            } else {
+                if let querySnapshot = querySnapshot {
+                    var notifications = [Notification]()
+                    querySnapshot.documents.forEach { document in
+                        do{
+                            if let data = try document.data(as: Notification.self){
+                                print(data)
+                                notifications.append(data)
+                            }
+                        }catch{
+                            completion(.failure(error))
+                        }
+                    }
+                    completion(.success(notifications))
+                }
+            }
+        }
+    }
+
+    func addPetToUser(petId: String) {
+        dateBase.collection("Users").document(userId).updateData(["petsIds": FieldValue.arrayUnion([petId])])
+    }
+
+    
 
     func fetchPet(petId: String, completion: @escaping (Result<Pet, Error>) -> Void) {
 

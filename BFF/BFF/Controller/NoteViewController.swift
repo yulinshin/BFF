@@ -7,23 +7,27 @@
 
 import UIKit
 
-class NoteViewController: UIViewController {
+class NoteViewController: UIViewController, UITextViewDelegate {
+
+    @IBOutlet weak var noteTextView: UITextView!
+
+    var callBack: ((_ note: String) -> Void)?
+
+    var note = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        noteTextView.delegate = self
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        noteTextView.text = note
     }
-    */
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        callBack?(textView.text)
+    }
 
 }
+
