@@ -205,4 +205,8 @@ class FirebaseManager {
     func updateDiaryPrivacy(diaryId: String, isPublic: Bool) {
         dateBase.collection("Diaries").document(diaryId).updateData(["isPublic": isPublic])
     }
+
+    func updateDiaryContent(diaryId: String, content: String) {
+        dateBase.collection("Diaries").document(diaryId).updateData(["content": content])
+    }
 }

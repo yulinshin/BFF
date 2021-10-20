@@ -27,12 +27,12 @@ class DetialViewModel {
         getdiaryData(from: Self.defaultDiray)
     }
 
-    init(from diary: Diary){
+    init(from diary: Diary) {
         getdiaryData(from: diary)
     }
 
-    private func getdiaryData(from diary: Diary){
-        if let image = diary.images.first{
+    private func getdiaryData(from diary: Diary) {
+        if let image = diary.images.first {
             self.postPetImageUrl.value = image
         }
         self.creatDate.value = diary.createdTime.dateValue().ISO8601Format()
@@ -57,6 +57,11 @@ class DetialViewModel {
 
     func changePrivacy(isPublic: Bool) {
         self.isPublic.value = isPublic
-        FirebaseManager.shared.updateDiaryPrivacy(diaryId:diaryId.value , isPublic: isPublic)
+        FirebaseManager.shared.updateDiaryPrivacy(diaryId: diaryId.value, isPublic: isPublic)
+    }
+
+    func updateDiary(content: String) {
+        self.contentText.value = content
+        FirebaseManager.shared.updateDiaryContent(diaryId: diaryId.value, content: content)
     }
 }

@@ -30,6 +30,7 @@ class DiaryDetailViewController: UIViewController {
     var viewModel = DetialViewModel()
     var comments = [String]()
     var petTags = [String]()
+    private var oldContent = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,21 +124,50 @@ class DiaryDetailViewController: UIViewController {
 
         }
 
-
         func editDiary(_ action: UIAlertAction) {
-
-
+            enterToEditMode()
             print("tapped \(action.title!)")
         }
 
+    func enterToEditMode() {
+        self.navigationController?.navigationItem.hidesBackButton = true
+        self.navigationController?.navigationBar.backgroundColor = UIColor.white
+        self.navigationItem.title = "Edit Diary"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveDiary))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelEditDiary))
+        oldContent = contentTextView.text
+        contentTextView.isEditable = true
+        contentTextView.becomeFirstResponder()
+    }
+
+    func leaveEditMode() {
+        self.navigationController?.navigationItem.hidesBackButton = false
+        self.navigationItem.title = ""
+        self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.leftBarButtonItem = nil
+        contentTextView.isEditable = false
+        contentTextView.resignFirstResponder()
+    }
+
+    @objc func saveDiary() {
+
+        viewModel.updateDiary(content: contentTextView.text)
+        leaveEditMode()
+        print("tapped save")
+        }
+
+    @objc func cancelEditDiary() {
+        contentTextView.text = oldContent
+        leaveEditMode()
+        print("tapped cancel")
+        }
 
         func deleteDiary(_ action: UIAlertAction) {
             print("tapped \(action.title!)")
 
-
         }
 
-        func setPetsTag(){
+        func setPetsTag() {
             tagStackView.subviews.forEach { subview in
                 tagStackView.removeArrangedSubview(subview)
             }
