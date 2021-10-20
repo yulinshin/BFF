@@ -12,6 +12,8 @@ class WellcomeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var addDiaryButton: UIButton!
 
+    var creatButtonTap: (() -> Void)?
+
     func setup(userName: String, petsCount: Int) {
 
         titleLabel.text = "HI \(userName)!"
@@ -28,5 +30,8 @@ class WellcomeCollectionViewCell: UICollectionViewCell {
             addDiaryButton.isHidden = false
         }
 
+    }
+    @IBAction func creatButtonTap(_ sender: Any) {
+        creatButtonTap?()
     }
 }

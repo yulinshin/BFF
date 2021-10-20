@@ -17,6 +17,7 @@ class HomePageViewController: UIViewController {
         case petNotifycation
         case pets
     }
+
     var sections = [Section.hero, Section.catalog, Section.petNotifycation, Section.pets]
 
     var catalogIcon = ["diary", "supply", "heart", "goal"]
@@ -143,6 +144,26 @@ class HomePageViewController: UIViewController {
 // MARK: - CollectionViewDelegate
 extension HomePageViewController: UICollectionViewDelegate {
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        if indexPath.section == 1 {
+            switch indexPath.row {
+
+            case 0: // Diary
+
+                let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryViewController") as? DiaryViewController else { return }
+                guard let userPetsId = user.petsIds else { return }
+                controller.userPetIds = userPetsId
+                self.navigationController?.show(controller, sender: nil)
+
+            default:
+                return
+            }
+        }
+
+    }
+
 }
 
 // MARK: - UICollectionViewDataSource
@@ -187,7 +208,12 @@ extension HomePageViewController: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WellcomeCollectionViewCell", for: indexPath)as? WellcomeCollectionViewCell else { fatalError() }
 
             cell.setup(userName: user.userName, petsCount: user.petsIds?.count ?? 0)
-
+            cell.creatButtonTap = {
+                let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatDiaryViewController") as? CreatDiaryViewController else { return }
+                self.present(controller, animated: true, completion: nil)
+            }
+            
             return cell
 
         case 1:
@@ -246,5 +272,4 @@ extension HomePageViewController: UICollectionViewDataSource {
         }
 
     }
-
 }
