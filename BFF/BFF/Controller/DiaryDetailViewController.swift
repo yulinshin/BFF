@@ -34,6 +34,8 @@ class DiaryDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        postPetImageView.layer.cornerRadius = postPetImageView.frame.height / 2
+
         viewModel.postPetImageUrl.bind {  [weak self] urlStr in
             self?.image.kf.setImage(with: URL(string: urlStr))
         }

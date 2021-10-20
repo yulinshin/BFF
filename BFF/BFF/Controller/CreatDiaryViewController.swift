@@ -62,6 +62,9 @@ class CreatDiaryViewController: UIViewController {
         }
         
     }
+    @IBAction func cancel(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     @IBAction func createDiary(_ sender: Any) {
         
         guard let petsId = petsData.first?.petId,

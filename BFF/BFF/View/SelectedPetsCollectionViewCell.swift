@@ -24,6 +24,7 @@ class SelectedPetsCollectionViewCell: UICollectionViewCell {
         
         self.image.loadImage(viewModel.imageUrl)
         self.petId = petId
+        image.layer.cornerRadius = image.frame.height / 2
 
     }
     

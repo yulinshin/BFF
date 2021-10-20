@@ -111,16 +111,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ccg-iP-7oX">
-                                <rect key="frame" x="0.0" y="45" width="414" height="411.5"/>
+                                <rect key="frame" x="0.0" y="43.5" width="414" height="415.5"/>
+                                <color key="backgroundColor" red="1" green="0.65076244120695148" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ccg-iP-7oX" secondAttribute="height" multiplier="1:1" id="MxG-yd-PKN"/>
                                 </constraints>
-                                <imageReference key="image" image="plus.app.fill" catalog="system" symbolScale="default"/>
+                                <imageReference key="image" image="plus.app" catalog="system" symbolScale="large"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="i1r-F3-bFx">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="WriteSomeThingHere...." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="i1r-F3-bFx">
                                 <rect key="frame" x="16" y="581" width="382" height="209"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -166,10 +167,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myI-3t-x3X">
+                                <rect key="frame" x="358" y="60" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="FhE-8v-KB2"/>
+                                    <constraint firstAttribute="height" constant="40" id="SdW-xU-WZ1"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system"/>
+                                <connections>
+                                    <action selector="cancel:" destination="2Yt-Iq-d73" eventType="touchUpInside" id="71w-WE-gw8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZTR-OX-FlQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="myI-3t-x3X" firstAttribute="top" secondItem="ZTR-OX-FlQ" secondAttribute="top" constant="16" id="1Gn-4F-cIl"/>
                             <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="exO-Ai-IAD" secondAttribute="trailing" constant="8" id="3Gh-oC-5Je"/>
                             <constraint firstItem="gSZ-Rg-ZJb" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="16" id="4uM-B7-RRs"/>
                             <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="i1r-F3-bFx" secondAttribute="trailing" constant="16" id="5tg-4c-awI"/>
@@ -182,6 +197,7 @@
                             <constraint firstItem="exO-Ai-IAD" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="8" id="TCZ-wA-T3H"/>
                             <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="gSZ-Rg-ZJb" secondAttribute="trailing" constant="16" id="a1y-Sj-Sdz"/>
                             <constraint firstItem="i1r-F3-bFx" firstAttribute="top" secondItem="gbk-V5-nR0" secondAttribute="bottom" constant="16" id="atY-Lk-xoc"/>
+                            <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="myI-3t-x3X" secondAttribute="trailing" constant="16" id="baG-z8-QJN"/>
                             <constraint firstItem="i1r-F3-bFx" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="16" id="bzf-2E-0PO"/>
                             <constraint firstItem="gbk-V5-nR0" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="16" id="j7R-Bg-S4P"/>
                             <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="gbk-V5-nR0" secondAttribute="trailing" constant="16" id="l0q-HU-u2I"/>
@@ -197,7 +213,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3tt-Ut-X6h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3489.8550724637685" y="69.642857142857139"/>
+            <point key="canvasLocation" x="3583" y="70"/>
         </scene>
         <!--Diary Detail View Controller-->
         <scene sceneID="Vb9-Bg-KyO">
@@ -209,6 +225,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="byf-8y-oNc">
                                 <rect key="frame" x="0.0" y="45" width="414" height="411.5"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="byf-8y-oNc" secondAttribute="height" multiplier="1:1" id="dJB-Tp-G8Q"/>
                                 </constraints>
@@ -329,7 +346,8 @@
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="message" catalog="system" width="128" height="113"/>
         <image name="photo.artframe" catalog="system" width="128" height="93"/>
-        <image name="plus.app.fill" catalog="system" width="128" height="114"/>
+        <image name="plus.app" catalog="system" width="128" height="114"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -18,7 +18,7 @@ class PetNotificationCollectionViewCell: UICollectionViewCell {
         petThumbnailImageView.loadImage(petImage, placeHolder: UIImage(systemName: "person.fill"))
         contentLabel.text = content
         petNameLabel.text = petName
-
+        petThumbnailImageView.layer.cornerRadius = petThumbnailImageView.frame.height / 2
     }
     
 }
