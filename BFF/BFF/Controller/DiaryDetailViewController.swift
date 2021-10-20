@@ -68,17 +68,84 @@ class DiaryDetailViewController: UIViewController {
             self?.petTags = petTags
         }
 
-    }
+        setPetsTag()
 
-    func setPetsTag(){
-        tagStackView.subviews.forEach { subview in
-            tagStackView.removeArrangedSubview(subview)
-        }
-        petTags.forEach { petName in
-            let tag = UILabel()
-            tag.text = petName
-            tagStackView.addArrangedSubview(tag)
-        }
     }
+    @IBAction func showMenu(_ sender: Any) {
 
-}
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        // Block PetsId -> Only show on other's Diary
+        alertController.addAction(UIAlertAction(title: "Hide this diary", style: .default, handler: blockDiary))
+
+        // Setting privacy Button
+        viewModel.isPublic.bind(listener: { isPublic in
+            if isPublic {
+
+                alertController.addAction(UIAlertAction(title: "ToPrivate", style: .default, handler: self.editPrivacyToPrivate))
+
+            } else {
+                alertController.addAction(UIAlertAction(title: "ToPublic", style: .default, handler: self.editPrivacyToPublic))
+            }
+        })
+
+            // Edit Diary Button
+            alertController.addAction(UIAlertAction(title: "Edit Diary", style: .default, handler: editDiary))
+
+            // Delete Diary Button
+            alertController.addAction(UIAlertAction(title: "Delete Diary", style: .destructive, handler: deleteDiary))
+
+            // Cancel Menu Button
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+            self.present(alertController, animated: true, completion: nil)
+
+        }
+
+// MARK: - Diary Menu Function
+
+        // Block PetsId Action
+        func blockDiary(_ action: UIAlertAction){
+            print("tapped \(action.title!)")
+
+        }
+
+        // Setting privacy Action
+        func editPrivacyToPublic(_ action: UIAlertAction){
+            print("tapped \(action.title!)")
+            viewModel.changePrivacy(isPublic: true)
+
+        }
+
+        func editPrivacyToPrivate(_ action: UIAlertAction){
+        print("tapped \(action.title!)")
+            viewModel.changePrivacy(isPublic: false)
+
+        }
+
+
+        func editDiary(_ action: UIAlertAction) {
+
+
+            print("tapped \(action.title!)")
+        }
+
+
+        func deleteDiary(_ action: UIAlertAction) {
+            print("tapped \(action.title!)")
+
+
+        }
+
+        func setPetsTag(){
+            tagStackView.subviews.forEach { subview in
+                tagStackView.removeArrangedSubview(subview)
+            }
+            petTags.forEach { petName in
+                let tag = UILabel()
+                tag.text = petName
+                tagStackView.addArrangedSubview(tag)
+            }
+        }
+
+    }
