@@ -20,6 +20,8 @@ class DetialViewModel {
     let petTags = Box([String]())
     let numberOfComments = Box(0)
     let comments = Box([String]())
+    let isPublic = Box(false)
+    let diaryId = Box(" ")
 
     init() {
         getdiaryData(from: Self.defaultDiray)
@@ -38,6 +40,8 @@ class DetialViewModel {
         self.petTags.value = diary.petTags
         self.numberOfComments.value = diary.comments.count
         self.comments.value = diary.comments
+        self.isPublic.value = diary.isPublic
+        self.diaryId.value = diary.diaryId
         FirebaseManager.shared.fetchPet(petId: diary.petId) { result in
             switch result {
             case .success(let pet):
@@ -49,5 +53,10 @@ class DetialViewModel {
                 self.postPetImageUrl.value = ""
             }
         }
+    }
+
+    func changePrivacy(isPublic: Bool) {
+        self.isPublic.value = isPublic
+        FirebaseManager.shared.updateDiaryPrivacy(diaryId:diaryId.value , isPublic: isPublic)
     }
 }
