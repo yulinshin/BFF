@@ -26,6 +26,18 @@ class CreatPetViewController: UIViewController {
         "Note"
     ]
 
+    enum PresentMode {
+
+        case read
+
+        case edit
+
+        case creat
+
+    }
+
+    var presentMode: PresentMode?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         petInfoTableView.delegate = self
@@ -41,7 +53,67 @@ class CreatPetViewController: UIViewController {
 
     }
 
-    @IBAction func creatPet(_ sender: Any) {
+    override func viewWillAppear(_ animated: Bool) {
+
+        switch presentMode {
+
+        case .read:
+
+            self.navigationItem.title = "My Pet"
+
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(savePet))
+
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "back", style: .done, target: self, action: #selector(cancel))
+
+        case .edit:
+
+            self.navigationItem.title = "Edit Pet"
+
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(updatePet))
+
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancel))
+
+        case .creat:
+
+            self.navigationItem.title = "Creat Pet"
+
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(savePet))
+
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancel))
+
+
+        case .none:
+            return
+        }
+
+
+    }
+
+
+    @objc func updatePet() {
+
+        guard let image = petImage.image else { return }
+
+        viewModel.upDatePetToDB(image: image) { result in
+
+            switch result {
+
+            case .success(let message):
+
+                print(message)
+                self.dismiss(animated: true, completion: nil)
+
+            case .failure(let error):
+                print("fetchData.failure\(error)")
+
+            }
+
+        }
+
+    }
+
+
+    @objc func savePet() {
 
         guard let image = petImage.image else { return }
 
@@ -60,6 +132,13 @@ class CreatPetViewController: UIViewController {
             }
 
         }
+    }
+
+
+    @objc func cancel() {
+
+        self.dismiss(animated: true, completion: nil)
+
     }
 }
 

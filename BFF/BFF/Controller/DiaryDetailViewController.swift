@@ -74,7 +74,6 @@ class DiaryDetailViewController: UIViewController {
             self?.diaryId = diaryId
         }
 
-
         setPetsTag()
 
     }
@@ -112,19 +111,19 @@ class DiaryDetailViewController: UIViewController {
 // MARK: - Diary Menu Function
 
         // Block PetsId Action
-        func blockDiary(_ action: UIAlertAction){
+        func blockDiary(_ action: UIAlertAction) {
             print("tapped \(action.title!)")
 
         }
 
         // Setting privacy Action
-        func editPrivacyToPublic(_ action: UIAlertAction){
+        func editPrivacyToPublic(_ action: UIAlertAction) {
             print("tapped \(action.title!)")
             viewModel.changePrivacy(isPublic: true)
 
         }
 
-        func editPrivacyToPrivate(_ action: UIAlertAction){
+        func editPrivacyToPrivate(_ action: UIAlertAction) {
         print("tapped \(action.title!)")
             viewModel.changePrivacy(isPublic: false)
 
@@ -170,18 +169,8 @@ class DiaryDetailViewController: UIViewController {
 
         func deleteDiary(_ action: UIAlertAction) {
 
-            FirebaseManager.shared.delateDiary(diaryId: diaryId) { result in
-                switch result {
-                case .success(let sucessMessage):
-                    print(sucessMessage)
-
-                case .failure(let error):
-                    print("fetchData.failure\(error)")
-                }
-            }
-
             print("tapped \(action.title!)")
-
+            viewModel.deleteDiary()
             self.navigationController?.popViewController(animated: true)
 
         }

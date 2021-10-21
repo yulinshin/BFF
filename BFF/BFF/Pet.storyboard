@@ -16,17 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7jb-GX-7Dk">
-                                <rect key="frame" x="16" y="806" width="382" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="sV4-Jb-XHG"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Create"/>
-                                <connections>
-                                    <action selector="creatPet:" destination="qoI-dw-mZO" eventType="touchUpInside" id="VBU-VI-b6x"/>
-                                </connections>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus.app" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="651-Kd-8gL">
                                 <rect key="frame" x="107" y="61" width="200" height="197.5"/>
                                 <constraints>
@@ -35,7 +24,7 @@
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ykn-SC-eiK">
-                                <rect key="frame" x="0.0" y="276" width="414" height="530"/>
+                                <rect key="frame" x="0.0" y="276" width="414" height="586"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="p27-cI-jJN">
@@ -60,15 +49,12 @@
                         <viewLayoutGuide key="safeArea" id="yRI-Ks-nhz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="yRI-Ks-nhz" firstAttribute="trailing" secondItem="7jb-GX-7Dk" secondAttribute="trailing" constant="16" id="02U-lh-sf9"/>
                             <constraint firstItem="651-Kd-8gL" firstAttribute="top" secondItem="yRI-Ks-nhz" secondAttribute="top" constant="16" id="03K-wx-eIY"/>
-                            <constraint firstItem="7jb-GX-7Dk" firstAttribute="bottom" secondItem="yRI-Ks-nhz" secondAttribute="bottom" constant="-16" id="4KG-FY-lR8"/>
                             <constraint firstItem="Ykn-SC-eiK" firstAttribute="leading" secondItem="yRI-Ks-nhz" secondAttribute="leading" id="BI5-GJ-j9t"/>
-                            <constraint firstItem="7jb-GX-7Dk" firstAttribute="leading" secondItem="yRI-Ks-nhz" secondAttribute="leading" constant="16" id="NKn-D1-AU0"/>
                             <constraint firstItem="651-Kd-8gL" firstAttribute="centerX" secondItem="CAs-Rm-a3p" secondAttribute="centerX" id="b0S-9X-BOQ"/>
                             <constraint firstItem="Ykn-SC-eiK" firstAttribute="top" secondItem="651-Kd-8gL" secondAttribute="bottom" constant="16" id="hwJ-yb-Yjc"/>
+                            <constraint firstItem="yRI-Ks-nhz" firstAttribute="bottom" secondItem="Ykn-SC-eiK" secondAttribute="bottom" id="nDk-Ra-3Kg"/>
                             <constraint firstItem="yRI-Ks-nhz" firstAttribute="trailing" secondItem="Ykn-SC-eiK" secondAttribute="trailing" id="of8-du-AHV"/>
-                            <constraint firstItem="7jb-GX-7Dk" firstAttribute="top" secondItem="Ykn-SC-eiK" secondAttribute="bottom" id="re8-Sf-VdW"/>
                         </constraints>
                     </view>
                     <connections>

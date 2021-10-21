@@ -18,6 +18,7 @@ class PetCollectionViewCell: UICollectionViewCell {
         petImageView.loadImage(petImage)
         petImageView.contentMode = .scaleAspectFill
         petImageView.layer.cornerRadius = 20
+        petImageView.isUserInteractionEnabled = false
         diaryCardBackground.layer.cornerRadius = 20
         diaryCardBackground.layer.shadowColor = UIColor.black.cgColor
         diaryCardBackground.layer.shadowOffset = CGSize(width: 2, height: 2)

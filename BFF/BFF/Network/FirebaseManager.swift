@@ -38,11 +38,9 @@ class FirebaseManager {
         }
     }
 
-
-
-    func listenUser(completion: @escaping (Result<User, Error>) -> Void){
+    func listenUser(completion: @escaping (Result<User, Error>) -> Void) {
         dateBase.collection("Users").document(userId).addSnapshotListener { documentSnapshot, error in
-            if let error = error{
+            if let error = error {
                 print(error.localizedDescription)
             } else {
                 if let documentSnapshot = documentSnapshot {
@@ -54,13 +52,12 @@ class FirebaseManager {
                     } catch {
                         completion(.failure(error))
                     }
-                }else {
+                } else {
                     fatalError()
                 }
             }
         }
     }
-
 
     func fetchNotifications(completion: @escaping (Result<[Notification], Error>) -> Void) {
 
@@ -93,18 +90,19 @@ class FirebaseManager {
 
     func listenNotifications(completion: @escaping (Result<[Notification], Error>) -> Void) {
         dateBase.collection("Users").document(userId).collection("Notifications").addSnapshotListener { querySnapshot, error in
-            if let error = error{
+            if let error = error {
                 completion(.failure(error))
             } else {
                 if let querySnapshot = querySnapshot {
                     var notifications = [Notification]()
                     querySnapshot.documents.forEach { document in
-                        do{
-                            if let data = try document.data(as: Notification.self){
+                        do {
+                            if let data = try document.data(as: Notification.self) {
+                                
                                 print(data)
                                 notifications.append(data)
                             }
-                        }catch{
+                        } catch {
                             completion(.failure(error))
                         }
                     }
@@ -117,8 +115,6 @@ class FirebaseManager {
     func addPetToUser(petId: String) {
         dateBase.collection("Users").document(userId).updateData(["petsIds": FieldValue.arrayUnion([petId])])
     }
-
-    
 
     func fetchPet(petId: String, completion: @escaping (Result<Pet, Error>) -> Void) {
 
@@ -163,6 +159,29 @@ class FirebaseManager {
         }
     }
 
+    func listenUsersPets(completion: @escaping (Result<[Pet], Error>) -> Void) {
+        dateBase.collection("Pets").whereField("userId", isEqualTo: userId).addSnapshotListener { querySnapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                if let querySnapshot = querySnapshot {
+                    var pets = [Pet]()
+                    querySnapshot.documents.forEach { document in
+                        do {
+                            if let data = try document.data(as: Pet.self) {
+                                print(data)
+                                pets.append(data)
+                            }
+                        } catch {
+                            completion(.failure(error))
+                        }
+                    }
+                    completion(.success(pets))
+                }
+            }
+        }
+    }
+
     func fetchPets (completion: @escaping (Result<[Pet], Error>) -> Void) {
 
         dateBase.collection("Pets").whereField("userId", isEqualTo: userId).getDocuments { (querySnapshot, error) in
@@ -187,7 +206,6 @@ class FirebaseManager {
         }
     }
 
-
     func creatPets(newPet: Pet) {
 
         let diariesRef = dateBase.collection("Pets")
@@ -206,6 +224,36 @@ class FirebaseManager {
     }
 
 
+    func updatePet(upDatepetId: String, newimage:UIImage, data:Pet) {
+
+        if let pic = data.petThumbnail {
+            deletePhoto(fileName: pic.fileName, filePath: .petPhotos)
+        } else {
+
+        }
+        uploadPhoto(image: newimage, filePath: .petPhotos) { result in
+                switch result {
+                case .success(let pic):
+                    self.dateBase.collection("Pets").document(upDatepetId).updateData([
+                        "petId": data.petId,
+                        "name": data.name,
+                        "userId": data.userId,
+                        "healthInfo.birthday": data.healthInfo.birthday,
+                        "healthInfo.chipId": data.healthInfo.chipId,
+                        "healthInfo.gender": data.healthInfo.chipId,
+                        "healthInfo.note": data.healthInfo.note,
+                        "healthInfo.type": data.healthInfo.type,
+                        "healthInfo.weight": data.healthInfo.weight,
+                        "healthInfo.weightUnit": data.healthInfo.weightUnit,
+                        "petThumbnail.url": pic.url ,
+                        "petThumbnail.fileName": pic.fileName
+                    ])
+                case .failure(let error):
+                    print("fetchData.failure\(error)")
+
+                }
+            }
+        }
 
 
     func fetchDiaries(completion: @escaping (Result<[Diary], Error>) -> Void) {
@@ -233,12 +281,12 @@ class FirebaseManager {
         }
     }
 
-    func creatDiary(content: String, imageUrls: [String], isPublic: Bool, petTags: [String]) {
+    func creatDiary(content: String, pics: [Pic], isPublic: Bool, petTags: [String]) {
 
         let diariesRef = dateBase.collection("Diaries")
         let document = diariesRef.document()
 
-        let diary = Diary(content: content, diaryId: document.documentID, images: imageUrls, isPublic: isPublic, petTags: petTags, userId: userId, petId: petTags[0])
+        let diary = Diary(content: content, diaryId: document.documentID, images: pics, isPublic: isPublic, petTags: petTags, userId: userId, petId: petTags[0])
 
         do {
             try document.setData(from: diary)
@@ -248,16 +296,16 @@ class FirebaseManager {
         }
     }
 
-
-
-    enum FilePathName : String {
+    enum FilePathName: String {
         case dairyPhotos = "DairyPhotos"
         case petPhotos = "PetPhotoss"
     }
 
-    func uploadPhoto(image: UIImage, filePath: FilePathName, completion: @escaping (Result<String, Error>) -> Void) {
+    func uploadPhoto(image: UIImage, filePath: FilePathName, completion: @escaping (Result<Pic, Error>) -> Void) {
 
-        let storageRef = storage.reference().child(filePath.rawValue).child("\(NSUUID().uuidString).jpg")
+        let fileName = "\(NSUUID().uuidString).jpg"
+        print(fileName)
+        let storageRef = storage.reference().child(filePath.rawValue).child(fileName)
 
         guard let data = image.pngData() else { return }
 
@@ -275,13 +323,30 @@ class FirebaseManager {
                             return
                         }
                         let urlString = downloadURL.absoluteString
-                        completion(.success(urlString))
+                        let pic = Pic(url: urlString, fileName: fileName)
+                        print(fileName)
+                        completion(.success(pic))
                     }
                 }
 
             }
         }
     }
+
+
+    func deletePhoto(fileName: String, filePath: FilePathName){
+        let storageRef = storage.reference().child(filePath.rawValue).child(fileName)
+        storageRef.delete { error in
+          if let error = error {
+              print(error)
+          } else {
+          }
+        }
+
+    }
+
+
+
 
     func updateDiaryPrivacy(diaryId: String, isPublic: Bool) {
         dateBase.collection("Diaries").document(diaryId).updateData(["isPublic": isPublic])
@@ -291,7 +356,11 @@ class FirebaseManager {
         dateBase.collection("Diaries").document(diaryId).updateData(["content": content])
     }
 
-    func delateDiary(diaryId: String, completion: @escaping (Result<String, Error>) -> Void){
+    func delateDiary(diaryId: String, diatyPics: [Pic], completion: @escaping (Result<String, Error>) -> Void) {
+        diatyPics.forEach { pic in
+            deletePhoto(fileName: pic.fileName, filePath: .dairyPhotos)
+        }
+
         dateBase.collection("Diaries").document(diaryId).delete() { error in
             if let error = error {
                 completion(.failure(error))
