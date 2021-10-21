@@ -28,7 +28,6 @@ class DiaryViewController: UIViewController {
 
         case pet(Pet)
         case diary(Diary)
-
         var pet: Pet? {
             if case .pet(let pet) = self {
                 return pet
@@ -178,7 +177,7 @@ class DiaryViewController: UIViewController {
 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DairyPhotoCell.identifier, for: indexPath) as? DairyPhotoCell
 
-            guard let imageStr = item.diary?.images.first else { return cell }
+            guard let imageStr = item.diary?.images.first?.url else { return cell }
             cell?.configure(with: PhotoCellViewlModel(with: imageStr))
 
             return cell
@@ -194,7 +193,7 @@ class DiaryViewController: UIViewController {
 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedPetsCollectionViewCell.identifier, for: indexPath) as? SelectedPetsCollectionViewCell
 
-            guard let imageStr = item.pet?.petThumbnail,
+            guard let imageStr = item.pet?.petThumbnail?.url,
                   let petId = item.pet?.petId else { return cell }
             cell?.congfigure(with: PhotoCellViewlModel(with: imageStr), petId: petId)
             return cell

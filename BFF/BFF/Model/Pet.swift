@@ -15,8 +15,12 @@ struct Pet: Codable {
     var userId: String
     var healthInfo: HealthInfo
     var medicalRecords: [MedicalRecord]?
-    var petThumbnail: String
-    
+    var petThumbnail: Pic?
+}
+
+struct Pic: Codable {
+    var url: String
+    var fileName: String
 }
 
 struct HealthInfo: Codable {

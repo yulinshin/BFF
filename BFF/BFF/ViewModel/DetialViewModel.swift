@@ -11,10 +11,11 @@ import Kingfisher
 
 class DetialViewModel {
 
-    private static let defaultDiray = Diary(content: " ", diaryId: " ", images: [String](), isPublic: true, petTags: [String](), userId: " ", petId: " ")
+    private static let defaultDiray = Diary(content: " ", diaryId: " ", images: [Pic](), isPublic: true, petTags: [String](), userId: " ", petId: " ")
     let postImageUrl = Box(" ")
     let postPetsName = Box(" ")
     let postPetImageUrl = Box(" ")
+    let postPetFileName = Box(" ")
     let creatDate = Box(" ")
     let contentText = Box(" ")
     let petTags = Box([String]())
@@ -33,7 +34,8 @@ class DetialViewModel {
 
     private func getdiaryData(from diary: Diary) {
         if let image = diary.images.first {
-            self.postPetImageUrl.value = image
+            self.postPetImageUrl.value = image.url
+            self.postPetFileName.value = image.fileName
         }
         self.creatDate.value = diary.createdTime.dateValue().ISO8601Format()
         self.contentText.value = diary.content
@@ -46,7 +48,6 @@ class DetialViewModel {
             switch result {
             case .success(let pet):
                 self.postPetsName.value = pet.name
-                self.postPetImageUrl.value = pet.petThumbnail
             case .failure(let error):
                 print("fetchData.failure\(error)")
                 self.postPetsName.value = ""
@@ -64,4 +65,19 @@ class DetialViewModel {
         self.contentText.value = content
         FirebaseManager.shared.updateDiaryContent(diaryId: diaryId.value, content: content)
     }
+
+    func deleteDiary(){
+        var pic = Pic(url: postImageUrl.value, fileName: postPetFileName.value)
+        print("Delete\(pic)")
+        FirebaseManager.shared.delateDiary(diaryId: diaryId.value, diatyPics:[pic]) { result in
+            switch result {
+            case .success(let sucessMessage):
+                print(sucessMessage)
+
+            case .failure(let error):
+                print("fetchData.failure\(error)")
+            }
+        }
+    }
 }
+

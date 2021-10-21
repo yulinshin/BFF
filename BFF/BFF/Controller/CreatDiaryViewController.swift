@@ -60,9 +60,9 @@ class CreatDiaryViewController: UIViewController {
 
             switch result {
 
-            case .success(let urlString):
+            case .success(let pic):
 
-                FirebaseManager.shared.creatDiary(content: self.diaryTextView.text, imageUrls: [urlString], isPublic: true, petTags: [petsId])
+                FirebaseManager.shared.creatDiary(content: self.diaryTextView.text, pics: [pic], isPublic: true, petTags: [petsId])
 
                 // fozen VC with indcater
 
@@ -123,9 +123,9 @@ extension CreatDiaryViewController: UICollectionViewDataSource {
         // swiftlint:disable:next line_length
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedPetsCollectionViewCell.identifier, for: indexPath) as? SelectedPetsCollectionViewCell else { return UICollectionViewCell()}
         
-        let imageStr = petsData[indexPath.row].petThumbnail
+        let imageStr = petsData[indexPath.row].petThumbnail?.url
         let petId = petsData[indexPath.row].petId
-        cell.congfigure(with: PhotoCellViewlModel(with: imageStr), petId: petId)
+        cell.congfigure(with: PhotoCellViewlModel(with: imageStr ?? ""), petId: petId)
         
         return cell
         

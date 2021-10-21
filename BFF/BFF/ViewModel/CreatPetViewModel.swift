@@ -65,7 +65,7 @@ class CreatPetViewModel {
     func creatPet(image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
 
         // swiftlint:disable:next line_length
-        var pet = Pet(petId: "", name: self.name.value, userId: "", healthInfo: HealthInfo(birthday: self.birthday.value, chipId: self.chipId.value, gender: self.gender.value, note: self.note.value, type: self.type.value, weight: self.weight.value, weightUnit: self.weightUnit.value), petThumbnail: "")
+        var pet = Pet(petId: "", name: self.name.value, userId: "", healthInfo: HealthInfo(birthday: self.birthday.value, chipId: self.chipId.value, gender: self.gender.value, note: self.note.value, type: self.type.value, weight: self.weight.value, weightUnit: self.weightUnit.value), petThumbnail: Pic(url: "", fileName: ""))
 
         FirebaseManager.shared.uploadPhoto(image: image, filePath: .petPhotos) { result in
 
@@ -86,4 +86,14 @@ class CreatPetViewModel {
             }
         }
     }
+
+
+    func upDatePetToDB(image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
+
+        // swiftlint:disable:next line_length
+            let pet = Pet(petId: "", name: self.name.value, userId: "", healthInfo: HealthInfo(birthday: self.birthday.value, chipId: self.chipId.value, gender: self.gender.value, note: self.note.value, type: self.type.value, weight: self.weight.value, weightUnit: self.weightUnit.value), petThumbnail: Pic(url: "", fileName: ""))
+
+                FirebaseManager.shared.updatePet(upDatepetId: pet.petId, newimage: image, data: pet)
+
+        }
 }
