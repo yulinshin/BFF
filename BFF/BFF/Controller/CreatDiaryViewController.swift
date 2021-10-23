@@ -26,6 +26,10 @@ class CreatDiaryViewController: UIViewController {
     }
     
     var diaryImage: UIImage?
+
+    var selectedPetId: String?
+
+    var petTags = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +38,7 @@ class CreatDiaryViewController: UIViewController {
         selectedPetsCollectionView.dataSource = self
         let petNib = UINib(nibName: "SelectedPetsCollectionViewCell", bundle: nil)
         selectedPetsCollectionView.register(petNib, forCellWithReuseIdentifier: SelectedPetsCollectionViewCell.identifier)
-        selectedPetsCollectionView.allowsMultipleSelection = true
+        selectedPetsCollectionView.allowsMultipleSelection = false
         fetchData()
         
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.handleSelectedDiaryImage))
@@ -47,28 +51,34 @@ class CreatDiaryViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveDiary))
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelEditDiary))
-        
+
+        self.navigationItem.rightBarButtonItem?.tintColor = .orange
+        self.navigationItem.leftBarButtonItem?.tintColor = .orange
     }
 
     @objc func saveDiary() {
 
-        guard let petsId = petsData.first?.petId,
+        guard let petId = selectedPetId,
               let image = imageView.image else {
                   return
               }
+
+        ProgressHUD.show()
+
         FirebaseManager.shared.uploadPhoto(image: image, filePath: .dairyPhotos) { result in
 
             switch result {
 
             case .success(let pic):
 
-                FirebaseManager.shared.creatDiary(content: self.diaryTextView.text, pics: [pic], isPublic: true, petTags: [petsId])
+                FirebaseManager.shared.creatDiary(content: self.diaryTextView.text, pics: [pic], isPublic: true, petTags: self.petTags, petId: petId)
 
-                // fozen VC with indcater
+                ProgressHUD.showSuccess(text:"新增日記成功")
 
-                self.navigationController?.dismiss(animated: true, completion: nil)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                    self.navigationController?.dismiss(animated: true, completion: nil)
+                      }
 
-                // present to PostVC
 
             case .failure(let error):
                 print("fetchData.failure\(error)")
@@ -108,9 +118,6 @@ class CreatDiaryViewController: UIViewController {
         }
         
     }
-    @IBAction func cancel(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
 }
 
 extension CreatDiaryViewController: UICollectionViewDataSource {
@@ -137,6 +144,7 @@ extension CreatDiaryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == selectedPetsCollectionView {
             guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
+            selectedPetId = petsData[indexPath.row].petId
             cell.selectBackground.layer.borderColor = UIColor.orange.cgColor
             cell.selectBackground.layer.borderWidth = 1
         }

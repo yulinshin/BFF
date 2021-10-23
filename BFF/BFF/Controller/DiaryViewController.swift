@@ -12,47 +12,13 @@ class DiaryViewController: UIViewController {
     @IBOutlet weak var selectedPetsCollectionView: UICollectionView!
     @IBOutlet weak var diariesCollectionView: UICollectionView!
 
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
+    
+    var lauoutType = LayoutType.grid
 
-    enum LayoutType {
-        case grid
-        case single
-    }
+    var showSelectedPetsCollectionView = true
 
-    enum Section: String {
-        case all
-    }
 
-    enum Item: Hashable {
-
-        case pet(Pet)
-        case diary(Diary)
-        var pet: Pet? {
-            if case .pet(let pet) = self {
-                return pet
-            } else {
-                return nil
-            }
-        }
-
-        var diary: Diary? {
-            if case .diary(let diary) = self {
-                return diary
-            } else {
-                return nil
-            }
-        }
-
-        static func == (lhs: Item, rhs: Item) -> Bool {
-            return lhs.diary?.diaryId == rhs.diary?.diaryId && lhs.pet?.petId == rhs.pet?.petId
-          }
-
-        func hash(into hasher: inout Hasher) {
-           hasher.combine(pet?.petId)
-            hasher.combine(diary?.diaryId)
-        }
-    }
+    var diaryWallViewModel = DiaryWallViewModel()
 
     var diaries = [Item]() {
         didSet {
@@ -63,16 +29,16 @@ class DiaryViewController: UIViewController {
 
     var userPetIds = [String]()
 
-    // from HomePageVC
     var userPetsData = [Item]() {
         didSet {
             applySnapshot()
             selectedPetsCollectionView.reloadData()
         }
     }
-    var showPets = ["1", "2"] {
+
+    var showPets = [String]() {
         didSet {
-            diariesCollectionView.reloadData()
+            diaryWallViewModel.fielter(petIds: showPets)
         }
     }
 
@@ -81,7 +47,6 @@ class DiaryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         selectedPetsCollectionView.delegate = self
         diariesCollectionView.delegate = self
         let diaryNib = UINib(nibName: "DairyPhotoCell", bundle: nil)
@@ -92,34 +57,53 @@ class DiaryViewController: UIViewController {
         selectedPetsCollectionView.dataSource = petsDataSource
         diariesCollectionView.collectionViewLayout = creatLayout(type: .single)
         selectedPetsCollectionView.allowsMultipleSelection = true
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Creat", style: .done, target: self, action: #selector(creatDiary))
+
+
+        diaryWallViewModel.showingDiarys.bind {  [weak self] diaries in
+
+            var diaryItems = [Item]()
+
+            diaries.forEach { diary in
+                diaryItems.append(Item.diary(diary))
+            }
+            self?.diaries = diaryItems
+        }
+
         fetchData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+
+        self.navigationController?.navigationBar.tintColor = UIColor.orange
+
+        if showSelectedPetsCollectionView {
+            self.selectedPetsCollectionView.isHidden = false
+
+        } else {
+            self.selectedPetsCollectionView.isHidden = true
+            
+        }
+
+        diaryWallViewModel.fetchDiary()
         fetchData()
     }
 
+
+    @objc func creatDiary(){
+
+            let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatDiaryViewController") as? CreatDiaryViewController else { return }
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor:UIColor.orange]
+            self.present(nav, animated: true, completion: nil)
+
+    }
+
     func fetchData() {
-
-        FirebaseManager.shared.fetchDiaries { result in
-
-            switch result {
-
-            case .success(let diaries):
-
-                var diaryItems = [Item]()
-
-                diaries.forEach { diary in
-                    diaryItems.append(Item.diary(diary))
-                }
-                self.diaries = diaryItems
-
-            case .failure(let error):
-                print("fetchData.failure\(error)")
-
-            }
-        }
 
         FirebaseManager.shared.fetchPets(petIds: userPetIds) { result in
 
@@ -127,20 +111,20 @@ class DiaryViewController: UIViewController {
 
             case .success(let pets):
 
+                var defultShowingPetsId = [String]()
                 var petsDataItem = [Item]()
                 pets.forEach { pet in
+                    defultShowingPetsId.append(pet.petId)
                     petsDataItem.append(Item.pet(pet))
                     print("Pet = \(pet)")
                 }
                 self.userPetsData = petsDataItem
+                self.showPets = defultShowingPetsId
 
             case .failure(let error):
                 print("fetchData.failure\(error)")
-
             }
-
         }
-
     }
 
     func applySnapshot(animatingDifferences: Bool = true) {
@@ -164,46 +148,11 @@ class DiaryViewController: UIViewController {
             if showPets.contains(petId) {
                 selectedPetsCollectionView.selectItem(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: [])
                 cell.selectBackground.layer.borderColor = UIColor.orange.cgColor
-                cell.selectBackground.layer.borderWidth = 1
+                cell.selectBackground.layer.borderWidth = 2
             }
         }
     }
-
-    // MARK: - dataSource
-
-    func makeDiariesDataSource() -> DataSource {
-
-        let dataSource = DataSource(collectionView: diariesCollectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
-
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DairyPhotoCell.identifier, for: indexPath) as? DairyPhotoCell
-
-            guard let imageStr = item.diary?.images.first?.url else { return cell }
-            cell?.configure(with: PhotoCellViewlModel(with: imageStr))
-
-            return cell
-        }
-
-        return dataSource
-
-    }
-
-    func makePetsDataSource() -> DataSource {
-
-        let dataSource = DataSource(collectionView: selectedPetsCollectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
-
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedPetsCollectionViewCell.identifier, for: indexPath) as? SelectedPetsCollectionViewCell
-
-            guard let imageStr = item.pet?.petThumbnail?.url,
-                  let petId = item.pet?.petId else { return cell }
-            cell?.congfigure(with: PhotoCellViewlModel(with: imageStr), petId: petId)
-            return cell
-
-        }
-
-        return dataSource
-
-    }
-
+    
     // MARK: - diariesCollectionViewCompostionLayout
 
     func creatLayout(type: LayoutType) -> UICollectionViewLayout {
@@ -250,13 +199,15 @@ extension DiaryViewController: UICollectionViewDelegate {
         if collectionView == selectedPetsCollectionView {
             guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
             cell.selectBackground.layer.borderColor = UIColor.orange.cgColor
-            cell.selectBackground.layer.borderWidth = 1
+            cell.selectBackground.layer.borderWidth = 2
+
             guard let petId = cell.petId else { return }
             if showPets.contains(petId) {
-               return
+                return
             } else {
-                showPets.insert(petId, at: indexPath.item)
+                showPets.append(petId)
             }
+
         } else {
 
             let storyboard = UIStoryboard(name: "Diary", bundle: nil)
@@ -274,11 +225,11 @@ extension DiaryViewController: UICollectionViewDelegate {
             cell.selectBackground.layer.borderWidth = 0
 
             guard let petId = cell.petId else { return }
-            if showPets.contains(petId) {
-                showPets.remove(at: indexPath.item)
-            } else {
-                return
+
+            if let index = showPets.firstIndex(of: petId) {
+                showPets.remove(at: index)
             }
+
         }
     }
 
@@ -292,5 +243,9 @@ extension DiaryViewController: UICollectionViewDelegateFlowLayout {
         } else {
             return CGSize(width: 0, height: 0)
         }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        0
     }
 }

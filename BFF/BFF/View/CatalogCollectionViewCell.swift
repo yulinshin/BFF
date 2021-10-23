@@ -15,6 +15,7 @@ class CatalogCollectionViewCell: UICollectionViewCell {
     func setup(title: String, iconName: String ) {
         iconBackgroundView.layer.shadowColor = UIColor.orange.cgColor
         iconImageView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        iconImageView.layer.cornerRadius = 10
         titleLabel.text = title
         iconImageView.image = UIImage(named: iconName)
     }

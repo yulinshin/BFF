@@ -281,12 +281,12 @@ class FirebaseManager {
         }
     }
 
-    func creatDiary(content: String, pics: [Pic], isPublic: Bool, petTags: [String]) {
+    func creatDiary(content: String, pics: [Pic], isPublic: Bool, petTags: [String], petId:String) {
 
         let diariesRef = dateBase.collection("Diaries")
         let document = diariesRef.document()
 
-        let diary = Diary(content: content, diaryId: document.documentID, images: pics, isPublic: isPublic, petTags: petTags, userId: userId, petId: petTags[0])
+        let diary = Diary(content: content, diaryId: document.documentID, images: pics, isPublic: isPublic, petTags: petTags, userId: userId, petId: petId)
 
         do {
             try document.setData(from: diary)
@@ -353,7 +353,9 @@ class FirebaseManager {
     }
 
     func updateDiaryContent(diaryId: String, content: String) {
+        ProgressHUD.show()
         dateBase.collection("Diaries").document(diaryId).updateData(["content": content])
+        ProgressHUD.showSuccess(text: "更新成功")
     }
 
     func delateDiary(diaryId: String, diatyPics: [Pic], completion: @escaping (Result<String, Error>) -> Void) {

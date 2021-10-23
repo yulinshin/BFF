@@ -117,16 +117,27 @@ class CreatPetViewController: UIViewController {
 
         guard let image = petImage.image else { return }
 
+        ProgressHUD.show()
+        
+
         viewModel.creatPet(image: image) { result in
+
+            ProgressHUD.dismiss()
 
             switch result {
 
             case .success(let message):
+                ProgressHUD.showSuccess(text: "建立成功")
 
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                    self.dismiss(animated: true, completion: nil)
+                      }
                 print(message)
-                self.dismiss(animated: true, completion: nil)
+
 
             case .failure(let error):
+
+                ProgressHUD.showFailure(text: "建立失敗")
                 print("fetchData.failure\(error)")
 
             }

@@ -21,7 +21,7 @@ class HomePageViewController: UIViewController {
     var sections = Section.allCases
 
     var catalogIcon = ["diary", "supply", "heart", "goal"]
-    var catalogLable =  ["日記本", "用品", "健康", "成就"]
+    var catalogLable =  ["相簿集", "用品", "健康", "成就"]
 
     var viewModel = HomePageViewModel()
 
@@ -51,8 +51,25 @@ class HomePageViewController: UIViewController {
         viewModel.usersPetsIds.bind { userPetsIds in
             self.userPetsCount = userPetsIds.count
             print("userPets")
+
         }
 
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+           let barAppearance =  UINavigationBarAppearance()
+           barAppearance.configureWithTransparentBackground()
+        barAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.orange]
+
+           navigationController?.navigationBar.standardAppearance = barAppearance
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let barAppearance =  UINavigationBarAppearance()
+        barAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.orange]
+        navigationController?.navigationBar.standardAppearance = barAppearance
     }
 
     // MARK: - UICollectionViewLayout
@@ -73,7 +90,7 @@ class HomePageViewController: UIViewController {
 
                 let layoutSection = NSCollectionLayoutSection(group: group)
                 layoutSection.orthogonalScrollingBehavior = .none
-                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 24, bottom: 6, trailing: 24)
 
                 return layoutSection
 
@@ -82,12 +99,12 @@ class HomePageViewController: UIViewController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(120))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(110))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
 
                 let layoutSection = NSCollectionLayoutSection(group: group)
 
-                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 24, bottom: 6, trailing: 24)
                 layoutSection.orthogonalScrollingBehavior = .none
 
                 return layoutSection
@@ -97,11 +114,10 @@ class HomePageViewController: UIViewController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(80))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
                 let layoutSection = NSCollectionLayoutSection(group: group)
-                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
 
                 return layoutSection
 
@@ -110,7 +126,7 @@ class HomePageViewController: UIViewController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .fractionalHeight(0.6))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.86), heightDimension: .fractionalHeight(0.55))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
                 let layoutSection = NSCollectionLayoutSection(group: group)
@@ -144,7 +160,6 @@ extension HomePageViewController: UICollectionViewDelegate {
                 }
             }
         }
-
 }
 
 // MARK: - UICollectionViewDataSource
@@ -202,6 +217,7 @@ extension HomePageViewController: UICollectionViewDataSource {
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatDiaryViewController") as? CreatDiaryViewController else { return }
                 let nav = UINavigationController(rootViewController: controller)
                 nav.modalPresentationStyle = .fullScreen
+                nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor:UIColor.orange]
                 self.present(nav, animated: true, completion: nil)
             }
             
@@ -248,11 +264,12 @@ extension HomePageViewController: UICollectionViewDataSource {
                 if indexPath.row == userPetsCount {
 
                     cell.setupBlankDiaryBook()
-                    cell.didTapBlankCard = {
+                    cell.didTapCard = {
                         let storyboard = UIStoryboard(name: "Pet", bundle: nil)
                         guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatPetViewController") as? CreatPetViewController else { return }
                         let nav = UINavigationController(rootViewController: controller)
                         nav.modalPresentationStyle = .fullScreen
+                        nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor:UIColor.orange]
                         controller.presentMode = .creat
                         self.present(nav, animated: true, completion: nil)
                     }
@@ -262,13 +279,12 @@ extension HomePageViewController: UICollectionViewDataSource {
                     viewModel.pets.bind { pets in
                     let pet = pets[indexPath.row]
                         cell.setup(petImage: pet.petThumbnail?.url ?? "")
-                    cell.didTapBlankCard = {
-                            let storyboard = UIStoryboard(name: "Pet", bundle: nil)
-                            guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatPetViewController") as? CreatPetViewController else { return }
-                            let nav = UINavigationController(rootViewController: controller)
-                            nav.modalPresentationStyle = .fullScreen
-                            controller.presentMode = .read
-                            self.present(nav, animated: true, completion: nil)
+                    cell.didTapCard = {
+                        let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+                        guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryViewController") as? DiaryViewController else { return }
+                        controller.userPetIds = [pet.petId]
+                        controller.showSelectedPetsCollectionView = false
+                        self.navigationController?.show(controller, sender: nil)
                     }
 
                 }

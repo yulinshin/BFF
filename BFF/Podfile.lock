@@ -466,6 +466,7 @@ PODS:
   - gRPC-Core/Interface (1.28.2)
   - GTMSessionFetcher/Core (1.7.0)
   - IQKeyboardManagerSwift (6.5.6)
+  - JGProgressHUD (2.2)
   - Kingfisher (6.3.1)
   - leveldb-library (1.22.1)
   - nanopb (2.30908.0):
@@ -481,6 +482,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - FirebaseFirestoreSwift (> 7.0-beta)
   - IQKeyboardManagerSwift
+  - JGProgressHUD
   - Kingfisher
   - SwiftLint
 
@@ -503,6 +505,7 @@ SPEC REPOS:
     - gRPC-Core
     - GTMSessionFetcher
     - IQKeyboardManagerSwift
+    - JGProgressHUD
     - Kingfisher
     - leveldb-library
     - nanopb
@@ -527,12 +530,13 @@ SPEC CHECKSUMS:
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
 
-PODFILE CHECKSUM: 15ba35ead75979796666ccda28544916efa6c1b1
+PODFILE CHECKSUM: 7b69a80fd0e38e0489755a191103d6e40bc786bb
 
 COCOAPODS: 1.11.2

@@ -24,8 +24,15 @@ class SelectedPetsCollectionViewCell: UICollectionViewCell {
         
         self.image.loadImage(viewModel.imageUrl)
         self.petId = petId
-        image.layer.cornerRadius = image.frame.height / 2
 
     }
+
+    override func layoutSubviews() {
+        selectBackground.layer.cornerRadius = selectBackground.frame.height / 2
+        selectBackground.clipsToBounds = true
+
+        image.layer.cornerRadius = image.frame.height / 2
+        image.clipsToBounds = true
+      }
     
 }
