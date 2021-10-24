@@ -35,7 +35,7 @@ class DetialViewModel {
 
     private func getdiaryData(from diary: Diary) {
         if let image = diary.images.first {
-            self.postPetImageUrl.value = image.url
+            self.postImageUrl.value = image.url
             self.postPetFileName.value = image.fileName
         }
 
@@ -53,6 +53,8 @@ class DetialViewModel {
             switch result {
             case .success(let pet):
                 self.postPetsName.value = pet.name
+                guard let url = pet.petThumbnail?.url else { return }
+                self.postPetImageUrl.value = url
             case .failure(let error):
                 print("fetchData.failure\(error)")
                 self.postPetsName.value = ""

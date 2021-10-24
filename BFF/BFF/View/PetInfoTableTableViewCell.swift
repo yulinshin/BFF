@@ -54,6 +54,7 @@ class PetInfoTableTableViewCell: UITableViewCell {
 
         case .more:
             self.button.isHidden = false
+            self.button.setTitle("", for: .normal)
             self.button.setImage(UIImage(systemName: "pencil"), for: .normal)
         }
 
@@ -119,7 +120,6 @@ class PetInfoTableTableViewCell: UITableViewCell {
 
         textField.inputAccessoryView = toolbar
         textField.inputView = picker
-        textField.text = pickerData.first
         picker.delegate = self
         picker.dataSource = self
         self.pickerData = pickerData

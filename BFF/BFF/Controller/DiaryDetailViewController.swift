@@ -38,11 +38,12 @@ class DiaryDetailViewController: UIViewController {
 
         postPetImageView.layer.cornerRadius = postPetImageView.frame.height / 2
 
-        viewModel.postPetImageUrl.bind {  [weak self] urlStr in
+        viewModel.postImageUrl.bind {  [weak self] urlStr in
             self?.image.kf.setImage(with: URL(string: urlStr))
         }
 
         viewModel.contentText.bind {  [weak self] content in
+            print(content)
             self?.contentTextView.text = content
         }
 
