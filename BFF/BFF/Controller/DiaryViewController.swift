@@ -45,6 +45,10 @@ class DiaryViewController: UIViewController {
     private lazy var diariesDataSource = makeDiariesDataSource()
     private lazy var petsDataSource = makePetsDataSource()
 
+    deinit {
+        print("DIEEEEEEEEEEEEE")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         selectedPetsCollectionView.delegate = self
@@ -90,7 +94,6 @@ class DiaryViewController: UIViewController {
         diaryWallViewModel.fetchDiary()
         fetchData()
     }
-
 
     @objc func creatDiary(){
 

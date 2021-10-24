@@ -80,10 +80,11 @@ class PetInfoTableTableViewCell: UITableViewCell {
 
         textField.inputView = datePicker
 
-        textField.textContentType = .dateTime
-
         datePicker.datePickerMode = .date
-        datePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
+
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
+        }
 
     }
 

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Kingfisher
+import FirebaseFirestoreSwift
 
 class DetialViewModel {
 
@@ -37,7 +38,11 @@ class DetialViewModel {
             self.postPetImageUrl.value = image.url
             self.postPetFileName.value = image.fileName
         }
-        self.creatDate.value = diary.createdTime.dateValue().ISO8601Format()
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd,yyyy"
+        let date = diary.createdTime.dateValue()
+        self.creatDate.value = dateFormatter.string(from: date)
         self.contentText.value = diary.content
         self.petTags.value = diary.petTags
         self.numberOfComments.value = diary.comments.count

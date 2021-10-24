@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3dv-ly-ybE">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -261,20 +262,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="1" green="0.65076244120000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" systemColor="systemGray2Color"/>
                     </tabBar>
                     <connections>
                         <segue destination="d0R-ew-AL7" kind="relationship" relationship="viewControllers" id="4A3-2h-kW6"/>
+                        <segue destination="Wdu-es-WhP" kind="relationship" relationship="viewControllers" id="vh6-gK-EUD"/>
+                        <segue destination="xjG-Ro-zgT" kind="relationship" relationship="viewControllers" id="myw-P6-Bae"/>
+                        <segue destination="4bQ-oi-pq0" kind="relationship" relationship="viewControllers" id="0jK-cU-aGZ"/>
+                        <segue destination="Mfp-Cs-8Wk" kind="relationship" relationship="viewControllers" id="Vdd-3t-F0K"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VnE-QI-X7C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="116.51785714285714"/>
+            <point key="canvasLocation" x="-32" y="117"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ch7-gF-uMh">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d0R-ew-AL7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="homekit" catalog="system" id="FZg-cm-zm8"/>
+                    <tabBarItem key="tabBarItem" title="" image="MyPetsTab" id="FZg-cm-zm8">
+                        <color key="badgeColor" red="1" green="0.65076244120000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xta-ML-mpc">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -289,15 +298,86 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="116.51785714285714"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="EdP-Cl-7qa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wdu-es-WhP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="Social" id="VUh-nF-iM7"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HKo-EF-NyM">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5lE-13-xnk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042" y="818"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0YW-ND-5mx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xjG-Ro-zgT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="LibaryTab" id="jXy-jF-tp7"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HaX-8o-r1Q">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hfm-3n-oz1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042" y="1496"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mPa-06-ile">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4bQ-oi-pq0" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="MessageTab" id="1r2-Ub-fI5"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mqj-KC-lJd">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jit-21-ofW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042" y="2170"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="eL1-Bb-xyA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mfp-Cs-8Wk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="MenuTabTab-1" selectedImage="MenuTabTab-1" id="EPF-bH-Cin"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hhc-7l-uzD">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gQL-VZ-ecO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="219" y="2170"/>
+        </scene>
     </scenes>
     <resources>
         <image name="123" width="720" height="1280"/>
-        <image name="homekit" catalog="system" width="128" height="106"/>
+        <image name="LibaryTab" width="31" height="28"/>
+        <image name="MenuTabTab-1" width="31" height="28"/>
+        <image name="MessageTab" width="31" height="28"/>
+        <image name="MyPetsTab" width="31" height="28"/>
+        <image name="Social" width="31" height="28"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
         <image name="square.and.arrow.up.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
