@@ -338,6 +338,26 @@ class FirebaseManager {
     }
 
 
+    func getPhoto(fileName: String, filePath: FilePathName, completion: @escaping (Result<Pic, Error>) -> Void)  {
+
+        let storageRef = storage.reference().child(filePath.rawValue).child(fileName)
+
+        storageRef.downloadURL { (url, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let downloadURL = url else {
+                    return
+                }
+                let urlString = downloadURL.absoluteString
+                let pic = Pic(url: urlString, fileName: fileName)
+                completion(.success(pic))
+            }
+        }
+
+    }
+
+
     func deletePhoto(fileName: String, filePath: FilePathName){
         let storageRef = storage.reference().child(filePath.rawValue).child(fileName)
         storageRef.delete { error in
@@ -376,4 +396,36 @@ class FirebaseManager {
             }
         }
     }
+
+
+    // Can Refactor with Ftech Notificaation?
+    func fetchSupplies(completion: @escaping (Result<[Supply], Error>) -> Void) {
+
+        dateBase.collection("Users").document(userId).collection("Supplies").getDocuments { (querySnapshot, error) in
+
+            if let error = error {
+
+                completion(.failure(error))
+            } else {
+
+                var supplies = [Supply]()
+
+                for document in querySnapshot!.documents {
+
+                    do {
+                        if let supply = try document.data(as: Supply.self, decoder: Firestore.Decoder()) {
+                            supplies.append(supply)
+                        }
+
+                    } catch {
+
+                        completion(.failure(error))
+                    }
+                }
+
+                completion(.success(supplies))
+            }
+        }
+    }
+
 }

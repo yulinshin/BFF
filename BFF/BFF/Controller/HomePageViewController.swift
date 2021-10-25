@@ -155,6 +155,13 @@ extension HomePageViewController: UICollectionViewDelegate {
                     controller.userPetIds = viewModel.usersPetsIds.value
                     self.navigationController?.show(controller, sender: nil)
 
+
+                case 1: // Supply
+
+                    let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
+                    guard let controller = storyboard.instantiateViewController(withIdentifier: "ListTableViewController") as? ListTableViewController else { return }
+                    self.navigationController?.show(controller, sender: nil)
+
                 default:
                     return
                 }
