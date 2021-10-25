@@ -13,5 +13,6 @@ target 'BFF' do
  pod 'IQKeyboardManagerSwift'
  pod 'Firebase/Storage'
  pod 'Kingfisher'
+ pod 'JGProgressHUD'
 
 end

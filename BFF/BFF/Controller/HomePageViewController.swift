@@ -18,58 +18,58 @@ class HomePageViewController: UIViewController {
         case pets
     }
 
-    var sections = [Section.hero, Section.catalog, Section.petNotifycation, Section.pets]
+    var sections = Section.allCases
 
     var catalogIcon = ["diary", "supply", "heart", "goal"]
-    var catalogLable =  ["日記本", "用品", "健康", "成就"]
+    var catalogLable =  ["相簿集", "用品", "健康", "成就"]
 
-    var user = User(userId: "", email: "", provider: "", providerId: "", userName: "", blockPets: [String](), petsIds: [String]()) {
+    var viewModel = HomePageViewModel()
 
+    var notificationCount = 0 {
         didSet {
-            collectionView.reloadData()
+            collectionView.reloadSections(IndexSet(integer: 2))
         }
-
     }
 
-    var notifications = [Notification]() {
-
+    var userPetsCount = 0 {
         didSet {
-            collectionView.reloadData()
+            collectionView.reloadSections(IndexSet(integer: 3))
         }
-
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        FirebaseManager.shared.fetchUser { result in
-            switch result {
-
-            case .success(let user):
-                self.user = user
-
-            case .failure(let error):
-                print("fetchData.failure\(error)")
-
-            }
-        }
-
-        FirebaseManager.shared.fetchNotifications { result in
-            switch result {
-
-            case .success(let notifications):
-                self.notifications = notifications
-
-            case .failure(let error):
-                print("fetchData.failure\(error)")
-
-            }
-        }
-
         collectionView.collectionViewLayout = createLayout()
         collectionView.delegate = self
         collectionView.dataSource = self
 
+        viewModel.notifiactions.bind { notifications in
+            self.notificationCount = notifications.count
+            print("UpdateNotification")
+        }
+        viewModel.usersPetsIds.bind { userPetsIds in
+            self.userPetsCount = userPetsIds.count
+            print("userPets")
+
+        }
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+           let barAppearance =  UINavigationBarAppearance()
+           barAppearance.configureWithTransparentBackground()
+        barAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.orange]
+
+           navigationController?.navigationBar.standardAppearance = barAppearance
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let barAppearance =  UINavigationBarAppearance()
+        barAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.orange]
+        navigationController?.navigationBar.standardAppearance = barAppearance
     }
 
     // MARK: - UICollectionViewLayout
@@ -90,7 +90,7 @@ class HomePageViewController: UIViewController {
 
                 let layoutSection = NSCollectionLayoutSection(group: group)
                 layoutSection.orthogonalScrollingBehavior = .none
-                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 24, bottom: 6, trailing: 24)
 
                 return layoutSection
 
@@ -99,12 +99,12 @@ class HomePageViewController: UIViewController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(120))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(110))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
 
                 let layoutSection = NSCollectionLayoutSection(group: group)
 
-                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 24, bottom: 6, trailing: 24)
                 layoutSection.orthogonalScrollingBehavior = .none
 
                 return layoutSection
@@ -114,11 +114,10 @@ class HomePageViewController: UIViewController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(80))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
                 let layoutSection = NSCollectionLayoutSection(group: group)
-                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
 
                 return layoutSection
 
@@ -127,7 +126,7 @@ class HomePageViewController: UIViewController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(300))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.86), heightDimension: .fractionalHeight(0.55))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
                 let layoutSection = NSCollectionLayoutSection(group: group)
@@ -144,26 +143,23 @@ class HomePageViewController: UIViewController {
 // MARK: - CollectionViewDelegate
 extension HomePageViewController: UICollectionViewDelegate {
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        if indexPath.section == 1 {
-            switch indexPath.row {
+            if indexPath.section == 1 {
+                switch indexPath.row {
 
-            case 0: // Diary
+                case 0: // Diary
 
-                let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-                guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryViewController") as? DiaryViewController else { return }
-                guard let userPetsId = user.petsIds else { return }
-                controller.userPetIds = userPetsId
-                self.navigationController?.show(controller, sender: nil)
+                    let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+                    guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryViewController") as? DiaryViewController else { return }
+                    controller.userPetIds = viewModel.usersPetsIds.value
+                    self.navigationController?.show(controller, sender: nil)
 
-            default:
-                return
+                default:
+                    return
+                }
             }
         }
-
-    }
-
 }
 
 // MARK: - UICollectionViewDataSource
@@ -186,11 +182,11 @@ extension HomePageViewController: UICollectionViewDataSource {
 
         case 2:
 
-            return notifications.count
+            return notificationCount
 
         case 3:
 
-            return user.petsIds?.count ?? 0
+            return userPetsCount + 1
 
         default:
 
@@ -207,11 +203,22 @@ extension HomePageViewController: UICollectionViewDataSource {
 
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WellcomeCollectionViewCell", for: indexPath)as? WellcomeCollectionViewCell else { fatalError() }
 
-            cell.setup(userName: user.userName, petsCount: user.petsIds?.count ?? 0)
+            viewModel.userName.bind { name in
+
+                self.viewModel.pets.bind { pets in
+
+                    cell.setup(userName: name, petsCount: pets.count)
+
+                }
+            }
+
             cell.creatButtonTap = {
                 let storyboard = UIStoryboard(name: "Diary", bundle: nil)
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatDiaryViewController") as? CreatDiaryViewController else { return }
-                self.present(controller, animated: true, completion: nil)
+                let nav = UINavigationController(rootViewController: controller)
+                nav.modalPresentationStyle = .fullScreen
+                nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor:UIColor.orange]
+                self.present(nav, animated: true, completion: nil)
             }
             
             return cell
@@ -228,39 +235,58 @@ extension HomePageViewController: UICollectionViewDataSource {
 
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PetNotificationCollectionViewCell", for: indexPath)as? PetNotificationCollectionViewCell else { fatalError() }
 
-            guard let petId = notifications[indexPath.row].fromPets.first else { return cell }
+            viewModel.notifiactions.bind { notifications in
 
-            FirebaseManager.shared.fetchPet(petId: petId) { result in
-                switch result {
+                let notification = notifications[indexPath.row]
 
-                case .success(let pet):
+                self.viewModel.pets.bind { pets in
 
-                    cell.setup(petName: pet.name, content: self.notifications[indexPath.row].content, petImage: pet.petThumbnail)
+                    pets.forEach { pet in
+                        if notification.fromPets.contains(pet.petId) {
 
-                case .failure(let error):
+                            cell.setup(petName: pet.name, content: notification.content, petImage: pet.petThumbnail?.url ?? "")
 
-                    print("fetchData.failure\(error)")
+                            return
+
+                        }
+                    }
 
                 }
+
             }
+
             return cell
 
         case 3:
 
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PetCollectionViewCell", for: indexPath)as? PetCollectionViewCell else { fatalError() }
 
-            guard let petId = user.petsIds?[indexPath.row] else { return cell }
+                if indexPath.row == userPetsCount {
 
-            FirebaseManager.shared.fetchPet(petId: petId) { result in
-                switch result {
+                    cell.setupBlankDiaryBook()
+                    cell.didTapCard = {
+                        let storyboard = UIStoryboard(name: "Pet", bundle: nil)
+                        guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatPetViewController") as? CreatPetViewController else { return }
+                        let nav = UINavigationController(rootViewController: controller)
+                        nav.modalPresentationStyle = .fullScreen
+                        nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor:UIColor.orange]
+                        controller.presentMode = .creat
+                        self.present(nav, animated: true, completion: nil)
+                    }
 
-                case .success(let pet):
+                } else {
 
-                    cell.setup(petImage: pet.petThumbnail)
-
-                case .failure(let error):
-
-                    print("fetchData.failure\(error)")
+                    viewModel.pets.bind { pets in
+                    let pet = pets[indexPath.row]
+                        cell.setup(petImage: pet.petThumbnail?.url ?? "")
+                    cell.didTapCard = {
+                        let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+                        guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryViewController") as? DiaryViewController else { return }
+                        controller.userPetIds = [pet.petId]
+                        controller.title = "\(pet.name)的寵物日記"
+                        controller.showSelectedPetsCollectionView = false
+                        self.navigationController?.show(controller, sender: nil)
+                    }
 
                 }
             }

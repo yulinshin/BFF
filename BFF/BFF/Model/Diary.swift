@@ -15,7 +15,7 @@ struct Diary: Codable {
     var content: String
     var createdTime: Timestamp
     var diaryId: String
-    var images: [String]
+    var images: [Pic]
     var isPublic: Bool
     var petTags: [String]
     var userId: String
@@ -24,7 +24,7 @@ struct Diary: Codable {
     init(
     content: String,
     diaryId: String,
-    images: [String],
+    images: [Pic],
     isPublic: Bool,
     petTags: [String],
     userId: String,
