@@ -276,7 +276,11 @@ class FirebaseManager {
                         completion(.failure(error))
                     }
                 }
-                completion(.success(diaries))
+
+                let sortDiary = diaries.sorted { firstDiary, secondDiary in
+                    return firstDiary.createdTime.dateValue() > secondDiary.createdTime.dateValue()
+                }
+                completion(.success(sortDiary))
             }
         }
     }

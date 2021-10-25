@@ -50,10 +50,13 @@ class CreatPetViewController: UIViewController {
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.handleSelectedPetImage))
         petImage.addGestureRecognizer(tapGR)
         petImage.isUserInteractionEnabled = true
+        self.navigationController?.navigationBar.tintColor = .orange
+
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
+
 
         switch presentMode {
 
@@ -61,9 +64,11 @@ class CreatPetViewController: UIViewController {
 
             self.navigationItem.title = "My Pet"
 
+
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(savePet))
 
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "back", style: .done, target: self, action: #selector(cancel))
+
 
         case .edit:
 
