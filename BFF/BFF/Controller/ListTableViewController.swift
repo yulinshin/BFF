@@ -18,6 +18,10 @@ class ListTableViewController: UITableViewController {
         let supplyNib = UINib(nibName: "SupplyListTableViewCell", bundle: nil)
         tableView.register(supplyNib, forCellReuseIdentifier: SupplyListTableViewCell.identifier )
 
+        let addCellNib = UINib(nibName: "AddNewItemTableViewCell", bundle: nil)
+        tableView.register(addCellNib, forCellReuseIdentifier:    AddNewItemTableViewCell.identifier )
+
+
         viewModel.suppiesViewModel.bind { supplyViewModels in
             self.tableView.reloadData()
         }
@@ -31,70 +35,77 @@ class ListTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
 
-        return  viewModel.suppiesViewModel.value.count
+        case 0:
+
+            return  viewModel.suppiesViewModel.value.count
+
+        case 1:
+            return  1
+        default:
+            return  0
+
+        }
+
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SupplyListTableViewCell.identifier, for: indexPath) as? SupplyListTableViewCell else { return UITableViewCell() }
+        switch indexPath.section {
 
-        cell.viewModel = viewModel.suppiesViewModel.value[indexPath.row]
-        cell.configur()
+        case 0:
 
-        return cell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SupplyListTableViewCell.identifier, for: indexPath) as? SupplyListTableViewCell else { return UITableViewCell() }
 
+            cell.viewModel = viewModel.suppiesViewModel.value[indexPath.row]
+            cell.configur()
+
+            return cell
+
+        default:
+
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddNewItemTableViewCell.identifier, for: indexPath) as? AddNewItemTableViewCell else { return UITableViewCell() }
+
+            return cell
+
+        }
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+        let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "SupplyDetailViewController") as? SupplyDetailViewController else { return }
+
+        switch indexPath.section {
+
+        case 0:
+
+            let supplyModel = viewModel.suppiesViewModel.value[indexPath.row]
+            
+            // swiftlint:disable:next line_length
+            let supply = Supply(color: supplyModel.iconColor.value, cycleTime: supplyModel.cycleTime.value, forPets: supplyModel.supplyUseByPets.value, fullStock: supplyModel.maxInventory.value, iconImage: supplyModel.supplyIconImage.value, isReminder: supplyModel.isNeedToRemind.value, perCycleTime: supplyModel.cycleDosage.value, reminderPercent: supplyModel.remindPercentage.value, stock: supplyModel.reminingInventory.value, supplyId: "supplyID", supplyName: supplyModel.supplyName.value, unit: supplyModel.suppluUnit.value)
+
+            controller.viewModel = SupplyViewModel(from: supply)
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
+
+
+        default:
+
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
+
+          
+        }
+
+
+
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

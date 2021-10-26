@@ -13,10 +13,13 @@ class SupplyViewModel {
 
 // Data for View
 
-    let supplyIconImage = Box("")
-    let iconColor = Box("")
-    let supplyName = Box("")
-    let inventoryStatusText = Box("")
+    // swiftlint:disable:next line_length
+    let deFultSupply = Supply(color: "123", cycleTime: "123", forPets: [String](), fullStock: 0, iconImage: "123", isReminder: true, perCycleTime: 0, reminderPercent: 0, stock: 0, supplyId: "123", supplyName: "123", unit: "123")
+
+    let supplyIconImage = Box(" ")
+    var iconColor = Box(" ")
+    let supplyName = Box(" ")
+    let inventoryStatusText = Box(" ")
     let inventoryStatusPercentage = Box(0.0)
     let maxInventory = Box(0)
     let reminingInventory = Box(0)
@@ -24,17 +27,27 @@ class SupplyViewModel {
     let supplyUseByPets = Box([String]())
     let isNeedToRemind = Box(true)
     let remindPercentage = Box(0.0)
-    let suppluUnit = Box("")
+    let suppluUnit = Box(" ")
+    let cycleTime = Box(" ")
 
     init(from supply: Supply) {
         getSupplyData(from: supply)
     }
 
+
+    init() {
+        getSupplyData(from: deFultSupply)
+    }
+
+
     func getSupplyData(from supply: Supply) {
 
         self.supplyIconImage.value = supply.iconImage
         self.supplyName.value = supply.supplyName
-        let stockInMax = Double(supply.stock / supply.fullStock)
+        let stockInMax = Double(supply.stock) / Double(supply.fullStock)
+        print ("supply.fullStock:\(supply.fullStock)")
+        print ("supply.stock:\(supply.stock)")
+        print ("STOCKINMAXXXXXXXX:\(stockInMax)")
         self.inventoryStatusText.value = "\(stockInMax * 100)%"
         self.inventoryStatusPercentage.value = stockInMax
         self.maxInventory.value = supply.fullStock
@@ -44,7 +57,7 @@ class SupplyViewModel {
         self.isNeedToRemind.value = supply.isReminder
         self.remindPercentage.value = supply.reminderPercent
         self.suppluUnit.value = supply.unit
-
+        self.cycleTime.value = supply.cycleTime
     }
 
 }
