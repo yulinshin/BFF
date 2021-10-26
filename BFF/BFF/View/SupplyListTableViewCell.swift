@@ -66,7 +66,7 @@ class SupplyListTableViewCell: UITableViewCell {
 
         viewModel?.maxInventory.bind(listener: { number in
 
-            self.viewModel?.suppluUnit.bind(listener: { unit in
+            self.viewModel?.supplyUnit.bind(listener: { unit in
 
                 self.maximumInventoryLabel.text = "\(number)\(unit)"
 
@@ -76,7 +76,7 @@ class SupplyListTableViewCell: UITableViewCell {
 
         viewModel?.reminingInventory.bind(listener: { number in
 
-            self.viewModel?.suppluUnit.bind(listener: { unit in
+            self.viewModel?.supplyUnit.bind(listener: { unit in
 
                 self.remainingInventoryLabel.text = "\(number)\(unit)"
 
@@ -86,7 +86,7 @@ class SupplyListTableViewCell: UITableViewCell {
 
         viewModel?.cycleDosage.bind(listener: { number in
 
-            self.viewModel?.suppluUnit.bind(listener: { unit in
+            self.viewModel?.supplyUnit.bind(listener: { unit in
 
                 self.cycleDosageLabel.text = "\(number)\(unit)"
 
@@ -132,11 +132,15 @@ class SupplyListTableViewCell: UITableViewCell {
             self.viewModel?.remindPercentage.bind(listener: { percentage in
 
                 if isNeedToRemind {
-                    self.remindIcon.image = UIImage(systemName: "bell")
-                    self.remindLabel.text = "不提醒"
-                } else {
+
                     self.remindIcon.image = UIImage(systemName: "bell.slash")
                     self.remindLabel.text = "低於\(percentage)%時提醒"
+
+                } else {
+
+                    self.remindIcon.image = UIImage(systemName: "bell")
+                    self.remindLabel.text = "不提醒"
+
                 }
 
             })

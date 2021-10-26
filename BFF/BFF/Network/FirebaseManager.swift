@@ -428,4 +428,44 @@ class FirebaseManager {
         }
     }
 
+
+    func creatSupply(supply: Supply) {
+
+        let suppliesRef = dateBase.collection("Users").document(userId).collection("Supplies")
+        let document = suppliesRef.document()
+
+        var newSupply = supply
+        newSupply.supplyId = document.documentID
+
+        do {
+            try document.setData(from: newSupply)
+            print(document)
+        } catch {
+            print(error)
+        }
+    }
+
+
+    func updatePet(supplyId: String, data:Supply) {
+
+        let supplyRef = dateBase.collection("Users").document(userId).collection("Supplies").document(supplyId)
+
+        supplyRef.updateData([
+            "color": data.color,
+            "cycleTime": data.cycleTime,
+            "forPets": data.forPets,
+            "fullStock": data.fullStock,
+            "iconImage": data.iconImage,
+            "isReminder": data.isReminder,
+            "perCycleTime": data.perCycleTime,
+            "reminderPercent": data.reminderPercent,
+            "stock": data.stock,
+            "supplyId": data.supplyId,
+            "supplyName": data.supplyName,
+            "unit": data.unit,
+        ])
+
+        }
+
+
 }

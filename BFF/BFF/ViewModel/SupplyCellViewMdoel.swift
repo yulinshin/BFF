@@ -27,7 +27,7 @@ class SupplyViewModel {
     let supplyUseByPets = Box([String]())
     let isNeedToRemind = Box(true)
     let remindPercentage = Box(0.0)
-    let suppluUnit = Box(" ")
+    let supplyUnit = Box(" ")
     let cycleTime = Box(" ")
 
     init(from supply: Supply) {
@@ -45,9 +45,6 @@ class SupplyViewModel {
         self.supplyIconImage.value = supply.iconImage
         self.supplyName.value = supply.supplyName
         let stockInMax = Double(supply.stock) / Double(supply.fullStock)
-        print ("supply.fullStock:\(supply.fullStock)")
-        print ("supply.stock:\(supply.stock)")
-        print ("STOCKINMAXXXXXXXX:\(stockInMax)")
         self.inventoryStatusText.value = "\(stockInMax * 100)%"
         self.inventoryStatusPercentage.value = stockInMax
         self.maxInventory.value = supply.fullStock
@@ -56,7 +53,7 @@ class SupplyViewModel {
         self.supplyUseByPets.value = supply.forPets
         self.isNeedToRemind.value = supply.isReminder
         self.remindPercentage.value = supply.reminderPercent
-        self.suppluUnit.value = supply.unit
+        self.supplyUnit.value = supply.unit
         self.cycleTime.value = supply.cycleTime
     }
 

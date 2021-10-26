@@ -89,7 +89,7 @@ class ListTableViewController: UITableViewController {
             let supplyModel = viewModel.suppiesViewModel.value[indexPath.row]
             
             // swiftlint:disable:next line_length
-            let supply = Supply(color: supplyModel.iconColor.value, cycleTime: supplyModel.cycleTime.value, forPets: supplyModel.supplyUseByPets.value, fullStock: supplyModel.maxInventory.value, iconImage: supplyModel.supplyIconImage.value, isReminder: supplyModel.isNeedToRemind.value, perCycleTime: supplyModel.cycleDosage.value, reminderPercent: supplyModel.remindPercentage.value, stock: supplyModel.reminingInventory.value, supplyId: "supplyID", supplyName: supplyModel.supplyName.value, unit: supplyModel.suppluUnit.value)
+            let supply = Supply(color: supplyModel.iconColor.value, cycleTime: supplyModel.cycleTime.value, forPets: supplyModel.supplyUseByPets.value, fullStock: supplyModel.maxInventory.value, iconImage: supplyModel.supplyIconImage.value, isReminder: supplyModel.isNeedToRemind.value, perCycleTime: supplyModel.cycleDosage.value, reminderPercent: supplyModel.remindPercentage.value, stock: supplyModel.reminingInventory.value, supplyId: "supplyID", supplyName: supplyModel.supplyName.value, unit: supplyModel.supplyUnit.value)
 
             controller.viewModel = SupplyViewModel(from: supply)
             controller.hidesBottomBarWhenPushed = true

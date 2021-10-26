@@ -32,9 +32,20 @@ class SupplyDetailViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "creat", style: .done, target: self, action: #selector(creatSupply))
+        self.navigationItem.rightBarButtonItem?.tintColor = .orange
+
         // Do any additional setup after loading the view.
 
+    }
 
+    @objc func creatSupply() {
+
+        // swiftlint:disable:next line_length
+        let supply = Supply(color: viewModel.iconColor.value, cycleTime: viewModel.cycleTime.value, forPets: viewModel.supplyUseByPets.value, fullStock: viewModel.maxInventory.value, iconImage: viewModel.supplyIconImage.value, isReminder: viewModel.isNeedToRemind.value, perCycleTime: viewModel.cycleDosage.value, reminderPercent: viewModel.remindPercentage.value, stock: viewModel.reminingInventory.value, supplyId: "supplyID", supplyName: viewModel.supplyName.value, unit: viewModel.supplyUnit.value)
+
+        FirebaseManager.shared.creatSupply(supply: supply)
     }
 
 }
@@ -109,11 +120,11 @@ extension SupplyDetailViewController: UITableViewDataSource {
             }
 
             viewModel.reminingInventory.bind { stock in
-                cell.maxStockTextField.text = "\(stock)"
+                cell.stockTextField.text = "\(stock)"
             }
 
-            viewModel.suppluUnit.bind { unit in
-                cell.maxStockTextField.text = unit
+            viewModel.supplyUnit.bind { unit in
+                cell.unitTextField.text = unit
             }
 
             cell.callbackMaxStock = { maxStock in
@@ -125,7 +136,7 @@ extension SupplyDetailViewController: UITableViewDataSource {
             }
 
             cell.callbackUnit = { unit in
-                self.viewModel.suppluUnit.value = unit
+                self.viewModel.supplyUnit.value = unit
             }
 
             return cell
@@ -159,7 +170,7 @@ extension SupplyDetailViewController: UITableViewDataSource {
 
             cell.callbackCycleUnit = { unit in
 
-                self.viewModel.suppluUnit.value = unit
+                self.viewModel.supplyUnit.value = unit
 
             }
 
