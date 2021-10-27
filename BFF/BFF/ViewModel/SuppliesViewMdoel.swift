@@ -21,18 +21,21 @@ class SuppliesViewMdoel {
 
         FirebaseManager.shared.fetchSupplies { result in
 
+            var newViewModels = [SupplyViewModel]()
             switch result {
             case .success(let supplies):
 
                 supplies.forEach { supply in
                     print("Supply: \(supply)")
                     let supplyViewModel = SupplyViewModel(from: supply)
-                    self.suppiesViewModel.value.append(supplyViewModel)
+                    newViewModels.append(supplyViewModel)
                 }
+                self.suppiesViewModel.value = newViewModels
 
             case .failure(let error):
                 print(error)
             }
         }
     }
+
 }

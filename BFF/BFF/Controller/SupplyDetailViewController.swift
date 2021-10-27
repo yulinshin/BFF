@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SupplyDetailViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+
+
+    enum ConstrolleMode {
+        case create
+        case edit
+    }
 
     enum CellStyle {
 
@@ -22,9 +29,15 @@ class SupplyDetailViewController: UIViewController {
 
     }
 
+    var mode: ConstrolleMode = .create
+
     var cellArray: [CellStyle] = [.icon, .name, .inventory, .pets, .cycleDosage, .reminder]
 
-    var userPetsData = [Pet]()
+    var userPetsData = [Pet]() {
+        didSet{
+            tableView.rectForRow(at: IndexPath.init(row: 3, section: 0))
+        }
+    }
     
     var viewModel = SupplyViewModel()
 
@@ -33,10 +46,20 @@ class SupplyDetailViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "creat", style: .done, target: self, action: #selector(creatSupply))
-        self.navigationItem.rightBarButtonItem?.tintColor = .orange
+        switch mode {
 
-        // Do any additional setup after loading the view.
+        case .create:
+
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "creat", style: .done, target: self, action: #selector(creatSupply))
+            self.navigationItem.rightBarButtonItem?.tintColor = .orange
+
+        case .edit:
+
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "save", style: .done, target: self, action: #selector(updateSupply))
+            self.navigationItem.rightBarButtonItem?.tintColor = .orange
+
+        }
+
 
     }
 
@@ -47,6 +70,15 @@ class SupplyDetailViewController: UIViewController {
 
         FirebaseManager.shared.creatSupply(supply: supply)
     }
+
+    @objc func updateSupply() {
+
+        // swiftlint:disable:next line_length
+        let supply = Supply(color: viewModel.iconColor.value, cycleTime: viewModel.cycleTime.value, forPets: viewModel.supplyUseByPets.value, fullStock: viewModel.maxInventory.value, iconImage: viewModel.supplyIconImage.value, isReminder: viewModel.isNeedToRemind.value, perCycleTime: viewModel.cycleDosage.value, reminderPercent: viewModel.remindPercentage.value, stock: viewModel.reminingInventory.value, supplyId: viewModel.supplyId.value, supplyName: viewModel.supplyName.value, unit: viewModel.supplyUnit.value)
+
+        FirebaseManager.shared.updateSupply(supplyId: supply.supplyId, data: supply)
+    }
+
 
 }
 
@@ -145,7 +177,9 @@ extension SupplyDetailViewController: UITableViewDataSource {
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SupplyPetsTableViewCell.identifier, for: indexPath) as? SupplyPetsTableViewCell else { return UITableViewCell() }
 
+
             viewModel.supplyUseByPets.bind { pets in
+                cell.userPetsData = self.userPetsData
                 cell.pets = pets
             }
 
@@ -154,7 +188,6 @@ extension SupplyDetailViewController: UITableViewDataSource {
                 self.viewModel.supplyUseByPets.value = pets
             }
 
-            cell.userPetsData = userPetsData
 
             return cell
 

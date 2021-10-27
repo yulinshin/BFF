@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import SwiftUI
+import Kingfisher
+import AVFoundation
 
 class SupplyViewModel {
 
@@ -29,6 +31,8 @@ class SupplyViewModel {
     let remindPercentage = Box(0.0)
     let supplyUnit = Box(" ")
     let cycleTime = Box(" ")
+    let imageUrl = Box([String]())
+    let supplyId = Box(" ")
 
     init(from supply: Supply) {
         getSupplyData(from: supply)
@@ -41,8 +45,9 @@ class SupplyViewModel {
 
 
     func getSupplyData(from supply: Supply) {
-
+        self.supplyId.value = supply.supplyId
         self.supplyIconImage.value = supply.iconImage
+        self.iconColor.value = supply.color
         self.supplyName.value = supply.supplyName
         let stockInMax = Double(supply.stock) / Double(supply.fullStock)
         self.inventoryStatusText.value = "\(stockInMax * 100)%"
@@ -56,5 +61,21 @@ class SupplyViewModel {
         self.supplyUnit.value = supply.unit
         self.cycleTime.value = supply.cycleTime
     }
+
+    func deleteSuppliesData() {
+
+        print("Start fetch supplies data")
+
+        FirebaseManager.shared.delateSupply(supplyId:self.supplyId.value) { result in
+
+            switch result {
+            case .success(let message):
+                print(message)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
 
 }

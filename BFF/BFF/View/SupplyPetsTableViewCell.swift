@@ -30,7 +30,6 @@ class SupplyPetsTableViewCell: UITableViewCell {
 
         collectionView.allowsMultipleSelection = true
 
-
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

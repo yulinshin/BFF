@@ -159,6 +159,34 @@ class FirebaseManager {
         }
     }
 
+
+
+    func fetchUserPets(completion: @escaping (Result<[Pet], Error>) -> Void) {
+
+        dateBase.collection("Pets").whereField("userId", isEqualTo: userId).getDocuments { (querySnapshot, error) in
+
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                var pets = [Pet]()
+                for doucment in querySnapshot!.documents {
+
+                    do {
+                        if let pet = try doucment.data(as: Pet.self, decoder: Firestore.Decoder()) {
+                            pets.append(pet)
+                        }
+
+                    } catch {
+
+                        completion(.failure(error))
+                    }
+                }
+                completion(.success(pets))
+            }
+        }
+    }
+
+
     func listenUsersPets(completion: @escaping (Result<[Pet], Error>) -> Void) {
         dateBase.collection("Pets").whereField("userId", isEqualTo: userId).addSnapshotListener { querySnapshot, error in
             if let error = error {
@@ -446,7 +474,7 @@ class FirebaseManager {
     }
 
 
-    func updatePet(supplyId: String, data:Supply) {
+    func updateSupply(supplyId: String, data:Supply) {
 
         let supplyRef = dateBase.collection("Users").document(userId).collection("Supplies").document(supplyId)
 
@@ -466,6 +494,18 @@ class FirebaseManager {
         ])
 
         }
+
+    func delateSupply(supplyId: String, completion: @escaping (Result<String, Error>) -> Void) {
+        print("StartDeleateSupply\(supplyId)")
+        dateBase.collection("Users").document(userId).collection("Supplies").document(supplyId).delete() { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let sucessMessage = "Deleate sucess"
+                completion(.success(sucessMessage))
+            }
+        }
+    }
 
 
 }

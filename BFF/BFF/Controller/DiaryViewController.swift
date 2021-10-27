@@ -81,8 +81,6 @@ class DiaryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 
-        self.navigationController?.navigationBar.tintColor = UIColor.orange
-
         if showSelectedPetsCollectionView {
             self.selectedPetsCollectionView.isHidden = false
 

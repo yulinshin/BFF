@@ -18,10 +18,11 @@ class AddNewItemTableViewCell: UITableViewCell {
         // Layout
 
         cellCardBackGroundVIew.layer.shadowColor = UIColor.gray.cgColor
-        cellCardBackGroundVIew.layer.shadowOpacity = 0.4
-        cellCardBackGroundVIew.layer.cornerRadius = 20
-        cellCardBackGroundVIew.layer.shadowRadius = 10
+        cellCardBackGroundVIew.layer.shadowOpacity = 0.2
+        cellCardBackGroundVIew.layer.cornerRadius = 16
+        cellCardBackGroundVIew.layer.shadowRadius = 4
         cellCardBackGroundVIew.backgroundColor = UIColor.white
+        cellCardBackGroundVIew.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
 
     }
 

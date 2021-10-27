@@ -28,6 +28,8 @@ class SupplyListTableViewCell: UITableViewCell {
     var viewModel: SupplyViewModel?
     var unit: String?
 
+    var didTapMoreButtom: (()->Void)?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -39,16 +41,24 @@ class SupplyListTableViewCell: UITableViewCell {
         // Layout
 
         cellCardBackGroundView.layer.shadowColor = UIColor.gray.cgColor
-        cellCardBackGroundView.layer.shadowOpacity = 0.4
-        cellCardBackGroundView.layer.cornerRadius = 20
-        cellCardBackGroundView.layer.shadowRadius = 10
+        cellCardBackGroundView.layer.shadowOpacity = 0.2
+        cellCardBackGroundView.layer.cornerRadius = 16
+        cellCardBackGroundView.layer.shadowRadius = 4
         cellCardBackGroundView.backgroundColor = UIColor.white
+        cellCardBackGroundView.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+
+        reFillStockButton.layer.cornerRadius = 4
 
 
         // Data Binding
         viewModel?.supplyIconImage.bind(listener: { imageName in
             self.supplyIconImageView.image = UIImage(named: imageName)
         })
+
+        viewModel?.iconColor.bind(listener: { iconColor in
+            self.supplyIconImageView.backgroundColor = UIColor(named: iconColor)
+        })
+
 
         viewModel?.supplyName.bind(listener: { supplyName in
             self.supplyNameLabel.text = supplyName
@@ -156,7 +166,10 @@ class SupplyListTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
     }
-    @IBAction func tapMoreButton(_ sender: Any) {
+    @IBAction func tapMoreButton(_ sender: UIButton) {
+
+        didTapMoreButtom?()
+
     }
     @IBAction func tapReFillStock(_ sender: Any) {
     }

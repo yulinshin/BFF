@@ -52,6 +52,8 @@ class HomePageViewController: UIViewController {
             self.userPetsCount = userPetsIds.count
             print("userPets")
 
+        self.navigationController?.navigationBar.tintColor = UIColor.orange
+
         }
 
     }

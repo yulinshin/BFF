@@ -12,6 +12,7 @@ class ListTableViewController: UITableViewController {
 
     var viewModel = SuppliesViewMdoel()
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,15 +22,13 @@ class ListTableViewController: UITableViewController {
         let addCellNib = UINib(nibName: "AddNewItemTableViewCell", bundle: nil)
         tableView.register(addCellNib, forCellReuseIdentifier:    AddNewItemTableViewCell.identifier )
 
-
-        viewModel.suppiesViewModel.bind { supplyViewModels in
-            self.tableView.reloadData()
-        }
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
-
+        
+        viewModel.suppiesViewModel.bind { supplyViewModels in
+            self.tableView.reloadData()
+        }
     }
 
     // MARK: - Table view data source
@@ -43,7 +42,7 @@ class ListTableViewController: UITableViewController {
 
         case 0:
 
-            return  viewModel.suppiesViewModel.value.count
+            return viewModel.suppiesViewModel.value.count
 
         case 1:
             return  1
@@ -63,8 +62,17 @@ class ListTableViewController: UITableViewController {
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SupplyListTableViewCell.identifier, for: indexPath) as? SupplyListTableViewCell else { return UITableViewCell() }
 
-            cell.viewModel = viewModel.suppiesViewModel.value[indexPath.row]
-            cell.configur()
+            viewModel.suppiesViewModel.bind { viewModels in
+                print("viewModels = \(viewModels.count)")
+                print("indexPath = \(indexPath.row)")
+                cell.viewModel = viewModels[indexPath.row]
+                cell.configur()
+
+                cell.didTapMoreButtom = {
+                    self.showMenu( viewModel: viewModels[indexPath.row] )
+                }
+
+            }
 
             return cell
 
@@ -77,6 +85,58 @@ class ListTableViewController: UITableViewController {
         }
     }
 
+
+    func showMenu(viewModel: SupplyViewModel ) {
+
+        let alert = UIAlertController(title: title, message: "要做什麼呢？", preferredStyle: .actionSheet)
+
+
+        alert.addAction(UIAlertAction(title: "更新用品資訊", style: .default, handler: { _ in
+
+            self.showNextPage(style: .edit, supplyModel: viewModel)
+
+        }))
+
+        alert.addAction(UIAlertAction(title: "刪除用品", style: .default, handler: { _ in
+
+            viewModel.deleteSuppliesData()
+
+        }))
+
+        if viewModel.isNeedToRemind.value {
+
+            alert.addAction(UIAlertAction(title: "關閉提醒", style: .default, handler: {  _ in
+
+                viewModel.isNeedToRemind.value = false
+
+            }))
+
+        } else {
+
+            alert.addAction(UIAlertAction(title: "開啟提醒", style: .default, handler: {  _ in
+
+                viewModel.isNeedToRemind.value = true
+
+            }))
+
+        }
+
+        self.present(alert, animated: true, completion: nil)
+
+    }
+
+
+    func showNextPage(style:SupplyDetailViewController.ConstrolleMode , supplyModel: SupplyViewModel = SupplyViewModel()) {
+        let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "SupplyDetailViewController") as? SupplyDetailViewController else { return }
+
+        controller.viewModel = supplyModel
+        controller.mode = .edit
+
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
@@ -84,28 +144,16 @@ class ListTableViewController: UITableViewController {
 
         switch indexPath.section {
 
-        case 0:
+        case 1:
 
-            let supplyModel = viewModel.suppiesViewModel.value[indexPath.row]
-            
-            // swiftlint:disable:next line_length
-            let supply = Supply(color: supplyModel.iconColor.value, cycleTime: supplyModel.cycleTime.value, forPets: supplyModel.supplyUseByPets.value, fullStock: supplyModel.maxInventory.value, iconImage: supplyModel.supplyIconImage.value, isReminder: supplyModel.isNeedToRemind.value, perCycleTime: supplyModel.cycleDosage.value, reminderPercent: supplyModel.remindPercentage.value, stock: supplyModel.reminingInventory.value, supplyId: "supplyID", supplyName: supplyModel.supplyName.value, unit: supplyModel.supplyUnit.value)
-
-            controller.viewModel = SupplyViewModel(from: supply)
+            controller.mode = .create
             controller.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(controller, animated: true)
-
 
         default:
-
-            controller.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(controller, animated: true)
-
-          
+            return
         }
 
-
-
     }
-
+    
 }
