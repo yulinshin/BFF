@@ -29,6 +29,7 @@ class SupplyListTableViewCell: UITableViewCell {
     var unit: String?
 
     var didTapMoreButtom: (()->Void)?
+    var didTapReFillButton: (()->Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -172,6 +173,10 @@ class SupplyListTableViewCell: UITableViewCell {
 
     }
     @IBAction func tapReFillStock(_ sender: Any) {
+
+        didTapReFillButton?()
+
+
     }
 
 }

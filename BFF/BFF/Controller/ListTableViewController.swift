@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import UserNotifications
 
 class ListTableViewController: UITableViewController {
 
 
     var viewModel = SuppliesViewMdoel()
+
+    var notificationManert = NotificationManger()
+
 
 
     override func viewDidLoad() {
@@ -21,6 +25,7 @@ class ListTableViewController: UITableViewController {
 
         let addCellNib = UINib(nibName: "AddNewItemTableViewCell", bundle: nil)
         tableView.register(addCellNib, forCellReuseIdentifier:    AddNewItemTableViewCell.identifier )
+        notificationManert.setUp()
 
     }
 
@@ -72,6 +77,10 @@ class ListTableViewController: UITableViewController {
                     self.showMenu( viewModel: viewModels[indexPath.row] )
                 }
 
+                cell.didTapReFillButton = {
+                    self.showReFillPopup(viewModel:viewModels[indexPath.row])
+                }
+
             }
 
             return cell
@@ -85,11 +94,16 @@ class ListTableViewController: UITableViewController {
         }
     }
 
+    func showReFillPopup(viewModel: SupplyViewModel){
 
-    func showMenu(viewModel: SupplyViewModel ) {
+        FillSupplyAlertView.shared.showAlert(supplyViewModel: viewModel)
+
+        
+    }
+
+    func showMenu(viewModel: SupplyViewModel) {
 
         let alert = UIAlertController(title: title, message: "要做什麼呢？", preferredStyle: .actionSheet)
-
 
         alert.addAction(UIAlertAction(title: "更新用品資訊", style: .default, handler: { _ in
 
@@ -109,14 +123,17 @@ class ListTableViewController: UITableViewController {
 
                 viewModel.isNeedToRemind.value = false
 
+                self.notificationManert.deleteNotification(notifyId: viewModel.supplyId.value)
+
             }))
 
         } else {
 
             alert.addAction(UIAlertAction(title: "開啟提醒", style: .default, handler: {  _ in
 
+                guard let supply = viewModel.suppply else { return }
+                NotificationManger.shared.creatSupplyNotification(supply: supply )
                 viewModel.isNeedToRemind.value = true
-
             }))
 
         }

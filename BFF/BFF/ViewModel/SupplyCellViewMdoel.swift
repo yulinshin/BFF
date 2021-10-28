@@ -18,6 +18,8 @@ class SupplyViewModel {
     // swiftlint:disable:next line_length
     let deFultSupply = Supply(color: "123", cycleTime: "123", forPets: [String](), fullStock: 0, iconImage: "123", isReminder: true, perCycleTime: 0, reminderPercent: 0, stock: 0, supplyId: "123", supplyName: "123", unit: "123")
 
+    var suppply: Supply?
+
     let supplyIconImage = Box(" ")
     var iconColor = Box(" ")
     let supplyName = Box(" ")
@@ -60,7 +62,9 @@ class SupplyViewModel {
         self.remindPercentage.value = supply.reminderPercent
         self.supplyUnit.value = supply.unit
         self.cycleTime.value = supply.cycleTime
+        self.suppply = supply
     }
+
 
     func deleteSuppliesData() {
 

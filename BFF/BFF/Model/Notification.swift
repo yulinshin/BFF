@@ -11,9 +11,10 @@ import FirebaseFirestore
 struct Notification: Codable {
 
     var content: String
-    var createdTime: Timestamp
+    var notifyTime: Timestamp
     var fromPets: [String]
     var title: String
     var type: String
+    var id: String
 
 }

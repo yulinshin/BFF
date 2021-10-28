@@ -14,20 +14,47 @@ import FirebaseMessaging
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+
+    let center = UNUserNotificationCenter.current()
+
+        // delegate for receiving or delivering notification
+    let notificationDelegate = NotificationDelegate()
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
         FirebaseApp.configure()
         IQKeyboardManager.shared.enable = true
-
-        UNUserNotificationCenter.current().delegate = self
-                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
-
-                }
-
-               UIApplication.shared.registerForRemoteNotifications()
-
         Messaging.messaging().delegate = self
+
+        center.delegate = notificationDelegate
+
+               // MARK: set authorization
+               let options: UNAuthorizationOptions = [.badge, .sound, .alert]
+               center.getNotificationSettings { ( settings ) in
+                   switch settings.authorizationStatus {
+                   case .notDetermined:
+                       self.center.requestAuthorization(options: options) {
+                           (granted, error) in
+                           if !granted {
+                               print("Something went wrong")
+                           }
+                       }
+                   case .authorized:
+                       DispatchQueue.main.async(execute: {
+                           UIApplication.shared.registerForRemoteNotifications()
+                       })
+                   case .denied:
+                       print("cannot use notifications cuz the user has denied permissions")
+
+                   case .provisional:
+                       break
+                   case .ephemeral:
+                       break
+                   @unknown default:
+                       break
+                   }
+               }
 
 
         return true

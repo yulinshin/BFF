@@ -112,6 +112,48 @@ class FirebaseManager {
         }
     }
 
+
+    func creatNotification(newNotify: Notification) {
+
+        let document =   dateBase.collection("Users").document(userId).collection("Notifications").document(newNotify.id)
+
+        do {
+            try document.setData(from: newNotify)
+            print(document)
+        } catch {
+            print(error)
+        }
+    }
+
+
+    func creatAndUpdateNotification(newNotify: Notification) {
+
+        let document =   dateBase.collection("Users").document(userId).collection("Notifications").document(newNotify.id)
+
+        do {
+            try document.setData(from: newNotify)
+            print(document)
+        } catch {
+            print(error)
+        }
+    }
+
+    func removeNotification(notifyId:String){
+
+        let document =   dateBase.collection("Users").document(userId).collection("Notifications").document(notifyId)
+
+
+    document.delete() { error in
+        if let error = error {
+             print("Error removing document: \(error)")
+         } else {
+             print("Document successfully removed!")
+         }
+    }
+
+    }
+
+
     func addPetToUser(petId: String) {
         dateBase.collection("Users").document(userId).updateData(["petsIds": FieldValue.arrayUnion([petId])])
     }

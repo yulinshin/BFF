@@ -11,6 +11,7 @@ import SwiftUI
 class SupplyDetailViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var creatButton: UIButton!
 
 
     enum ConstrolleMode {
@@ -50,13 +51,10 @@ class SupplyDetailViewController: UIViewController {
 
         case .create:
 
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "creat", style: .done, target: self, action: #selector(creatSupply))
-            self.navigationItem.rightBarButtonItem?.tintColor = .orange
-
+            creatButton.setTitle("新增", for: .normal)
+            
         case .edit:
-
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "save", style: .done, target: self, action: #selector(updateSupply))
-            self.navigationItem.rightBarButtonItem?.tintColor = .orange
+            creatButton.setTitle("儲存", for: .normal)
 
         }
 
@@ -77,6 +75,15 @@ class SupplyDetailViewController: UIViewController {
         let supply = Supply(color: viewModel.iconColor.value, cycleTime: viewModel.cycleTime.value, forPets: viewModel.supplyUseByPets.value, fullStock: viewModel.maxInventory.value, iconImage: viewModel.supplyIconImage.value, isReminder: viewModel.isNeedToRemind.value, perCycleTime: viewModel.cycleDosage.value, reminderPercent: viewModel.remindPercentage.value, stock: viewModel.reminingInventory.value, supplyId: viewModel.supplyId.value, supplyName: viewModel.supplyName.value, unit: viewModel.supplyUnit.value)
 
         FirebaseManager.shared.updateSupply(supplyId: supply.supplyId, data: supply)
+    }
+    @IBAction func tapButton(_ sender: Any) {
+
+        switch mode {
+        case .create:
+            creatSupply()
+        case .edit:
+            updateSupply()
+        }
     }
 
 
