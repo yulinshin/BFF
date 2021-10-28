@@ -12,13 +12,13 @@ struct Supply: Codable {
     var color: String
     var cycleTime: String
     var forPets: [String]
-    var fullStock: Double
+    var fullStock: Int
     var iconImage: String
     var isReminder: Bool
-    var perCycleTime: Double
+    var perCycleTime: Int
     var reminderPercent: Double
-    var stock: Double
-    var supplyID: String
+    var stock: Int
+    var supplyId: String
     var supplyName: String
     var unit: String
     

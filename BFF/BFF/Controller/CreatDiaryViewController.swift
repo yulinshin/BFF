@@ -51,7 +51,6 @@ class CreatDiaryViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveDiary))
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelEditDiary))
-
         self.navigationItem.rightBarButtonItem?.tintColor = .orange
         self.navigationItem.leftBarButtonItem?.tintColor = .orange
     }

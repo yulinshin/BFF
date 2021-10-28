@@ -52,6 +52,8 @@ class HomePageViewController: UIViewController {
             self.userPetsCount = userPetsIds.count
             print("userPets")
 
+        self.navigationController?.navigationBar.tintColor = UIColor.orange
+
         }
 
     }
@@ -153,6 +155,13 @@ extension HomePageViewController: UICollectionViewDelegate {
                     let storyboard = UIStoryboard(name: "Diary", bundle: nil)
                     guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryViewController") as? DiaryViewController else { return }
                     controller.userPetIds = viewModel.usersPetsIds.value
+                    self.navigationController?.show(controller, sender: nil)
+
+
+                case 1: // Supply
+
+                    let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
+                    guard let controller = storyboard.instantiateViewController(withIdentifier: "ListTableViewController") as? ListTableViewController else { return }
                     self.navigationController?.show(controller, sender: nil)
 
                 default:

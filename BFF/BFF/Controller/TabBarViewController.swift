@@ -81,17 +81,19 @@ private enum Tab {
                 image: UIImage.asset(.MenuTab),
                 selectedImage: UIImage.asset(.MenuTab)
             )
-            
+
         }
     }
 }
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
-    private let tabs: [Tab] = [ .soical, .message, .home, .libary, .menu]
+    private let tabs: [Tab] = [ .soical, .message, .home, .libary, .menu ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.tabBar.tintColor = .orange
 
         viewControllers = tabs.map({ $0.controller() })
         self.selectedIndex = 2

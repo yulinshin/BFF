@@ -6,18 +6,57 @@
 //
 
 import UIKit
-import Firebase
+import UserNotifications
 import IQKeyboardManagerSwift
+import Firebase
+import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
+
+    let center = UNUserNotificationCenter.current()
+
+        // delegate for receiving or delivering notification
+    let notificationDelegate = NotificationDelegate()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
         FirebaseApp.configure()
         IQKeyboardManager.shared.enable = true
-        UITabBar.appearance().tintColor = .orange
+        Messaging.messaging().delegate = self
+
+        center.delegate = notificationDelegate
+
+               // MARK: set authorization
+               let options: UNAuthorizationOptions = [.badge, .sound, .alert]
+               center.getNotificationSettings { ( settings ) in
+                   switch settings.authorizationStatus {
+                   case .notDetermined:
+                       self.center.requestAuthorization(options: options) {
+                           (granted, error) in
+                           if !granted {
+                               print("Something went wrong")
+                           }
+                       }
+                   case .authorized:
+                       DispatchQueue.main.async(execute: {
+                           UIApplication.shared.registerForRemoteNotifications()
+                       })
+                   case .denied:
+                       print("cannot use notifications cuz the user has denied permissions")
+
+                   case .provisional:
+                       break
+                   case .ephemeral:
+                       break
+                   @unknown default:
+                       break
+                   }
+               }
+
+
         return true
     }
 
@@ -35,4 +74,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+
+        let deviceTokenString = deviceToken.reduce("") {
+            $0 + String(format: "%02x", $1)
+        }
+        print("deviceToken", deviceTokenString)
+    }
+
+}
+
+extension AppDelegate: MessagingDelegate {
+
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("fcm Token", fcmToken ?? "")
+        // 將 fcm token 傳送給後台
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    // 使用者點選推播時觸發
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print(#function)
+        let content = response.notification.request.content
+        print(content.userInfo)
+        completionHandler()
+    }
+
+    // 讓 App 在前景也能顯示推播
+    // swiftlint:disable:next line_length
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        if #available(iOS 14.0, *) {
+            completionHandler([.banner])
+        } else {
+            // Fallback on earlier versions
+        }
+    }
 }

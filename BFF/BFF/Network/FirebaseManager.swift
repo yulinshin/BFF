@@ -112,6 +112,48 @@ class FirebaseManager {
         }
     }
 
+
+    func creatNotification(newNotify: Notification) {
+
+        let document =   dateBase.collection("Users").document(userId).collection("Notifications").document(newNotify.id)
+
+        do {
+            try document.setData(from: newNotify)
+            print(document)
+        } catch {
+            print(error)
+        }
+    }
+
+
+    func creatAndUpdateNotification(newNotify: Notification) {
+
+        let document =   dateBase.collection("Users").document(userId).collection("Notifications").document(newNotify.id)
+
+        do {
+            try document.setData(from: newNotify)
+            print(document)
+        } catch {
+            print(error)
+        }
+    }
+
+    func removeNotification(notifyId:String){
+
+        let document =   dateBase.collection("Users").document(userId).collection("Notifications").document(notifyId)
+
+
+    document.delete() { error in
+        if let error = error {
+             print("Error removing document: \(error)")
+         } else {
+             print("Document successfully removed!")
+         }
+    }
+
+    }
+
+
     func addPetToUser(petId: String) {
         dateBase.collection("Users").document(userId).updateData(["petsIds": FieldValue.arrayUnion([petId])])
     }
@@ -158,6 +200,34 @@ class FirebaseManager {
             }
         }
     }
+
+
+
+    func fetchUserPets(completion: @escaping (Result<[Pet], Error>) -> Void) {
+
+        dateBase.collection("Pets").whereField("userId", isEqualTo: userId).getDocuments { (querySnapshot, error) in
+
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                var pets = [Pet]()
+                for doucment in querySnapshot!.documents {
+
+                    do {
+                        if let pet = try doucment.data(as: Pet.self, decoder: Firestore.Decoder()) {
+                            pets.append(pet)
+                        }
+
+                    } catch {
+
+                        completion(.failure(error))
+                    }
+                }
+                completion(.success(pets))
+            }
+        }
+    }
+
 
     func listenUsersPets(completion: @escaping (Result<[Pet], Error>) -> Void) {
         dateBase.collection("Pets").whereField("userId", isEqualTo: userId).addSnapshotListener { querySnapshot, error in
@@ -338,6 +408,26 @@ class FirebaseManager {
     }
 
 
+    func getPhoto(fileName: String, filePath: FilePathName, completion: @escaping (Result<Pic, Error>) -> Void)  {
+
+        let storageRef = storage.reference().child(filePath.rawValue).child(fileName)
+
+        storageRef.downloadURL { (url, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let downloadURL = url else {
+                    return
+                }
+                let urlString = downloadURL.absoluteString
+                let pic = Pic(url: urlString, fileName: fileName)
+                completion(.success(pic))
+            }
+        }
+
+    }
+
+
     func deletePhoto(fileName: String, filePath: FilePathName){
         let storageRef = storage.reference().child(filePath.rawValue).child(fileName)
         storageRef.delete { error in
@@ -376,4 +466,88 @@ class FirebaseManager {
             }
         }
     }
+
+
+    // Can Refactor with Ftech Notificaation?
+    func fetchSupplies(completion: @escaping (Result<[Supply], Error>) -> Void) {
+
+        dateBase.collection("Users").document(userId).collection("Supplies").getDocuments { (querySnapshot, error) in
+
+            if let error = error {
+
+                completion(.failure(error))
+            } else {
+
+                var supplies = [Supply]()
+
+                for document in querySnapshot!.documents {
+
+                    do {
+                        if let supply = try document.data(as: Supply.self, decoder: Firestore.Decoder()) {
+                            supplies.append(supply)
+                        }
+
+                    } catch {
+
+                        completion(.failure(error))
+                    }
+                }
+
+                completion(.success(supplies))
+            }
+        }
+    }
+
+
+    func creatSupply(supply: Supply) {
+
+        let suppliesRef = dateBase.collection("Users").document(userId).collection("Supplies")
+        let document = suppliesRef.document()
+
+        var newSupply = supply
+        newSupply.supplyId = document.documentID
+
+        do {
+            try document.setData(from: newSupply)
+            print(document)
+        } catch {
+            print(error)
+        }
+    }
+
+
+    func updateSupply(supplyId: String, data:Supply) {
+
+        let supplyRef = dateBase.collection("Users").document(userId).collection("Supplies").document(supplyId)
+
+        supplyRef.updateData([
+            "color": data.color,
+            "cycleTime": data.cycleTime,
+            "forPets": data.forPets,
+            "fullStock": data.fullStock,
+            "iconImage": data.iconImage,
+            "isReminder": data.isReminder,
+            "perCycleTime": data.perCycleTime,
+            "reminderPercent": data.reminderPercent,
+            "stock": data.stock,
+            "supplyId": data.supplyId,
+            "supplyName": data.supplyName,
+            "unit": data.unit,
+        ])
+
+        }
+
+    func delateSupply(supplyId: String, completion: @escaping (Result<String, Error>) -> Void) {
+        print("StartDeleateSupply\(supplyId)")
+        dateBase.collection("Users").document(userId).collection("Supplies").document(supplyId).delete() { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let sucessMessage = "Deleate sucess"
+                completion(.success(sucessMessage))
+            }
+        }
+    }
+
+
 }
