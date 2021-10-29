@@ -13,16 +13,21 @@ class HomePageViewModel {
     let notifiactions = Box([Notification]())
     let pets = Box([Pet]())
     let usersPetsIds = Box([String]())
+    var userDataDidLoad: (() -> Void)?
+    var userNotifiactionsDidChange: (() -> Void)?
 
     init() {
-        self.listenUsersPets()
-        self.listenUserData()
+        self.fetchUserData()
         self.listenNotificationData()
     }
 
-    func listenUserData() {
+    deinit {
+        print("HomePageViewModel DIE")
+    }
 
-        FirebaseManager.shared.listenUser { result in
+    func fetchUserData() {
+
+        FirebaseManager.shared.fetchUser { result in
 
             switch result {
 
@@ -32,6 +37,15 @@ class HomePageViewModel {
 
                 self.usersPetsIds.value = user.petsIds ?? [String]()
 
+                print("upDate UserData at HomeVM")
+
+                // save data to Local
+
+
+                //
+
+                self.fetchUserPetsData()
+
             case .failure(let error):
 
                 print("Can't Get User Info \(error)")
@@ -39,7 +53,34 @@ class HomePageViewModel {
             }
 
         }
+    }
 
+
+    func fetchUserPetsData() {
+
+        FirebaseManager.shared.fetchUserPets { result in
+
+            switch result {
+
+            case .success(let pets):
+
+                self.pets.value = pets
+                self.userDataDidLoad?()
+
+                print("upDate UserPetsData at HomeVM")
+
+                // save data to Local
+
+
+                //
+
+            case .failure(let error):
+
+                print("Can't Get Pets Data \(error)")
+
+            }
+
+        }
     }
 
     func listenNotificationData() {
@@ -51,6 +92,8 @@ class HomePageViewModel {
             case .success(let notifications):
 
                 self.notifiactions.value = notifications
+                self.userNotifiactionsDidChange?()
+                print("upDated NotificationData at HomeVM")
 
             case .failure(let error):
 
@@ -64,6 +107,8 @@ class HomePageViewModel {
 
     func listenUsersPets() {
 
+        print("Perpare to listen UsersPets at HomeVM........")
+
         FirebaseManager.shared.listenUsersPets { result in
 
             switch result {
@@ -71,10 +116,40 @@ class HomePageViewModel {
             case .success(let pets):
 
                 self.pets.value = pets
+                self.userDataDidLoad?()
 
             case .failure(let error):
 
                 print("Can't Get Pets Data \(error)")
+
+            }
+
+        }
+
+    }
+
+    func listenUserData() {
+
+        print("Perpare to listen UserData at HomeVM........")
+
+        FirebaseManager.shared.listenUser { result in
+
+            switch result {
+
+            case .success(let user):
+
+                self.userName.value = user.userName
+
+                self.usersPetsIds.value = user.petsIds ?? [String]()
+
+                print("upDated UserData at HomeVM")
+
+                self.fetchUserPetsData()
+
+
+            case .failure(let error):
+
+                print("Can't Get User Info \(error)")
 
             }
 
