@@ -13,7 +13,7 @@ class ListTableViewController: UITableViewController {
 
     var viewModel = SuppliesViewMdoel()
 
-    var notificationManert = NotificationManger()
+    var notificationManger = NotificationManger()
 
 
 
@@ -25,15 +25,16 @@ class ListTableViewController: UITableViewController {
 
         let addCellNib = UINib(nibName: "AddNewItemTableViewCell", bundle: nil)
         tableView.register(addCellNib, forCellReuseIdentifier:    AddNewItemTableViewCell.identifier )
-        notificationManert.setUp()
+        notificationManger.setUp()
+
+        viewModel.suppiesDidChange = {
+            self.tableView.reloadData()
+        }
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        
-        viewModel.suppiesViewModel.bind { supplyViewModels in
-            self.tableView.reloadData()
-        }
+        viewModel.fetchSuppliesData()
     }
 
     // MARK: - Table view data source
@@ -67,28 +68,25 @@ class ListTableViewController: UITableViewController {
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SupplyListTableViewCell.identifier, for: indexPath) as? SupplyListTableViewCell else { return UITableViewCell() }
 
-            viewModel.suppiesViewModel.bind { viewModels in
-                print("viewModels = \(viewModels.count)")
-                print("indexPath = \(indexPath.row)")
-                cell.viewModel = viewModels[indexPath.row]
-                cell.configur()
 
+                let cellViewModel = viewModel.suppiesViewModel.value[indexPath.row]
+                cell.viewModel = cellViewModel
+                cell.configur()
                 cell.didTapMoreButtom = {
-                    self.showMenu( viewModel: viewModels[indexPath.row] )
+                    self.showMenu( viewModel: cellViewModel )
                 }
 
                 cell.didTapReFillButton = {
-                    self.showReFillPopup(viewModel:viewModels[indexPath.row])
+                    self.showReFillPopup(viewModel: cellViewModel )
                 }
-
-            }
+            cell.selectedBackgroundView?.backgroundColor = .white
 
             return cell
 
         default:
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddNewItemTableViewCell.identifier, for: indexPath) as? AddNewItemTableViewCell else { return UITableViewCell() }
-
+            cell.selectedBackgroundView?.backgroundColor = .white
             return cell
 
         }
@@ -103,7 +101,7 @@ class ListTableViewController: UITableViewController {
 
     func showMenu(viewModel: SupplyViewModel) {
 
-        let alert = UIAlertController(title: title, message: "要做什麼呢？", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: viewModel.supplyName.value, message: "要做什麼呢？", preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: "更新用品資訊", style: .default, handler: { _ in
 
@@ -114,6 +112,7 @@ class ListTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "刪除用品", style: .default, handler: { _ in
 
             viewModel.deleteSuppliesData()
+            self.viewModel.fetchSuppliesData()
 
         }))
 
@@ -122,8 +121,8 @@ class ListTableViewController: UITableViewController {
             alert.addAction(UIAlertAction(title: "關閉提醒", style: .default, handler: {  _ in
 
                 viewModel.isNeedToRemind.value = false
-
-                self.notificationManert.deleteNotification(notifyId: viewModel.supplyId.value)
+                viewModel.updateToDataBase()
+                self.notificationManger.deleteNotification(notifyId: viewModel.supplyId.value)
 
             }))
 
@@ -137,6 +136,11 @@ class ListTableViewController: UITableViewController {
             }))
 
         }
+
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: {  _ in
+
+        }))
+
 
         self.present(alert, animated: true, completion: nil)
 

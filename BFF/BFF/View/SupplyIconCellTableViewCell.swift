@@ -10,15 +10,15 @@ import UIKit
 class SupplyIconCellTableViewCell: UITableViewCell {
 
     @IBOutlet weak var iconImage: UIImageView!
-    @IBOutlet weak var stockView: UIView!
     @IBOutlet weak var stockLabel: UILabel!
     @IBOutlet weak var colorCollectionVew: UICollectionView!
 
+    @IBOutlet weak var stockPrgressView: UIProgressView!
     @IBOutlet weak var itemCollecitonView: UICollectionView!
     static let identifier = "SupplyIconCellTableViewCell"
 
     var colorArray = ["red", "orange","yellow","green","blue","purple"]
-    var iconArray = ["1.circle.fill","2.circle.fill","3.circle.fill","4.circle.fill","5.circle.fill","6.circle.fill"]
+    var iconArray = ["Bag","Food","Fooeed","Medice","N","water"]
 
     var iconNameCallback: ((_ iconName: String) -> Void)?
 
@@ -33,6 +33,7 @@ class SupplyIconCellTableViewCell: UITableViewCell {
         let diaryNib = UINib(nibName: "CubeCollectionViewCell", bundle: nil)
         colorCollectionVew.register(diaryNib, forCellWithReuseIdentifier: CubeCollectionViewCell.identifier)
         itemCollecitonView.register(diaryNib, forCellWithReuseIdentifier: CubeCollectionViewCell.identifier)
+        iconImage.layer.cornerRadius = 20
 
         // Initialization code
     }
@@ -74,12 +75,15 @@ extension SupplyIconCellTableViewCell: UICollectionViewDataSource {
 
             cell.iconImage.image = UIImage(named: "")
             cell.iconImage.backgroundColor = UIColor(named: colorArray[indexPath.row])
+            cell.iconImage.layer.cornerRadius = 6
             return cell
 
         case itemCollecitonView:
 
 
-            cell.iconImage.image = UIImage(systemName: iconArray[indexPath.row])
+            cell.iconImage.image = UIImage(named: iconArray[indexPath.row])
+            cell.iconImage.backgroundColor = .gray
+            cell.iconImage.layer.cornerRadius = 6
             return cell
 
 
@@ -96,8 +100,9 @@ extension SupplyIconCellTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
             guard let cell = collectionView.cellForItem(at: indexPath) as? CubeCollectionViewCell else { return }
-        cell.background.layer.borderColor = UIColor.orange.cgColor
-        cell.background.layer.borderWidth = 4
+        cell.background.layer.borderColor = UIColor(named: "main")?.cgColor
+        cell.background.layer.borderWidth = 2
+        cell.background.layer.cornerRadius = 8
 
         switch collectionView {
 
@@ -118,7 +123,7 @@ extension SupplyIconCellTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
 
         guard let cell = collectionView.cellForItem(at: indexPath) as? CubeCollectionViewCell else { return }
-    cell.background.layer.borderColor = UIColor.orange.cgColor
+    cell.background.layer.borderColor = UIColor(named: "main")?.cgColor
     cell.background.layer.borderWidth = 0
 
     }

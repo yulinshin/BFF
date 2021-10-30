@@ -22,6 +22,8 @@ class FirebaseManager {
 
     func fetchUser(completion: @escaping (Result<User, Error>) -> Void) {
 
+        print("Start fetch UserData ........")
+
         dateBase.collection("Users").document(userId).getDocument { (document, error) in
 
             if let document = document, document.exists {
@@ -39,6 +41,9 @@ class FirebaseManager {
     }
 
     func listenUser(completion: @escaping (Result<User, Error>) -> Void) {
+
+        print("Start listen UserData........")
+
         dateBase.collection("Users").document(userId).addSnapshotListener { documentSnapshot, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -116,12 +121,11 @@ class FirebaseManager {
     func creatNotification(newNotify: Notification) {
 
         let document =   dateBase.collection("Users").document(userId).collection("Notifications").document(newNotify.id)
-
         do {
             try document.setData(from: newNotify)
-            print(document)
+            print("upLoad NotificartionInFo Sucess - \(newNotify) ")
         } catch {
-            print(error)
+            print("upLoad NotificartionInFo Sucess - \(error) ")
         }
     }
 
@@ -178,7 +182,9 @@ class FirebaseManager {
 
     func fetchPets(petIds: [String], completion: @escaping (Result<[Pet], Error>) -> Void) {
 
-        dateBase.collection("Pets").whereField(Firebase.FieldPath.documentID(), in: petIds).getDocuments { (querySnapshot, error) in
+        guard !petIds.isEmpty else { return }
+
+        dateBase.collection("Pets").whereField("petId", in: petIds).getDocuments { (querySnapshot, error) in
 
             if let error = error {
                 completion(.failure(error))
@@ -205,6 +211,8 @@ class FirebaseManager {
 
     func fetchUserPets(completion: @escaping (Result<[Pet], Error>) -> Void) {
 
+        print("Start fetch UserPetsData ........")
+        
         dateBase.collection("Pets").whereField("userId", isEqualTo: userId).getDocuments { (querySnapshot, error) in
 
             if let error = error {
@@ -230,6 +238,9 @@ class FirebaseManager {
 
 
     func listenUsersPets(completion: @escaping (Result<[Pet], Error>) -> Void) {
+
+        print(" start listen UsersPets........")
+
         dateBase.collection("Pets").whereField("userId", isEqualTo: userId).addSnapshotListener { querySnapshot, error in
             if let error = error {
                 completion(.failure(error))
@@ -324,6 +335,8 @@ class FirebaseManager {
                 }
             }
         }
+
+
 
 
     func fetchDiaries(completion: @escaping (Result<[Diary], Error>) -> Void) {

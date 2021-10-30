@@ -175,6 +175,7 @@ extension HomePageViewController: UICollectionViewDataSource {
                 let nav = UINavigationController(rootViewController: controller)
                 nav.modalPresentationStyle = .fullScreen
                 nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor: UIColor(named: "main")]
+                controller.title = "新增寵物日記"
                 self.present(nav, animated: true, completion: nil)
             }
             

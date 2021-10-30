@@ -93,7 +93,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tabBar.tintColor = .orange
+        self.tabBar.tintColor = UIColor(named: "main")
 
         viewControllers = tabs.map({ $0.controller() })
         self.selectedIndex = 2

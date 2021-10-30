@@ -12,8 +12,12 @@ class DiaryViewController: UIViewController {
     @IBOutlet weak var selectedPetsCollectionView: UICollectionView!
     @IBOutlet weak var diariesCollectionView: UICollectionView!
 
-    
-    var lauoutType = LayoutType.grid
+    @IBOutlet weak var petsTopConstraint: NSLayoutConstraint!
+
+
+    private var lastContentOffset: CGFloat = 0
+
+    var lauoutType = LayoutType.single
 
     var showSelectedPetsCollectionView = true
 
@@ -46,7 +50,7 @@ class DiaryViewController: UIViewController {
     private lazy var petsDataSource = makePetsDataSource()
 
     deinit {
-        print("DIEEEEEEEEEEEEE")
+        print("DiaryViewController DIE")
     }
 
     override func viewDidLoad() {
@@ -62,8 +66,7 @@ class DiaryViewController: UIViewController {
         diariesCollectionView.collectionViewLayout = creatLayout(type: .single)
         selectedPetsCollectionView.allowsMultipleSelection = true
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Creat", style: .done, target: self, action: #selector(creatDiary))
-
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Filter"), style: .done, target: self, action: #selector(switchShowList))
 
         diaryWallViewModel.showingDiarys.bind {  [weak self] diaries in
 
@@ -81,6 +84,9 @@ class DiaryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 
+        self.navigationController?.navigationBar.backgroundColor = .white
+
+
         if showSelectedPetsCollectionView {
             self.selectedPetsCollectionView.isHidden = false
 
@@ -93,15 +99,36 @@ class DiaryViewController: UIViewController {
         fetchData()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.navigationBar.backgroundColor = .clear
+    }
+
     @objc func creatDiary(){
 
             let storyboard = UIStoryboard(name: "Diary", bundle: nil)
             guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatDiaryViewController") as? CreatDiaryViewController else { return }
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
-            nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor:UIColor.orange]
+            nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor:UIColor(named: "main")]
             self.present(nav, animated: true, completion: nil)
 
+    }
+
+    @objc func switchShowList(){
+        switch lauoutType {
+
+        case .grid:
+            
+            lauoutType = .single
+            diariesCollectionView.collectionViewLayout = creatLayout(type: .single)
+            diariesCollectionView.reloadData()
+
+        case .single:
+
+            lauoutType = .grid
+            diariesCollectionView.collectionViewLayout = creatLayout(type: .grid)
+            diariesCollectionView.reloadData()
+        }
     }
 
     func fetchData() {
@@ -148,8 +175,8 @@ class DiaryViewController: UIViewController {
                   let cell = selectedPetsCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SelectedPetsCollectionViewCell else { return }
             if showPets.contains(petId) {
                 selectedPetsCollectionView.selectItem(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: [])
-                cell.selectBackground.layer.borderColor = UIColor.orange.cgColor
-                cell.selectBackground.layer.borderWidth = 2
+                cell.selectBackground.layer.borderColor = UIColor.white.cgColor
+                cell.selectBackground.layer.borderWidth = 3
             }
         }
     }
@@ -199,8 +226,8 @@ extension DiaryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == selectedPetsCollectionView {
             guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-            cell.selectBackground.layer.borderColor = UIColor.orange.cgColor
-            cell.selectBackground.layer.borderWidth = 2
+            cell.selectBackground.layer.borderColor = UIColor.white.cgColor
+            cell.selectBackground.layer.borderWidth = 3
 
             guard let petId = cell.petId else { return }
             if showPets.contains(petId) {
@@ -222,7 +249,7 @@ extension DiaryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView == selectedPetsCollectionView {
             guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-            cell.selectBackground.layer.borderColor = UIColor.orange.cgColor
+            cell.selectBackground.layer.borderColor = UIColor.white.cgColor
             cell.selectBackground.layer.borderWidth = 0
 
             guard let petId = cell.petId else { return }
@@ -233,6 +260,42 @@ extension DiaryViewController: UICollectionViewDelegate {
 
         }
     }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+        guard scrollView.contentOffset.y > 0 else { return }
+
+        if (self.lastContentOffset >= scrollView.contentOffset.y) {
+
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+
+                self.petsTopConstraint.constant = 0
+                self.selectedPetsCollectionView.alpha = 1
+                self.view.layoutIfNeeded()
+
+
+            }
+
+        }
+        else if (self.lastContentOffset < scrollView.contentOffset.y) {
+
+
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+
+                self.petsTopConstraint.constant = -70
+                self.selectedPetsCollectionView.alpha = 0
+                self.view.layoutIfNeeded()
+
+            }
+        }
+
+        // update the new position acquired
+        self.lastContentOffset = scrollView.contentOffset.y
+    }
+
+
+
+
 
 }
 

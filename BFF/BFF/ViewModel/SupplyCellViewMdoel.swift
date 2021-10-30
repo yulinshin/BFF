@@ -7,16 +7,14 @@
 
 import Foundation
 import UIKit
-import SwiftUI
 import Kingfisher
-import AVFoundation
 
 class SupplyViewModel {
 
 // Data for View
 
     // swiftlint:disable:next line_length
-    let deFultSupply = Supply(color: "123", cycleTime: "123", forPets: [String](), fullStock: 0, iconImage: "123", isReminder: true, perCycleTime: 0, reminderPercent: 0, stock: 0, supplyId: "123", supplyName: "123", unit: "123")
+    let deFultSupply = Supply(color: "red", cycleTime: " ", forPets: [String](), fullStock: 0, iconImage: "bag", isReminder: true, perCycleTime: 0, reminderPercent: 0, stock: 0, supplyId: " ", supplyName: " ", unit: " ")
 
     var suppply: Supply?
 
@@ -42,7 +40,7 @@ class SupplyViewModel {
 
 
     init() {
-        getSupplyData(from: deFultSupply)
+
     }
 
 
@@ -52,7 +50,11 @@ class SupplyViewModel {
         self.iconColor.value = supply.color
         self.supplyName.value = supply.supplyName
         let stockInMax = Double(supply.stock) / Double(supply.fullStock)
-        self.inventoryStatusText.value = "\(stockInMax * 100)%"
+        if (stockInMax.isNaN || stockInMax.isInfinite) {
+            self.inventoryStatusText.value = "\(stockInMax)"
+        }else{
+            self.inventoryStatusText.value = "\(Int(stockInMax * 100))%"
+        }
         self.inventoryStatusPercentage.value = stockInMax
         self.maxInventory.value = supply.fullStock
         self.reminingInventory.value = supply.stock
@@ -63,6 +65,13 @@ class SupplyViewModel {
         self.supplyUnit.value = supply.unit
         self.cycleTime.value = supply.cycleTime
         self.suppply = supply
+    }
+
+    func updateToDataBase() {
+        // swiftlint:disable:next line_length
+        let supply = Supply(color: self.iconColor.value, cycleTime: self.cycleTime.value, forPets: self.supplyUseByPets.value, fullStock: self.maxInventory.value, iconImage: self.supplyIconImage.value, isReminder: self.isNeedToRemind.value, perCycleTime: self.cycleDosage.value, reminderPercent: self.remindPercentage.value, stock: self.reminingInventory.value, supplyId: self.supplyId.value, supplyName: self.supplyName.value, unit: self.supplyUnit.value)
+
+        FirebaseManager.shared.updateSupply(supplyId: supply.supplyId, data: supply)
     }
 
 
@@ -79,6 +88,13 @@ class SupplyViewModel {
                 print(error)
             }
         }
+    }
+
+
+    func packSupply() -> Supply{
+        // swiftlint:disable:next line_length
+        let supply = Supply(color: self.iconColor.value, cycleTime: self.cycleTime.value, forPets: self.supplyUseByPets.value, fullStock: self.maxInventory.value, iconImage: self.supplyIconImage.value, isReminder: self.isNeedToRemind.value, perCycleTime: self.cycleDosage.value, reminderPercent: self.remindPercentage.value, stock: self.reminingInventory.value, supplyId: self.supplyId.value, supplyName: self.supplyName.value, unit: self.supplyUnit.value)
+        return supply
     }
 
 

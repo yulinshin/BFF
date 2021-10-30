@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import AVFoundation
 
 class SupplyDetailViewController: UIViewController {
 
@@ -36,7 +37,7 @@ class SupplyDetailViewController: UIViewController {
 
     var userPetsData = [Pet]() {
         didSet{
-            tableView.rectForRow(at: IndexPath.init(row: 3, section: 0))
+            tableView.reloadData()
         }
     }
     
@@ -46,6 +47,8 @@ class SupplyDetailViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        creatButton.layer.cornerRadius = 10
+        fetchData()
 
         switch mode {
 
@@ -58,7 +61,6 @@ class SupplyDetailViewController: UIViewController {
 
         }
 
-
     }
 
     @objc func creatSupply() {
@@ -67,6 +69,29 @@ class SupplyDetailViewController: UIViewController {
         let supply = Supply(color: viewModel.iconColor.value, cycleTime: viewModel.cycleTime.value, forPets: viewModel.supplyUseByPets.value, fullStock: viewModel.maxInventory.value, iconImage: viewModel.supplyIconImage.value, isReminder: viewModel.isNeedToRemind.value, perCycleTime: viewModel.cycleDosage.value, reminderPercent: viewModel.remindPercentage.value, stock: viewModel.reminingInventory.value, supplyId: "supplyID", supplyName: viewModel.supplyName.value, unit: viewModel.supplyUnit.value)
 
         FirebaseManager.shared.creatSupply(supply: supply)
+    }
+
+    func fetchData() {
+
+        FirebaseManager.shared.fetchPets { result in
+
+            switch result {
+
+            case .success(let pets):
+
+                var petsData = [Pet]()
+                pets.forEach { pet in
+                    petsData.append(pet)
+                }
+                self.userPetsData = petsData
+                print("DidGet:\(self.userPetsData.count)")
+            case .failure(let error):
+                print("fetchData.failure\(error)")
+
+            }
+
+        }
+
     }
 
     @objc func updateSupply() {
@@ -84,6 +109,16 @@ class SupplyDetailViewController: UIViewController {
         case .edit:
             updateSupply()
         }
+
+        let supply = viewModel.packSupply()
+
+        if viewModel.isNeedToRemind.value {
+            NotificationManger.shared.creatSupplyNotification(supply: supply)
+        } else {
+            NotificationManger.shared.deleteNotification(notifyId: "Supply_\(supply.supplyId)")
+        }
+
+        self.navigationController?.popViewController(animated: true)
     }
 
 
@@ -106,11 +141,12 @@ extension SupplyDetailViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SupplyIconCellTableViewCell.identifier, for: indexPath) as? SupplyIconCellTableViewCell else { return UITableViewCell() }
 
             viewModel.supplyIconImage.bind { icon in
-                cell.iconImage.image = UIImage(systemName: icon)
+                cell.iconImage.image = UIImage(named: icon)
             }
 
             viewModel.iconColor.bind { color in
                 cell.iconImage.backgroundColor = UIColor(named: color)
+                cell.stockPrgressView.tintColor = UIColor(named: color)
             }
 
             viewModel.maxInventory.bind { maxStock in
@@ -119,7 +155,9 @@ extension SupplyDetailViewController: UITableViewDataSource {
                 }
             }
 
-
+            viewModel.inventoryStatusPercentage.bind { percentage in
+                cell.stockPrgressView.progress = Float(percentage)
+            }
 
             cell.iconNameCallback = { name in
 
@@ -156,6 +194,7 @@ extension SupplyDetailViewController: UITableViewDataSource {
 
             viewModel.maxInventory.bind { maxStock in
                 cell.maxStockTextField.text = "\(maxStock)"
+                print("Setting \(maxStock)")
             }
 
             viewModel.reminingInventory.bind { stock in
@@ -168,10 +207,13 @@ extension SupplyDetailViewController: UITableViewDataSource {
 
             cell.callbackMaxStock = { maxStock in
                 self.viewModel.maxInventory.value = maxStock
+                print("over \(maxStock)")
+                tableView.reloadData()
             }
 
             cell.callbackStock = { stock in
                 self.viewModel.reminingInventory.value = stock
+                tableView.reloadData()
             }
 
             cell.callbackUnit = { unit in
@@ -184,17 +226,15 @@ extension SupplyDetailViewController: UITableViewDataSource {
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SupplyPetsTableViewCell.identifier, for: indexPath) as? SupplyPetsTableViewCell else { return UITableViewCell() }
 
+            cell.userPetsData = self.userPetsData
 
             viewModel.supplyUseByPets.bind { pets in
-                cell.userPetsData = self.userPetsData
-                cell.pets = pets
+                cell.selcetedPets = pets
             }
-
 
             cell.callback = { pets in
                 self.viewModel.supplyUseByPets.value = pets
             }
-
 
             return cell
 
@@ -210,7 +250,7 @@ extension SupplyDetailViewController: UITableViewDataSource {
 
             cell.callbackCycleUnit = { unit in
 
-                self.viewModel.supplyUnit.value = unit
+                self.viewModel.cycleTime.value = unit
 
             }
 
@@ -232,7 +272,7 @@ extension SupplyDetailViewController: UITableViewDataSource {
             }
 
             viewModel.remindPercentage.bind { remindPercentage in
-                cell.reminderTextFIeld.text = "\(remindPercentage)"
+                cell.reminderTextFIeld.text = "\(Int(remindPercentage))"
             }
 
             cell.callbackTogle = { isNeedToRemind in
@@ -241,7 +281,6 @@ extension SupplyDetailViewController: UITableViewDataSource {
 
             cell.callbackRemindPercentage = { percentage in
                 self.viewModel.remindPercentage.value = percentage
-
             }
 
             return cell

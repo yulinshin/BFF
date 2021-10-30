@@ -10,6 +10,7 @@ import Foundation
 class SuppliesViewMdoel {
 
     let suppiesViewModel = Box([SupplyViewModel]())
+    var suppiesDidChange: (() -> Void)?
 
     init() {
        fetchSuppliesData()
@@ -31,6 +32,7 @@ class SuppliesViewMdoel {
                     newViewModels.append(supplyViewModel)
                 }
                 self.suppiesViewModel.value = newViewModels
+                self.suppiesDidChange?()
 
             case .failure(let error):
                 print(error)

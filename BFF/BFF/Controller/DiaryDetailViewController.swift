@@ -31,6 +31,7 @@ class DiaryDetailViewController: UIViewController {
     var comments = [String]()
     var petTags = [String]()
     var diaryId = ""
+    
     private var oldContent = ""
 
     override func viewDidLoad() {
@@ -103,7 +104,7 @@ class DiaryDetailViewController: UIViewController {
             alertController.addAction(UIAlertAction(title: "Delete Diary", style: .destructive, handler: deleteDiary))
 
             // Cancel Menu Button
-            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
 
             self.present(alertController, animated: true, completion: nil)
 
@@ -139,8 +140,8 @@ class DiaryDetailViewController: UIViewController {
         self.navigationController?.navigationItem.hidesBackButton = true
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationItem.title = "Edit Diary"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveDiary))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelEditDiary))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "儲存", style: .done, target: self, action: #selector(saveDiary))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .done, target: self, action: #selector(cancelEditDiary))
         oldContent = contentTextView.text
         contentTextView.isEditable = true
         contentTextView.becomeFirstResponder()
@@ -188,3 +189,4 @@ class DiaryDetailViewController: UIViewController {
         }
 
     }
+

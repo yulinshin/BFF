@@ -103,8 +103,6 @@ class HomePageViewModel: NSObject {
 
                 print("upDate UserPetsData at HomeVM")
 
-
-
                 // Update data to Local
 
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
@@ -162,7 +160,15 @@ class HomePageViewModel: NSObject {
 
             case .success(let notifications):
 
-                self.notifiactions.value = notifications
+                var showNotifications = [Notification]()
+                notifications.forEach { notification in
+                    if notification.notifyTime.dateValue() < Date(){
+                        showNotifications.append(notification)
+                }
+                }
+                showNotifications = showNotifications.sorted(by:{ $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
+                self.notifiactions.value = showNotifications
+
                 self.userNotifiactionsDidChange?()
                 print("upDated NotificationData at HomeVM")
 
