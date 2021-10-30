@@ -10,10 +10,10 @@ import UserNotifications
 import IQKeyboardManagerSwift
 import Firebase
 import FirebaseMessaging
+import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
 
     let center = UNUserNotificationCenter.current()
 
@@ -82,6 +82,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("deviceToken", deviceTokenString)
     }
 
+    // MARK: - Core Data stack
+
+    lazy var persistentContainer: NSPersistentContainer = {
+
+        let container = NSPersistentContainer(name: "UserData")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+
+                fatalError("CoreData:Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        print("CordDataLocation: \(NSPersistentContainer.defaultDirectoryURL())")
+        return container
+    }()
+
+    // MARK: - Core Data Saving support
+
+    func saveContext () {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+
+                try context.save()
+
+            } catch {
+
+                let nserror = error as NSError
+                fatalError("CoreData:Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
 }
 
 extension AppDelegate: MessagingDelegate {
@@ -111,3 +142,4 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
     }
 }
+
