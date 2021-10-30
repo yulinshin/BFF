@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import CoreData
+import UIKit
 
-class HomePageViewModel {
+class HomePageViewModel: NSObject {
 
     let userName = Box("")
     let notifiactions = Box([Notification]())
@@ -16,7 +18,9 @@ class HomePageViewModel {
     var userDataDidLoad: (() -> Void)?
     var userNotifiactionsDidChange: (() -> Void)?
 
-    init() {
+
+    override init() {
+        super.init()
         self.fetchUserData()
         self.listenNotificationData()
     }
@@ -39,10 +43,40 @@ class HomePageViewModel {
 
                 print("upDate UserData at HomeVM")
 
-                // save data to Local
+
+                // Update data to Local
+
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
 
 
-                //
+                    let context = appDelegate.persistentContainer.viewContext
+                    do {
+                        var requests = try context.fetch(UserMO.fetchRequest())
+
+                        if requests.isEmpty {
+                            let userMo = UserMO(context:
+                                                    appDelegate.persistentContainer.viewContext)
+                            userMo.name = user.userName
+                            userMo.petsIds = user.petsIds
+                            userMo.userId = user.userId
+
+                            appDelegate.saveContext()
+                        } else {
+                        for request in requests {
+
+                            if request.userId == user.userId {
+                                request.name = user.userName
+                                request.petsIds = user.petsIds
+
+                            }
+                            appDelegate.saveContext()
+                        }
+                    }
+                    } catch {
+                        fatalError("CodataERROR:\(error)")
+                    }
+
+                }
 
                 self.fetchUserPetsData()
 
@@ -69,8 +103,45 @@ class HomePageViewModel {
 
                 print("upDate UserPetsData at HomeVM")
 
-                // save data to Local
 
+
+                // Update data to Local
+
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+
+                    pets.forEach { pet in
+                        let context = appDelegate.persistentContainer.viewContext
+                        do {
+                            var requests = try context.fetch(PetMO.fetchRequest())
+                            var isContain = false
+
+                            for request in requests {
+                                if request.petId == pet.petId {
+                                    request.name = pet.name
+                                    request.thumbNail?.fileName = pet.petThumbnail?.fileName
+                                    request.thumbNail?.url = pet.petThumbnail?.url
+                                    isContain = true
+                                }
+                                appDelegate.saveContext()
+                            }
+
+                            if isContain == false {
+                                let petMo = PetMO(context: appDelegate.persistentContainer.viewContext)
+                                petMo.name = pet.name
+                                let picMo = PicMO(context: appDelegate.persistentContainer.viewContext)
+                                picMo.url = pet.petThumbnail?.url
+                                picMo.fileName = pet.petThumbnail?.fileName
+                                petMo.thumbNail = picMo
+                                petMo.petId = pet.petId
+                                appDelegate.saveContext()
+                            }
+
+                        } catch {
+                            fatalError("\(error)")
+                        }
+                    }
+
+                }
 
                 //
 
@@ -146,7 +217,6 @@ class HomePageViewModel {
 
                 self.fetchUserPetsData()
 
-
             case .failure(let error):
 
                 print("Can't Get User Info \(error)")
@@ -156,4 +226,8 @@ class HomePageViewModel {
         }
 
     }
+}
+
+extension HomePageViewModel: NSFetchedResultsControllerDelegate {
+
 }
