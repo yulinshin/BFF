@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class CreatPetViewController: UIViewController {
 
@@ -96,25 +97,32 @@ class CreatPetViewController: UIViewController {
 
     @objc func coverToEditMode(){
         self.presentMode = .edit
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "儲存", style: .done, target: self, action: #selector(self.updatePet))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .done, target: self, action: #selector(self.cancel))
         petInfoTableView.reloadData()
     }
 
 
     @objc func updatePet() {
 
+        ProgressHUD.show()
+
         guard let image = petImage.image else { return }
 
         viewModel.upDatePetToDB(image: image) { result in
 
+            ProgressHUD.dismiss()
+
             switch result {
 
             case .success(let message):
-
                 print(message)
-                self.dismiss(animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
+                ProgressHUD.showSuccess(text: "修改成功")
 
             case .failure(let error):
                 print("fetchData.failure\(error)")
+                ProgressHUD.showFailure(text: "修改失敗")
 
             }
 
@@ -157,7 +165,7 @@ class CreatPetViewController: UIViewController {
 
 
     @objc func cancel() {
-
+        self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
 
     }
@@ -186,6 +194,7 @@ extension CreatPetViewController: UITableViewDataSource {
                 cell.textField.text = name
 
             }
+            cell.button.isHidden = true
 
             cell.callback = { text in
                 self.viewModel.updateData(name: text)
@@ -199,7 +208,7 @@ extension CreatPetViewController: UITableViewDataSource {
                 cell.textField.text = type
 
             }
-
+            cell.button.isHidden = true
             cell.callback = { text in
                 self.viewModel.updateData(type: text)
             }
@@ -214,7 +223,7 @@ extension CreatPetViewController: UITableViewDataSource {
                 cell.textField.text = birthday
 
             }
-
+            cell.button.isHidden = true
             cell.callback = { text in
                 self.viewModel.updateData(birthday: text)
             }
@@ -227,7 +236,7 @@ extension CreatPetViewController: UITableViewDataSource {
                 cell.textField.text = "\(weight)"
 
             }
-
+            cell.button.isHidden = true
             cell.callback = { text in
                 self.viewModel.updateData(weight: text)
             }
@@ -241,7 +250,7 @@ extension CreatPetViewController: UITableViewDataSource {
                 cell.creatPicker(pickerData: ["kg", "g"])
 
             }
-
+            cell.button.isHidden = true
             cell.callback = { text in
                 self.viewModel.updateData(weightUnit: text)
             }
@@ -255,7 +264,7 @@ extension CreatPetViewController: UITableViewDataSource {
                 cell.creatPicker(pickerData: ["boy", "girl"])
 
             }
-
+            cell.button.isHidden = true
             cell.callback = { text in
                 self.viewModel.updateData(gender: text)
             }
@@ -268,7 +277,7 @@ extension CreatPetViewController: UITableViewDataSource {
                 cell.textField.text = chipId
 
             }
-
+            cell.button.isHidden = true
             cell.callback = { text in
                 self.viewModel.updateData(chipId: text)
             }
@@ -276,7 +285,8 @@ extension CreatPetViewController: UITableViewDataSource {
         case "備註" :
 
             cell.configur(cellStyle: .more, title: fields[indexPath.row] )
-
+            cell.button.isHidden = false
+            cell.textField.isHidden = true
             cell.moreButtonTap = {
 
                 let storyboard = UIStoryboard(name: "Pet", bundle: nil)
@@ -289,12 +299,37 @@ extension CreatPetViewController: UITableViewDataSource {
                     }
                 }
 
+                if self.presentMode == .read {
+                    controller.mode = .read
+                } else if self.presentMode == .edit {
+                    controller.mode = .edit
+                }else {
+                    controller.mode = .creat
+                }
+
+
                 self.navigationController?.show(controller, sender: nil)
 
             }
 
         default:
             return cell
+        }
+
+        if presentMode == .read {
+            self.viewModel.petThumbnail.bind { url in
+                self.petImage.isUserInteractionEnabled = false
+                self.petImage.loadImage(url, placeHolder: UIImage())
+            }
+            cell.textField.isUserInteractionEnabled = false
+        } else if presentMode == .edit {
+            self.viewModel.petThumbnail.bind { url in
+                self.petImage.isUserInteractionEnabled = true
+                self.petImage.loadImage(url, placeHolder: UIImage())
+            }
+            cell.textField.isUserInteractionEnabled = true
+        } else {
+            cell.textField.isUserInteractionEnabled = true
         }
 
         return cell

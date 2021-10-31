@@ -14,6 +14,18 @@ class NoteViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
 
+    enum PresentMode {
+
+        case read
+
+        case edit
+
+        case creat
+
+    }
+
+    var mode: PresentMode?
+
     var callBack: ((_ note: String) -> Void)?
 
     var note = ""
@@ -31,6 +43,12 @@ class NoteViewController: UIViewController, UITextViewDelegate {
             titleLabel.text = "毛小孩的的備註事項"
         }else{
             titleLabel.text = "\(petsName)的備註事項"
+        }
+
+        if mode == .read {
+            noteTextView.isUserInteractionEnabled = false
+        } else {
+            noteTextView.isUserInteractionEnabled = true
         }
 
     }

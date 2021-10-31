@@ -50,7 +50,8 @@ class HomePageViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        viewModel.fetchUserData()
+        viewModel.fetchUserPetsData()
         let barAppearance =  UINavigationBarAppearance()
         barAppearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = barAppearance
@@ -96,6 +97,14 @@ extension HomePageViewController: UICollectionViewDelegate {
 
                 let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "ListTableViewController") as? ListTableViewController else { return }
+
+                self.navigationController?.show(controller, sender: nil)
+
+
+            case 2: // Health
+
+                let storyboard = UIStoryboard(name: "Pet", bundle: nil)
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "PetsListTableViewController") as? PetsListTableViewController else { return }
 
                 self.navigationController?.show(controller, sender: nil)
 
@@ -281,7 +290,7 @@ extension HomePageViewController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(110))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
 
                 let layoutSection = NSCollectionLayoutSection(group: group)
