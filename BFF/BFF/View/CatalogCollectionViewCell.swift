@@ -13,11 +13,21 @@ class CatalogCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
 
     func setup(title: String, iconName: String ) {
-        iconBackgroundView.layer.shadowColor = UIColor.orange.cgColor
+        iconBackgroundView.layer.shadowColor = UIColor(named: "main")?.cgColor
         iconImageView.layer.shadowOffset = CGSize(width: 1, height: 1)
         iconImageView.layer.cornerRadius = 10
         titleLabel.text = title
         iconImageView.image = UIImage(named: iconName)
+
     }
+
+    override func layoutSubviews() {
+        iconBackgroundView.backgroundColor = .white
+        iconBackgroundView.layer.cornerRadius = 10
+        iconBackgroundView.layer.shadowColor = UIColor(named: "main")?.cgColor
+        iconBackgroundView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        iconBackgroundView.layer.shadowOpacity = 0.5
+        iconBackgroundView.layer.shadowRadius = 2
+      }
     
 }

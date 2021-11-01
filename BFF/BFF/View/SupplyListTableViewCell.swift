@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import CoreData
+
 
 class SupplyListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var supplyIconImageView: UIImageView!
-
+    @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var supplyNameLabel: UILabel!
     @IBOutlet weak var inventoryStatusLabel: UILabel!
     @IBOutlet weak var inventoryStatusView: UIStackView!
@@ -27,6 +29,7 @@ class SupplyListTableViewCell: UITableViewCell {
 
     var viewModel: SupplyViewModel?
     var unit: String?
+    var userPetsData: [PetMO]?
 
     var didTapMoreButtom: (()->Void)?
     var didTapReFillButton: (()->Void)?
@@ -47,13 +50,27 @@ class SupplyListTableViewCell: UITableViewCell {
         cellCardBackGroundView.layer.shadowRadius = 4
         cellCardBackGroundView.backgroundColor = UIColor.white
         cellCardBackGroundView.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
-
         reFillStockButton.layer.cornerRadius = 4
+
+
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+
+
+            let context = appDelegate.persistentContainer.viewContext
+            do {
+                var requests = try context.fetch(PetMO.fetchRequest())
+                userPetsData = requests
+            } catch {
+                fatalError("CodataERROR:\(error)")
+            }
+
+        }
 
 
         // Data Binding
         viewModel?.supplyIconImage.bind(listener: { imageName in
             self.supplyIconImageView.image = UIImage(named: imageName)
+            self.supplyIconImageView.layer.cornerRadius = 16
         })
 
         viewModel?.iconColor.bind(listener: { iconColor in
@@ -71,7 +88,7 @@ class SupplyListTableViewCell: UITableViewCell {
 
         viewModel?.inventoryStatusPercentage.bind(listener: { percentage in
 
-            // Draw PercentageView
+            self.progressView.progress = Float(percentage)
 
         })
 
@@ -105,37 +122,36 @@ class SupplyListTableViewCell: UITableViewCell {
 
         })
 
-        viewModel?.supplyUseByPets.bind(listener: { pets in
+        viewModel?.supplyUseByPets.bind(listener: { petIds in
 
             // CleanStock
             self.supplyUseByPetsStackVIew.subviews.forEach { view in
                 view.removeFromSuperview()
             }
 
-            pets.forEach { pet in
 
-                // GetPetsThumbnail
-                FirebaseManager.shared.getPhoto(fileName: pet, filePath: .petPhotos) { result in
+            petIds.forEach { petId in
 
-                    switch result {
-
-                    case .success(let pic):
-
+                self.userPetsData?.forEach({ petData in
+                    if petData.petId == petId {
                         let petImageView = UIImageView()
-                        petImageView.loadImage(pic.url)
-
-                        // SetPetsThumbnail
+                        petImageView.translatesAutoresizingMaskIntoConstraints = false
+                        petImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+                        petImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+                        petImageView.loadImage(petData.thumbNail?.url)
+                        petImageView.contentMode = .scaleAspectFill
+                        petImageView.layer.cornerRadius = 15
+                        petImageView.clipsToBounds = true
                         self.supplyUseByPetsStackVIew.addArrangedSubview(petImageView)
-
-                    case .failure(let error):
-
-                        print(error)
-
+                    } else {
+                        return
                     }
-                }
 
+                })
             }
-            })
+
+        }
+    )
 
         viewModel?.isNeedToRemind.bind(listener: { isNeedToRemind in
 
@@ -144,12 +160,12 @@ class SupplyListTableViewCell: UITableViewCell {
 
                 if isNeedToRemind {
 
-                    self.remindIcon.image = UIImage(systemName: "bell.slash")
-                    self.remindLabel.text = "低於\(percentage)%時提醒"
+                    self.remindIcon.image = UIImage(systemName: "bell")
+                    self.remindLabel.text = "低於\(Int(percentage))%時提醒"
 
                 } else {
 
-                    self.remindIcon.image = UIImage(systemName: "bell")
+                    self.remindIcon.image = UIImage(systemName: "bell.slash")
                     self.remindLabel.text = "不提醒"
 
                 }

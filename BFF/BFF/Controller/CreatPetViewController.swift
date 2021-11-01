@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class CreatPetViewController: UIViewController {
 
@@ -16,14 +17,14 @@ class CreatPetViewController: UIViewController {
     var viewModel = CreatPetViewModel()
 
     var fields  = [
-        "Name",
-        "Type",
-        "Birthday",
-        "Weight",
-        "WeightUnit",
-        "Gender",
-        "ChipId",
-        "Note"
+        "名字",
+        "品種",
+        "生日",
+        "體重",
+        "體重單位",
+        "性別",
+        "晶片",
+        "備註"
     ]
 
     enum PresentMode {
@@ -50,7 +51,7 @@ class CreatPetViewController: UIViewController {
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.handleSelectedPetImage))
         petImage.addGestureRecognizer(tapGR)
         petImage.isUserInteractionEnabled = true
-        self.navigationController?.navigationBar.tintColor = .orange
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
 
 
     }
@@ -62,29 +63,29 @@ class CreatPetViewController: UIViewController {
 
         case .read:
 
-            self.navigationItem.title = "My Pet"
+            self.navigationItem.title = "\(viewModel.name.value)"
 
 
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(savePet))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "編輯", style: .done, target: self, action: #selector(coverToEditMode))
 
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "back", style: .done, target: self, action: #selector(cancel))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .done, target: self, action: #selector(cancel))
 
 
         case .edit:
 
-            self.navigationItem.title = "Edit Pet"
+            self.navigationItem.title = "\(viewModel.name.value)"
 
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(updatePet))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "儲存", style: .done, target: self, action: #selector(updatePet))
 
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancel))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .done, target: self, action: #selector(cancel))
 
         case .creat:
 
-            self.navigationItem.title = "Creat Pet"
+            self.navigationItem.title = "新增毛小孩"
 
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(savePet))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "新增", style: .done, target: self, action: #selector(savePet))
 
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancel))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .done, target: self, action: #selector(cancel))
 
 
         case .none:
@@ -94,22 +95,34 @@ class CreatPetViewController: UIViewController {
 
     }
 
+    @objc func coverToEditMode(){
+        self.presentMode = .edit
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "儲存", style: .done, target: self, action: #selector(self.updatePet))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .done, target: self, action: #selector(self.cancel))
+        petInfoTableView.reloadData()
+    }
+
 
     @objc func updatePet() {
+
+        ProgressHUD.show()
 
         guard let image = petImage.image else { return }
 
         viewModel.upDatePetToDB(image: image) { result in
 
+            ProgressHUD.dismiss()
+
             switch result {
 
             case .success(let message):
-
                 print(message)
-                self.dismiss(animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
+                ProgressHUD.showSuccess(text: "修改成功")
 
             case .failure(let error):
                 print("fetchData.failure\(error)")
+                ProgressHUD.showFailure(text: "修改失敗")
 
             }
 
@@ -152,7 +165,7 @@ class CreatPetViewController: UIViewController {
 
 
     @objc func cancel() {
-
+        self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
 
     }
@@ -173,7 +186,7 @@ extension CreatPetViewController: UITableViewDataSource {
 
         switch fields[indexPath.row] {
 
-        case "Name" :
+        case "名字" :
 
             viewModel.name.bind { name in
 
@@ -181,12 +194,13 @@ extension CreatPetViewController: UITableViewDataSource {
                 cell.textField.text = name
 
             }
+            cell.button.isHidden = true
 
             cell.callback = { text in
                 self.viewModel.updateData(name: text)
             }
 
-        case "Type" :
+        case "品種" :
 
             viewModel.type.bind { type in
 
@@ -194,12 +208,12 @@ extension CreatPetViewController: UITableViewDataSource {
                 cell.textField.text = type
 
             }
-
+            cell.button.isHidden = true
             cell.callback = { text in
                 self.viewModel.updateData(type: text)
             }
 
-        case "Birthday" :
+        case "生日" :
 
             cell.creatDatePicker()
 
@@ -209,12 +223,12 @@ extension CreatPetViewController: UITableViewDataSource {
                 cell.textField.text = birthday
 
             }
-
+            cell.button.isHidden = true
             cell.callback = { text in
                 self.viewModel.updateData(birthday: text)
             }
 
-        case "Weight" :
+        case "體重" :
 
             viewModel.weight.bind { weight in
 
@@ -222,12 +236,12 @@ extension CreatPetViewController: UITableViewDataSource {
                 cell.textField.text = "\(weight)"
 
             }
-
+            cell.button.isHidden = true
             cell.callback = { text in
                 self.viewModel.updateData(weight: text)
             }
 
-        case "WeightUnit" :
+        case "體重單位" :
 
             viewModel.weightUnit.bind { weightUnit in
 
@@ -236,12 +250,12 @@ extension CreatPetViewController: UITableViewDataSource {
                 cell.creatPicker(pickerData: ["kg", "g"])
 
             }
-
+            cell.button.isHidden = true
             cell.callback = { text in
                 self.viewModel.updateData(weightUnit: text)
             }
 
-        case "Gender" :
+        case "性別" :
 
             viewModel.gender.bind { gender in
 
@@ -250,12 +264,12 @@ extension CreatPetViewController: UITableViewDataSource {
                 cell.creatPicker(pickerData: ["boy", "girl"])
 
             }
-
+            cell.button.isHidden = true
             cell.callback = { text in
                 self.viewModel.updateData(gender: text)
             }
 
-        case "ChipId" :
+        case "晶片" :
 
             viewModel.chipId.bind { chipId in
 
@@ -263,25 +277,36 @@ extension CreatPetViewController: UITableViewDataSource {
                 cell.textField.text = chipId
 
             }
-
+            cell.button.isHidden = true
             cell.callback = { text in
                 self.viewModel.updateData(chipId: text)
             }
 
-        case "Note" :
+        case "備註" :
 
             cell.configur(cellStyle: .more, title: fields[indexPath.row] )
-
+            cell.button.isHidden = false
+            cell.textField.isHidden = true
             cell.moreButtonTap = {
 
                 let storyboard = UIStoryboard(name: "Pet", bundle: nil)
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "NoteViewController") as? NoteViewController else { return }
                 self.viewModel.note.bind { text in
-                    controller.note = text
+                    controller.note = self.viewModel.name.value
+                    controller.petsName = (self.viewModel.name.value)
                     controller.callBack = { [weak self] text in
                         self?.viewModel.updateData(note: text)
                     }
                 }
+
+                if self.presentMode == .read {
+                    controller.mode = .read
+                } else if self.presentMode == .edit {
+                    controller.mode = .edit
+                }else {
+                    controller.mode = .creat
+                }
+
 
                 self.navigationController?.show(controller, sender: nil)
 
@@ -289,6 +314,22 @@ extension CreatPetViewController: UITableViewDataSource {
 
         default:
             return cell
+        }
+
+        if presentMode == .read {
+            self.viewModel.petThumbnail.bind { url in
+                self.petImage.isUserInteractionEnabled = false
+                self.petImage.loadImage(url, placeHolder: UIImage())
+            }
+            cell.textField.isUserInteractionEnabled = false
+        } else if presentMode == .edit {
+            self.viewModel.petThumbnail.bind { url in
+                self.petImage.isUserInteractionEnabled = true
+                self.petImage.loadImage(url, placeHolder: UIImage())
+            }
+            cell.textField.isUserInteractionEnabled = true
+        } else {
+            cell.textField.isUserInteractionEnabled = true
         }
 
         return cell

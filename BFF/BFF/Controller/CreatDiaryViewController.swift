@@ -33,7 +33,9 @@ class CreatDiaryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        diaryTextView.text = "寫下毛小孩的日記...."
+        diaryTextView.delegate = self
         selectedPetsCollectionView.delegate = self
         selectedPetsCollectionView.dataSource = self
         let petNib = UINib(nibName: "SelectedPetsCollectionViewCell", bundle: nil)
@@ -46,13 +48,13 @@ class CreatDiaryViewController: UIViewController {
         imageView.isUserInteractionEnabled = true
 
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
-        self.navigationItem.title = "Creat Diary"
+        self.navigationItem.title = "新增毛小孩的日記"
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveDiary))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "儲存", style: .done, target: self, action: #selector(saveDiary))
 
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelEditDiary))
-        self.navigationItem.rightBarButtonItem?.tintColor = .orange
-        self.navigationItem.leftBarButtonItem?.tintColor = .orange
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .done, target: self, action: #selector(cancelEditDiary))
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "main")
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "main")
     }
 
     @objc func saveDiary() {
@@ -144,15 +146,15 @@ extension CreatDiaryViewController: UICollectionViewDelegate {
         if collectionView == selectedPetsCollectionView {
             guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
             selectedPetId = petsData[indexPath.row].petId
-            cell.selectBackground.layer.borderColor = UIColor.orange.cgColor
-            cell.selectBackground.layer.borderWidth = 1
+            cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
+            cell.selectBackground.layer.borderWidth = 3
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView == selectedPetsCollectionView {
             guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-            cell.selectBackground.layer.borderColor = UIColor.orange.cgColor
+            cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
             cell.selectBackground.layer.borderWidth = 0
         }
     }
@@ -170,3 +172,22 @@ extension CreatDiaryViewController: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+extension CreatDiaryViewController: UITextViewDelegate {
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "寫下毛小孩的日記...."
+            textView.textColor = UIColor.lightGray
+        }
+    }
+
+}
+

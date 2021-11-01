@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -24,7 +25,7 @@
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ixt-sb-OKN">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" name="main"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="jWM-tB-sCO"/>
                                         </constraints>
@@ -68,6 +69,11 @@
                                         </cells>
                                     </collectionView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ixt-sb-OKN" secondAttribute="trailing" id="6DK-SK-pTR"/>
+                                    <constraint firstItem="ixt-sb-OKN" firstAttribute="top" secondItem="EgM-nk-hBv" secondAttribute="top" id="hte-Vv-mZB"/>
+                                    <constraint firstItem="ixt-sb-OKN" firstAttribute="leading" secondItem="EgM-nk-hBv" secondAttribute="leading" id="o3g-FW-qIa"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="A43-V5-3wc"/>
@@ -81,6 +87,7 @@
                     </view>
                     <connections>
                         <outlet property="diariesCollectionView" destination="gLt-m0-B3d" id="EQU-aG-WH2"/>
+                        <outlet property="petsTopConstraint" destination="hte-Vv-mZB" id="kPj-H0-ACp"/>
                         <outlet property="selectedPetsCollectionView" destination="ixt-sb-OKN" id="leP-kt-3bG"/>
                     </connections>
                 </viewController>
@@ -96,16 +103,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AddDiary" translatesAutoresizingMaskIntoConstraints="NO" id="Akc-4r-dCJ" userLabel="plus">
+                                <rect key="frame" x="100" y="144" width="214" height="230"/>
+                                <color key="tintColor" name="main"/>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ccg-iP-7oX">
-                                <rect key="frame" x="0.0" y="43.5" width="414" height="415.5"/>
-                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="414"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ccg-iP-7oX" secondAttribute="height" multiplier="1:1" id="MxG-yd-PKN"/>
                                 </constraints>
-                                <imageReference key="image" image="plus.app" catalog="system" symbolScale="large"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="WriteSomeThingHere...." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="i1r-F3-bFx">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="i1r-F3-bFx">
                                 <rect key="frame" x="16" y="598.5" width="382" height="247.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -128,7 +138,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="baF-29-Ezf"/>
                                         </constraints>
-                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5RT-hz-VMg">
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5RT-hz-VMg">
                                             <size key="itemSize" width="68" height="68"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -136,7 +146,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="jcb-62-xWM">
-                                                <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
+                                                <rect key="frame" x="0.0" y="1" width="68" height="68"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="G5i-U4-DVi">
                                                     <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
@@ -155,20 +165,20 @@
                                     </view>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Who's Diary?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exO-Ai-IAD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="誰的日記呢？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exO-Ai-IAD">
                                 <rect key="frame" x="24" y="474" width="366" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="57D-cx-4OY">
-                                <rect key="frame" x="16" y="430" width="101" height="20"/>
+                                <rect key="frame" x="16" y="430" width="81" height="20"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAF-A7-raR">
-                                        <rect key="frame" x="0.0" y="0.0" width="101" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="81" height="20"/>
                                         <color key="tintColor" red="1" green="0.65076244120000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="plus.circle.fill" catalog="system" title="  tagPets"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="  tagPets"/>
                                         <connections>
                                             <action selector="tagPets:" destination="2Yt-Iq-d73" eventType="touchUpInside" id="iYN-b2-ppX"/>
                                         </connections>
@@ -185,10 +195,16 @@
                             <constraint firstItem="ccg-iP-7oX" firstAttribute="bottom" secondItem="57D-cx-4OY" secondAttribute="bottom" constant="8" id="38A-jy-bDR"/>
                             <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="i1r-F3-bFx" secondAttribute="trailing" constant="16" id="5tg-4c-awI"/>
                             <constraint firstItem="ccg-iP-7oX" firstAttribute="trailing" secondItem="ZTR-OX-FlQ" secondAttribute="trailing" id="91g-xn-diP"/>
+                            <constraint firstItem="Akc-4r-dCJ" firstAttribute="centerY" secondItem="ccg-iP-7oX" secondAttribute="centerY" id="9Ek-eK-Zu5"/>
                             <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="exO-Ai-IAD" secondAttribute="trailing" constant="24" id="A85-JA-GZe"/>
                             <constraint firstItem="ccg-iP-7oX" firstAttribute="top" secondItem="ZTR-OX-FlQ" secondAttribute="top" id="BjR-g7-BwN"/>
+                            <constraint firstItem="Akc-4r-dCJ" firstAttribute="centerX" secondItem="ccg-iP-7oX" secondAttribute="centerX" id="DfD-Ja-nuq"/>
+                            <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="Akc-4r-dCJ" secondAttribute="trailing" constant="100" id="HCr-6D-Fw4"/>
+                            <constraint firstItem="Akc-4r-dCJ" firstAttribute="centerX" secondItem="ccg-iP-7oX" secondAttribute="centerX" id="HqP-hv-f6J"/>
                             <constraint firstItem="ccg-iP-7oX" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" id="Kbx-34-jlX"/>
                             <constraint firstItem="exO-Ai-IAD" firstAttribute="top" secondItem="ccg-iP-7oX" secondAttribute="bottom" constant="16" id="N4f-Ub-gkM"/>
+                            <constraint firstItem="Akc-4r-dCJ" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="100" id="NOc-b0-UAh"/>
+                            <constraint firstItem="exO-Ai-IAD" firstAttribute="top" secondItem="Akc-4r-dCJ" secondAttribute="bottom" constant="100" id="QLe-bN-YK3"/>
                             <constraint firstItem="i1r-F3-bFx" firstAttribute="top" secondItem="1ki-En-Kgb" secondAttribute="bottom" constant="16" id="RNl-i2-wul"/>
                             <constraint firstItem="exO-Ai-IAD" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="24" id="Upg-9P-dlI"/>
                             <constraint firstItem="1ki-En-Kgb" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="24" id="WeI-V0-v3R"/>
@@ -196,6 +212,8 @@
                             <constraint firstItem="ZTR-OX-FlQ" firstAttribute="bottom" secondItem="i1r-F3-bFx" secondAttribute="bottom" constant="16" id="dYg-gR-6J5"/>
                             <constraint firstItem="1ki-En-Kgb" firstAttribute="top" secondItem="exO-Ai-IAD" secondAttribute="bottom" constant="16" id="hTT-69-Eyi"/>
                             <constraint firstItem="57D-cx-4OY" firstAttribute="leading" secondItem="ccg-iP-7oX" secondAttribute="leading" constant="16" id="nza-QT-hKO"/>
+                            <constraint firstItem="Akc-4r-dCJ" firstAttribute="top" secondItem="ZTR-OX-FlQ" secondAttribute="top" constant="100" id="puP-vJ-RFP"/>
+                            <constraint firstItem="Akc-4r-dCJ" firstAttribute="centerY" secondItem="ccg-iP-7oX" secondAttribute="centerY" id="wfn-nL-HkE"/>
                             <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="1ki-En-Kgb" secondAttribute="trailing" constant="24" id="wxV-dT-8B3"/>
                         </constraints>
                     </view>
@@ -353,11 +371,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AddDiary" width="161.5" height="135"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="message" catalog="system" width="128" height="113"/>
         <image name="photo.artframe" catalog="system" width="128" height="93"/>
-        <image name="plus.app" catalog="system" width="128" height="114"/>
-        <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
+        <namedColor name="main">
+            <color red="1" green="0.6119999885559082" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -366,9 +386,6 @@
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

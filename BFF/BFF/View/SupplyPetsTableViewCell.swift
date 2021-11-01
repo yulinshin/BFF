@@ -13,9 +13,12 @@ class SupplyPetsTableViewCell: UITableViewCell {
 
     static let identifier = "SupplyPetsTableViewCell"
 
-    var pets = [String]()
+    var selcetedPets = [String]()
+
     var userPetsData = [Pet]() {
-        didSet { collectionView.reloadData() }
+        didSet {
+            print("userPetsData:\(userPetsData.count)")
+            collectionView.reloadData() }
     }
 
     var callback: ((_ pets: [String]) -> Void)?
@@ -54,6 +57,12 @@ extension SupplyPetsTableViewCell: UICollectionViewDelegate, UICollectionViewDat
         let imageStr = userPetsData[indexPath.row].petThumbnail?.url
         let petId = userPetsData[indexPath.row].petId
         cell.congfigure(with: PhotoCellViewlModel(with: imageStr ?? ""), petId: petId)
+        if selcetedPets.contains(petId){
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
+            cell.isSelected = true
+            cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
+            cell.selectBackground.layer.borderWidth = 2
+        }
 
         return cell
     }
@@ -61,14 +70,15 @@ extension SupplyPetsTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-        cell.selectBackground.layer.borderColor = UIColor.orange.cgColor
+        cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
         cell.selectBackground.layer.borderWidth = 2
 
         guard let petId = cell.petId else { return }
-        if pets.contains(petId) {
+        if selcetedPets.contains(petId) {
             return
         } else {
-            pets.append(petId)
+            selcetedPets.append(petId)
+            callback?(selcetedPets)
         }
 
     }
@@ -76,13 +86,14 @@ extension SupplyPetsTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
 
             guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-            cell.selectBackground.layer.borderColor = UIColor.orange.cgColor
+            cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
             cell.selectBackground.layer.borderWidth = 0
 
             guard let petId = cell.petId else { return }
 
-            if let index = pets.firstIndex(of: petId) {
-                pets.remove(at: index)
+            if let index = selcetedPets.firstIndex(of: petId) {
+                selcetedPets.remove(at: index)
+                callback?(selcetedPets)
             }
 
     }

@@ -22,6 +22,8 @@ class FirebaseManager {
 
     func fetchUser(completion: @escaping (Result<User, Error>) -> Void) {
 
+        print("Start fetch UserData ........")
+
         dateBase.collection("Users").document(userId).getDocument { (document, error) in
 
             if let document = document, document.exists {
@@ -39,6 +41,9 @@ class FirebaseManager {
     }
 
     func listenUser(completion: @escaping (Result<User, Error>) -> Void) {
+
+        print("Start listen UserData........")
+
         dateBase.collection("Users").document(userId).addSnapshotListener { documentSnapshot, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -116,12 +121,11 @@ class FirebaseManager {
     func creatNotification(newNotify: Notification) {
 
         let document =   dateBase.collection("Users").document(userId).collection("Notifications").document(newNotify.id)
-
         do {
             try document.setData(from: newNotify)
-            print(document)
+            print("upLoad NotificartionInFo Sucess - \(newNotify) ")
         } catch {
-            print(error)
+            print("upLoad NotificartionInFo Sucess - \(error) ")
         }
     }
 
@@ -158,6 +162,68 @@ class FirebaseManager {
         dateBase.collection("Users").document(userId).updateData(["petsIds": FieldValue.arrayUnion([petId])])
     }
 
+
+    func removePet(petId:String){
+
+        let document =   dateBase.collection("Pets").document(petId)
+
+    document.delete() { error in
+        if let error = error {
+             print("Error removing document: \(error)")
+         } else {
+             print("Document successfully removed!")
+         }
+    }
+
+    }
+
+    func removePetFromUser(petId: String) {
+        dateBase.collection("Users").document(userId).updateData(["petsIds": FieldValue.arrayRemove([petId])])
+        dateBase.collection("Users").document(userId).collection("Notification").whereField("fromPets", arrayContains: petId).getDocuments { querySnapshot, error in
+
+            if let error = error {
+
+            } else {
+                if let querySnapshot = querySnapshot {
+                    querySnapshot.documents.forEach { document in
+                        do {
+                            if let data = try document.data(as: Notification.self) {
+                                if data.fromPets.count == 1 {
+                                    self.dateBase.collection("Users").document(self.userId).collection("Notification").document(document.documentID).delete()
+                                } else {
+                                    // swiftlint:disable:next line_length
+                                    self.dateBase.collection("Users").document(self.userId).collection("Notification").document(document.documentID).updateData(["fromPets": FieldValue.arrayRemove([petId])])
+                                }
+                            }
+                        } catch {
+
+                        }
+                    }
+
+                }
+            }
+        }
+
+        dateBase.collection("Users").document(userId).collection("Supplies").whereField("forPets", arrayContains: petId).getDocuments { querySnapshot, error in
+
+            if let error = error {
+
+            } else {
+                if let querySnapshot = querySnapshot {
+                    querySnapshot.documents.forEach { document in
+                        do {
+                            self.dateBase.collection("Users").document(self.userId).collection("Supplies").document(document.documentID).updateData(["petsIds": FieldValue.arrayRemove([petId])])
+                        } catch {
+
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+
     func fetchPet(petId: String, completion: @escaping (Result<Pet, Error>) -> Void) {
 
         dateBase.collection("Pets").document(petId).getDocument { (document, error) in
@@ -178,7 +244,9 @@ class FirebaseManager {
 
     func fetchPets(petIds: [String], completion: @escaping (Result<[Pet], Error>) -> Void) {
 
-        dateBase.collection("Pets").whereField(Firebase.FieldPath.documentID(), in: petIds).getDocuments { (querySnapshot, error) in
+        guard !petIds.isEmpty else { return }
+
+        dateBase.collection("Pets").whereField("petId", in: petIds).getDocuments { (querySnapshot, error) in
 
             if let error = error {
                 completion(.failure(error))
@@ -205,6 +273,8 @@ class FirebaseManager {
 
     func fetchUserPets(completion: @escaping (Result<[Pet], Error>) -> Void) {
 
+        print("Start fetch UserPetsData ........")
+        
         dateBase.collection("Pets").whereField("userId", isEqualTo: userId).getDocuments { (querySnapshot, error) in
 
             if let error = error {
@@ -230,6 +300,9 @@ class FirebaseManager {
 
 
     func listenUsersPets(completion: @escaping (Result<[Pet], Error>) -> Void) {
+
+        print(" start listen UsersPets........")
+
         dateBase.collection("Pets").whereField("userId", isEqualTo: userId).addSnapshotListener { querySnapshot, error in
             if let error = error {
                 completion(.failure(error))
@@ -294,20 +367,23 @@ class FirebaseManager {
     }
 
 
-    func updatePet(upDatepetId: String, newimage:UIImage, data:Pet) {
+    func updatePet(upDatepetId: String, newimage:UIImage, data:Pet, completion: @escaping (Result<String, Error>) -> Void) {
 
+
+        print("Strat UpDatePet\(upDatepetId)....................")
         if let pic = data.petThumbnail {
             deletePhoto(fileName: pic.fileName, filePath: .petPhotos)
-        } else {
-
         }
         uploadPhoto(image: newimage, filePath: .petPhotos) { result in
+            print("Strat UpDatePetPhoto\(newimage)....................")
                 switch result {
                 case .success(let pic):
+                    print("UpDatePetPhotoSucess\(pic)....................")
+                    print("UpDatePetToDB....................")
                     self.dateBase.collection("Pets").document(upDatepetId).updateData([
                         "petId": data.petId,
                         "name": data.name,
-                        "userId": data.userId,
+                        "userId": self.userId,
                         "healthInfo.birthday": data.healthInfo.birthday,
                         "healthInfo.chipId": data.healthInfo.chipId,
                         "healthInfo.gender": data.healthInfo.chipId,
@@ -318,12 +394,16 @@ class FirebaseManager {
                         "petThumbnail.url": pic.url ,
                         "petThumbnail.fileName": pic.fileName
                     ])
+                    completion(.success("Succes"))
                 case .failure(let error):
+                    completion(.failure(error))
                     print("fetchData.failure\(error)")
 
                 }
             }
         }
+
+
 
 
     func fetchDiaries(completion: @escaping (Result<[Diary], Error>) -> Void) {
@@ -429,11 +509,14 @@ class FirebaseManager {
 
 
     func deletePhoto(fileName: String, filePath: FilePathName){
+        print("Strat DeletePhoto\(fileName)....................")
         let storageRef = storage.reference().child(filePath.rawValue).child(fileName)
         storageRef.delete { error in
           if let error = error {
+              print("DeletePhotoFlsae....................")
               print(error)
           } else {
+              print("DeletePhotoScess....................")
           }
         }
 

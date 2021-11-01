@@ -28,11 +28,12 @@ class SelectedPetsCollectionViewCell: UICollectionViewCell {
     }
 
     override func layoutSubviews() {
-        selectBackground.layer.cornerRadius = selectBackground.frame.height / 2
-        selectBackground.clipsToBounds = true
 
-        image.layer.cornerRadius = image.frame.height / 2
+        selectBackground.layer.cornerRadius = selectBackground.bounds.height / 2
+        selectBackground.clipsToBounds = true
+        image.layer.cornerRadius = image.bounds.height / 2
         image.clipsToBounds = true
+
       }
     
 }

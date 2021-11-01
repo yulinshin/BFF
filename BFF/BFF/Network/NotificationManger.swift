@@ -9,6 +9,8 @@ import Foundation
 
 import UserNotifications
 import FirebaseFirestore
+import CoreData
+
 
 class NotificationManger {
 
@@ -37,40 +39,74 @@ class NotificationManger {
 
     func creatSupplyNotification(supply:Supply){
 
-        let identifier = "Supply_\(supply.supplyId)"
 
-        let notifycation = Notification(content: "Defult", notifyTime: Timestamp.init(date: Date()), fromPets: [String](), title: "Title", type: "Supply", id: "identifier")
+        let identifier = "Supply_\(supply.supplyId)"
+        var title = ""
+        if supply.forPets == [String]() {
+            title = "來自毛小孩的通知"
+        }else{
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+
+                let fetchRequests = NSFetchRequest<PetMO>(entityName: "Pet")
+                fetchRequests.predicate = NSPredicate(format: "petId = %@", supply.forPets[0])
+                let context = appDelegate.persistentContainer.viewContext
+                do {
+                    var pet = try context.fetch(fetchRequests)
+                    title = "來自\(pet[0].name!)的通知"
+                } catch {
+                    fatalError("CodataERROR:\(error)")
+                }
+
+            }
+
+        }
+        // swiftlint:disable:next line_length
+        let notifycation = Notification(content: "\(supply.supplyName)要沒囉～要記得幫我買~~~", notifyTime: Timestamp.init(date: Date()), fromPets: supply.forPets, title: title, type: "Supply", id: identifier)
 
         setUNUserNotification(notifycation, supply, identifier)
-
-        FirebaseManager.shared.creatNotification(newNotify: notifycation)
 
     }
 
 
 
     func setUNUserNotification(_ notifycation: Notification, _ supply: Supply, _ identifier: String) {
+
+        var setNotification = notifycation
+
         let content = UNMutableNotificationContent()
-        content.title = notifycation.title
-        content.body = notifycation.content
+        content.title = setNotification.title
+        content.body = setNotification.content
         content.sound = UNNotificationSound.default
 
         let date = countNotifyDate(fullStock: supply.fullStock, stock: supply.stock, reminderPercent: supply.reminderPercent, perCycleTime: supply.perCycleTime, cycleTime: supply.cycleTime)
 
-        let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        var triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+
+//        triggerDate.hour = triggerDate.hour
+        guard let minute = triggerDate.minute else { return }
+        triggerDate.minute = minute + 1
+//        triggerDate.second = 0
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+
+        guard let notifyTime = Calendar.current.date(from: triggerDate) else { return }
+
+        setNotification.notifyTime = Timestamp(date: notifyTime)
 
         //ForTese 10s
         let testTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
 
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: testTrigger)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
 
         unuPool.add(request, withCompletionHandler: { (error) in
             if let error = error {
 
                 print("addNotificationError: \(error)")
 
+            }else {
+
+                print("addNotificationSurceed: \(setNotification.notifyTime)")
+                FirebaseManager.shared.creatNotification(newNotify: setNotification)
             }
         })
     }
@@ -137,6 +173,7 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
             print("Dismiss Action")
         case UNNotificationDefaultActionIdentifier:
             print("Default")
+            //Seting RefrashNotification
 
         case "SnoozeAction":
             print("Snooze")

@@ -62,13 +62,17 @@ class FillSupplyAlertView: UIView {
         UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.addSubview(parentView)
 
     }
-    
-    
+
+
+    @IBAction func onCliclExit(_ sender: Any) {
+        parentView.removeFromSuperview()
+    }
+
     
     @IBAction func onClickDone(_ sender: Any) {
 
         guard let supplyViewModel = supplyViewModel else { return }
-        parentView.removeFromSuperview()
+
         let stockstr = reFillStockTextField.text ?? "0"
         let stock = Int(stockstr) ?? 0
         supplyViewModel.reminingInventory.value += stock
@@ -85,6 +89,7 @@ class FillSupplyAlertView: UIView {
 
         FirebaseManager.shared.updateSupply(supplyId: supply.supplyId, data: supply)
 
+        parentView.removeFromSuperview()
     }
     
     
