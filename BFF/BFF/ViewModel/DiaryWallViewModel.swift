@@ -31,6 +31,26 @@ class DiaryWallViewModel {
         }
     }
 
+    func listenDiaries(){
+
+        FirebaseManager.shared.listenDiaries { result in
+
+
+            switch result {
+
+            case .success(let diarys):
+
+                self.diarys.value = diarys
+                self.showingDiarys.value = diarys
+
+            case .failure(let error):
+
+                print(error)
+
+            }
+        }
+    }
+
     func fielter(petIds:[String]){
 
         showingDiarys.value = diarys.value.filter({ diary in

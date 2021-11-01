@@ -28,6 +28,7 @@ class SuppliesViewMdoel {
 
                 supplies.forEach { supply in
                     print("Supply: \(supply)")
+
                     let supplyViewModel = SupplyViewModel(from: supply)
                     newViewModels.append(supplyViewModel)
                 }

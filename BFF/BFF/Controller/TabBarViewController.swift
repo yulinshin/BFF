@@ -33,13 +33,13 @@ private enum Tab {
 
         case .message: controller = UIStoryboard.message.instantiateInitialViewController()!
 
-        case .menu: controller = UIStoryboard.menu.instantiateInitialViewController()!
-
+        case .menu:
+            controller = UINavigationController(rootViewController: UIStoryboard.menu.instantiateInitialViewController()!)
         }
 
         controller.tabBarItem = tabBarItem()
 
-        controller.tabBarItem.imageInsets = UIEdgeInsets(top: 6.0, left: 0.0, bottom: -6.0, right: 0.0)
+        controller.tabBarItem.imageInsets = UIEdgeInsets(top: 6.0, left: 0.0, bottom: 0.0, right: 0.0)
 
         return controller
     }
@@ -50,34 +50,34 @@ private enum Tab {
 
         case .home:
             return UITabBarItem(
-                title: nil,
+                title: "首頁",
                 image: UIImage.asset(.MyPetsTab),
                 selectedImage: UIImage.asset(.MyPetsTab)
             )
 
         case .soical:
             return UITabBarItem(
-                title: nil,
+                title: "隨意逛",
                 image: UIImage.asset(.Social),
                 selectedImage: UIImage.asset(.Social)
             )
 
         case .libary:
             return UITabBarItem(
-                title: nil,
+                title: "寵物圖書館",
                 image: UIImage.asset(.LibaryTab),
                 selectedImage: UIImage.asset(.LibaryTab)
             )
 
         case .message:
             return UITabBarItem(
-                title: nil,
+                title: "私訊",
                 image: UIImage.asset(.MessageTab),
                 selectedImage: UIImage.asset(.MessageTab)
             )
         case .menu:
             return UITabBarItem(
-                title: nil,
+                title: "更多",
                 image: UIImage.asset(.MenuTab),
                 selectedImage: UIImage.asset(.MenuTab)
             )
@@ -86,21 +86,48 @@ private enum Tab {
     }
 }
 
+protocol MenuViewControllerDelegate {
+    func didTapMenuButton()
+}
+
+
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
-    private let tabs: [Tab] = [ .soical, .message, .home, .libary, .menu ]
+    private let tabs: [Tab] = [ .soical, .message, .home, .libary]
+
+    var showViewController = [UIViewController]()
+
+    var menuDelegate: MenuViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.tabBar.tintColor = UIColor(named: "main")
 
-        viewControllers = tabs.map({ $0.controller() })
+        showViewController = tabs.map({ $0.controller() })
+
+        viewControllers = showViewController
+
         self.selectedIndex = 2
 
         delegate = self
+
     }
 
     // MARK: - UITabBarControllerDelegate
+
+
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+
+//        if viewController == showViewController[4] {
+//
+//            menuDelegate?.didTapMenuButton()
+//
+//            return false
+//        }
+
+      return true
+    }
+
 
 }
