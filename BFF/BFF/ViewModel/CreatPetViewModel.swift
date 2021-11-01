@@ -7,12 +7,13 @@
 
 import Foundation
 import UIKit
+import Kingfisher
+import AVFoundation
 
 class CreatPetViewModel {
 
     let name = Box("")
     let petThumbnail = Box("")
-    let allergy = Box("")
     let birthday = Box("")
     let chipId = Box("")
     let gender = Box("")
@@ -20,6 +21,27 @@ class CreatPetViewModel {
     let type = Box("")
     let weight = Box(0.0)
     let weightUnit = Box("")
+    let photoFile = Box("")
+    let petId = Box("")
+
+
+    init(from pet: Pet) {
+        name.value = pet.name
+        petThumbnail.value = pet.petThumbnail?.url ?? ""
+        birthday.value = pet.healthInfo.birthday
+        chipId.value = pet.healthInfo.chipId
+        gender.value = pet.healthInfo.gender
+        note.value = pet.healthInfo.note
+        type.value = pet.healthInfo.type
+        weight.value = pet.healthInfo.weight
+        weightUnit.value = pet.healthInfo.weightUnit
+        photoFile.value = pet.petThumbnail?.fileName ?? ""
+        petId.value = pet.petId
+    }
+
+    init() {
+    }
+
 
     func updateData(name: String) {
         self.name.value = name
@@ -27,10 +49,6 @@ class CreatPetViewModel {
 
     func updateData(petThumbnail: String) {
         self.petThumbnail.value = petThumbnail
-    }
-
-    func updateData(allergy: String) {
-        self.allergy.value = allergy
     }
 
     func updateData(birthday: String) {
@@ -91,9 +109,53 @@ class CreatPetViewModel {
     func upDatePetToDB(image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
 
         // swiftlint:disable:next line_length
-            let pet = Pet(petId: "", name: self.name.value, userId: "", healthInfo: HealthInfo(birthday: self.birthday.value, chipId: self.chipId.value, gender: self.gender.value, note: self.note.value, type: self.type.value, weight: self.weight.value, weightUnit: self.weightUnit.value), petThumbnail: Pic(url: "", fileName: ""))
+        var pet = Pet(petId: self.petId.value, name: self.name.value, userId: "", healthInfo: HealthInfo(birthday: self.birthday.value, chipId: self.chipId.value, gender: self.gender.value, note: self.note.value, type: self.type.value, weight: self.weight.value, weightUnit: self.weightUnit.value), petThumbnail: Pic(url: self.petThumbnail.value, fileName: self.photoFile.value))
 
-                FirebaseManager.shared.updatePet(upDatepetId: pet.petId, newimage: image, data: pet)
+        FirebaseManager.shared.updatePet(upDatepetId: pet.petId, newimage: image, data: pet) { result in
+            switch result {
+
+
+            case.success(let message):
+
+                completion(.success(message))
+
+            case.failure(let error):
+
+                completion(.failure(error))
+
+            }
+        }
+
+    }
+
+
+    func deleatePet() {
+
+        FirebaseManager.shared.deletePhoto(fileName: photoFile.value, filePath: .petPhotos)
+
+
+        FirebaseManager.shared.removePet(petId: petId.value)
+
+        FirebaseManager.shared.removePetFromUser(petId: petId.value)
+
+
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+
+            let context = appDelegate.persistentContainer.viewContext
+            do {
+                var requests = try context.fetch(PetMO.fetchRequest())
+                var isContain = false
+                for request in requests {
+                    if request.petId == petId.value {
+                        context.delete(request)
+                    }
+                    appDelegate.saveContext()
+                }
+            } catch {
+                fatalError("\(error)")
+            }
 
         }
+
+    }
 }

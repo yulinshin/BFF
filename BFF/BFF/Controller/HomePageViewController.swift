@@ -37,6 +37,9 @@ class HomePageViewController: UIViewController {
         collectionView.dataSource = self
         self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
 
+        let tabBar = self.tabBarController as? TabBarController
+        tabBar?.menuDelegate = self
+
         viewModel.userDataDidLoad = {
             self.collectionView.reloadData() // 獲得使用者資料後 進行reloadCollectionView
         }
@@ -50,7 +53,9 @@ class HomePageViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        viewModel.fetchUserData()
+        viewModel.fetchUserPetsData()
+        viewModel.fetchNotificationData()
         let barAppearance =  UINavigationBarAppearance()
         barAppearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = barAppearance
@@ -98,6 +103,22 @@ extension HomePageViewController: UICollectionViewDelegate {
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "ListTableViewController") as? ListTableViewController else { return }
 
                 self.navigationController?.show(controller, sender: nil)
+
+
+            case 2: // Health
+
+                let storyboard = UIStoryboard(name: "Pet", bundle: nil)
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "PetsListTableViewController") as? PetsListTableViewController else { return }
+
+                self.navigationController?.show(controller, sender: nil)
+
+            case 3: // Health
+
+                let storyboard = UIStoryboard(name: "Goal", bundle: nil)
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "GoalViewController") as? GoalViewController else { return }
+
+                self.navigationController?.pushViewController(controller, animated: true)
+
 
             default:
                 return
@@ -281,7 +302,7 @@ extension HomePageViewController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(110))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
 
                 let layoutSection = NSCollectionLayoutSection(group: group)
@@ -330,5 +351,17 @@ extension HomePageViewController {
         }
         return layout
     }
+
+}
+
+extension HomePageViewController: MenuViewControllerDelegate{
+    func didTapMenuButton() {
+        var viewController = UIStoryboard.menu.instantiateInitialViewController()!
+        viewController.modalPresentationStyle = .popover
+        self.present(viewController, animated: true)
+
+
+    }
+
 
 }

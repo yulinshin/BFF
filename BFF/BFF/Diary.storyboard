@@ -103,15 +103,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Akc-4r-dCJ" userLabel="plus">
-                                <rect key="frame" x="177" y="221.5" width="60" height="59"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AddDiary" translatesAutoresizingMaskIntoConstraints="NO" id="Akc-4r-dCJ" userLabel="plus">
+                                <rect key="frame" x="100" y="144" width="214" height="230"/>
                                 <color key="tintColor" name="main"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="Gjq-cR-IML"/>
-                                    <constraint firstAttribute="height" constant="60" id="Xhu-hI-6lw"/>
-                                </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ccg-iP-7oX">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ccg-iP-7oX">
                                 <rect key="frame" x="0.0" y="44" width="414" height="414"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -203,9 +199,12 @@
                             <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="exO-Ai-IAD" secondAttribute="trailing" constant="24" id="A85-JA-GZe"/>
                             <constraint firstItem="ccg-iP-7oX" firstAttribute="top" secondItem="ZTR-OX-FlQ" secondAttribute="top" id="BjR-g7-BwN"/>
                             <constraint firstItem="Akc-4r-dCJ" firstAttribute="centerX" secondItem="ccg-iP-7oX" secondAttribute="centerX" id="DfD-Ja-nuq"/>
+                            <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="Akc-4r-dCJ" secondAttribute="trailing" constant="100" id="HCr-6D-Fw4"/>
                             <constraint firstItem="Akc-4r-dCJ" firstAttribute="centerX" secondItem="ccg-iP-7oX" secondAttribute="centerX" id="HqP-hv-f6J"/>
                             <constraint firstItem="ccg-iP-7oX" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" id="Kbx-34-jlX"/>
                             <constraint firstItem="exO-Ai-IAD" firstAttribute="top" secondItem="ccg-iP-7oX" secondAttribute="bottom" constant="16" id="N4f-Ub-gkM"/>
+                            <constraint firstItem="Akc-4r-dCJ" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="100" id="NOc-b0-UAh"/>
+                            <constraint firstItem="exO-Ai-IAD" firstAttribute="top" secondItem="Akc-4r-dCJ" secondAttribute="bottom" constant="100" id="QLe-bN-YK3"/>
                             <constraint firstItem="i1r-F3-bFx" firstAttribute="top" secondItem="1ki-En-Kgb" secondAttribute="bottom" constant="16" id="RNl-i2-wul"/>
                             <constraint firstItem="exO-Ai-IAD" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="24" id="Upg-9P-dlI"/>
                             <constraint firstItem="1ki-En-Kgb" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="24" id="WeI-V0-v3R"/>
@@ -213,6 +212,7 @@
                             <constraint firstItem="ZTR-OX-FlQ" firstAttribute="bottom" secondItem="i1r-F3-bFx" secondAttribute="bottom" constant="16" id="dYg-gR-6J5"/>
                             <constraint firstItem="1ki-En-Kgb" firstAttribute="top" secondItem="exO-Ai-IAD" secondAttribute="bottom" constant="16" id="hTT-69-Eyi"/>
                             <constraint firstItem="57D-cx-4OY" firstAttribute="leading" secondItem="ccg-iP-7oX" secondAttribute="leading" constant="16" id="nza-QT-hKO"/>
+                            <constraint firstItem="Akc-4r-dCJ" firstAttribute="top" secondItem="ZTR-OX-FlQ" secondAttribute="top" constant="100" id="puP-vJ-RFP"/>
                             <constraint firstItem="Akc-4r-dCJ" firstAttribute="centerY" secondItem="ccg-iP-7oX" secondAttribute="centerY" id="wfn-nL-HkE"/>
                             <constraint firstItem="ZTR-OX-FlQ" firstAttribute="trailing" secondItem="1ki-En-Kgb" secondAttribute="trailing" constant="24" id="wxV-dT-8B3"/>
                         </constraints>
@@ -371,10 +371,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AddDiary" width="161.5" height="135"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="message" catalog="system" width="128" height="113"/>
         <image name="photo.artframe" catalog="system" width="128" height="93"/>
-        <image name="plus.circle" catalog="system" width="128" height="121"/>
         <namedColor name="main">
             <color red="1" green="0.6119999885559082" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

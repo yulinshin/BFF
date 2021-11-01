@@ -239,7 +239,11 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ork-0Y-Nmk">
                                                     <rect key="frame" x="16" y="16" width="319" height="327"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="123" translatesAutoresizingMaskIntoConstraints="NO" id="dDu-QH-w9n">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AddPet" translatesAutoresizingMaskIntoConstraints="NO" id="wW5-HY-t0Y">
+                                                            <rect key="frame" x="100" y="100" width="119" height="127"/>
+                                                            <color key="tintColor" name="main"/>
+                                                        </imageView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dDu-QH-w9n">
                                                             <rect key="frame" x="0.0" y="0.0" width="319" height="327"/>
                                                             <color key="tintColor" red="1" green="0.65076244120000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </imageView>
@@ -247,9 +251,13 @@
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="dDu-QH-w9n" secondAttribute="trailing" id="1sg-69-XKP"/>
+                                                        <constraint firstItem="wW5-HY-t0Y" firstAttribute="leading" secondItem="ork-0Y-Nmk" secondAttribute="leading" constant="100" id="6Yb-WO-Dxy"/>
+                                                        <constraint firstItem="wW5-HY-t0Y" firstAttribute="top" secondItem="ork-0Y-Nmk" secondAttribute="top" constant="100" id="DpG-BG-28h"/>
                                                         <constraint firstItem="dDu-QH-w9n" firstAttribute="top" secondItem="ork-0Y-Nmk" secondAttribute="top" id="Qbm-vg-cUY"/>
+                                                        <constraint firstAttribute="bottom" secondItem="wW5-HY-t0Y" secondAttribute="bottom" constant="100" id="VDz-dn-lyC"/>
                                                         <constraint firstItem="dDu-QH-w9n" firstAttribute="leading" secondItem="ork-0Y-Nmk" secondAttribute="leading" id="b4U-Kf-qww"/>
                                                         <constraint firstAttribute="bottom" secondItem="dDu-QH-w9n" secondAttribute="bottom" id="eNh-Tr-qp1"/>
+                                                        <constraint firstAttribute="trailing" secondItem="wW5-HY-t0Y" secondAttribute="trailing" constant="100" id="o2p-2D-i0X"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -299,7 +307,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="123" width="720" height="1280"/>
+        <image name="AddPet" width="78" height="120"/>
         <image name="MyPetsTab" width="31" height="28"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>

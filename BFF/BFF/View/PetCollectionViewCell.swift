@@ -30,7 +30,8 @@ class PetCollectionViewCell: UICollectionViewCell {
     }
 
     func setupBlankDiaryBook() {
-        petImageView.image = UIImage(systemName: "plus.app")
+
+        petImageView.image = UIImage(named: "")
         petImageView.contentMode = .scaleAspectFit
         petImageView.layer.cornerRadius = 20
 

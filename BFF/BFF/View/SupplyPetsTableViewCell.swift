@@ -60,6 +60,8 @@ extension SupplyPetsTableViewCell: UICollectionViewDelegate, UICollectionViewDat
         if selcetedPets.contains(petId){
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
             cell.isSelected = true
+            cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
+            cell.selectBackground.layer.borderWidth = 2
         }
 
         return cell
