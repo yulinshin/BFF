@@ -16,5 +16,6 @@ target 'BFF' do
  pod 'JGProgressHUD'
  pod 'Firebase/Core'
  pod 'Firebase/Messaging'
+ pod 'lottie-ios'
 
 end
