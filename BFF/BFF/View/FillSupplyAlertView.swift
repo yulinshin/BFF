@@ -2,6 +2,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class FillSupplyAlertView: UIView {
     
@@ -85,9 +86,9 @@ class FillSupplyAlertView: UIView {
             NotificationManger.shared.creatSupplyNotification(supply: supply )
         }
         // swiftlint:disable:next line_length
-        let supply = Supply(color: supplyViewModel.iconColor.value, cycleTime: supplyViewModel.cycleTime.value, forPets: supplyViewModel.supplyUseByPets.value, fullStock: supplyViewModel.maxInventory.value, iconImage: supplyViewModel.supplyIconImage.value, isReminder: supplyViewModel.isNeedToRemind.value, perCycleTime: supplyViewModel.cycleDosage.value, reminderPercent: supplyViewModel.remindPercentage.value, stock: supplyViewModel.reminingInventory.value, supplyId: supplyViewModel.supplyId.value, supplyName: supplyViewModel.supplyName.value, unit: supplyViewModel.supplyUnit.value)
-
-        FirebaseManager.shared.updateSupply(supplyId: supply.supplyId, data: supply)
+        let supply = Supply(color: supplyViewModel.iconColor.value, cycleTime: supplyViewModel.cycleTime.value, forPets: supplyViewModel.supplyUseByPets.value, fullStock: supplyViewModel.maxInventory.value, iconImage: supplyViewModel.supplyIconImage.value, isReminder: supplyViewModel.isNeedToRemind.value, perCycleTime: supplyViewModel.cycleDosage.value, reminderPercent: supplyViewModel.remindPercentage.value, stock: supplyViewModel.reminingInventory.value, supplyId: supplyViewModel.supplyId.value, supplyName: supplyViewModel.supplyName.value, unit: supplyViewModel.supplyUnit.value, lastUpdate: Timestamp.init(date: Date()))
+        
+        supplyViewModel.updateToDataBase()
 
         parentView.removeFromSuperview()
     }
