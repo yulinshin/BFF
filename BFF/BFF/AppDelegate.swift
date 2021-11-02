@@ -11,6 +11,8 @@ import IQKeyboardManagerSwift
 import Firebase
 import FirebaseMessaging
 import CoreData
+import GoogleMaps
+import GooglePlaces
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,12 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // delegate for receiving or delivering notification
     let notificationDelegate = NotificationDelegate()
 
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
         FirebaseApp.configure()
         IQKeyboardManager.shared.enable = true
         Messaging.messaging().delegate = self
+        GMSServices.provideAPIKey("AIzaSyCuIEN8YUXa-OS0S5L2nOW_O__u4NfzfdY")
+        GMSPlacesClient.provideAPIKey("AIzaSyCuIEN8YUXa-OS0S5L2nOW_O__u4NfzfdY")
 
         center.delegate = notificationDelegate
 
