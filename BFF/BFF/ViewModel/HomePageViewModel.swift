@@ -57,17 +57,22 @@ class HomePageViewModel: NSObject {
                             let userMo = UserMO(context:
                                                     appDelegate.persistentContainer.viewContext)
                             userMo.name = user.userName
+                            print("HEEEEEEEE\(user.userName)")
                             userMo.petsIds = user.petsIds
                             userMo.userId = user.userId
 
                             appDelegate.saveContext()
+
                         } else {
                         for request in requests {
 
                             if request.userId == user.userId {
                                 request.name = user.userName
                                 request.petsIds = user.petsIds
-
+                            } else {
+                                request.userId = user.userId
+                                request.name = user.userName
+                                request.petsIds = user.petsIds
                             }
                             appDelegate.saveContext()
                         }

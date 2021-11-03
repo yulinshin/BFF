@@ -47,6 +47,7 @@
 		62892FDE27320D4C001A7B32 /* LibaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62892FDD27320D4C001A7B32 /* LibaryViewController.swift */; };
 		62892FE027321046001A7B32 /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62892FDF27321046001A7B32 /* BookCollectionViewCell.swift */; };
 		62892FE2273210F3001A7B32 /* bookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62892FE1273210F3001A7B32 /* bookViewModel.swift */; };
+		62892FE42732376D001A7B32 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62892FE32732376D001A7B32 /* SignInViewController.swift */; };
 		628B4856272F01C700F20CC7 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628B4855272F01C700F20CC7 /* SideMenuViewController.swift */; };
 		62930BDB272C2DCA00BC1908 /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 62930BD9272C2DCA00BC1908 /* UserData.xcdatamodeld */; };
 		62930C17272D0C6800BC1908 /* PicMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62930C11272D0C6800BC1908 /* PicMO+CoreDataClass.swift */; };
@@ -152,6 +153,7 @@
 		62892FDD27320D4C001A7B32 /* LibaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibaryViewController.swift; sourceTree = "<group>"; };
 		62892FDF27321046001A7B32 /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
 		62892FE1273210F3001A7B32 /* bookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bookViewModel.swift; sourceTree = "<group>"; };
+		62892FE32732376D001A7B32 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		628B4855272F01C700F20CC7 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		62930BDA272C2DCA00BC1908 /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
 		62930C11272D0C6800BC1908 /* PicMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PicMO+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				62C6E5E7272F93750097AEE1 /* SocialViewController.swift */,
 				624D5C482730CD7D00602125 /* MapViewController.swift */,
 				62892FDD27320D4C001A7B32 /* LibaryViewController.swift */,
+				62892FE32732376D001A7B32 /* SignInViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -634,6 +637,7 @@
 				62C38D8F272EE631008DEE8B /* GoalViewController.swift in Sources */,
 				62603AD227278BDC00467E2D /* SupplyDetailViewController.swift in Sources */,
 				62BA0101272E7DF400A19478 /* PetHealthCardListTableViewCell.swift in Sources */,
+				62892FE42732376D001A7B32 /* SignInViewController.swift in Sources */,
 				62979258271E64D800B68E86 /* Diary.swift in Sources */,
 				6249617D2720F16E0079B244 /* HomePageViewModel.swift in Sources */,
 				624D5C492730CD7D00602125 /* MapViewController.swift in Sources */,
