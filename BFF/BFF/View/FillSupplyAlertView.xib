@@ -79,7 +79,7 @@
                                     </constraints>
                                     <color key="tintColor" name="main"/>
                                     <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system" title=" "/>
                                     <connections>
                                         <action selector="onCliclExit:" destination="-1" eventType="touchUpInside" id="VZr-Me-Jf1"/>
                                     </connections>

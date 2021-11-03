@@ -19,98 +19,13 @@
                         <color key="tintColor" red="1" green="0.65076244120000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="selectedImageTintColor" systemColor="systemGray2Color"/>
                     </tabBar>
-                    <connections>
-                        <segue destination="QTi-w0-KSE" kind="relationship" relationship="viewControllers" id="Tvh-hL-B0e"/>
-                        <segue destination="XEy-OA-Xi5" kind="relationship" relationship="viewControllers" id="Q6S-ty-b0D"/>
-                        <segue destination="0mV-9v-56Y" kind="relationship" relationship="viewControllers" id="1Kh-nE-ZlB"/>
-                        <segue destination="ebg-Ea-LRp" kind="relationship" relationship="viewControllers" id="Mnx-uD-4pc"/>
-                        <segue destination="XZn-OM-uvO" kind="relationship" relationship="viewControllers" id="K6D-ou-qzG"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VnE-QI-X7C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-32" y="117"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="dIa-km-nPA">
-            <objects>
-                <navigationController storyboardIdentifier="UINavigationController-Wdu-es-WhP" automaticallyAdjustsScrollViewInsets="NO" id="QTi-w0-KSE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Social" id="zHD-pg-cBk"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6DA-UU-F5k">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Qu-Oa-ITl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="865" y="269"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="rR3-tR-MrW">
-            <objects>
-                <navigationController storyboardIdentifier="UINavigationController-xjG-Ro-zgT" automaticallyAdjustsScrollViewInsets="NO" id="ebg-Ea-LRp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="LibaryTab" id="kpk-pc-tIq"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gq5-WS-W7f">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f9L-3e-rnl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="854" y="1065"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Xx3-XH-KEA">
-            <objects>
-                <navigationController storyboardIdentifier="UINavigationController-4bQ-oi-pq0" automaticallyAdjustsScrollViewInsets="NO" id="XEy-OA-Xi5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="MessageTab" id="jY3-Pf-zsN"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ywh-By-TcG">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LMK-3Y-hsx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-57" y="1065"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="QUg-Gg-ryG">
-            <objects>
-                <navigationController storyboardIdentifier="UINavigationController-Mfp-Cs-8Wk" automaticallyAdjustsScrollViewInsets="NO" id="XZn-OM-uvO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="MenuTabTab" id="I6Q-PT-rUY"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vDf-7u-pOV">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NjF-30-0IW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-901" y="1065"/>
-        </scene>
-        <!--Home-->
-        <scene sceneID="AmZ-PU-gkR">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="Home" storyboardName="Home" id="0mV-9v-56Y" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="baK-ae-vDx"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sR2-Ld-7jE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="854" y="-481"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="LibaryTab" width="31" height="28"/>
-        <image name="MenuTabTab" width="31" height="28"/>
-        <image name="MessageTab" width="31" height="28"/>
-        <image name="Social" width="31" height="28"/>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

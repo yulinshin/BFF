@@ -22,7 +22,7 @@ class HomePageViewModel: NSObject {
     override init() {
         super.init()
         self.fetchUserData()
-        self.listenNotificationData()
+        self.fetchNotificationData()
     }
 
     deinit {
@@ -150,6 +150,40 @@ class HomePageViewModel: NSObject {
             }
 
         }
+    }
+
+    func fetchNotificationData() {
+
+        FirebaseManager.shared.fetchNotifications { result in
+
+            switch result {
+
+            case .success(let notifications):
+
+                var showNotifications = [Notification]()
+                notifications.forEach { notification in
+                    if notification.notifyTime.dateValue() < Date(){
+                        print("Notify:\(notification.notifyTime.dateValue())")
+                        print("now:\(Date())")
+                        showNotifications.append(notification)
+                    }
+                }
+
+                showNotifications = showNotifications.sorted(by:{ $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
+
+                self.notifiactions.value = showNotifications
+
+                self.userNotifiactionsDidChange?()
+                print("upDated NotificationData at HomeVM")
+
+            case .failure(let error):
+
+                print("Can't Get Notifications Data \(error)")
+
+            }
+
+        }
+
     }
 
     func listenNotificationData() {

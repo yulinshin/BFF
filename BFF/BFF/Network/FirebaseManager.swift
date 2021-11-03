@@ -325,6 +325,33 @@ class FirebaseManager {
         }
     }
 
+
+    func listenPets(completion: @escaping (Result<[Pet], Error>) -> Void) {
+
+        print(" start listen UsersPets........")
+
+        dateBase.collection("Pets").addSnapshotListener { querySnapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                if let querySnapshot = querySnapshot {
+                    var pets = [Pet]()
+                    querySnapshot.documents.forEach { document in
+                        do {
+                            if let data = try document.data(as: Pet.self) {
+                                print(data)
+                                pets.append(data)
+                            }
+                        } catch {
+                            completion(.failure(error))
+                        }
+                    }
+                    completion(.success(pets))
+                }
+            }
+        }
+    }
+
     func fetchPets (completion: @escaping (Result<[Pet], Error>) -> Void) {
 
         dateBase.collection("Pets").whereField("userId", isEqualTo: userId).getDocuments { (querySnapshot, error) in
@@ -403,6 +430,35 @@ class FirebaseManager {
             }
         }
 
+
+    func listenDiaries(completion: @escaping (Result<[Diary], Error>) -> Void) {
+
+        dateBase.collection("Diaries").addSnapshotListener { (querySnapshot, error) in
+
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                var diaries = [Diary]()
+                for doucment in querySnapshot!.documents {
+
+                    do {
+                        if let diary = try doucment.data(as: Diary.self, decoder: Firestore.Decoder()) {
+                            diaries.append(diary)
+                        }
+
+                    } catch {
+
+                        completion(.failure(error))
+                    }
+                }
+
+                let sortDiary = diaries.sorted { firstDiary, secondDiary in
+                    return firstDiary.createdTime.dateValue() > secondDiary.createdTime.dateValue()
+                }
+                completion(.success(sortDiary))
+            }
+        }
+    }
 
 
 
@@ -566,7 +622,20 @@ class FirebaseManager {
                 for document in querySnapshot!.documents {
 
                     do {
-                        if let supply = try document.data(as: Supply.self, decoder: Firestore.Decoder()) {
+                        if var supply = try document.data(as: Supply.self, decoder: Firestore.Decoder()) {
+
+
+                            let daysBetweenDate = supply.lastUpdate.dateValue().daysBetweenDate(toDate: Date())
+                            if daysBetweenDate > 0 {
+                                let comsume = supply.perCycleTime * daysBetweenDate
+                                var newStock = supply.stock - comsume
+                                supply.stock = newStock
+                                FirebaseManager.shared.updateSupply(supplyId: supply.supplyId, data: supply)
+                                if supply.isReminder == true {
+                                    NotificationManger.shared.creatSupplyNotification(supply: supply)
+                                }
+
+                            }
                             supplies.append(supply)
                         }
 
@@ -616,6 +685,7 @@ class FirebaseManager {
             "supplyId": data.supplyId,
             "supplyName": data.supplyName,
             "unit": data.unit,
+            "lastUpdate": Timestamp.init(date: Date()) ,
         ])
 
         }

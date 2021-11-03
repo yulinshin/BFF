@@ -62,6 +62,7 @@ class NotificationManger {
         }
         // swiftlint:disable:next line_length
         let notifycation = Notification(content: "\(supply.supplyName)要沒囉～要記得幫我買~~~", notifyTime: Timestamp.init(date: Date()), fromPets: supply.forPets, title: title, type: "Supply", id: identifier)
+        print("SetNotification: \(notifycation.notifyTime.dateValue())")
 
         setUNUserNotification(notifycation, supply, identifier)
 
@@ -79,19 +80,23 @@ class NotificationManger {
         content.sound = UNNotificationSound.default
 
         let date = countNotifyDate(fullStock: supply.fullStock, stock: supply.stock, reminderPercent: supply.reminderPercent, perCycleTime: supply.perCycleTime, cycleTime: supply.cycleTime)
-
         var triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
 
+        print("countDate: \(triggerDate)")
+
 //        triggerDate.hour = triggerDate.hour
-        guard let minute = triggerDate.minute else { return }
-        triggerDate.minute = minute + 1
+        guard let second = triggerDate.second else { return }
+        triggerDate.second = second + 10
 //        triggerDate.second = 0
+
+        print("TestDate: \(triggerDate)")
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
 
         guard let notifyTime = Calendar.current.date(from: triggerDate) else { return }
 
         setNotification.notifyTime = Timestamp(date: notifyTime)
+        print("SetedNotification: \(setNotification.notifyTime.dateValue())")
 
         //ForTese 10s
         let testTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
@@ -122,7 +127,11 @@ class NotificationManger {
             return Calendar.current.date(byAdding: .second, value: 10, to: Date()) ?? Date()
         }
 
-        let notifyDateFromNow = (stockDo - (maxStockDo * (reminderPercent/100.0))) / cycleComuseDo
+        var notifyDateFromNow = (stockDo - (maxStockDo * (reminderPercent/100.0))) / cycleComuseDo
+
+        if notifyDateFromNow < 0 {
+            notifyDateFromNow = 0
+        }
 
         switch cycleTime {
 
