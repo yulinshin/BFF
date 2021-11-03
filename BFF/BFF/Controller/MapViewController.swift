@@ -17,7 +17,7 @@ struct Location {
     var adderass: String
 }
 
-class LibraryViewController: UIViewController, CLLocationManagerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate {
 
 
     @IBOutlet weak var mapVIew: GMSMapView!
@@ -244,7 +244,7 @@ class LibraryViewController: UIViewController, CLLocationManagerDelegate {
  }
  */
 
-extension LibraryViewController: GMSMapViewDelegate, MapMarkerDelegate {
+extension MapViewController: GMSMapViewDelegate, MapMarkerDelegate {
 
     func didTapInfoButton(data: Location) {
 

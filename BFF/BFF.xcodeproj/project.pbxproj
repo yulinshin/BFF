@@ -19,7 +19,7 @@
 		624C8E082720473F00646C71 /* CreatPetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C8E072720473F00646C71 /* CreatPetViewModel.swift */; };
 		624CFD742729389B00D77CCA /* NotificationManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624CFD732729389B00D77CCA /* NotificationManger.swift */; };
 		624D5C472730CD4A00602125 /* Libary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624D5C462730CD4A00602125 /* Libary.storyboard */; };
-		624D5C492730CD7D00602125 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624D5C482730CD7D00602125 /* LibraryViewController.swift */; };
+		624D5C492730CD7D00602125 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624D5C482730CD7D00602125 /* MapViewController.swift */; };
 		624D5C4B2731321700602125 /* MapMarkerWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 624D5C4A2731321700602125 /* MapMarkerWindowView.xib */; };
 		624D5C4D273132D900602125 /* MapMarkerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624D5C4C273132D900602125 /* MapMarkerWindow.swift */; };
 		62540417271F187D004F49DC /* DetialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62540416271F187D004F49DC /* DetialViewModel.swift */; };
@@ -44,6 +44,9 @@
 		6285C79B271DD519006E13EC /* DairyPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6285C799271DD519006E13EC /* DairyPhotoCell.xib */; };
 		6285C79E271DE49A006E13EC /* SelectedPetsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6285C79C271DE49A006E13EC /* SelectedPetsCollectionViewCell.swift */; };
 		6285C79F271DE49A006E13EC /* SelectedPetsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6285C79D271DE49A006E13EC /* SelectedPetsCollectionViewCell.xib */; };
+		62892FDE27320D4C001A7B32 /* LibaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62892FDD27320D4C001A7B32 /* LibaryViewController.swift */; };
+		62892FE027321046001A7B32 /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62892FDF27321046001A7B32 /* BookCollectionViewCell.swift */; };
+		62892FE2273210F3001A7B32 /* bookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62892FE1273210F3001A7B32 /* bookViewModel.swift */; };
 		628B4856272F01C700F20CC7 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628B4855272F01C700F20CC7 /* SideMenuViewController.swift */; };
 		62930BDB272C2DCA00BC1908 /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 62930BD9272C2DCA00BC1908 /* UserData.xcdatamodeld */; };
 		62930C17272D0C6800BC1908 /* PicMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62930C11272D0C6800BC1908 /* PicMO+CoreDataClass.swift */; };
@@ -120,7 +123,7 @@
 		624C8E072720473F00646C71 /* CreatPetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatPetViewModel.swift; sourceTree = "<group>"; };
 		624CFD732729389B00D77CCA /* NotificationManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManger.swift; sourceTree = "<group>"; };
 		624D5C462730CD4A00602125 /* Libary.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Libary.storyboard; sourceTree = "<group>"; };
-		624D5C482730CD7D00602125 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
+		624D5C482730CD7D00602125 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		624D5C4A2731321700602125 /* MapMarkerWindowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapMarkerWindowView.xib; sourceTree = "<group>"; };
 		624D5C4C273132D900602125 /* MapMarkerWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerWindow.swift; sourceTree = "<group>"; };
 		62540416271F187D004F49DC /* DetialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetialViewModel.swift; sourceTree = "<group>"; };
@@ -146,6 +149,9 @@
 		6285C799271DD519006E13EC /* DairyPhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DairyPhotoCell.xib; sourceTree = "<group>"; };
 		6285C79C271DE49A006E13EC /* SelectedPetsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPetsCollectionViewCell.swift; sourceTree = "<group>"; };
 		6285C79D271DE49A006E13EC /* SelectedPetsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedPetsCollectionViewCell.xib; sourceTree = "<group>"; };
+		62892FDD27320D4C001A7B32 /* LibaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibaryViewController.swift; sourceTree = "<group>"; };
+		62892FDF27321046001A7B32 /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
+		62892FE1273210F3001A7B32 /* bookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bookViewModel.swift; sourceTree = "<group>"; };
 		628B4855272F01C700F20CC7 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		62930BDA272C2DCA00BC1908 /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
 		62930C11272D0C6800BC1908 /* PicMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PicMO+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -238,6 +244,7 @@
 				62D454BF27268522009DF0FF /* SupplyCellViewMdoel.swift */,
 				62D454C127268CB6009DF0FF /* SuppliesViewMdoel.swift */,
 				62BA0102272E7EBE00A19478 /* PetHealthCellViewModel.swift */,
+				62892FE1273210F3001A7B32 /* bookViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -324,7 +331,8 @@
 				62C38D8E272EE631008DEE8B /* GoalViewController.swift */,
 				628B4855272F01C700F20CC7 /* SideMenuViewController.swift */,
 				62C6E5E7272F93750097AEE1 /* SocialViewController.swift */,
-				624D5C482730CD7D00602125 /* LibraryViewController.swift */,
+				624D5C482730CD7D00602125 /* MapViewController.swift */,
+				62892FDD27320D4C001A7B32 /* LibaryViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -376,6 +384,7 @@
 				62C38D96272EEAB4008DEE8B /* GoalCollectionViewCellD.swift */,
 				624D5C4A2731321700602125 /* MapMarkerWindowView.xib */,
 				624D5C4C273132D900602125 /* MapMarkerWindow.swift */,
+				62892FDF27321046001A7B32 /* BookCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -614,6 +623,7 @@
 				62930C18272D0C6800BC1908 /* PicMO+CoreDataProperties.swift in Sources */,
 				62603AD827278D9F00467E2D /* SupplyInventoryTableViewCell.swift in Sources */,
 				62930C1C272D0E2B00BC1908 /* PetMO+CoreDataProperties.swift in Sources */,
+				62892FE027321046001A7B32 /* BookCollectionViewCell.swift in Sources */,
 				623340D8271C3B19002B2429 /* HomePageViewController.swift in Sources */,
 				62930BDB272C2DCA00BC1908 /* UserData.xcdatamodeld in Sources */,
 				62D454C027268522009DF0FF /* SupplyCellViewMdoel.swift in Sources */,
@@ -626,13 +636,15 @@
 				62BA0101272E7DF400A19478 /* PetHealthCardListTableViewCell.swift in Sources */,
 				62979258271E64D800B68E86 /* Diary.swift in Sources */,
 				6249617D2720F16E0079B244 /* HomePageViewModel.swift in Sources */,
-				624D5C492730CD7D00602125 /* LibraryViewController.swift in Sources */,
+				624D5C492730CD7D00602125 /* MapViewController.swift in Sources */,
+				62892FE2273210F3001A7B32 /* bookViewModel.swift in Sources */,
 				6254041B271F219B004F49DC /* DiaryWallViewModel.swift in Sources */,
 				62EF088E2723BCAF006C7D62 /* File.swift in Sources */,
 				623340D4271C3B19002B2429 /* AppDelegate.swift in Sources */,
 				623340D6271C3B19002B2429 /* SceneDelegate.swift in Sources */,
 				62930C17272D0C6800BC1908 /* PicMO+CoreDataClass.swift in Sources */,
 				62603ADE27278E1E00467E2D /* SupplyReminderCellTableViewCell.swift in Sources */,
+				62892FDE27320D4C001A7B32 /* LibaryViewController.swift in Sources */,
 				624C8E082720473F00646C71 /* CreatPetViewModel.swift in Sources */,
 				6297925C271E947C00B68E86 /* CreatDiaryViewController.swift in Sources */,
 				629FF5C3271D5F4200C7C94A /* Pet.swift in Sources */,
