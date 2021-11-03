@@ -33,6 +33,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var infoWindow = MapMarkerWindow()
     var locationMarker: GMSMarker = GMSMarker()
 
+    var gcpKey = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,8 +56,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
 
-        // Creates a marker in the center of the map.
-
+        getGCPKey()
         getLocation()
         getSpecialLocation()
     }
@@ -70,12 +71,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
     }
 
+    func getGCPKey(){
+        guard let path = Bundle.main.path(forResource: "Keys", ofType: "plist") else { return }
+        let url = URL(fileURLWithPath: path)
+        guard let data = try? Data(contentsOf: url) else { return }
+        guard let plist = try? PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as? [[String:String]] else { return }
+        guard let key = plist[0]["GCP_KEY"] else { return }
+        self.gcpKey = key
+
+    }
+
     func getLocation() {
 
         var components = URLComponents(string: "https://sheets.googleapis.com/v4/spreadsheets/1ZfgSLKt-SW73SnaTXZAsslwmdJPEW3JlZMS7NxXJ-kQ/values/Hospital?")!
-        let key = URLQueryItem(name: "key", value: "AIzaSyCuIEN8YUXa-OS0S5L2nOW_O__u4NfzfdY") // use your key
+        let key = URLQueryItem(name: "key", value: gcpKey) // use your key
         let address = URLQueryItem(name: "majorDimension", value: "ROWS")
         components.queryItems = [key, address]
+        print( " KEY = ===== = = = == = \(gcpKey)")
 
         let task = URLSession.shared.dataTask(with: components.url!) { data, response, error in
             guard let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, error == nil else {
@@ -112,7 +124,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func getSpecialLocation() {
 
         var components = URLComponents(string: "https://sheets.googleapis.com/v4/spreadsheets/1ZfgSLKt-SW73SnaTXZAsslwmdJPEW3JlZMS7NxXJ-kQ/values/Hospital_special?")!
-        let key = URLQueryItem(name: "key", value: "AIzaSyCuIEN8YUXa-OS0S5L2nOW_O__u4NfzfdY") // use your key
+        let key = URLQueryItem(name: "key", value: gcpKey) // use your key
         let address = URLQueryItem(name: "majorDimension", value: "ROWS")
         components.queryItems = [key, address]
 

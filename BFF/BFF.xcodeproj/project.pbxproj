@@ -48,6 +48,7 @@
 		62892FE027321046001A7B32 /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62892FDF27321046001A7B32 /* BookCollectionViewCell.swift */; };
 		62892FE2273210F3001A7B32 /* bookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62892FE1273210F3001A7B32 /* bookViewModel.swift */; };
 		62892FE42732376D001A7B32 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62892FE32732376D001A7B32 /* SignInViewController.swift */; };
+		62892FEB2732B1A4001A7B32 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62892FEA2732B1A4001A7B32 /* Keys.plist */; };
 		628B4856272F01C700F20CC7 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628B4855272F01C700F20CC7 /* SideMenuViewController.swift */; };
 		62930BDB272C2DCA00BC1908 /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 62930BD9272C2DCA00BC1908 /* UserData.xcdatamodeld */; };
 		62930C17272D0C6800BC1908 /* PicMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62930C11272D0C6800BC1908 /* PicMO+CoreDataClass.swift */; };
@@ -154,6 +155,7 @@
 		62892FDF27321046001A7B32 /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
 		62892FE1273210F3001A7B32 /* bookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bookViewModel.swift; sourceTree = "<group>"; };
 		62892FE32732376D001A7B32 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		62892FEA2732B1A4001A7B32 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		628B4855272F01C700F20CC7 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		62930BDA272C2DCA00BC1908 /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
 		62930C11272D0C6800BC1908 /* PicMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PicMO+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				629FF5BF271D5DDD00C7C94A /* Model */,
 				629FF5B2271D3C2900C7C94A /* View */,
 				623340E8271C3F82002B2429 /* GoogleService-Info.plist */,
+				62892FEA2732B1A4001A7B32 /* Keys.plist */,
 				623340D3271C3B19002B2429 /* AppDelegate.swift */,
 				623340D5271C3B19002B2429 /* SceneDelegate.swift */,
 				62979259271E8A8800B68E86 /* Diary.storyboard */,
@@ -504,6 +507,7 @@
 			files = (
 				62603AE227279A4600467E2D /* CubeCollectionViewCell.xib in Resources */,
 				6297925A271E8A8800B68E86 /* Diary.storyboard in Resources */,
+				62892FEB2732B1A4001A7B32 /* Keys.plist in Resources */,
 				624D5C4B2731321700602125 /* MapMarkerWindowView.xib in Resources */,
 				62FC61A027258E3400292710 /* Menu.storyboard in Resources */,
 				62FC6192272586FD00292710 /* Home.storyboard in Resources */,
