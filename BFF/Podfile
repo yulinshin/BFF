@@ -16,6 +16,7 @@ target 'BFF' do
  pod 'JGProgressHUD'
  pod 'Firebase/Core'
  pod 'Firebase/Messaging'
+ pod 'Firebase/Auth'
  pod 'lottie-ios'
  pod 'GoogleMaps', '5.2.0'
  pod 'GooglePlaces', '5.1.0'

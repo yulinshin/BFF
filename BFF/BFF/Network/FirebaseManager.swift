@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseAuth
 import FirebaseFirestoreSwift
 import FirebaseStorage
 import UIKit
@@ -14,11 +15,12 @@ import UIKit
 class FirebaseManager {
 
     static let shared = FirebaseManager()
-
     lazy var dateBase = Firestore.firestore()
     lazy var storage = Storage.storage()
 
-    var userId = "7QBGUfSDqPPjfJXRpQAI"
+    let userId = Auth.auth().currentUser?.uid ?? ""
+    let userEmail = Auth.auth().currentUser?.email ?? ""
+    let userName = Auth.auth().currentUser?.displayName ?? ""
 
     func fetchUser(completion: @escaping (Result<User, Error>) -> Void) {
 
@@ -35,7 +37,13 @@ class FirebaseManager {
                     completion(.failure(error))
                 }
             } else {
-                fatalError()
+                let newUserDoc = self.dateBase.collection("Users").document(self.userId)
+                let newUserData = User(userId: self.userId, email: self.userEmail, userName: self.userName)
+
+                do {
+                    try newUserDoc.setData(from: newUserData)
+                } catch {
+                }
             }
         }
     }
