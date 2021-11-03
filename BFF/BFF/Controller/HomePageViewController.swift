@@ -120,6 +120,7 @@ extension HomePageViewController: UICollectionViewDelegate {
                 self.navigationController?.pushViewController(controller, animated: true)
 
 
+
             default:
                 return
             }
