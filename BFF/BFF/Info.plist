@@ -4,12 +4,20 @@
 <dict>
 	<key>GCP_API_KEY</key>
 	<string>$(GCP_API_KEY)</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>comgooglemaps-x-callback</string>
 		<string>comgooglemaps</string>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>GenJyuuGothic-Regular.ttf</string>
+		<string>GenJyuuGothic-Normal.ttf</string>
+		<string>GenJyuuGothic-Medium.ttf</string>
+		<string>GenJyuuGothic-Light.ttf</string>
+		<string>GenJyuuGothic-Heavy.ttf</string>
+		<string>GenJyuuGothic-ExtraLight.ttf</string>
+		<string>GenJyuuGothic-Bold.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

@@ -10,6 +10,11 @@
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="GenJyuuGothic-Medium.ttf">
+            <string>GenJyuuGothic-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="bCJ-0R-dKZ">
@@ -74,13 +79,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="283" height="70"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WellComeTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Yi-E1-mlo">
-                                                            <rect key="frame" x="0.0" y="0.0" width="220" height="44.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="278" height="48.5"/>
+                                                            <fontDescription key="fontDescription" name="GenJyuuGothic-Medium" family="Gen Jyuu Gothic" pointSize="40"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="subTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y4C-Wi-ws4">
-                                                            <rect key="frame" x="0.0" y="52.5" width="50.5" height="17.5"/>
+                                                            <rect key="frame" x="0.0" y="56.5" width="50.5" height="13.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" name="Text"/>
                                                             <nil key="highlightedColor"/>
