@@ -49,6 +49,14 @@
 		62892FE2273210F3001A7B32 /* bookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62892FE1273210F3001A7B32 /* bookViewModel.swift */; };
 		62892FE42732376D001A7B32 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62892FE32732376D001A7B32 /* SignInViewController.swift */; };
 		62892FEB2732B1A4001A7B32 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62892FEA2732B1A4001A7B32 /* Keys.plist */; };
+		62892FED2732D092001A7B32 /* ImageSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62892FEC2732D092001A7B32 /* ImageSliderView.swift */; };
+		62892FFD2732F749001A7B32 /* GenJyuuGothic-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62892FF62732F746001A7B32 /* GenJyuuGothic-Medium.ttf */; };
+		62892FFE2732F749001A7B32 /* GenJyuuGothic-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62892FF72732F747001A7B32 /* GenJyuuGothic-ExtraLight.ttf */; };
+		62892FFF2732F749001A7B32 /* GenJyuuGothic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62892FF82732F747001A7B32 /* GenJyuuGothic-Bold.ttf */; };
+		628930002732F749001A7B32 /* GenJyuuGothic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62892FF92732F748001A7B32 /* GenJyuuGothic-Regular.ttf */; };
+		628930012732F749001A7B32 /* GenJyuuGothic-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62892FFA2732F748001A7B32 /* GenJyuuGothic-Heavy.ttf */; };
+		628930022732F749001A7B32 /* GenJyuuGothic-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62892FFB2732F749001A7B32 /* GenJyuuGothic-Normal.ttf */; };
+		628930032732F749001A7B32 /* GenJyuuGothic-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62892FFC2732F749001A7B32 /* GenJyuuGothic-Light.ttf */; };
 		628B4856272F01C700F20CC7 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628B4855272F01C700F20CC7 /* SideMenuViewController.swift */; };
 		62930BDB272C2DCA00BC1908 /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 62930BD9272C2DCA00BC1908 /* UserData.xcdatamodeld */; };
 		62930C17272D0C6800BC1908 /* PicMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62930C11272D0C6800BC1908 /* PicMO+CoreDataClass.swift */; };
@@ -156,6 +164,14 @@
 		62892FE1273210F3001A7B32 /* bookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bookViewModel.swift; sourceTree = "<group>"; };
 		62892FE32732376D001A7B32 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		62892FEA2732B1A4001A7B32 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		62892FEC2732D092001A7B32 /* ImageSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSliderView.swift; sourceTree = "<group>"; };
+		62892FF62732F746001A7B32 /* GenJyuuGothic-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GenJyuuGothic-Medium.ttf"; sourceTree = "<group>"; };
+		62892FF72732F747001A7B32 /* GenJyuuGothic-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GenJyuuGothic-ExtraLight.ttf"; sourceTree = "<group>"; };
+		62892FF82732F747001A7B32 /* GenJyuuGothic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GenJyuuGothic-Bold.ttf"; sourceTree = "<group>"; };
+		62892FF92732F748001A7B32 /* GenJyuuGothic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GenJyuuGothic-Regular.ttf"; sourceTree = "<group>"; };
+		62892FFA2732F748001A7B32 /* GenJyuuGothic-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GenJyuuGothic-Heavy.ttf"; sourceTree = "<group>"; };
+		62892FFB2732F749001A7B32 /* GenJyuuGothic-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GenJyuuGothic-Normal.ttf"; sourceTree = "<group>"; };
+		62892FFC2732F749001A7B32 /* GenJyuuGothic-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GenJyuuGothic-Light.ttf"; sourceTree = "<group>"; };
 		628B4855272F01C700F20CC7 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		62930BDA272C2DCA00BC1908 /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
 		62930C11272D0C6800BC1908 /* PicMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PicMO+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -343,6 +359,20 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		62892FF52732F499001A7B32 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				62892FF82732F747001A7B32 /* GenJyuuGothic-Bold.ttf */,
+				62892FF72732F747001A7B32 /* GenJyuuGothic-ExtraLight.ttf */,
+				62892FFA2732F748001A7B32 /* GenJyuuGothic-Heavy.ttf */,
+				62892FFC2732F749001A7B32 /* GenJyuuGothic-Light.ttf */,
+				62892FF62732F746001A7B32 /* GenJyuuGothic-Medium.ttf */,
+				62892FFB2732F749001A7B32 /* GenJyuuGothic-Normal.ttf */,
+				62892FF92732F748001A7B32 /* GenJyuuGothic-Regular.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		62930BDC272D005C00BC1908 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +389,8 @@
 		629FF5B2271D3C2900C7C94A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				62892FF52732F499001A7B32 /* Font */,
+				62892FEC2732D092001A7B32 /* ImageSliderView.swift */,
 				627ADBC2272A3370000D0457 /* FillSupplyAlertView.swift */,
 				62C80D1A2720117800EE2FB1 /* PetInfoTableTableViewCell.swift */,
 				62BF3FB9272A7D6600F6DFB5 /* FillSupplyAlertView.xib */,
@@ -508,14 +540,21 @@
 				62603AE227279A4600467E2D /* CubeCollectionViewCell.xib in Resources */,
 				6297925A271E8A8800B68E86 /* Diary.storyboard in Resources */,
 				62892FEB2732B1A4001A7B32 /* Keys.plist in Resources */,
+				628930022732F749001A7B32 /* GenJyuuGothic-Normal.ttf in Resources */,
+				628930002732F749001A7B32 /* GenJyuuGothic-Regular.ttf in Resources */,
 				624D5C4B2731321700602125 /* MapMarkerWindowView.xib in Resources */,
 				62FC61A027258E3400292710 /* Menu.storyboard in Resources */,
 				62FC6192272586FD00292710 /* Home.storyboard in Resources */,
+				62892FFE2732F749001A7B32 /* GenJyuuGothic-ExtraLight.ttf in Resources */,
+				62892FFD2732F749001A7B32 /* GenJyuuGothic-Medium.ttf in Resources */,
+				628930032732F749001A7B32 /* GenJyuuGothic-Light.ttf in Resources */,
 				623340E0271C3B1B002B2429 /* LaunchScreen.storyboard in Resources */,
+				628930012732F749001A7B32 /* GenJyuuGothic-Heavy.ttf in Resources */,
 				62D454BE27267D82009DF0FF /* SupplyListTableViewCell.xib in Resources */,
 				623340E9271C3F82002B2429 /* GoogleService-Info.plist in Resources */,
 				623340DD271C3B1B002B2429 /* Assets.xcassets in Resources */,
 				62FC619A27258DF900292710 /* Soical.storyboard in Resources */,
+				62892FFF2732F749001A7B32 /* GenJyuuGothic-Bold.ttf in Resources */,
 				6285C79F271DE49A006E13EC /* SelectedPetsCollectionViewCell.xib in Resources */,
 				62603AE62727B64F00467E2D /* AddNewItemTableViewCell.xib in Resources */,
 				62D454B827267CF2009DF0FF /* Supplies.storyboard in Resources */,
@@ -640,6 +679,7 @@
 				628B4856272F01C700F20CC7 /* SideMenuViewController.swift in Sources */,
 				62C38D8F272EE631008DEE8B /* GoalViewController.swift in Sources */,
 				62603AD227278BDC00467E2D /* SupplyDetailViewController.swift in Sources */,
+				62892FED2732D092001A7B32 /* ImageSliderView.swift in Sources */,
 				62BA0101272E7DF400A19478 /* PetHealthCardListTableViewCell.swift in Sources */,
 				62892FE42732376D001A7B32 /* SignInViewController.swift in Sources */,
 				62979258271E64D800B68E86 /* Diary.swift in Sources */,
@@ -834,6 +874,7 @@
 				DEVELOPMENT_TEAM = 94F23Z62YB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BFF/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -865,6 +906,7 @@
 				DEVELOPMENT_TEAM = 94F23Z62YB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BFF/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

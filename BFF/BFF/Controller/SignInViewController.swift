@@ -11,18 +11,163 @@ import FirebaseAuth
 
 class SignInViewController: UIViewController {
 
+    fileprivate var timer: Timer!
+    fileprivate var currentPos:Int = 0
+    fileprivate var images:[UIImage] = [UIImage]()
+    fileprivate var imageSliderView: ImageSliderView!
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackGround()
+        setupAppleSignInButton()
+    }
 
-       setupAppleSignInButton()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        timer.invalidate()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+    }
+
+    private func setupBackGround() {
+
+        images.append(UIImage(named: "WellcomPic-1")!)
+        images.append(UIImage(named: "WellcomPic-2")!)
+
+        let screen = UIScreen.main.bounds
+        let image = images[0]
+        let imageWidth =  screen.width
+        let imageHeight = screen.height
+        let gradientView = UIView(frame:CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight))
+        imageSliderView = ImageSliderView(frame: CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight))
+        imageSliderView.setImage(image, animated: false)
+        imageSliderView.contentMode = .scaleAspectFill
+        view.addSubview(imageSliderView)
+        view.addSubview(gradientView)
+
+
+        let gradient = CAGradientLayer()
+        gradient.frame = UIScreen.main.bounds
+        gradient.colors = [UIColor.clear, UIColor(named: "main-O")!.cgColor]
+        gradient.locations = [0.3, 0.8]
+        gradientView.layer.addSublayer(gradient)
+
+        
+
+        // setup timer
+
+        Timer.scheduledTimer(timeInterval: 3.5, target: self, selector: #selector(SignInViewController.scaleImageEvent), userInfo: nil, repeats: true)
+
+//        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(SignInViewController.changeImageEvent), userInfo: nil, repeats: true)
+//        scaleImageEvent()
+
+    }
+
+    @objc func scaleImageEvent() {
+        self.imageSliderView.transform = CGAffineTransform(scaleX: 1, y: 1)
+        UIView.animate(withDuration: 3.0, animations: {() -> Void in
+            self.imageSliderView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            self.changeImageEvent()
+        })
+    }
+
+    @objc func changeImageEvent() {
+
+        // take next image
+        if currentPos == 0 {
+            imageSliderView.setImage(images[1], animated: true)
+            currentPos += 1
+            print(currentPos)
+        } else {
+            imageSliderView.setImage(images[0], animated: true)
+            currentPos -= 1
+            print(currentPos)
+        }
     }
 
     func setupAppleSignInButton(){
 
-        let button = ASAuthorizationAppleIDButton()
+        let titleLabel = UILabel()
+        let subTitleLAbel = UILabel()
+        let textLable = UILabel()
+        let button = ASAuthorizationAppleIDButton.init(type: .signIn, style: .white)
+        button.cornerRadius = 20
+
         button.addTarget(self, action: #selector(handleSignInWithAppleTapped), for: .touchUpInside)
-        button.center = view.center
+
+        button.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subTitleLAbel.translatesAutoresizingMaskIntoConstraints = false
+        textLable.translatesAutoresizingMaskIntoConstraints = false
+
         view.addSubview(button)
+        view.addSubview(titleLabel)
+        view.addSubview(subTitleLAbel)
+        view.addSubview(textLable)
+
+        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100).isActive = true
+        button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36).isActive = true
+        button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36).isActive = true
+
+        titleLabel.bottomAnchor.constraint(equalTo: subTitleLAbel.topAnchor, constant: -10).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36).isActive = true
+
+        subTitleLAbel.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -80).isActive = true
+        subTitleLAbel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36).isActive = true
+        subTitleLAbel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36).isActive = true
+
+        textLable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+        textLable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36).isActive = true
+        textLable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36).isActive = true
+
+
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+
+        let title = "BFF PetsDiary"
+        let titleAttributes: NSDictionary = [
+            NSAttributedString.Key.font:UIFont(name: "GenJyuuGothic-Bold", size: 36),
+            NSAttributedString.Key.kern:CGFloat(2)
+        ]
+
+        let titleAttributed = NSAttributedString(string: title, attributes:titleAttributes as? [NSAttributedString.Key : Any])
+        titleLabel.attributedText = titleAttributed
+
+
+
+
+        subTitleLAbel.textColor = .white
+        subTitleLAbel.textAlignment = .center
+
+        let subTitle = "- 開始紀錄毛小孩們的大小事 -"
+        let subTitleAttributes: NSDictionary = [
+            NSAttributedString.Key.font:UIFont(name: "GenJyuuGothic-Medium", size: 16),
+            NSAttributedString.Key.kern:CGFloat(4)
+        ]
+
+        let subTitleAttributed = NSAttributedString(string: subTitle, attributes:subTitleAttributes as? [NSAttributedString.Key : Any])
+        subTitleLAbel.attributedText = subTitleAttributed
+
+        textLable.textColor = .white
+        textLable.textAlignment = .center
+
+        let text = "Best Friend Forver"
+        let attributes: NSDictionary = [
+            NSAttributedString.Key.font:UIFont(name: "GenJyuuGothic-Medium", size: 10),
+            NSAttributedString.Key.kern:CGFloat(10)
+        ]
+
+        let attributedTitle = NSAttributedString(string: text, attributes:attributes as? [NSAttributedString.Key : Any])
+
+        textLable.attributedText = attributedTitle
+
+
         view.backgroundColor = .white
 
     }
