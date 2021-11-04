@@ -599,6 +599,23 @@ class FirebaseManager {
         ProgressHUD.showSuccess(text: "更新成功")
     }
 
+    func upDateDiaryLiked(diaryId: String, isLiked: Bool) {
+
+        ProgressHUD.show()
+
+        if isLiked {
+
+            dateBase.collection("Diaries").document(diaryId).updateData(["whoLiked": FieldValue.arrayUnion([userId])])
+            ProgressHUD.showSuccess(text: "更新成功")
+
+        } else{
+            dateBase.collection("Diaries").document(diaryId).updateData(["whoLiked": FieldValue.arrayRemove([userId])])
+            ProgressHUD.showSuccess(text: "更新成功")
+        }
+
+    }
+
+
     func delateDiary(diaryId: String, diatyPics: [Pic], completion: @escaping (Result<String, Error>) -> Void) {
         diatyPics.forEach { pic in
             deletePhoto(fileName: pic.fileName, filePath: .dairyPhotos)

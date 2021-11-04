@@ -11,8 +11,9 @@ class DiaryWallViewModel {
 
     var diarys = Box([Diary]())
     var showingDiarys = Box([Diary]())
+    var didupDateData: (()->Void)?
 
-    func fetchDiary(){
+    func fetchDiary() {
         FirebaseManager.shared.fetchDiaries { result in
 
 
@@ -22,7 +23,7 @@ class DiaryWallViewModel {
 
                 self.diarys.value = diarys
                 self.showingDiarys.value = diarys
-
+                self.didupDateData?()
             case .failure(let error):
 
                 print(error)
@@ -42,7 +43,7 @@ class DiaryWallViewModel {
 
                 self.diarys.value = diarys
                 self.showingDiarys.value = diarys
-
+                self.didupDateData?()
             case .failure(let error):
 
                 print(error)
@@ -51,13 +52,29 @@ class DiaryWallViewModel {
         }
     }
 
-    func fielter(petIds:[String]){
+    func fielter(petIds:[String]) {
 
         showingDiarys.value = diarys.value.filter({ diary in
-            if petIds.contains(diary.petId){
+            if petIds.contains(diary.petId) {
                 return true
             } else { return false }
         })
     }
 
+    func updateWhoLiked(index: Int){
+
+        if diarys.value[index].whoLiked.contains(FirebaseManager.shared.userId) {
+
+            FirebaseManager.shared.upDateDiaryLiked(diaryId: diarys.value[index].diaryId, isLiked: false)
+
+          diarys.value[index].whoLiked.removeAll { $0 != FirebaseManager.shared.userId }
+            self.didupDateData?()
+
+        } else {
+
+            FirebaseManager.shared.upDateDiaryLiked(diaryId: diarys.value[index].diaryId, isLiked: true)
+          diarys.value[index].whoLiked.append(FirebaseManager.shared.userId)
+            self.didupDateData?()
+        }
+    }
 }

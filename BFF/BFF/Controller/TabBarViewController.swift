@@ -126,6 +126,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             return false
         }
 
+        viewController.navigationController?.popToViewController(viewController, animated: true)
+
       return true
     }
 

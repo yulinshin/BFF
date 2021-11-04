@@ -19,8 +19,6 @@ class DiaryDetailViewController: UIViewController {
 
     @IBOutlet weak var createdTimeLabel: UILabel!
 
-    @IBOutlet weak var tagStackView: UIStackView!
-
     @IBOutlet weak var ccommentImage: UIImageView!
 
     @IBOutlet weak var commentLabel: UILabel!
@@ -36,6 +34,8 @@ class DiaryDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        contentTextView.sizeToFit()
 
         postPetImageView.layer.cornerRadius = postPetImageView.frame.height / 2
 
@@ -66,6 +66,7 @@ class DiaryDetailViewController: UIViewController {
 
         viewModel.comments.bind {  [weak self] comments in
             self?.comments = comments
+            self?.commentLabel.text = "\(comments.count)"
         }
 
         viewModel.petTags.bind {  [weak self] petTags in
@@ -76,7 +77,7 @@ class DiaryDetailViewController: UIViewController {
             self?.diaryId = diaryId
         }
 
-        setPetsTag()
+//        setPetsTag()
 
     }
     @IBAction func showMenu(_ sender: Any) {
@@ -176,17 +177,17 @@ class DiaryDetailViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
 
         }
-
-        func setPetsTag() {
-            tagStackView.subviews.forEach { subview in
-                tagStackView.removeArrangedSubview(subview)
-            }
-            petTags.forEach { petName in
-                let tag = UILabel()
-                tag.text = petName
-                tagStackView.addArrangedSubview(tag)
-            }
-        }
+//
+//        func setPetsTag() {
+//            tagStackView.subviews.forEach { subview in
+//                tagStackView.removeArrangedSubview(subview)
+//            }
+//            petTags.forEach { petName in
+//                let tag = UILabel()
+//                tag.text = petName
+//                tagStackView.addArrangedSubview(tag)
+//            }
+//        }
 
     }
 
