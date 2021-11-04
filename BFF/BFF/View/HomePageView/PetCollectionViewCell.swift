@@ -13,6 +13,9 @@ import Lottie
 class PetCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var diaryCardBackground: UIView!
+    @IBOutlet weak var petNameLabel: UILabel!
+    @IBOutlet weak var birthdayLabel: UILabel!
+
 
     var didTapCard: (() -> Void)?
     let addPetAnimationView = AnimationView(name: "AddPet")
