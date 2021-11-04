@@ -12,7 +12,7 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="3dv-ly-ybE" customClass="TabBarController" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8Cl-f4-QXB">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8Cl-f4-QXB" customClass="AppTabBar" customModule="BFF">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

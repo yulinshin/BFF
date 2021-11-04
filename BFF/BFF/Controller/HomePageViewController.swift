@@ -38,18 +38,24 @@ class HomePageViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
 
         let tabBar = self.tabBarController as? TabBarController
-        tabBar?.menuDelegate = self
 
         viewModel.userDataDidLoad = {
             self.collectionView.reloadData() // 獲得使用者資料後 進行reloadCollectionView
         }
 
         viewModel.userNotifiactionsDidChange = {
+
             self.collectionView.reloadData() // 當監聽的Notification資料更新後 進行reloadCollectionView
         }
 
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "MenuTab"), style: .done, target: self, action: #selector(showSideMenu))
+
     }
 
+
+    @objc func showSideMenu(){
+        print("ShowSideMenu")
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -112,7 +118,7 @@ extension HomePageViewController: UICollectionViewDelegate {
 
                 self.navigationController?.show(controller, sender: nil)
 
-            case 3: // Health
+            case 3: // Goal
 
                 let storyboard = UIStoryboard(name: "Goal", bundle: nil)
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "GoalViewController") as? GoalViewController else { return }
@@ -191,16 +197,6 @@ extension HomePageViewController: UICollectionViewDataSource {
 
             cell.setup(userName: viewModel.userName.value, petsCount: viewModel.usersPetsIds.value.count)
 
-            cell.creatButtonTap = {
-                let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-                guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatDiaryViewController") as? CreatDiaryViewController else { return }
-                let nav = UINavigationController(rootViewController: controller)
-                nav.modalPresentationStyle = .fullScreen
-                nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor: UIColor(named: "main")]
-                controller.title = "新增寵物日記"
-                self.present(nav, animated: true, completion: nil)
-            }
-            
             return cell
 
         case 1:
@@ -315,11 +311,11 @@ extension HomePageViewController {
 
             case .petNotifycation:
 
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
 
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(0))
 
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 group.contentInsets.trailing = 8
@@ -340,29 +336,18 @@ extension HomePageViewController {
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(1*6/5))
 
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                group.contentInsets.trailing = 8
                 group.contentInsets.leading = 8
+                group.contentInsets.trailing = 8
+
 
                 let layoutSection = NSCollectionLayoutSection(group: group)
                 layoutSection.orthogonalScrollingBehavior = .groupPaging
-                layoutSection.interGroupSpacing = -36
+                layoutSection.interGroupSpacing = 0
 
                 return layoutSection
             }
         }
         return layout
     }
-
-}
-
-extension HomePageViewController: MenuViewControllerDelegate{
-    func didTapMenuButton() {
-        var viewController = UIStoryboard.menu.instantiateInitialViewController()!
-        viewController.modalPresentationStyle = .popover
-        self.present(viewController, animated: true)
-
-
-    }
-
 
 }
