@@ -22,7 +22,7 @@ class PetCollectionViewCell: UICollectionViewCell {
     let title = UILabel()
 
 
-    func setup(petImage: String) {
+    func setup(petImage: String, petName: String, petBirthday: String) {
         addPetAnimationView.isHidden = true
         title.isHidden = true
         petImageView.isHidden = false
@@ -37,8 +37,31 @@ class PetCollectionViewCell: UICollectionViewCell {
         diaryCardBackground.layer.shadowOffset = CGSize(width: 2, height: 2)
         diaryCardBackground.layer.shadowOpacity = 0.4
         diaryCardBackground.layer.shadowRadius = 6
+        petNameLabel.text = petName
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy"
+        let date = dateFormatter.date(from:petBirthday)!
+        let now = Date()
 
+        let ageComponents = Calendar.current.dateComponents([.year, .month], from: date, to: now)
+        if let age = ageComponents.year {
+            if let month = ageComponents.month{
+                birthdayLabel.text = "\(age)歲\(month)個月"
+            }else{
+                birthdayLabel.text = "\(age)歲"
+            }
+        } else {
+            if let month = ageComponents.month{
+                birthdayLabel.text = "\(month)個月"
+            }else {
+
+                    birthdayLabel.text = "0個月"
+                }
+            }
     }
+
+
+
 
     func setupBlankDiaryBook() {
         title.isHidden = false

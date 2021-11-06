@@ -21,6 +21,8 @@ struct Diary: Codable {
     var whoLiked: [String] = [String]()
     var userId: String
     var petId: String
+    var petThumbnail: Pic?
+    var petname: String?
 
     init(
     content: String,

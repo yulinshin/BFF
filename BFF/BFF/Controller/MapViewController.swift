@@ -20,7 +20,7 @@ struct Location {
 class MapViewController: UIViewController, CLLocationManagerDelegate {
 
 
-    @IBOutlet weak var mapVIew: GMSMapView!
+    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var allButton: UIButton!
     @IBOutlet weak var normailButton: UIButton!
     @IBOutlet weak var sepcialButton: UIButton!
@@ -42,10 +42,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
         let camera = GMSCameraPosition(latitude: 47.0169, longitude: -122.336471, zoom: 12)
 
-        mapVIew.camera = camera
-        mapVIew.settings.myLocationButton = true
-        mapVIew.isMyLocationEnabled = true
-        mapVIew.delegate = self
+        mapView.camera = camera
+        mapView.settings.myLocationButton = true
+        mapView.isMyLocationEnabled = true
+        mapView.delegate = self
 
         self.infoWindow = loadNiB()
 
@@ -67,24 +67,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
         let camera = GMSCameraPosition.camera(withLatitude: userLocation!.coordinate.latitude,
                                               longitude: userLocation!.coordinate.longitude, zoom: 17.0)
-        mapVIew.camera = camera
+        mapView.camera = camera
         locationManager.stopUpdatingLocation()
     }
 
     func getGCPKey(){
         guard let path = Bundle.main.path(forResource: "Keys", ofType: "plist") else { return }
-        let url = URL(fileURLWithPath: path)
-        guard let data = try? Data(contentsOf: url) else { return }
-        guard let plist = try? PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as? [[String:String]] else { return }
-        guard let key = plist[0]["GCP_KEY"] else { return }
-        self.gcpKey = key
+
+        if let myDict = NSDictionary(contentsOfFile: path){
+            self.gcpKey = myDict["GCP_KEY"] as? String ?? ""
+        }
 
     }
 
     func getLocation() {
 
         var components = URLComponents(string: "https://sheets.googleapis.com/v4/spreadsheets/1ZfgSLKt-SW73SnaTXZAsslwmdJPEW3JlZMS7NxXJ-kQ/values/Hospital?")!
-        let key = URLQueryItem(name: "key", value: gcpKey) // use your key
+        let key = URLQueryItem(name: "key", value: gcpKey)
         let address = URLQueryItem(name: "majorDimension", value: "ROWS")
         components.queryItems = [key, address]
         print( " KEY = ===== = = = == = \(gcpKey)")
@@ -112,7 +111,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 marker.position = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
 //                marker.title = location.name
 //                marker.snippet = location.phone
-                marker.map = self.mapVIew
+                marker.map = self.mapView
                 marker.userData = location
                 self.locationsNormal.append(marker)
             }
@@ -151,7 +150,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 //                marker.title = location.name
 //                marker.snippet = location.phone
                 marker.icon =  GMSMarker.markerImage(with: .yellow)
-                marker.map = self.mapVIew
+                marker.map = self.mapView
                 marker.userData = location
                 self.locationsSpecial.append(marker)
             }
@@ -167,10 +166,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBAction func showAllHostipal(_ sender: Any) {
         locationsNormal.forEach { marker in
-            marker.map = mapVIew
+            marker.map = mapView
         }
         locationsSpecial.forEach { marker in
-            marker.map = mapVIew
+            marker.map = mapView
         }
         allButton.isSelected = true
         normailButton.isSelected = false
@@ -181,7 +180,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func showNormailHostipal(_ sender: Any) {
 
         locationsNormal.forEach { marker in
-            marker.map = mapVIew
+            marker.map = mapView
         }
         locationsSpecial.forEach { marker in
             marker.map = nil
@@ -198,7 +197,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             marker.map = nil
         }
         locationsSpecial.forEach { marker in
-            marker.map = mapVIew
+            marker.map = mapView
         }
 
         allButton.isSelected = false

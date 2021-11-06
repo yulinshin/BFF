@@ -247,7 +247,7 @@ extension HomePageViewController: UICollectionViewDataSource {
 
                 let pet =  viewModel.pets.value[indexPath.row]
 
-                cell.setup(petImage: pet.petThumbnail?.url ?? "")
+                cell.setup(petImage: pet.petThumbnail?.url ?? "", petName: pet.name, petBirthday: pet.healthInfo.birthday)
                 cell.didTapCard = {
 
                     let storyboard = UIStoryboard(name: "Diary", bundle: nil)
@@ -311,11 +311,11 @@ extension HomePageViewController {
 
             case .petNotifycation:
 
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(5))
 
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(0))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(5))
 
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 group.contentInsets.trailing = 8

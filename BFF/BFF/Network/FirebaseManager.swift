@@ -131,14 +131,14 @@ class FirebaseManager {
         let document =   dateBase.collection("Users").document(userId).collection("Notifications").document(newNotify.id)
         do {
             try document.setData(from: newNotify)
-            print("upLoad NotificartionInFo Sucess - \(newNotify) ")
+            print("upLoad NotificationInFo Success - \(newNotify) ")
         } catch {
-            print("upLoad NotificartionInFo Sucess - \(error) ")
+            print("upLoad NotificationInFo Success - \(error) ")
         }
     }
 
 
-    func creatAndUpdateNotification(newNotify: Notification) {
+    func createAndUpdateNotification(newNotify: Notification) {
 
         let document =   dateBase.collection("Users").document(userId).collection("Notifications").document(newNotify.id)
 
@@ -606,11 +606,11 @@ class FirebaseManager {
         if isLiked {
 
             dateBase.collection("Diaries").document(diaryId).updateData(["whoLiked": FieldValue.arrayUnion([userId])])
-            ProgressHUD.showSuccess(text: "更新成功")
+            ProgressHUD.showSuccess(text: "😍😍😍😍")
 
         } else{
             dateBase.collection("Diaries").document(diaryId).updateData(["whoLiked": FieldValue.arrayRemove([userId])])
-            ProgressHUD.showSuccess(text: "更新成功")
+            ProgressHUD.showSuccess(text: "UnLiked")
         }
 
     }
@@ -629,6 +629,53 @@ class FirebaseManager {
                 completion(.success(sucessMessage))
             }
         }
+    }
+
+
+    func fetchComments(diaryId:String, completion: @escaping (Result<[Comment], Error>) -> Void) {
+
+        dateBase.collection("Comments").whereField("diaryId", isEqualTo: diaryId).getDocuments { (querySnapshot, error) in
+
+            if let error = error {
+
+                completion(.failure(error))
+            } else {
+
+                var comments = [Comment]()
+
+                for document in querySnapshot!.documents {
+
+                    do {
+                        if let comment = try document.data(as: Comment.self, decoder: Firestore.Decoder()) {
+                            comments.append(comment)
+                        }
+
+                    } catch {
+
+                        completion(.failure(error))
+                    }
+                }
+
+                completion(.success(comments))
+            }
+        }
+    }
+
+    func creatComments(content: String, petId: String, diaryId: String) {
+
+        let commentsRef = dateBase.collection("Comments")
+        let document = commentsRef.document()
+        let comment = Comment(commentId: document.documentID, content: content, createdTime: Timestamp(date: Date()), diaryId: diaryId, petId: petId)
+
+        do {
+            try document.setData(from: comment)
+            dateBase.collection("Diaries").document(diaryId).updateData(["comments": FieldValue.arrayUnion([document.documentID])])
+            print(document)
+        } catch {
+            print(error)
+        }
+
+
     }
 
 

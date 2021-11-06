@@ -1,5 +1,5 @@
 //
-//  DiarysTableViewController.swift
+//  diariesTableViewController.swift
 //  BFF
 //
 //  Created by yulin on 2021/11/4.
@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class DiarysViewController: UIViewController {
+class DiariesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -19,12 +19,11 @@ class DiarysViewController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
-        viewModel.didupDateData = {
+        viewModel.didUpDateData = {
             self.tableView.reloadData()
         }
 
     }
-
 
     override func viewWillAppear(_ animated: Bool) {
         viewModel.fetchDiary()
@@ -33,7 +32,7 @@ class DiarysViewController: UIViewController {
 
 // MARK: - Table view data source
 
-extension DiarysViewController: UITableViewDelegate, UITableViewDataSource {
+extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
@@ -41,44 +40,43 @@ extension DiarysViewController: UITableViewDelegate, UITableViewDataSource {
 
         cell.setup()
 
-        viewModel.showingDiarys.bind { diarys in
+        viewModel.showingDiaries.bind { diaries in
 
-            cell.diaryImageVIew.loadImage(diarys[indexPath.row].images.first?.url)
-            cell.diaryCommentLabel.text = "\( diarys[indexPath.row].comments.count)"
-            cell.dateLabel.text = "\(diarys[indexPath.row].createdTime.dateValue().toString())"
-            cell.diaryContentLabel.text = "\(diarys[indexPath.row].content)"
+            cell.diaryImageView.loadImage(diaries[indexPath.row].images.first?.url)
+            cell.diaryCommentLabel.text = "\( diaries[indexPath.row].comments.count)"
+            cell.dateLabel.text = "\(diaries[indexPath.row].createdTime.dateValue().toString())"
+            cell.diaryContentLabel.text = "\(diaries[indexPath.row].content)"
 
-            cell.llkeLabel.text = "\(diarys[indexPath.row].whoLiked.count)"
+            cell.likeLabel.text = "\(diaries[indexPath.row].whoLiked.count)"
 
-            if diarys[indexPath.row].whoLiked.contains(FirebaseManager.shared.userId) {
-                cell.likeicon.image = UIImage(systemName: "heart.fill")
+            if diaries[indexPath.row].whoLiked.contains(FirebaseManager.shared.userId) {
+                cell.likeIcon.image = UIImage(systemName: "heart.fill")
 
             } else {
-                cell.likeicon.image = UIImage(systemName: "heart")
+                cell.likeIcon.image = UIImage(systemName: "heart")
 
             }
+
+            cell.petNameLabel.text = diaries[indexPath.row].petname
+            cell.petImageView.loadImage(diaries[indexPath.row].petThumbnail?.url)
 
             cell.didTapLiked = {
                 self.viewModel.updateWhoLiked(index: indexPath.row)
             }
 
-            FirebaseManager.shared.fetchPet(petId: diarys[indexPath.row].petId) { result in
+            cell.didTapMoreButton = {
+                cell.diaryContentLabel.numberOfLines  = 0
+                tableView.reloadData()
+            }
 
-                switch result {
+            cell.didTapComment = {
 
-                case.success(let pet):
+                let storyboard = UIStoryboard(name: "Soical", bundle: nil)
 
-                        guard let data = pet.petThumbnail?.url else { return }
-                        print("setImageFor\(indexPath.row) : \(pet.name)")
-                        cell.petImageVIew.loadImage(data)
-                        cell.petNameLabel.text = pet.name
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
+                controller.diary = diaries[indexPath.row]
+                self.navigationController?.pushViewController(controller, animated: true)
 
-
-                case.failure(let error):
-
-                        print(error)
-
-                }
             }
 
             cell.selectionStyle = .none
@@ -96,17 +94,17 @@ extension DiarysViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return viewModel.diarys.value.count
+        return viewModel.diaries.value.count
     }
 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
-        controller.viewModel = DetialViewModel(from: viewModel.diarys.value[indexPath.row])
-        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
-        self.navigationController?.show(controller, sender: nil)
+//        let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+//        guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
+//        controller.viewModel = DetialViewModel(from: viewModel.diaries.value[indexPath.row])
+//        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
+//        self.navigationController?.show(controller, sender: nil)
 
 
 
@@ -116,24 +114,29 @@ extension DiarysViewController: UITableViewDelegate, UITableViewDataSource {
 
 class DiaryViewCell: UITableViewCell {
 
-    @IBOutlet weak var diaryImageVIew: UIImageView!
+    @IBOutlet weak var diaryImageView: UIImageView!
 
-    @IBOutlet weak var photoBackgroundVIew: UIView!
+    @IBOutlet weak var photoBackgroundView: UIView!
     @IBOutlet weak var diaryCommentLabel: UILabel!
-    @IBOutlet weak var petImageVIew: UIImageView!
+    @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var commentIcon: UIImageView!
 
-    @IBOutlet weak var llkeLabel: UILabel!
-    @IBOutlet weak var likeicon: UIImageView!
+    @IBOutlet weak var likeLabel: UILabel!
+    @IBOutlet weak var likeIcon: UIImageView!
     @IBOutlet weak var diaryContentLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var petNameLabel: UILabel!
 
-    static let identifier = "DiarysViewCell"
+    @IBOutlet weak var moreButton: UIButton!
+    static let identifier = "diariesViewCell"
 
-    var didTapLiked: (()->Void)?
+    var didTapLiked: (() -> Void)?
 
-    var didTapComment: (()->Void)?
+    var didTapComment: (() -> Void)?
+
+    var didTapMoreButton: (() -> Void)?
+
+    var isNeedToOpen = false
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -144,22 +147,23 @@ class DiaryViewCell: UITableViewCell {
 
     func setup() {
 
-        photoBackgroundVIew.backgroundColor = .white
-        photoBackgroundVIew.layer.cornerRadius = 10
-        diaryImageVIew.layer.cornerRadius = 20
-        diaryImageVIew.clipsToBounds = true
-        diaryImageVIew.contentMode = .scaleAspectFill
-        photoBackgroundVIew.layer.shadowColor = UIColor.gray.cgColor
-        photoBackgroundVIew.layer.shadowOpacity = 0.2
-        photoBackgroundVIew.layer.shadowRadius = 4
-        photoBackgroundVIew.layer.shadowOffset = CGSize(width: 1, height: 1)
-        petImageVIew.layer.cornerRadius = 20
+        photoBackgroundView.backgroundColor = .white
+        photoBackgroundView.layer.cornerRadius = 10
+        diaryImageView.layer.cornerRadius = 20
+        diaryImageView.clipsToBounds = true
+        diaryImageView.contentMode = .scaleAspectFill
+        photoBackgroundView.layer.shadowColor = UIColor.gray.cgColor
+        photoBackgroundView.layer.shadowOpacity = 0.2
+        photoBackgroundView.layer.shadowRadius = 4
+        photoBackgroundView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        petImageView.layer.cornerRadius = 20
 
-        likeicon.isUserInteractionEnabled = true
-        likeicon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapLikedButton)))
+        likeIcon.isUserInteractionEnabled = true
+        likeIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapLikedButton)))
 
-        likeicon.isUserInteractionEnabled = true
+        commentIcon.isUserInteractionEnabled = true
         commentIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapCommentButton)))
+
     }
 
     @objc func tapLikedButton(){
@@ -174,6 +178,24 @@ class DiaryViewCell: UITableViewCell {
 
     }
 
+    @IBAction func showMore(_ sender: UIButton) {
 
+        didTapMoreButton?()
 
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        if diaryContentLabel.isTruncated() {
+            moreButton.isHidden = false
+        } else { 
+            moreButton.isHidden = true
+        }
+
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
 }

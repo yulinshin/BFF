@@ -19,7 +19,7 @@ class SupplyListTableViewCell: UITableViewCell {
     @IBOutlet weak var maximumInventoryLabel: UILabel!
     @IBOutlet weak var remainingInventoryLabel: UILabel!
     @IBOutlet weak var cycleDosageLabel: UILabel!
-    @IBOutlet weak var supplyUseByPetsStackVIew: UIStackView!
+    @IBOutlet weak var supplyUseByPetsStackView: UIStackView!
     @IBOutlet weak var remindIcon: UIImageView!
     @IBOutlet weak var remindLabel: UILabel!
     @IBOutlet weak var reFillStockButton: UIButton!
@@ -125,7 +125,7 @@ class SupplyListTableViewCell: UITableViewCell {
         viewModel?.supplyUseByPets.bind(listener: { petIds in
 
             // CleanStock
-            self.supplyUseByPetsStackVIew.subviews.forEach { view in
+            self.supplyUseByPetsStackView.subviews.forEach { view in
                 view.removeFromSuperview()
             }
 
@@ -142,7 +142,7 @@ class SupplyListTableViewCell: UITableViewCell {
                         petImageView.contentMode = .scaleAspectFill
                         petImageView.layer.cornerRadius = 15
                         petImageView.clipsToBounds = true
-                        self.supplyUseByPetsStackVIew.addArrangedSubview(petImageView)
+                        self.supplyUseByPetsStackView.addArrangedSubview(petImageView)
                     } else {
                         return
                     }
