@@ -25,7 +25,7 @@
         <!--Comments-->
         <scene sceneID="CdR-4B-K12">
             <objects>
-                <viewController storyboardIdentifier="ChatViewController" hidesBottomBarWhenPushed="YES" id="Kwf-CJ-CKM" customClass="ChatViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CommentTableViewController" hidesBottomBarWhenPushed="YES" id="Kwf-CJ-CKM" customClass="CommentTableViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vTV-dM-izT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,7 +34,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="668"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ChatTableCell" rowHeight="66" id="s3r-dJ-ih9" customClass="ChatTableCell" customModule="BFF" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentTableCell" rowHeight="66" id="s3r-dJ-ih9" customClass="CommentTableCell" customModule="BFF" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s3r-dJ-ih9" id="GZT-Bj-LLB">

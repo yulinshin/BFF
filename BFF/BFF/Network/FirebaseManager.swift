@@ -12,6 +12,8 @@ import FirebaseFirestoreSwift
 import FirebaseStorage
 import UIKit
 
+
+// swiftlint:disable file_length
 class FirebaseManager {
 
     static let shared = FirebaseManager()
@@ -155,15 +157,133 @@ class FirebaseManager {
         let document =   dateBase.collection("Users").document(userId).collection("Notifications").document(notifyId)
 
 
-    document.delete() { error in
-        if let error = error {
-             print("Error removing document: \(error)")
-         } else {
-             print("Document successfully removed!")
-         }
-    }
+        document.delete() { error in
+            if let error = error {
+                print("Error removing document: \(error)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
 
     }
+
+    // swiftlint:disable cyclomatic_complexity
+    func listMessages(completion: @escaping (Result<[Message], Error>) -> Void) {
+
+
+        var messages = [Message]()
+        dateBase.collection("Messages").whereField("receiver", isEqualTo: userId).addSnapshotListener { querySnapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                if let querySnapshot = querySnapshot {
+                    querySnapshot.documents.forEach { document in
+                        do {
+                            if let data = try document.data(as: Message.self) {
+
+                                if !messages.contains(where: { message in
+                                    return message.messageId == data.messageId
+                                }){
+                                    messages.append(data)
+                                }
+
+                                completion(.success(messages))
+                            }
+                        } catch {
+                            completion(.failure(error))
+                        }
+                    }
+                }
+            }
+        }
+        dateBase.collection("Messages").whereField("sender", isEqualTo: userId).addSnapshotListener { querySnapshot, error in
+            if let querySnapshot = querySnapshot {
+                querySnapshot.documents.forEach { document in
+                    do {
+                        if let data = try document.data(as: Message.self) {
+
+                            if !messages.contains(where: { message in
+                                return message.messageId == data.messageId
+                            }){
+                                messages.append(data)
+                            }
+                            completion(.success(messages))
+                        }
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+            }
+
+        }
+    }
+
+
+    func listMessages(otherUserId: String,completion: @escaping (Result<[Message], Error>) -> Void) {
+
+        var messages = [Message]()
+        dateBase.collection("Messages").whereField("receiver", isEqualTo: otherUserId).whereField("sender", isEqualTo: userId).addSnapshotListener { querySnapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                if let querySnapshot = querySnapshot {
+                    querySnapshot.documents.forEach { document in
+                        do {
+                            if let data = try document.data(as: Message.self) {
+
+                                if !messages.contains(where: { message in
+                                    return message.messageId == data.messageId
+                                }){
+                                    messages.append(data)
+                                }
+
+                                completion(.success(messages))
+                            }
+                        } catch {
+                            completion(.failure(error))
+                        }
+                    }
+                }
+            }
+        }
+        dateBase.collection("Messages").whereField("sender", isEqualTo: otherUserId).whereField("receiver", isEqualTo: userId).addSnapshotListener { querySnapshot, error in
+            if let querySnapshot = querySnapshot {
+                querySnapshot.documents.forEach { document in
+                    do {
+                        if let data = try document.data(as: Message.self) {
+
+                            if !messages.contains(where: { message in
+                                return message.messageId == data.messageId
+                            }){
+                                messages.append(data)
+                            }
+                            completion(.success(messages))
+                        }
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+            }
+
+        }
+
+    }
+
+
+    func sendMessage(reciverId: String, content: String ){
+
+        let douctment = dateBase.collection("Messages").document()
+        let message = Message(content: content, createdTime: Timestamp.init(date: Date()), receiver: reciverId, sender: userId, messageId: douctment.documentID)
+        do {
+            try douctment.setData(from: message)
+
+        } catch {
+            print(error)
+        }
+
+
+    }
+
 
 
     func addPetToUser(petId: String) {
@@ -175,13 +295,13 @@ class FirebaseManager {
 
         let document =   dateBase.collection("Pets").document(petId)
 
-    document.delete() { error in
-        if let error = error {
-             print("Error removing document: \(error)")
-         } else {
-             print("Document successfully removed!")
-         }
-    }
+        document.delete() { error in
+            if let error = error {
+                print("Error removing document: \(error)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
 
     }
 
@@ -411,32 +531,32 @@ class FirebaseManager {
         }
         uploadPhoto(image: newimage, filePath: .petPhotos) { result in
             print("Strat UpDatePetPhoto\(newimage)....................")
-                switch result {
-                case .success(let pic):
-                    print("UpDatePetPhotoSucess\(pic)....................")
-                    print("UpDatePetToDB....................")
-                    self.dateBase.collection("Pets").document(upDatepetId).updateData([
-                        "petId": data.petId,
-                        "name": data.name,
-                        "userId": self.userId,
-                        "healthInfo.birthday": data.healthInfo.birthday,
-                        "healthInfo.chipId": data.healthInfo.chipId,
-                        "healthInfo.gender": data.healthInfo.chipId,
-                        "healthInfo.note": data.healthInfo.note,
-                        "healthInfo.type": data.healthInfo.type,
-                        "healthInfo.weight": data.healthInfo.weight,
-                        "healthInfo.weightUnit": data.healthInfo.weightUnit,
-                        "petThumbnail.url": pic.url ,
-                        "petThumbnail.fileName": pic.fileName
-                    ])
-                    completion(.success("Succes"))
-                case .failure(let error):
-                    completion(.failure(error))
-                    print("fetchData.failure\(error)")
+            switch result {
+            case .success(let pic):
+                print("UpDatePetPhotoSucess\(pic)....................")
+                print("UpDatePetToDB....................")
+                self.dateBase.collection("Pets").document(upDatepetId).updateData([
+                    "petId": data.petId,
+                    "name": data.name,
+                    "userId": self.userId,
+                    "healthInfo.birthday": data.healthInfo.birthday,
+                    "healthInfo.chipId": data.healthInfo.chipId,
+                    "healthInfo.gender": data.healthInfo.chipId,
+                    "healthInfo.note": data.healthInfo.note,
+                    "healthInfo.type": data.healthInfo.type,
+                    "healthInfo.weight": data.healthInfo.weight,
+                    "healthInfo.weightUnit": data.healthInfo.weightUnit,
+                    "petThumbnail.url": pic.url ,
+                    "petThumbnail.fileName": pic.fileName
+                ])
+                completion(.success("Succes"))
+            case .failure(let error):
+                completion(.failure(error))
+                print("fetchData.failure\(error)")
 
-                }
             }
         }
+    }
 
 
     func listenDiaries(completion: @escaping (Result<[Diary], Error>) -> Void) {
@@ -576,12 +696,12 @@ class FirebaseManager {
         print("Strat DeletePhoto\(fileName)....................")
         let storageRef = storage.reference().child(filePath.rawValue).child(fileName)
         storageRef.delete { error in
-          if let error = error {
-              print("DeletePhotoFlsae....................")
-              print(error)
-          } else {
-              print("DeletePhotoScess....................")
-          }
+            if let error = error {
+                print("DeletePhotoFlsae....................")
+                print(error)
+            } else {
+                print("DeletePhotoScess....................")
+            }
         }
 
     }
@@ -760,7 +880,7 @@ class FirebaseManager {
             "lastUpdate": Timestamp.init(date: Date()) ,
         ])
 
-        }
+    }
 
     func delateSupply(supplyId: String, completion: @escaping (Result<String, Error>) -> Void) {
         print("StartDeleateSupply\(supplyId)")
@@ -776,3 +896,5 @@ class FirebaseManager {
 
 
 }
+
+
