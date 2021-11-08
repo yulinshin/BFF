@@ -18,8 +18,11 @@ struct Diary: Codable {
     var images: [Pic]
     var isPublic: Bool
     var petTags: [String]
+    var whoLiked: [String] = [String]()
     var userId: String
     var petId: String
+    var petThumbnail: Pic?
+    var petname: String?
 
     init(
     content: String,

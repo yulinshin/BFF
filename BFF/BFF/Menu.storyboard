@@ -4,10 +4,16 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="GenJyuuGothic-Regular.ttf">
+            <string>GenJyuuGothic-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="RNj-ge-qA5">
@@ -72,42 +78,95 @@
         <!--Item-->
         <scene sceneID="KR2-5n-3Md">
             <objects>
-                <viewController id="134-VG-407" customClass="TestViewController" customModule="BFF" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SideMenuViewController" id="134-VG-407" customClass="SideMenuViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="TestViewController" id="K2P-gf-rtY">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="260" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkx-oV-Y2p">
-                                <rect key="frame" x="174" y="526" width="67" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                <connections>
-                                    <action selector="sendNotificationBtnPressed:" destination="134-VG-407" eventType="touchUpInside" id="fE5-rv-kox"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O8b-p3-QMA">
-                                <rect key="frame" x="174" y="487" width="67" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                <connections>
-                                    <action selector="wwww:" destination="134-VG-407" eventType="touchUpInside" id="T4w-By-ctB"/>
-                                </connections>
-                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vtV-9i-ZV4">
+                                <rect key="frame" x="0.0" y="100" width="260" height="796"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Iy-kC-n8X">
+                                <rect key="frame" x="0.0" y="0.0" width="260" height="100"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ar0-7b-6Z0">
+                                        <rect key="frame" x="16" y="16" width="68" height="68"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="68" id="IM3-tg-JmH"/>
+                                            <constraint firstAttribute="height" constant="68" id="mFz-kb-ggw"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="di4-am-HUS">
+                                        <rect key="frame" x="92" y="55" width="27" height="14"/>
+                                        <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="10"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qP0-eK-Cun">
+                                        <rect key="frame" x="92" y="30" width="152" height="23"/>
+                                        <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gearshape.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="A61-lf-dfn">
+                                        <rect key="frame" x="214" y="16" width="30" height="29.5"/>
+                                        <color key="tintColor" name="main"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="jsL-Ao-9Rw"/>
+                                            <constraint firstAttribute="width" secondItem="A61-lf-dfn" secondAttribute="height" multiplier="1:1" id="q4t-IS-IZd"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="qP0-eK-Cun" firstAttribute="leading" secondItem="Ar0-7b-6Z0" secondAttribute="trailing" constant="8" id="2kV-Oe-gAi"/>
+                                    <constraint firstItem="di4-am-HUS" firstAttribute="leading" secondItem="qP0-eK-Cun" secondAttribute="leading" id="5gG-U7-Pn2"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ar0-7b-6Z0" secondAttribute="bottom" constant="16" id="UOb-uN-yMG"/>
+                                    <constraint firstAttribute="height" constant="100" id="Zxb-GS-kcW"/>
+                                    <constraint firstAttribute="trailing" secondItem="A61-lf-dfn" secondAttribute="trailing" constant="16" id="a5u-1g-uzZ"/>
+                                    <constraint firstItem="qP0-eK-Cun" firstAttribute="top" secondItem="0Iy-kC-n8X" secondAttribute="top" constant="30" id="aC0-VC-7GV"/>
+                                    <constraint firstItem="di4-am-HUS" firstAttribute="top" secondItem="qP0-eK-Cun" secondAttribute="bottom" constant="2" id="fOE-X6-bfr"/>
+                                    <constraint firstItem="A61-lf-dfn" firstAttribute="top" secondItem="0Iy-kC-n8X" secondAttribute="top" constant="16" id="gMh-qP-R2Y"/>
+                                    <constraint firstAttribute="trailing" secondItem="qP0-eK-Cun" secondAttribute="trailing" constant="16" id="hWS-9e-gPA"/>
+                                    <constraint firstItem="Ar0-7b-6Z0" firstAttribute="leading" secondItem="0Iy-kC-n8X" secondAttribute="leading" constant="16" id="hr5-Mc-y8s"/>
+                                    <constraint firstItem="Ar0-7b-6Z0" firstAttribute="top" secondItem="0Iy-kC-n8X" secondAttribute="top" constant="16" id="qT7-3K-GeU"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="IJ3-lo-CNe"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="0Iy-kC-n8X" secondAttribute="trailing" id="3dY-CF-Iim"/>
+                            <constraint firstItem="vtV-9i-ZV4" firstAttribute="top" secondItem="0Iy-kC-n8X" secondAttribute="bottom" id="5Uy-KP-Mva"/>
+                            <constraint firstItem="0Iy-kC-n8X" firstAttribute="leading" secondItem="K2P-gf-rtY" secondAttribute="leading" id="5nh-Fi-8BQ"/>
+                            <constraint firstItem="vtV-9i-ZV4" firstAttribute="top" secondItem="0Iy-kC-n8X" secondAttribute="bottom" id="GjT-5K-EyZ"/>
+                            <constraint firstItem="vtV-9i-ZV4" firstAttribute="leading" secondItem="IJ3-lo-CNe" secondAttribute="leading" id="O9i-hn-2bZ"/>
+                            <constraint firstItem="0Iy-kC-n8X" firstAttribute="top" secondItem="K2P-gf-rtY" secondAttribute="top" id="aP6-1f-vgI"/>
+                            <constraint firstAttribute="bottom" secondItem="vtV-9i-ZV4" secondAttribute="bottom" id="jo4-XR-4Uv"/>
+                            <constraint firstItem="IJ3-lo-CNe" firstAttribute="trailing" secondItem="vtV-9i-ZV4" secondAttribute="trailing" id="pM2-uL-EYb"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="0Fk-AW-B4D"/>
+                    <size key="freeformSize" width="260" height="896"/>
+                    <connections>
+                        <outlet property="setting" destination="A61-lf-dfn" id="cbW-KZ-5kf"/>
+                        <outlet property="userImage" destination="Ar0-7b-6Z0" id="sCX-sM-mMB"/>
+                        <outlet property="userName" destination="qP0-eK-Cun" id="5F8-0L-Xvx"/>
+                        <outlet property="useremail" destination="di4-am-HUS" id="CTI-vp-2ya"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UZG-Gx-fwL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1345" y="139"/>
+            <point key="canvasLocation" x="-1348" y="135"/>
         </scene>
     </scenes>
     <resources>
         <image name="404" width="487" height="244"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
+        <namedColor name="main">
+            <color red="1" green="0.6119999885559082" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

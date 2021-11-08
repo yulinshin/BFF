@@ -24,6 +24,7 @@ class DetialViewModel {
     let comments = Box([String]())
     let isPublic = Box(false)
     let diaryId = Box(" ")
+    var diary: Diary?
 
     init() {
         getdiaryData(from: Self.defaultDiray)
@@ -31,6 +32,7 @@ class DetialViewModel {
 
     init(from diary: Diary) {
         getdiaryData(from: diary)
+        self.diary = diary
     }
 
     private func getdiaryData(from diary: Diary) {
@@ -38,11 +40,8 @@ class DetialViewModel {
             self.postImageUrl.value = image.url
             self.postPetFileName.value = image.fileName
         }
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd,yyyy"
-        let date = diary.createdTime.dateValue()
-        self.creatDate.value = dateFormatter.string(from: date)
+        
+        self.creatDate.value =  diary.createdTime.dateValue().toString()
         self.contentText.value = diary.content
         self.petTags.value = diary.petTags
         self.numberOfComments.value = diary.comments.count

@@ -2,6 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>GCP_API_KEY</key>
+	<string>$(GCP_API_KEY)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>comgooglemaps-x-callback</string>
+		<string>comgooglemaps</string>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>GenJyuuGothic-Regular.ttf</string>
+		<string>GenJyuuGothic-Normal.ttf</string>
+		<string>GenJyuuGothic-Medium.ttf</string>
+		<string>GenJyuuGothic-Light.ttf</string>
+		<string>GenJyuuGothic-Heavy.ttf</string>
+		<string>GenJyuuGothic-ExtraLight.ttf</string>
+		<string>GenJyuuGothic-Bold.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

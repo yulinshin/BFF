@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 struct Supply: Codable {
 
@@ -21,5 +22,6 @@ struct Supply: Codable {
     var supplyId: String
     var supplyName: String
     var unit: String
+    var lastUpdate: Timestamp
     
 }

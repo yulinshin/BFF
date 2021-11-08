@@ -19,13 +19,13 @@ class DiaryDetailViewController: UIViewController {
 
     @IBOutlet weak var createdTimeLabel: UILabel!
 
-    @IBOutlet weak var tagStackView: UIStackView!
-
     @IBOutlet weak var ccommentImage: UIImageView!
 
     @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var likeCountLabel: UILabel!
 
     @IBOutlet weak var settingButton: UIButton!
+    @IBOutlet weak var diaryStateLabel: UILabel!
 
     var viewModel = DetialViewModel()
     var comments = [String]()
@@ -36,6 +36,8 @@ class DiaryDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        contentTextView.sizeToFit()
 
         postPetImageView.layer.cornerRadius = postPetImageView.frame.height / 2
 
@@ -66,6 +68,7 @@ class DiaryDetailViewController: UIViewController {
 
         viewModel.comments.bind {  [weak self] comments in
             self?.comments = comments
+            self?.commentLabel.text = "\(comments.count)"
         }
 
         viewModel.petTags.bind {  [weak self] petTags in
@@ -76,9 +79,35 @@ class DiaryDetailViewController: UIViewController {
             self?.diaryId = diaryId
         }
 
-        setPetsTag()
+        viewModel.isPublic.bind { isPublic in
+            if isPublic {
+                self.diaryStateLabel.text = "Public"
+            }else{
+                self.diaryStateLabel.text = "Private"
+            }
+        }
+        if let count = viewModel.diary?.whoLiked.count {
+            likeCountLabel.text = "\(count)"
+
+        }
+
+        ccommentImage.isUserInteractionEnabled = true
+        ccommentImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapComment)))
 
     }
+
+    @objc func didTapComment(){
+
+        let storyboard = UIStoryboard(name: "Soical", bundle: nil)
+
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "CommentTableViewController") as? CommentTableViewController else { return }
+        controller.diary = viewModel.diary!
+        self.navigationController?.pushViewController(controller, animated: true)
+
+    }
+
+
+
     @IBAction func showMenu(_ sender: Any) {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -122,12 +151,14 @@ class DiaryDetailViewController: UIViewController {
         func editPrivacyToPublic(_ action: UIAlertAction) {
             print("tapped \(action.title!)")
             viewModel.changePrivacy(isPublic: true)
+            self.diaryStateLabel.text = "Public"
 
         }
 
         func editPrivacyToPrivate(_ action: UIAlertAction) {
         print("tapped \(action.title!)")
             viewModel.changePrivacy(isPublic: false)
+            self.diaryStateLabel.text = "Private"
 
         }
 
@@ -176,17 +207,17 @@ class DiaryDetailViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
 
         }
-
-        func setPetsTag() {
-            tagStackView.subviews.forEach { subview in
-                tagStackView.removeArrangedSubview(subview)
-            }
-            petTags.forEach { petName in
-                let tag = UILabel()
-                tag.text = petName
-                tagStackView.addArrangedSubview(tag)
-            }
-        }
+//
+//        func setPetsTag() {
+//            tagStackView.subviews.forEach { subview in
+//                tagStackView.removeArrangedSubview(subview)
+//            }
+//            petTags.forEach { petName in
+//                let tag = UILabel()
+//                tag.text = petName
+//                tagStackView.addArrangedSubview(tag)
+//            }
+//        }
 
     }
 

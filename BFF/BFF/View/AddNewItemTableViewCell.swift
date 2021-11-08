@@ -8,7 +8,7 @@
 import UIKit
 
 class AddNewItemTableViewCell: UITableViewCell {
-    @IBOutlet weak var cellCardBackGroundVIew: UIView!
+    @IBOutlet weak var cellCardBackGroundView: UIView!
 
     static let identifier = "AddNewItemTableViewCell"
 
@@ -17,12 +17,12 @@ class AddNewItemTableViewCell: UITableViewCell {
 
         // Layout
 
-        cellCardBackGroundVIew.layer.shadowColor = UIColor.gray.cgColor
-        cellCardBackGroundVIew.layer.shadowOpacity = 0.2
-        cellCardBackGroundVIew.layer.cornerRadius = 16
-        cellCardBackGroundVIew.layer.shadowRadius = 4
-        cellCardBackGroundVIew.backgroundColor = UIColor.white
-        cellCardBackGroundVIew.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        cellCardBackGroundView.layer.shadowColor = UIColor.gray.cgColor
+        cellCardBackGroundView.layer.shadowOpacity = 0.2
+        cellCardBackGroundView.layer.cornerRadius = 16
+        cellCardBackGroundView.layer.shadowRadius = 4
+        cellCardBackGroundView.backgroundColor = UIColor.white
+        cellCardBackGroundView.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
 
     }
 

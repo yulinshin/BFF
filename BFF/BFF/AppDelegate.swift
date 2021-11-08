@@ -10,52 +10,78 @@ import UserNotifications
 import IQKeyboardManagerSwift
 import Firebase
 import FirebaseMessaging
+import FirebaseAuth
 import CoreData
+import GoogleMaps
+import GooglePlaces
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let center = UNUserNotificationCenter.current()
 
-        // delegate for receiving or delivering notification
+    // delegate for receiving or delivering notification
     let notificationDelegate = NotificationDelegate()
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
         FirebaseApp.configure()
+
         IQKeyboardManager.shared.enable = true
         Messaging.messaging().delegate = self
+        GMSServices.provideAPIKey("AIzaSyCuIEN8YUXa-OS0S5L2nOW_O__u4NfzfdY")
+        GMSPlacesClient.provideAPIKey("AIzaSyCuIEN8YUXa-OS0S5L2nOW_O__u4NfzfdY")
 
         center.delegate = notificationDelegate
 
-               // MARK: set authorization
-               let options: UNAuthorizationOptions = [.badge, .sound, .alert]
-               center.getNotificationSettings { ( settings ) in
-                   switch settings.authorizationStatus {
-                   case .notDetermined:
-                       self.center.requestAuthorization(options: options) {
-                           (granted, error) in
-                           if !granted {
-                               print("Something went wrong")
-                           }
-                       }
-                   case .authorized:
-                       DispatchQueue.main.async(execute: {
-                           UIApplication.shared.registerForRemoteNotifications()
-                       })
-                   case .denied:
-                       print("cannot use notifications cuz the user has denied permissions")
+        // MARK: set authorization
+        let options: UNAuthorizationOptions = [.badge, .sound, .alert]
+        center.getNotificationSettings { ( settings ) in
+            switch settings.authorizationStatus {
+            case .notDetermined:
+                self.center.requestAuthorization(options: options) {
+                    (granted, error) in
+                    if !granted {
+                        print("Something went wrong")
+                    }
+                }
+            case .authorized:
+                DispatchQueue.main.async(execute: {
+                    UIApplication.shared.registerForRemoteNotifications()
+                })
+            case .denied:
+                print("cannot use notifications cuz the user has denied permissions")
 
-                   case .provisional:
-                       break
-                   case .ephemeral:
-                       break
-                   @unknown default:
-                       break
-                   }
-               }
+            case .provisional:
+                break
+            case .ephemeral:
+                break
+            @unknown default:
+                break
+            }
+        }
 
+
+        let userDefaults = UserDefaults.standard
+
+        if !userDefaults.bool(forKey:"hasRunBefore") {
+
+            print("First time launch, setting UserDefults")
+
+            do {
+                try Auth.auth().signOut()
+            } catch {
+                print("Failed to singOut pervious User")
+            }
+            userDefaults.set(true, forKey: "hasRunBefore")
+            userDefaults.synchronize()  // force the app to update UserDefaults
+
+        } else {
+            print("Has been launched before, Loading UserDefults")
+            
+        }
 
         return true
     }
