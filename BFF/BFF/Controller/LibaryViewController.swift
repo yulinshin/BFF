@@ -20,6 +20,7 @@ class LibaryViewController: UIViewController {
         libaryCollectionView.dataSource = self
 
         self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
+        navigationController?.navigationBar.barTintColor = UIColor(named: "main")
 
 
     }
@@ -62,6 +63,7 @@ extension LibaryViewController:UICollectionViewDataSource, UICollectionViewDeleg
 
             let storyboard = UIStoryboard(name: "Libary", bundle: nil)
             guard let controller = storyboard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
+            controller.title = "全台動物醫院"
             self.navigationController?.pushViewController(controller, animated: true)
         default:
             break

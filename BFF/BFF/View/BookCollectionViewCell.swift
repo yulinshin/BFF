@@ -38,10 +38,12 @@ class BookCollectionViewCell: UICollectionViewCell {
     func setLayout(){
 
         bookCoverBackground.layer.cornerRadius = 10
-        bookCoverBackground.layer.shadowColor = UIColor.white.cgColor
-        bookCoverBackground.layer.shadowOffset = CGSize(width: 10, height: 10)
+        bookCoverBackground.backgroundColor = .white
+        bookCoverBackground.layer.shadowOffset = CGSize(width: 4, height: 4)
         bookCoverBackground.layer.shadowColor = UIColor.gray.cgColor
-        bookCoverBackground.layer.shadowRadius = 6
+
+        bookCoverBackground.layer.shadowRadius = 10
+        bookCoverBackground.layer.shadowOpacity = 0.2
 
     }
 
