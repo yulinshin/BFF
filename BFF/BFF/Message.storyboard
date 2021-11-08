@@ -84,7 +84,6 @@
         <!--Chat List Table View Controller-->
         <scene sceneID="7WM-U1-4QR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="U1D-1h-9nA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="ChatListTableViewController" id="yMT-RJ-3A3" customClass="ChatListTableViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zaz-JU-DQS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -101,8 +100,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="66"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QFR-Vd-vOP">
-                                                    <rect key="frame" x="16" y="16" width="40" height="40"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="QFR-Vd-vOP">
+                                                    <rect key="frame" x="16" y="17.5" width="40" height="37"/>
+                                                    <color key="tintColor" name="main"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="QFR-Vd-vOP" secondAttribute="height" multiplier="1:1" id="f4l-3d-MMn"/>
                                                         <constraint firstAttribute="width" constant="40" id="qQR-aB-QkL"/>
@@ -165,6 +165,7 @@
                         <outlet property="tableView" destination="h3L-yZ-ZBL" id="jRm-ak-cao"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U1D-1h-9nA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1734.7826086956522" y="116.51785714285714"/>
         </scene>
@@ -177,7 +178,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PNY-Sr-8aI">
-                                <rect key="frame" x="0.0" y="44" width="414" height="740"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="736"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentTableCell" rowHeight="66" id="T3M-yV-lPO" customClass="CommentTableCell" customModule="BFF" customModuleProvider="target">
@@ -191,15 +192,15 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ZD-Pm-hiL">
-                                <rect key="frame" x="0.0" y="784" width="414" height="62"/>
+                                <rect key="frame" x="0.0" y="780" width="414" height="66"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kBl-im-6Qb">
-                                        <rect key="frame" x="62" y="16" width="294" height="30"/>
+                                        <rect key="frame" x="16" y="16" width="340" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rU-cv-SD7">
-                                        <rect key="frame" x="364" y="14" width="34" height="32"/>
+                                        <rect key="frame" x="364" y="18" width="34" height="32"/>
                                         <fontDescription key="fontDescription" name="GenJyuuGothic-Medium" family="Gen Jyuu Gothic" pointSize="14"/>
                                         <color key="tintColor" name="main"/>
                                         <state key="normal" title="Send">
@@ -209,24 +210,14 @@
                                             <action selector="sendMessage:" destination="rqC-4N-DcN" eventType="touchUpInside" id="zTX-al-Rys"/>
                                         </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hPb-vo-8pH">
-                                        <rect key="frame" x="16" y="16" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="gxh-WN-ZGH"/>
-                                            <constraint firstAttribute="width" constant="30" id="hh6-Wt-MEZ"/>
-                                        </constraints>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="3rU-cv-SD7" secondAttribute="bottom" constant="16" id="0qz-tW-EC9"/>
                                     <constraint firstAttribute="bottom" secondItem="kBl-im-6Qb" secondAttribute="bottom" constant="16" id="Aec-Aw-LDK"/>
-                                    <constraint firstAttribute="bottom" secondItem="hPb-vo-8pH" secondAttribute="bottom" constant="16" id="EgM-c0-boO"/>
-                                    <constraint firstItem="kBl-im-6Qb" firstAttribute="leading" secondItem="hPb-vo-8pH" secondAttribute="trailing" constant="16" id="FYp-gf-GlM"/>
                                     <constraint firstAttribute="trailing" secondItem="3rU-cv-SD7" secondAttribute="trailing" constant="16" id="LKF-kd-wl6"/>
-                                    <constraint firstItem="hPb-vo-8pH" firstAttribute="top" secondItem="7ZD-Pm-hiL" secondAttribute="top" constant="16" id="Nj7-AV-3dj"/>
-                                    <constraint firstItem="hPb-vo-8pH" firstAttribute="leading" secondItem="7ZD-Pm-hiL" secondAttribute="leading" constant="16" id="UT2-lj-fzQ"/>
                                     <constraint firstItem="kBl-im-6Qb" firstAttribute="top" secondItem="7ZD-Pm-hiL" secondAttribute="top" constant="16" id="axa-ZS-meS"/>
+                                    <constraint firstItem="kBl-im-6Qb" firstAttribute="leading" secondItem="7ZD-Pm-hiL" secondAttribute="leading" constant="16" id="nfS-Cv-gMB"/>
                                     <constraint firstItem="3rU-cv-SD7" firstAttribute="leading" secondItem="kBl-im-6Qb" secondAttribute="trailing" constant="8" id="yVh-fS-M2r"/>
                                 </constraints>
                             </view>
@@ -275,6 +266,7 @@
     </scenes>
     <resources>
         <image name="404" width="487" height="244"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <namedColor name="main">
             <color red="1" green="0.6119999885559082" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

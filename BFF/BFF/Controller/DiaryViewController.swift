@@ -65,6 +65,7 @@ class DiaryViewController: UIViewController {
         selectedPetsCollectionView.dataSource = petsDataSource
         diariesCollectionView.collectionViewLayout = creatLayout(type: .single)
         selectedPetsCollectionView.allowsMultipleSelection = true
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Filter"), style: .done, target: self, action: #selector(switchShowList))
 

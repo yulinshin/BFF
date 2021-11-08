@@ -50,6 +50,11 @@ extension ChatListTableViewController: UITableViewDelegate, UITableViewDataSourc
 
         guard let viewModel = viewModel else { return cell}
         cell.setup(viewModel: (viewModel.showingUserList.value[indexPath.row]))
+
+        viewModel.showingUserList.value[indexPath.row].didGetData = {
+            cell.nameLabel.text =  viewModel.showingUserList.value[indexPath.row].userName.value
+            cell.photImageView.loadImage( viewModel.showingUserList.value[indexPath.row].userPic.value , placeHolder: UIImage(systemName: "person.fill"))
+        }
         return cell
     }
 
@@ -60,7 +65,6 @@ extension ChatListTableViewController: UITableViewDelegate, UITableViewDataSourc
         guard let controller = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
         controller.viewModel = self.viewModel?.showingUserList.value[indexPath.row]
         self.navigationController?.show(controller, sender: nil)
-
 
 
     }
@@ -86,12 +90,6 @@ class ChatListTableViewCell: UITableViewCell{
 
         viewModel.lastMassage.bind { content in
             self.commentLabel.text = content
-        }
-        viewModel.userName.bind { name in
-            self.nameLabel.text = name
-        }
-        viewModel.userPic.bind { url in
-            self.photImageView.loadImage(url)
         }
 
         viewModel.lastMassageDate.bind { date in

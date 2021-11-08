@@ -22,8 +22,10 @@ class DiaryDetailViewController: UIViewController {
     @IBOutlet weak var ccommentImage: UIImageView!
 
     @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var likeCountLabel: UILabel!
 
     @IBOutlet weak var settingButton: UIButton!
+    @IBOutlet weak var diaryStateLabel: UILabel!
 
     var viewModel = DetialViewModel()
     var comments = [String]()
@@ -77,9 +79,35 @@ class DiaryDetailViewController: UIViewController {
             self?.diaryId = diaryId
         }
 
-//        setPetsTag()
+        viewModel.isPublic.bind { isPublic in
+            if isPublic {
+                self.diaryStateLabel.text = "Public"
+            }else{
+                self.diaryStateLabel.text = "Private"
+            }
+        }
+        if let count = viewModel.diary?.whoLiked.count {
+            likeCountLabel.text = "\(count)"
+
+        }
+
+        ccommentImage.isUserInteractionEnabled = true
+        ccommentImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapComment)))
 
     }
+
+    @objc func didTapComment(){
+
+        let storyboard = UIStoryboard(name: "Soical", bundle: nil)
+
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "CommentTableViewController") as? CommentTableViewController else { return }
+        controller.diary = viewModel.diary!
+        self.navigationController?.pushViewController(controller, animated: true)
+
+    }
+
+
+
     @IBAction func showMenu(_ sender: Any) {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -123,12 +151,14 @@ class DiaryDetailViewController: UIViewController {
         func editPrivacyToPublic(_ action: UIAlertAction) {
             print("tapped \(action.title!)")
             viewModel.changePrivacy(isPublic: true)
+            self.diaryStateLabel.text = "Public"
 
         }
 
         func editPrivacyToPrivate(_ action: UIAlertAction) {
         print("tapped \(action.title!)")
             viewModel.changePrivacy(isPublic: false)
+            self.diaryStateLabel.text = "Private"
 
         }
 

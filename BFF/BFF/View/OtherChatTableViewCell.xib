@@ -18,8 +18,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_sticker_placeholder01" translatesAutoresizingMaskIntoConstraints="NO" id="F4N-Tl-SNd">
-                        <rect key="frame" x="24" y="16" width="40" height="40"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="F4N-Tl-SNd">
+                        <rect key="frame" x="24" y="17.5" width="40" height="37"/>
+                        <color key="tintColor" name="main-O"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="4vd-kG-Dr4"/>
                             <constraint firstAttribute="height" constant="40" id="ESY-zh-wsn"/>
@@ -72,9 +73,12 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="profile_sticker_placeholder01" width="36" height="36"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <namedColor name="B6">
             <color red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="main-O">
+            <color red="0.84700000286102295" green="0.59799998998641968" blue="0.32199999690055847" alpha="0.8880000114440918" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

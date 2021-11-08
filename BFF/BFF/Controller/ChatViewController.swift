@@ -36,8 +36,10 @@ class ChatViewController: UIViewController {
         viewModel?.setlisiten()
         viewModel?.didGetData = {
             self.tableView.reloadData()
-
+            self.title = self.viewModel?.userName.value
         }
+
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
 
     }
 

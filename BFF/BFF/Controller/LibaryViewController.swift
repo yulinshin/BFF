@@ -16,10 +16,20 @@ class LibaryViewController: UIViewController {
     @IBOutlet weak var libaryCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.prefersLargeTitles = true
-
         libaryCollectionView.delegate = self
         libaryCollectionView.dataSource = self
+
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
+
+
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
     }
 
@@ -38,6 +48,8 @@ extension LibaryViewController:UICollectionViewDataSource, UICollectionViewDeleg
 
         cell.model = bookViewModels[indexPath.row]
         cell.makeBookCover()
+        cell.setLayout()
+
         
         return cell
     }
@@ -50,9 +62,6 @@ extension LibaryViewController:UICollectionViewDataSource, UICollectionViewDeleg
 
             let storyboard = UIStoryboard(name: "Libary", bundle: nil)
             guard let controller = storyboard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
-
-
-
             self.navigationController?.pushViewController(controller, animated: true)
         default:
             break

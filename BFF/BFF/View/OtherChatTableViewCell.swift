@@ -39,7 +39,7 @@ class OtherChatTableViewCell: UITableViewCell {
         }
 
         viewModel.sender.bind { sender in
-            self.profileImg.loadImage(sender)
+            self.profileImg.loadImage(sender, placeHolder: UIImage(systemName: "person.fill"))
         }
 
         viewModel.content.bind { content in
