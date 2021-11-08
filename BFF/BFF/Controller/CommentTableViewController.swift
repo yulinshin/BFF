@@ -28,7 +28,7 @@ class CommentTableViewController: UIViewController {
 
         let petNib = UINib(nibName: "SelectedPetsCollectionViewCell", bundle: nil)
         collectionView.register(petNib, forCellWithReuseIdentifier: SelectedPetsCollectionViewCell.identifier)
-
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
         getComments()
 
     }

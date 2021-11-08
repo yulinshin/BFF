@@ -9,6 +9,11 @@ import UIKit
 
 class SideMenuViewController: UIViewController {
 
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var useremail: UILabel!
+    @IBOutlet weak var setting: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -46,7 +46,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.settings.myLocationButton = true
         mapView.isMyLocationEnabled = true
         mapView.delegate = self
-
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
         self.infoWindow = loadNiB()
 
         // User Location

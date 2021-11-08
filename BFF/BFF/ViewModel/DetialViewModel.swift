@@ -24,6 +24,7 @@ class DetialViewModel {
     let comments = Box([String]())
     let isPublic = Box(false)
     let diaryId = Box(" ")
+    var diary: Diary?
 
     init() {
         getdiaryData(from: Self.defaultDiray)
@@ -31,6 +32,7 @@ class DetialViewModel {
 
     init(from diary: Diary) {
         getdiaryData(from: diary)
+        self.diary = diary
     }
 
     private func getdiaryData(from diary: Diary) {

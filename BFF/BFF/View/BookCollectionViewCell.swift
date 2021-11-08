@@ -22,7 +22,7 @@ class BookCollectionViewCell: UICollectionViewCell {
         }
 
         model.icon.bind { urlStr in
-            self.bookIconImageView.loadImage(urlStr, placeHolder: UIImage())
+            self.bookIconImageView.loadImage(urlStr, placeHolder: UIImage(named: "vet"))
         }
 
         model.title.bind { title in
@@ -33,15 +33,20 @@ class BookCollectionViewCell: UICollectionViewCell {
             self.bookSubTitle.text = subtitle
         }
 
-        setLayout()
-
     }
 
     func setLayout(){
 
         bookCoverBackground.layer.cornerRadius = 10
-        bookCoverBackground.layer.shadowColor = UIColor.gray.cgColor
+        bookCoverBackground.layer.shadowColor = UIColor.white.cgColor
         bookCoverBackground.layer.shadowOffset = CGSize(width: 10, height: 10)
+        bookCoverBackground.layer.shadowColor = UIColor.gray.cgColor
+        bookCoverBackground.layer.shadowRadius = 6
+
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
 
     }
 

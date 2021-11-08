@@ -265,17 +265,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QHC-lh-H0n">
-                                <rect key="frame" x="16" y="715.5" width="129.5" height="20"/>
+                                <rect key="frame" x="16" y="715.5" width="134.5" height="20"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="VPH-9Q-Krd">
-                                        <rect key="frame" x="0.0" y="0.0" width="60.5" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="63" height="20"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Uvk-xe-q7v">
                                                 <rect key="frame" x="0.0" y="0.0" width="22" height="19.5"/>
                                                 <color key="tintColor" name="main"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUZ-I2-SH7">
-                                                <rect key="frame" x="26" y="0.0" width="34.5" height="20"/>
+                                                <rect key="frame" x="26" y="0.0" width="37" height="20"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Label">
                                                         <attributes>
@@ -290,14 +290,14 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="MOr-Zz-nhO">
-                                        <rect key="frame" x="70.5" y="0.0" width="59" height="20"/>
+                                        <rect key="frame" x="73" y="0.0" width="61.5" height="20"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="PYg-MK-Jj7">
                                                 <rect key="frame" x="0.0" y="1.5" width="20.5" height="17.5"/>
                                                 <color key="tintColor" name="main"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ra-KL-juI">
-                                                <rect key="frame" x="24.5" y="0.0" width="34.5" height="20"/>
+                                                <rect key="frame" x="24.5" y="0.0" width="37" height="20"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Label">
                                                         <attributes>
@@ -342,6 +342,15 @@
                                     <action selector="showMenu:" destination="540-Ds-hWY" eventType="touchUpInside" id="FeC-Wi-RPb"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1q-np-oWY">
+                                <rect key="frame" x="356.5" y="428.5" width="41.5" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20.5" id="M1d-ic-PhL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="B0J-nK-oWq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -356,6 +365,8 @@
                             <constraint firstItem="B0J-nK-oWq" firstAttribute="trailing" secondItem="Cad-zW-cYW" secondAttribute="trailing" constant="16" id="Ese-gG-z92"/>
                             <constraint firstItem="Cad-zW-cYW" firstAttribute="leading" secondItem="B0J-nK-oWq" secondAttribute="leading" constant="16" id="FYH-4P-jfQ"/>
                             <constraint firstAttribute="trailing" secondItem="CAl-bQ-NsD" secondAttribute="trailing" id="KGw-jd-ngX"/>
+                            <constraint firstItem="B0J-nK-oWq" firstAttribute="trailing" secondItem="k1q-np-oWY" secondAttribute="trailing" constant="16" id="R91-nf-hV9"/>
+                            <constraint firstItem="Wrl-nC-FS7" firstAttribute="top" secondItem="k1q-np-oWY" secondAttribute="bottom" constant="17" id="U54-ix-zRQ"/>
                             <constraint firstItem="B0J-nK-oWq" firstAttribute="trailing" secondItem="Wrl-nC-FS7" secondAttribute="trailing" constant="16" id="WRZ-1d-w0w"/>
                             <constraint firstItem="QHC-lh-H0n" firstAttribute="leading" secondItem="Cad-zW-cYW" secondAttribute="leading" id="YiX-ff-Jga"/>
                             <constraint firstItem="B0J-nK-oWq" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QHC-lh-H0n" secondAttribute="bottom" constant="16" id="ZD3-fn-whC"/>
@@ -370,7 +381,9 @@
                         <outlet property="commentLabel" destination="cUZ-I2-SH7" id="6kJ-lY-Fko"/>
                         <outlet property="contentTextView" destination="Cad-zW-cYW" id="Yyt-lk-hfX"/>
                         <outlet property="createdTimeLabel" destination="Aao-ZA-naO" id="Tpl-BN-Mjg"/>
+                        <outlet property="diaryStateLabel" destination="k1q-np-oWY" id="HDv-Cg-2we"/>
                         <outlet property="image" destination="CAl-bQ-NsD" id="JaE-0j-VYa"/>
+                        <outlet property="likeCountLabel" destination="7ra-KL-juI" id="3yh-ns-bFy"/>
                         <outlet property="postPetImageView" destination="hoP-z5-cZ5" id="N0r-FV-r8i"/>
                         <outlet property="postPetNameLabel" destination="B36-HL-g9r" id="Oa5-xX-ayx"/>
                         <outlet property="settingButton" destination="Wrl-nC-FS7" id="9LI-bI-gtE"/>

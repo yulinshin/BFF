@@ -14,7 +14,27 @@ class DiaryWallViewModel {
     var didUpDateData: (() -> Void)?
 
     func fetchDiary() {
-        FirebaseManager.shared.fetchDiaries { result in
+        FirebaseManager.shared.fetchDiaries() { result in
+
+            switch result {
+
+            case .success(let diaries):
+
+                self.diaries.value = diaries
+                self.showingDiaries.value = diaries
+                self.updatePetData()
+
+            case.failure(let error):
+
+                print(error)
+
+            }
+        }
+    }
+
+
+    func fetchAllDiary() {
+        FirebaseManager.shared.fetchAllDiaries() { result in
 
             switch result {
 

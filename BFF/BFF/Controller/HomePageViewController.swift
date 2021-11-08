@@ -49,12 +49,13 @@ class HomePageViewController: UIViewController {
         }
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "MenuTab"), style: .done, target: self, action: #selector(showSideMenu))
+        self.navigationItem.rightBarButtonItem?.tintColor = .white
 
     }
 
 
     @objc func showSideMenu(){
-        print("ShowSideMenu")
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -100,6 +101,7 @@ extension HomePageViewController: UICollectionViewDelegate {
 
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryViewController") as? DiaryViewController else { return }
                 controller.userPetIds = viewModel.usersPetsIds.value
+                controller.showSelectedPetsCollectionView = false
 
                 self.navigationController?.show(controller, sender: nil)
 
@@ -249,7 +251,6 @@ extension HomePageViewController: UICollectionViewDataSource {
 
                 cell.setup(petImage: pet.petThumbnail?.url ?? "", petName: pet.name, petBirthday: pet.healthInfo.birthday)
                 cell.didTapCard = {
-
                     let storyboard = UIStoryboard(name: "Diary", bundle: nil)
                     guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryViewController") as? DiaryViewController else { return }
                     controller.userPetIds = [pet.petId]

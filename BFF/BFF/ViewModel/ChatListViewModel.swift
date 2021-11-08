@@ -7,6 +7,7 @@
 
 import Foundation
 import Kingfisher
+import SwiftUI
 
 class ChatListViewModel {
 
@@ -48,6 +49,7 @@ class ChatListViewModel {
                     self.showingUserList.value.append(groupModel)
                     }
                 }
+
                 self.didGetData?()
 
             case .failure(let error):
@@ -74,12 +76,13 @@ class ChatGroupViewModel {
 
         self.messages.value = messages.sorted(by: {$0.createdTime.dateValue() > $1.createdTime.dateValue()})
         self.userId.value = userId
-        self.userName.value = userId //Need to cahnge to userName
-        self.userPic.value = userId  //Need to cahnge to userName
+        self.userName.value = "" //Need to cahnge to userName
+        self.userPic.value = ""  //Need to cahnge to userName
         guard let content = self.messages.value.first?.content,
         let lastDate = self.messages.value.first?.createdTime.dateValue().toString() else { return }
             self.lastMassage.value = content
             self.lastMassageDate.value = lastDate
+        getUserInfo(userId: userId)
         }
 
     func setlisiten(){
@@ -98,8 +101,28 @@ class ChatGroupViewModel {
 
             }
         }
+        getUserInfo(userId: userId.value)
+    }
+    func getUserInfo(userId:String){
+
+        FirebaseManager.shared.fetchUserInfo(userId: userId) { result in
+            switch result {
+
+            case .success(let user):
+
+                self.userName.value = user.userName
+                self.userPic.value = user.userThumbNail?.url ?? ""
+                self.didGetData?()
+
+            case .failure(let error):
+                print(error)
+
+
+            }
+        }
 
     }
+
 }
 
 

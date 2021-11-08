@@ -50,6 +50,26 @@ class FirebaseManager {
         }
     }
 
+    func fetchUserInfo(userId: String, completion: @escaping (Result<User, Error>) -> Void) {
+
+        print("Start fetch UserData ........")
+
+        dateBase.collection("Users").document(userId).getDocument { (document, error) in
+
+            if let document = document, document.exists {
+                do {
+                    if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                        completion(.success(user))
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            } else {
+
+            }
+        }
+    }
+
     func listenUser(completion: @escaping (Result<User, Error>) -> Void) {
 
         print("Start listen UserData........")
@@ -590,6 +610,37 @@ class FirebaseManager {
 
 
 
+    func fetchAllDiaries(completion: @escaping (Result<[Diary], Error>) -> Void) {
+
+        dateBase.collection("Diaries").whereField("isPublic", isEqualTo: true).getDocuments { (querySnapshot, error) in
+
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                var diaries = [Diary]()
+                for doucment in querySnapshot!.documents {
+
+                    do {
+                        if let diary = try doucment.data(as: Diary.self, decoder: Firestore.Decoder()) {
+                            diaries.append(diary)
+                        }
+
+                    } catch {
+
+                        completion(.failure(error))
+                    }
+                }
+
+                let sortDiary = diaries.sorted { firstDiary, secondDiary in
+                    return firstDiary.createdTime.dateValue() > secondDiary.createdTime.dateValue()
+                }
+                completion(.success(sortDiary))
+            }
+        }
+    }
+
+
+
     func fetchDiaries(completion: @escaping (Result<[Diary], Error>) -> Void) {
 
         dateBase.collection("Diaries").whereField("userId", isEqualTo: userId).getDocuments { (querySnapshot, error) in
@@ -726,7 +777,7 @@ class FirebaseManager {
         if isLiked {
 
             dateBase.collection("Diaries").document(diaryId).updateData(["whoLiked": FieldValue.arrayUnion([userId])])
-            ProgressHUD.showSuccess(text: "😍😍😍😍")
+            ProgressHUD.showSuccess(text: "Liked")
 
         } else{
             dateBase.collection("Diaries").document(diaryId).updateData(["whoLiked": FieldValue.arrayRemove([userId])])

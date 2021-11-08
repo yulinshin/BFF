@@ -26,7 +26,7 @@ class DiariesViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.fetchDiary()
+        viewModel.fetchAllDiary()
     }
 }
 
@@ -79,6 +79,17 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
 
             }
 
+            cell.didTapSendMessageButton = {
+
+                let storyboard = UIStoryboard(name: "Message", bundle: nil)
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
+                controller.viewModel = ChatGroupViewModel(messages: [Message](), userId: diaries[indexPath.row].userId)
+
+                self.navigationController?.pushViewController(controller, animated: true)
+
+
+            }
+
             cell.selectionStyle = .none
 
         }
@@ -126,7 +137,7 @@ class DiaryViewCell: UITableViewCell {
     @IBOutlet weak var diaryContentLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var petNameLabel: UILabel!
-
+    @IBOutlet weak var sendMessageButton: UIImageView!
     @IBOutlet weak var moreButton: UIButton!
     static let identifier = "diariesViewCell"
 
@@ -135,6 +146,9 @@ class DiaryViewCell: UITableViewCell {
     var didTapComment: (() -> Void)?
 
     var didTapMoreButton: (() -> Void)?
+
+    var didTapSendMessageButton: (() -> Void)?
+
 
     var isNeedToOpen = false
 
@@ -164,7 +178,18 @@ class DiaryViewCell: UITableViewCell {
         commentIcon.isUserInteractionEnabled = true
         commentIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapCommentButton)))
 
+        sendMessageButton.isUserInteractionEnabled = true
+        sendMessageButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapsendMessageButton)))
+
     }
+
+    @objc func tapsendMessageButton(){
+
+        didTapSendMessageButton?()
+
+    }
+
+
 
     @objc func tapLikedButton(){
 

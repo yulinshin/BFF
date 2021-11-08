@@ -234,6 +234,7 @@ extension CreatPetViewController: UITableViewDataSource {
 
                 cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
                 cell.textField.text = "\(weight)"
+                cell.textField.keyboardType = .numbersAndPunctuation
 
             }
             cell.button.isHidden = true
