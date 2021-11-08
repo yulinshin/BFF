@@ -73,7 +73,7 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
 
                 let storyboard = UIStoryboard(name: "Soical", bundle: nil)
 
-                guard let controller = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "CommentTableViewController") as? CommentTableViewController else { return }
                 controller.diary = diaries[indexPath.row]
                 self.navigationController?.pushViewController(controller, animated: true)
 

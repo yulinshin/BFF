@@ -1,5 +1,5 @@
 //
-//  ChatViewModel.swift
+//  CommentViewModel.swift
 //  BFF
 //
 //  Created by yulin on 2021/11/6.
@@ -9,7 +9,7 @@ import Foundation
 import Kingfisher
 import AVFoundation
 
-class ChatViewModel {
+class CommentViewModel {
 
     let name = Box(" ")
     let pic = Box(" ")

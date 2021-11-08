@@ -37,6 +37,8 @@
 		62603AE227279A4600467E2D /* CubeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62603AE027279A4600467E2D /* CubeCollectionViewCell.xib */; };
 		62603AE52727B64F00467E2D /* AddNewItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62603AE32727B64F00467E2D /* AddNewItemTableViewCell.swift */; };
 		62603AE62727B64F00467E2D /* AddNewItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62603AE42727B64F00467E2D /* AddNewItemTableViewCell.xib */; };
+		6264A85A2736BA6200FACF97 /* ChatListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6264A8592736BA6200FACF97 /* ChatListTableViewController.swift */; };
+		6264A85C2736BB9000FACF97 /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6264A85B2736BB9000FACF97 /* ChatListViewModel.swift */; };
 		6267CDE527338F3700CFA28D /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6267CDE427338F3700CFA28D /* AppTabBar.swift */; };
 		6267CDED2733BBD600CFA28D /* DiarysTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6267CDEC2733BBD600CFA28D /* DiarysTableViewController.swift */; };
 		627648A8271D6B840026C3C3 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627648A7271D6B840026C3C3 /* FirebaseManager.swift */; };
@@ -84,10 +86,16 @@
 		62AB33F827205D5000C8E582 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AB33F727205D5000C8E582 /* NoteViewController.swift */; };
 		62AB33FA27205D6E00C8E582 /* Pet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62AB33F927205D6E00C8E582 /* Pet.storyboard */; };
 		62B617D1273534D70062BBE5 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617D0273534D70062BBE5 /* UILabel+Extension.swift */; };
-		62B617D327365DF20062BBE5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617D227365DF20062BBE5 /* ChatViewController.swift */; };
-		62B617D527365EA50062BBE5 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617D427365EA50062BBE5 /* ChatViewModel.swift */; };
+		62B617D327365DF20062BBE5 /* CommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617D227365DF20062BBE5 /* CommentTableViewController.swift */; };
+		62B617D527365EA50062BBE5 /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617D427365EA50062BBE5 /* CommentViewModel.swift */; };
 		62B617D727365FFE0062BBE5 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617D627365FFE0062BBE5 /* Comment.swift */; };
 		62B617D9273682B30062BBE5 /* CoreDataManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617D8273682B30062BBE5 /* CoreDataManger.swift */; };
+		62B617DB2736A5D60062BBE5 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617DA2736A5D60062BBE5 /* Message.swift */; };
+		62B617DE2736B0FF0062BBE5 /* MyChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617DC2736B0FF0062BBE5 /* MyChatTableViewCell.swift */; };
+		62B617DF2736B0FF0062BBE5 /* MyChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62B617DD2736B0FF0062BBE5 /* MyChatTableViewCell.xib */; };
+		62B617E12736B1C20062BBE5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617E02736B1C20062BBE5 /* ChatViewController.swift */; };
+		62B617E42736B3890062BBE5 /* OtherChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62B617E22736B3890062BBE5 /* OtherChatTableViewCell.xib */; };
+		62B617E52736B3890062BBE5 /* OtherChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617E32736B3890062BBE5 /* OtherChatTableViewCell.swift */; };
 		62BA00FF272E7B7C00A19478 /* PetsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BA00FE272E7B7C00A19478 /* PetsListTableViewController.swift */; };
 		62BA0101272E7DF400A19478 /* PetHealthCardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BA0100272E7DF400A19478 /* PetHealthCardListTableViewCell.swift */; };
 		62BA0103272E7EBE00A19478 /* PetHealthCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BA0102272E7EBE00A19478 /* PetHealthCellViewModel.swift */; };
@@ -159,6 +167,8 @@
 		62603AE32727B64F00467E2D /* AddNewItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewItemTableViewCell.swift; sourceTree = "<group>"; };
 		62603AE42727B64F00467E2D /* AddNewItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNewItemTableViewCell.xib; sourceTree = "<group>"; };
 		62603AE72727E73D00467E2D /* BFF.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BFF.entitlements; sourceTree = "<group>"; };
+		6264A8592736BA6200FACF97 /* ChatListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListTableViewController.swift; sourceTree = "<group>"; };
+		6264A85B2736BB9000FACF97 /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
 		6267CDE427338F3700CFA28D /* AppTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBar.swift; sourceTree = "<group>"; };
 		6267CDEC2733BBD600CFA28D /* DiarysTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiarysTableViewController.swift; sourceTree = "<group>"; };
 		627648A7271D6B840026C3C3 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -206,10 +216,16 @@
 		62AB33F727205D5000C8E582 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		62AB33F927205D6E00C8E582 /* Pet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pet.storyboard; sourceTree = "<group>"; };
 		62B617D0273534D70062BBE5 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
-		62B617D227365DF20062BBE5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		62B617D427365EA50062BBE5 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		62B617D227365DF20062BBE5 /* CommentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewController.swift; sourceTree = "<group>"; };
+		62B617D427365EA50062BBE5 /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
 		62B617D627365FFE0062BBE5 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		62B617D8273682B30062BBE5 /* CoreDataManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManger.swift; sourceTree = "<group>"; };
+		62B617DA2736A5D60062BBE5 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		62B617DC2736B0FF0062BBE5 /* MyChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyChatTableViewCell.swift; sourceTree = "<group>"; };
+		62B617DD2736B0FF0062BBE5 /* MyChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyChatTableViewCell.xib; sourceTree = "<group>"; };
+		62B617E02736B1C20062BBE5 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		62B617E22736B3890062BBE5 /* OtherChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherChatTableViewCell.xib; sourceTree = "<group>"; };
+		62B617E32736B3890062BBE5 /* OtherChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherChatTableViewCell.swift; sourceTree = "<group>"; };
 		62BA00FE272E7B7C00A19478 /* PetsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsListTableViewController.swift; sourceTree = "<group>"; };
 		62BA0100272E7DF400A19478 /* PetHealthCardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetHealthCardListTableViewCell.swift; sourceTree = "<group>"; };
 		62BA0102272E7EBE00A19478 /* PetHealthCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetHealthCellViewModel.swift; sourceTree = "<group>"; };
@@ -270,7 +286,8 @@
 		621FCEAB271E5B7E0049F42C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				62B617D427365EA50062BBE5 /* ChatViewModel.swift */,
+				62B617D427365EA50062BBE5 /* CommentViewModel.swift */,
+				6264A85B2736BB9000FACF97 /* ChatListViewModel.swift */,
 				621FCEAC271E5B990049F42C /* PhotoCellViewlModel.swift */,
 				62540416271F187D004F49DC /* DetialViewModel.swift */,
 				6254041A271F219B004F49DC /* DiaryWallViewModel.swift */,
@@ -353,6 +370,7 @@
 		6285C795271DD059006E13EC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				62B617E02736B1C20062BBE5 /* ChatViewController.swift */,
 				623340D7271C3B19002B2429 /* HomePageViewController.swift */,
 				6285C796271DD08D006E13EC /* DiaryViewController.swift */,
 				6200C5FA272296970074DB64 /* DiaryVC+DiffDataSource.swift */,
@@ -374,7 +392,8 @@
 				62892FDD27320D4C001A7B32 /* LibaryViewController.swift */,
 				62892FE32732376D001A7B32 /* SignInViewController.swift */,
 				6267CDEC2733BBD600CFA28D /* DiarysTableViewController.swift */,
-				62B617D227365DF20062BBE5 /* ChatViewController.swift */,
+				6264A8592736BA6200FACF97 /* ChatListTableViewController.swift */,
+				62B617D227365DF20062BBE5 /* CommentTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -409,11 +428,15 @@
 		629FF5B2271D3C2900C7C94A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				62B617E32736B3890062BBE5 /* OtherChatTableViewCell.swift */,
+				62B617E22736B3890062BBE5 /* OtherChatTableViewCell.xib */,
 				62892FEC2732D092001A7B32 /* ImageSliderView.swift */,
 				627ADBC2272A3370000D0457 /* FillSupplyAlertView.swift */,
 				62C80D1A2720117800EE2FB1 /* PetInfoTableTableViewCell.swift */,
 				62BF3FB9272A7D6600F6DFB5 /* FillSupplyAlertView.xib */,
 				62C80D192720117800EE2FB1 /* PetInfoTableTableViewCell.xib */,
+				62B617DC2736B0FF0062BBE5 /* MyChatTableViewCell.swift */,
+				62B617DD2736B0FF0062BBE5 /* MyChatTableViewCell.xib */,
 				62D861BC27336A4B00668D25 /* HomePageView */,
 				6285C798271DD519006E13EC /* DairyPhotoCell.swift */,
 				6285C799271DD519006E13EC /* DairyPhotoCell.xib */,
@@ -462,6 +485,7 @@
 				629FF5C8271D623F00C7C94A /* Supply.swift */,
 				62979257271E64D800B68E86 /* Diary.swift */,
 				62B617D627365FFE0062BBE5 /* Comment.swift */,
+				62B617DA2736A5D60062BBE5 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -571,6 +595,7 @@
 				62892FEB2732B1A4001A7B32 /* Keys.plist in Resources */,
 				628930022732F749001A7B32 /* GenJyuuGothic-Normal.ttf in Resources */,
 				628930002732F749001A7B32 /* GenJyuuGothic-Regular.ttf in Resources */,
+				62B617DF2736B0FF0062BBE5 /* MyChatTableViewCell.xib in Resources */,
 				624D5C4B2731321700602125 /* MapMarkerWindowView.xib in Resources */,
 				62FC61A027258E3400292710 /* Menu.storyboard in Resources */,
 				62FC6192272586FD00292710 /* Home.storyboard in Resources */,
@@ -580,6 +605,7 @@
 				623340E0271C3B1B002B2429 /* LaunchScreen.storyboard in Resources */,
 				628930012732F749001A7B32 /* GenJyuuGothic-Heavy.ttf in Resources */,
 				62D454BE27267D82009DF0FF /* SupplyListTableViewCell.xib in Resources */,
+				62B617E42736B3890062BBE5 /* OtherChatTableViewCell.xib in Resources */,
 				623340E9271C3F82002B2429 /* GoogleService-Info.plist in Resources */,
 				623340DD271C3B1B002B2429 /* Assets.xcassets in Resources */,
 				62FC619A27258DF900292710 /* Soical.storyboard in Resources */,
@@ -691,6 +717,7 @@
 				62603AD627278D8300467E2D /* SupplyNameTableViewCell.swift in Sources */,
 				62540417271F187D004F49DC /* DetialViewModel.swift in Sources */,
 				62FC619827258C3B00292710 /* UIImage+Extension.swift in Sources */,
+				62B617E52736B3890062BBE5 /* OtherChatTableViewCell.swift in Sources */,
 				62548773272F80C90007B080 /* Date+Extension.swift in Sources */,
 				62930C2C272D24F700BC1908 /* UserMO+CoreDataProperties.swift in Sources */,
 				62C6E5E8272F93750097AEE1 /* SocialViewController.swift in Sources */,
@@ -718,24 +745,27 @@
 				62892FE2273210F3001A7B32 /* bookViewModel.swift in Sources */,
 				6254041B271F219B004F49DC /* DiaryWallViewModel.swift in Sources */,
 				62EF088E2723BCAF006C7D62 /* File.swift in Sources */,
+				62B617DB2736A5D60062BBE5 /* Message.swift in Sources */,
 				623340D4271C3B19002B2429 /* AppDelegate.swift in Sources */,
 				623340D6271C3B19002B2429 /* SceneDelegate.swift in Sources */,
 				62930C17272D0C6800BC1908 /* PicMO+CoreDataClass.swift in Sources */,
 				62B617D9273682B30062BBE5 /* CoreDataManger.swift in Sources */,
 				62603ADE27278E1E00467E2D /* SupplyReminderCellTableViewCell.swift in Sources */,
 				62892FDE27320D4C001A7B32 /* LibaryViewController.swift in Sources */,
+				6264A85A2736BA6200FACF97 /* ChatListTableViewController.swift in Sources */,
 				62B617D727365FFE0062BBE5 /* Comment.swift in Sources */,
 				624C8E082720473F00646C71 /* CreatPetViewModel.swift in Sources */,
 				6297925C271E947C00B68E86 /* CreatDiaryViewController.swift in Sources */,
 				629FF5C3271D5F4200C7C94A /* Pet.swift in Sources */,
 				629FF5C1271D5DFF00C7C94A /* User.swift in Sources */,
 				6254041D271F23DD004F49DC /* Box.swift in Sources */,
+				62B617E12736B1C20062BBE5 /* ChatViewController.swift in Sources */,
 				629FF5BD271D5A0800C7C94A /* KingfisherWrapper.swift in Sources */,
 				62C38D93272EEA96008DEE8B /* GoalCollectionViewCellB.swift in Sources */,
 				6285C79A271DD519006E13EC /* DairyPhotoCell.swift in Sources */,
 				629FF5C9271D623F00C7C94A /* Supply.swift in Sources */,
 				62603AE127279A4600467E2D /* CubeCollectionViewCell.swift in Sources */,
-				62B617D327365DF20062BBE5 /* ChatViewController.swift in Sources */,
+				62B617D327365DF20062BBE5 /* CommentTableViewController.swift in Sources */,
 				62603ADA27278DCB00467E2D /* SupplyPetsTableViewCell.swift in Sources */,
 				629FF5C7271D614D00C7C94A /* Notification.swift in Sources */,
 				624D5C4D273132D900602125 /* MapMarkerWindow.swift in Sources */,
@@ -761,9 +791,11 @@
 				62C80D172720115B00EE2FB1 /* CreatPetsVC+UploadImge.swift in Sources */,
 				62C38D91272EE89D008DEE8B /* GoalCollectionViewCellA.swift in Sources */,
 				62930C2B272D24F700BC1908 /* UserMO+CoreDataClass.swift in Sources */,
+				62B617DE2736B0FF0062BBE5 /* MyChatTableViewCell.swift in Sources */,
 				62FC619627258B2300292710 /* UIStoryboard+Extension.swift in Sources */,
 				62D454BA27267D49009DF0FF /* ListTableViewController.swift in Sources */,
-				62B617D527365EA50062BBE5 /* ChatViewModel.swift in Sources */,
+				62B617D527365EA50062BBE5 /* CommentViewModel.swift in Sources */,
+				6264A85C2736BB9000FACF97 /* ChatListViewModel.swift in Sources */,
 				627ADBCB272A7876000D0457 /* FillSupplyAlertView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
