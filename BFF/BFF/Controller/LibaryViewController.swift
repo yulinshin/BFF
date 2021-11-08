@@ -18,7 +18,6 @@ class LibaryViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
 
-//        libaryCollectionView.register(BookCollectionViewCell.self, forCellWithReuseIdentifier: "BookCollectionViewCell")
         libaryCollectionView.delegate = self
         libaryCollectionView.dataSource = self
 

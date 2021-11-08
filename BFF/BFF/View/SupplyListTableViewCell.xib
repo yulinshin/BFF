@@ -227,7 +227,7 @@
                 <outlet property="remindLabel" destination="vqu-fY-8gt" id="op7-J1-4Oi"/>
                 <outlet property="supplyIconImageView" destination="YdV-XC-Xtg" id="WbN-jg-JtF"/>
                 <outlet property="supplyNameLabel" destination="r7C-pO-ahW" id="fUN-vT-DdR"/>
-                <outlet property="supplyUseByPetsStackVIew" destination="vOc-xn-KoJ" id="NEZ-ug-pXf"/>
+                <outlet property="supplyUseByPetsStackView" destination="vOc-xn-KoJ" id="NEZ-ug-pXf"/>
             </connections>
             <point key="canvasLocation" x="247.10144927536234" y="132.92410714285714"/>
         </tableViewCell>

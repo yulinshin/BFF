@@ -69,7 +69,7 @@ class SocialViewController: UIViewController {
         self.navigationController?.title = "隨意逛"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Filter"), style: .done, target: self, action: #selector(switchShowList))
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "main")
-        diaryWallViewModel.showingDiarys.bind {  [weak self] diaries in
+        diaryWallViewModel.showingDiaries.bind {  [weak self] diaries in
 
             var diaryItems = [Item]()
 

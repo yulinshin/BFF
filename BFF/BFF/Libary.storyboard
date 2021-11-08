@@ -66,7 +66,7 @@
                     </view>
                     <connections>
                         <outlet property="allButton" destination="Sg0-Lb-CZN" id="RbH-Ek-uQK"/>
-                        <outlet property="mapVIew" destination="51M-rH-7FR" id="9zO-zZ-Z4g"/>
+                        <outlet property="mapView" destination="51M-rH-7FR" id="9zO-zZ-Z4g"/>
                         <outlet property="normailButton" destination="S1e-pL-09U" id="UaE-cv-tjI"/>
                         <outlet property="sepcialButton" destination="QKw-vs-8Iq" id="zFo-Tx-KeE"/>
                     </connections>

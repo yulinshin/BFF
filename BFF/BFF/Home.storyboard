@@ -177,11 +177,13 @@
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="PhG-Hp-KgI">
                                                             <rect key="frame" x="8" y="9.5" width="70" height="67"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="width" constant="70" id="5eh-wZ-Lq7"/>
+                                                                <constraint firstAttribute="height" constant="70" id="5uH-7m-l2n"/>
                                                                 <constraint firstAttribute="width" secondItem="PhG-Hp-KgI" secondAttribute="height" multiplier="1:1" id="iQQ-d9-b2X"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="751" text="contnetestimatedestimatedestimatedestimatedestimatedestimatedestimated" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ade-mm-6uZ">
-                                                            <rect key="frame" x="86" y="34" width="225" height="44"/>
+                                                            <rect key="frame" x="86" y="34" width="217" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="bUD-Pd-knU"/>
                                                             </constraints>
@@ -196,14 +198,13 @@
                                                         <constraint firstAttribute="trailing" secondItem="PLc-OB-OIN" secondAttribute="trailing" constant="8" id="64r-5A-msZ"/>
                                                         <constraint firstItem="PLc-OB-OIN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="j4K-f5-K07" secondAttribute="top" constant="10" id="7l7-BA-Rvc"/>
                                                         <constraint firstItem="PhG-Hp-KgI" firstAttribute="leading" secondItem="j4K-f5-K07" secondAttribute="leading" constant="8" id="Gjd-Yl-yQF"/>
-                                                        <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="ade-mm-6uZ" secondAttribute="bottom" constant="16" id="WiO-Jw-BLz"/>
                                                         <constraint firstItem="PhG-Hp-KgI" firstAttribute="top" secondItem="j4K-f5-K07" secondAttribute="top" constant="8" id="a1U-tf-Gkj"/>
                                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ade-mm-6uZ" secondAttribute="bottom" constant="8" id="ccE-QW-glR"/>
                                                         <constraint firstItem="ade-mm-6uZ" firstAttribute="top" secondItem="PLc-OB-OIN" secondAttribute="bottom" constant="4" id="cgY-CX-LXa"/>
                                                         <constraint firstAttribute="bottom" secondItem="PhG-Hp-KgI" secondAttribute="bottom" constant="8" id="h0K-NM-dex"/>
                                                         <constraint firstItem="ade-mm-6uZ" firstAttribute="leading" secondItem="PhG-Hp-KgI" secondAttribute="trailing" constant="8" id="hjK-MR-yPV"/>
                                                         <constraint firstItem="PLc-OB-OIN" firstAttribute="leading" secondItem="PhG-Hp-KgI" secondAttribute="trailing" constant="8" id="vDr-QW-L1h"/>
-                                                        <constraint firstAttribute="trailing" secondItem="ade-mm-6uZ" secondAttribute="trailing" constant="8" id="vyD-dZ-c2a"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ade-mm-6uZ" secondAttribute="trailing" constant="16" id="vyD-dZ-c2a"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>

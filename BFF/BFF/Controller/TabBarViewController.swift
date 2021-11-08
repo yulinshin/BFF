@@ -117,6 +117,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         setupMiddleButton()
     }
 
+
     // MARK: - UITabBarControllerDelegate
 
 
@@ -126,28 +127,31 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             return false
         }
 
+        viewController.navigationController?.popToViewController(viewController, animated: true)
+
       return true
     }
 
     func setupMiddleButton() {
 
-        var sliderViewFrame = CGRect(x: 0, y: 0, width: view.bounds.width/5 , height: 4)
-        sliderViewFrame.origin.y = view.bounds.height - self.tabBar.frame.height
+//
+
+        var sliderViewFrame = CGRect(x: 0, y: 0, width: tabBar.bounds.width/5 , height: 4)
         sliderView.frame = sliderViewFrame
         sliderView.backgroundColor = UIColor(named: "main")
         sliderView.layer.cornerRadius = sliderViewFrame.height/2
-        view.addSubview(sliderView)
+        tabBar.addSubview(sliderView)
 
 
         var actionButtonFrame = actionButton.frame
-        actionButtonFrame.origin.y = view.bounds.height - actionButtonFrame.height - 54
-        actionButtonFrame.origin.x = view.bounds.width/2 - actionButtonFrame.size.width/2
+        actionButtonFrame.origin.x = tabBar.bounds.width/2 - actionButtonFrame.size.width/2
+        actionButtonFrame.origin.y = -actionButtonFrame.size.height/2
         actionButton.frame = actionButtonFrame
         actionButton.backgroundColor = UIColor(named: "main")
         actionButton.setImage(UIImage(systemName: "plus"), for: .normal)
         actionButton.tintColor = .white
         actionButton.layer.cornerRadius = actionButtonFrame.height/2
-        view.addSubview(actionButton)
+        tabBar.addSubview(actionButton)
         actionButton.addTarget(self, action: #selector(actionButtonAction(sender:)), for: .touchUpInside)
 
         view.layoutIfNeeded()
@@ -165,6 +169,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
        controller.title = "新增寵物日記"
         self.present(nav, animated: true, completion: nil)
        }
+
+
 
 
 }
