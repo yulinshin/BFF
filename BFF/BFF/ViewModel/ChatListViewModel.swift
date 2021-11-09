@@ -85,6 +85,11 @@ class ChatGroupViewModel {
         getUserInfo(userId: userId)
         }
 
+    init (userid:String){
+        self.userId.value = userid
+        getUserInfo(userId: userid)
+    }
+
     func setlisiten(){
 
         FirebaseManager.shared.listMessages(otherUserId: self.userId.value) { result in

@@ -85,6 +85,7 @@
 		629FF5C9271D623F00C7C94A /* Supply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629FF5C8271D623F00C7C94A /* Supply.swift */; };
 		62AB33F827205D5000C8E582 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AB33F727205D5000C8E582 /* NoteViewController.swift */; };
 		62AB33FA27205D6E00C8E582 /* Pet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62AB33F927205D6E00C8E582 /* Pet.storyboard */; };
+		62B609E5273912F5007FB169 /* PetsProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B609E4273912F5007FB169 /* PetsProfileViewController.swift */; };
 		62B617D1273534D70062BBE5 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617D0273534D70062BBE5 /* UILabel+Extension.swift */; };
 		62B617D327365DF20062BBE5 /* CommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617D227365DF20062BBE5 /* CommentTableViewController.swift */; };
 		62B617D527365EA50062BBE5 /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617D427365EA50062BBE5 /* CommentViewModel.swift */; };
@@ -215,6 +216,7 @@
 		629FF5C8271D623F00C7C94A /* Supply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supply.swift; sourceTree = "<group>"; };
 		62AB33F727205D5000C8E582 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		62AB33F927205D6E00C8E582 /* Pet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pet.storyboard; sourceTree = "<group>"; };
+		62B609E4273912F5007FB169 /* PetsProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsProfileViewController.swift; sourceTree = "<group>"; };
 		62B617D0273534D70062BBE5 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		62B617D227365DF20062BBE5 /* CommentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewController.swift; sourceTree = "<group>"; };
 		62B617D427365EA50062BBE5 /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				6267CDEC2733BBD600CFA28D /* DiarysTableViewController.swift */,
 				6264A8592736BA6200FACF97 /* ChatListTableViewController.swift */,
 				62B617D227365DF20062BBE5 /* CommentTableViewController.swift */,
+				62B609E4273912F5007FB169 /* PetsProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -763,6 +766,7 @@
 				629FF5BD271D5A0800C7C94A /* KingfisherWrapper.swift in Sources */,
 				62C38D93272EEA96008DEE8B /* GoalCollectionViewCellB.swift in Sources */,
 				6285C79A271DD519006E13EC /* DairyPhotoCell.swift in Sources */,
+				62B609E5273912F5007FB169 /* PetsProfileViewController.swift in Sources */,
 				629FF5C9271D623F00C7C94A /* Supply.swift in Sources */,
 				62603AE127279A4600467E2D /* CubeCollectionViewCell.swift in Sources */,
 				62B617D327365DF20062BBE5 /* CommentTableViewController.swift in Sources */,
@@ -945,6 +949,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -977,6 +982,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;

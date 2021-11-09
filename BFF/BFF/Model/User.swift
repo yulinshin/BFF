@@ -15,5 +15,6 @@ struct User: Codable {
     var blockPets: [String]?
     var petsIds: [String]?
     var userThumbNail: Pic?
+    var followedPets: [String]?
     
 }

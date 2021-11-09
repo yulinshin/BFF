@@ -90,6 +90,20 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
 
             }
 
+
+
+            cell.didTapPetButton = {
+
+                let storyboard = UIStoryboard(name: "Pet", bundle: nil)
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "PetsProfileViewController") as? PetsProfileViewController else { return }
+                controller.viewModel = ProfileViewModel(petId: diaries[indexPath.row].petId)
+
+                self.navigationController?.pushViewController(controller, animated: true)
+
+
+            }
+
+
             cell.selectionStyle = .none
 
         }
@@ -149,6 +163,8 @@ class DiaryViewCell: UITableViewCell {
 
     var didTapSendMessageButton: (() -> Void)?
 
+    var didTapPetButton: (() -> Void)?
+
 
     var isNeedToOpen = false
 
@@ -181,11 +197,19 @@ class DiaryViewCell: UITableViewCell {
         sendMessageButton.isUserInteractionEnabled = true
         sendMessageButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapsendMessageButton)))
 
+        petImageView.isUserInteractionEnabled = true
+        petImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapPetButton)))
+
     }
 
     @objc func tapsendMessageButton(){
 
         didTapSendMessageButton?()
+
+    }
+    @objc func tapPetButton(){
+
+        didTapPetButton?()
 
     }
 
