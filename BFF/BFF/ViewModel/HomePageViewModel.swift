@@ -11,6 +11,7 @@ import UIKit
 
 class HomePageViewModel: NSObject {
 
+    var user: User?
     let userName = Box("")
     let notifiactions = Box([Notification]())
     let pets = Box([Pet]())
@@ -36,6 +37,8 @@ class HomePageViewModel: NSObject {
             switch result {
 
             case .success(let user):
+
+                self.user = user
 
                 self.userName.value = user.userName
 

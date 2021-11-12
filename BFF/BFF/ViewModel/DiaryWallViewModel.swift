@@ -41,7 +41,29 @@ class DiaryWallViewModel {
             case .success(let diaries):
 
                 self.diaries.value = diaries
-                self.showingDiaries.value = diaries
+
+                FirebaseManager.shared.fetchUser { result in
+                    self.showingDiaries.value = diaries
+
+                    switch result {
+
+                    case .success(let user):
+
+                        user.blockPets?.forEach({ user in
+
+
+
+
+                        })
+
+                    case .failure(let error):
+
+
+                    }
+
+
+                }
+
                 self.updatePetData()
 
             case.failure(let error):

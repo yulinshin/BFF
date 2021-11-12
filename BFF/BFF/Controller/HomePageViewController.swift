@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class HomePageViewController: UIViewController {
 
@@ -28,6 +29,12 @@ class HomePageViewController: UIViewController {
     var catalogLable =  ["相簿集", "用品", "健康", "成就"]
     var viewModel = HomePageViewModel()
     var tempScrollYPosition: CGFloat?
+    var transparentView = UIView()
+    var tableView = UITableView()
+    var settingArray = ["帳戶設定","黑名單管理","登出"]
+    var settingPicArray = ["person.circle","x.square.fill","rectangle.portrait.and.arrow.right.fill"]
+    let menuHeight: CGFloat = 250
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,12 +58,50 @@ class HomePageViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "MenuTab"), style: .done, target: self, action: #selector(showSideMenu))
         self.navigationItem.rightBarButtonItem?.tintColor = .white
 
+
+        tableView.isScrollEnabled = true
+                 tableView.delegate = self
+                 tableView.dataSource = self
+                 tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: "Cell")
+
     }
 
 
     @objc func showSideMenu(){
 
+        tableView.isScrollEnabled = false
+            guard let window =  UIApplication.shared.windows.filter {$0.isKeyWindow}.first else {return}
+             transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+             transparentView.frame = self.view.frame
+        window.addSubview(transparentView)
+
+             let screenSize = UIScreen.main.bounds.size
+        tableView.tintColor = UIColor(named: "main")
+             tableView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: menuHeight)
+        window.addSubview(tableView)
+        tableView.layer.cornerRadius = 10
+
+             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onClickTransparentView))
+             transparentView.addGestureRecognizer(tapGesture)
+
+             transparentView.alpha = 0
+
+             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+                 self.transparentView.alpha = 0.5
+                 self.tableView.frame = CGRect(x: 0, y: screenSize.height - self.menuHeight, width: screenSize.width, height: self.menuHeight)
+               }, completion: nil)
     }
+
+
+    @objc func onClickTransparentView() {
+           let screenSize = UIScreen.main.bounds.size
+           UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+               self.transparentView.alpha = 0
+               self.tableView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: self.menuHeight)
+             }, completion: nil)
+         }
+
+
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -137,6 +182,7 @@ extension HomePageViewController: UICollectionViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
+
         guard let tempScrollYPosition = tempScrollYPosition else {
 
             tempScrollYPosition = scrollView.contentOffset.y
@@ -153,7 +199,6 @@ extension HomePageViewController: UICollectionViewDelegate {
         self.tempScrollYPosition = scrollView.contentOffset.y
 
     }
-
 }
 
 // MARK: - UICollectionViewDataSource
@@ -352,3 +397,84 @@ extension HomePageViewController {
     }
 
 }
+
+
+extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         return settingArray.count
+     }
+
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? MenuTableViewCell else {fatalError("Unable to deque cell")}
+         cell.lbl.text = settingArray[indexPath.row]
+         cell.settingImage.image = UIImage(systemName: settingPicArray[indexPath.row]) ?? UIImage()
+         cell.selectionStyle = .none
+         return cell
+     }
+
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+         return 50
+     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        switch settingArray[indexPath.row] {
+
+        case "帳戶設定":
+
+            let storyboard = UIStoryboard(name: "User", bundle: nil)
+
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "UserAccountTableViewController") as? UserAccountTableViewController else { return }
+            controller.user = viewModel.user
+
+            guard let window =  UIApplication.shared.windows.filter {$0.isKeyWindow}.first else {return}
+                 transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+                 transparentView.frame = self.view.frame
+                window.subviews.last?.removeFromSuperview()
+                window.subviews.last?.removeFromSuperview()
+
+            self.navigationController?.show(controller, sender: nil)
+
+        case "黑名單管理":
+
+
+            let storyboard = UIStoryboard(name: "User", bundle: nil)
+
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "BlockPetsListTableViewController") as?    BlockPetsListTableViewController else { return }
+
+            guard let window =  UIApplication.shared.windows.filter {$0.isKeyWindow}.first else {return}
+                 transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+                 transparentView.frame = self.view.frame
+                window.subviews.last?.removeFromSuperview()
+                window.subviews.last?.removeFromSuperview()
+
+            self.navigationController?.show(controller, sender: nil)
+
+
+
+            print("黑名單管理")
+
+        case "登出":
+
+            let firebaseAuth = Auth.auth()
+        do {
+          try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
+        }
+
+        guard let window =  UIApplication.shared.windows.filter {$0.isKeyWindow}.first else {return}
+             transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+             transparentView.frame = self.view.frame
+            window.subviews.last?.removeFromSuperview()
+            window.subviews.last?.removeFromSuperview()
+            self.dismiss(animated: true, completion: nil)
+
+        default:
+            print("outOFrange")
+        }
+
+
+    }
+ }

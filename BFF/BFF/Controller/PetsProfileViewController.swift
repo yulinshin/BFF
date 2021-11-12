@@ -310,15 +310,16 @@ class PetsProfileViewController: UIViewController {
 
             if viewModel.isBlocked.value {
 
-                FirebaseManager.shared.updateCurrentUserBlockPets(blockPetId: viewModel.petId.value)
 
+                FirebaseManager.shared.unBlockPets(blockPetId: viewModel.petId.value)
 
                 viewModel.isBlocked.value = false
 
 
             } else {
 
-                FirebaseManager.shared.unBlockPets(blockPetId: viewModel.petId.value)
+                FirebaseManager.shared.updateCurrentUserBlockPets(blockPetId: viewModel.petId.value)
+
 
                 viewModel.isBlocked.value = true
 
@@ -423,7 +424,9 @@ class ProfileViewModel {
 
 
                         self.isFollowed.value = user.followedPets?.contains(petId) ?? false
+                        print ("IS Follwed \(user.followedPets)")
                         self.isBlocked.value = user.blockPets?.contains(petId) ?? false
+                        print ("IS Block \(user.blockPets)")
                         self.gotData?()
 
                     case .failure(let error):

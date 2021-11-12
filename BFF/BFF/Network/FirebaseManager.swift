@@ -82,6 +82,48 @@ class FirebaseManager {
         currentUserDB.updateData(["blockPets": FieldValue.arrayRemove([blockPetId])])
     }
 
+    func updateUserInfo(user: User, newimage: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
+
+        print("Strat UpDateUser\(user.userId)....................")
+        if let pic = user.userThumbNail {
+            deletePhoto(fileName: pic.fileName, filePath: .userPhotos)
+        }
+        uploadPhoto(image: newimage, filePath: .userPhotos) { result in
+            print("Strat UpDatePetPhoto\(newimage)....................")
+            switch result {
+            case .success(let pic):
+                var newUserData = user
+                newUserData.userThumbNail?.url = pic.url
+                newUserData.userThumbNail?.fileName = pic.fileName
+
+                let userDB = self.dateBase.collection("Users").document(newUserData.userId)
+                do {
+                    try userDB.setData(from: newUserData)
+                    completion(.success("Succes"))
+                } catch {
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+
+    func updateUserInfo(user: User, completion: @escaping (Result<String, Error>) -> Void) {
+
+        print("Strat UpDateUser\(user.userId)....................")
+
+                let userDB = self.dateBase.collection("Users").document(user.userId)
+                do {
+                    try userDB.setData(from: user)
+                    completion(.success("Succes"))
+                } catch {
+                    completion(.failure(error))
+
+        }
+    }
+
+
 
 
     func fetchUserInfo(userId: String, completion: @escaping (Result<User, Error>) -> Void) {
@@ -756,6 +798,7 @@ class FirebaseManager {
     enum FilePathName: String {
         case dairyPhotos = "DairyPhotos"
         case petPhotos = "PetPhotoss"
+        case userPhotos = "UserPhotos"
     }
 
     func uploadPhoto(image: UIImage, filePath: FilePathName, completion: @escaping (Result<Pic, Error>) -> Void) {
