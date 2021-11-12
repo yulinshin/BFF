@@ -42,28 +42,6 @@ class DiaryWallViewModel {
 
                 self.diaries.value = diaries
 
-                FirebaseManager.shared.fetchUser { result in
-                    self.showingDiaries.value = diaries
-
-                    switch result {
-
-                    case .success(let user):
-
-                        user.blockPets?.forEach({ user in
-
-
-
-
-                        })
-
-                    case .failure(let error):
-
-
-                    }
-
-
-                }
-
                 self.updatePetData()
 
             case.failure(let error):
@@ -87,7 +65,8 @@ class DiaryWallViewModel {
                     self.diaries.value[index].petname = pet.name
                     self.diaries.value[index].petThumbnail = pet.petThumbnail ?? Pic(url: "", fileName: "")
                     self.showingDiaries.value = self.diaries.value
-                    self.didUpDateData?()
+                    self.filterDiaris()
+
 
                 case.failure(let error):
 
@@ -95,7 +74,41 @@ class DiaryWallViewModel {
                 }
 
             }
+
         }
+    }
+
+    func filterDiaris() {
+
+        FirebaseManager.shared.fetchUser { result in
+
+            switch result {
+
+            case .success(let user):
+
+                user.blockPets?.forEach({ petId in
+
+                    self.showingDiaries.value = self.showingDiaries.value.filter { diary in
+                        if diary.petId == petId {
+                            print(self.showingDiaries.value.count)
+                            return false
+                        } else {
+                            print(self.showingDiaries.value.count)
+                            return true
+                        }
+                    }
+                })
+                self.didUpDateData?()
+            case .failure(let error):
+                break
+
+
+            }
+
+
+        }
+
+
     }
 
     func listenDiaries() {
