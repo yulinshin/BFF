@@ -50,6 +50,40 @@ class FirebaseManager {
         }
     }
 
+
+    func updateCurrentUserFollow(followPetId: String ) {
+
+
+        let currentUserDB = dateBase.collection("Users").document(userId)
+
+        currentUserDB.updateData(["followedPets": FieldValue.arrayUnion([followPetId])])
+    }
+
+    func removeCurrentUserFollow(followPetId: String ) {
+
+
+        let currentUserDB = dateBase.collection("Users").document(userId)
+
+        currentUserDB.updateData(["followedPets": FieldValue.arrayRemove([followPetId])])
+    }
+
+    func updateCurrentUserBlockPets(blockPetId: String ) {
+
+
+        let currentUserDB = dateBase.collection("Users").document(userId)
+
+        currentUserDB.updateData(["blockPets": FieldValue.arrayUnion([blockPetId])])
+    }
+
+    func unBlockPets(blockPetId: String ) {
+
+        let currentUserDB = dateBase.collection("Users").document(userId)
+
+        currentUserDB.updateData(["blockPets": FieldValue.arrayRemove([blockPetId])])
+    }
+
+
+
     func fetchUserInfo(userId: String, completion: @escaping (Result<User, Error>) -> Void) {
 
         print("Start fetch UserData ........")
@@ -610,6 +644,9 @@ class FirebaseManager {
 
 
 
+
+
+
     func fetchAllDiaries(completion: @escaping (Result<[Diary], Error>) -> Void) {
 
         dateBase.collection("Diaries").whereField("isPublic", isEqualTo: true).getDocuments { (querySnapshot, error) in
@@ -638,6 +675,37 @@ class FirebaseManager {
             }
         }
     }
+
+
+    func fetchPetAllDiaries(petId: String, completion: @escaping (Result<[Diary], Error>) -> Void) {
+
+        dateBase.collection("Diaries").whereField("petId", isEqualTo: petId).getDocuments { (querySnapshot, error) in
+
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                var diaries = [Diary]()
+                for document in querySnapshot!.documents {
+
+                    do {
+                        if let diary = try document.data(as: Diary.self, decoder: Firestore.Decoder()) {
+                            diaries.append(diary)
+                        }
+
+                    } catch {
+
+                        completion(.failure(error))
+                    }
+                }
+
+                let sortDiary = diaries.sorted { firstDiary, secondDiary in
+                    return firstDiary.createdTime.dateValue() > secondDiary.createdTime.dateValue()
+                }
+                completion(.success(sortDiary))
+            }
+        }
+    }
+
 
 
 
