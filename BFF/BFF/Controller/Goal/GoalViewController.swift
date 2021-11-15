@@ -93,7 +93,7 @@ extension GoalViewController {
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
 
                 let layoutSection = NSCollectionLayoutSection(group: group)
-                layoutSection.orthogonalScrollingBehavior = .continuous
+                layoutSection.orthogonalScrollingBehavior = .none
                 layoutSection.interGroupSpacing = 0
 
                 return layoutSection

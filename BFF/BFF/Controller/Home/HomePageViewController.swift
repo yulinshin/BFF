@@ -24,8 +24,10 @@ class HomePageViewController: UIViewController {
 
     // MARK: - Can consider moving to VM -
     var sections = Section.allCases
-    var catalogIcon = ["diary", "supply", "heart", "goal"]
-    var catalogLabel =  ["相簿集", "用品", "健康", "成就"]
+//    var catalogIcon = ["diary", "supply", "heart", "goal"]
+//    var catalogLabel =  ["相簿集", "用品", "健康", "成就"]
+    var catalogIcon = ["diary", "supply", "heart"]
+    var catalogLabel =  ["相簿集", "用品", "健康"]
     var viewModel = HomePageViewModel()
     var tempScrollYPosition: CGFloat?
     var transparentView = UIView()
@@ -361,11 +363,11 @@ extension HomePageViewController {
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(110))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
-
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
+                group.interItemSpacing  = .fixed(30)
                 let layoutSection = NSCollectionLayoutSection(group: group)
 
-                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 24, bottom: 6, trailing: 24)
+                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 40, bottom: 6, trailing: 40)
                 layoutSection.orthogonalScrollingBehavior = .none
 
                 return layoutSection

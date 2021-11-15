@@ -155,7 +155,7 @@
         <image name="room3" width="1320.5" height="2435"/>
         <image name="room4" width="1320" height="2435"/>
         <namedColor name="blue">
-            <color red="0.4212028980255127" green="0.69472748041152954" blue="0.77497327327728271" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.42100000381469727" green="0.69499999284744263" blue="0.77499997615814209" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
