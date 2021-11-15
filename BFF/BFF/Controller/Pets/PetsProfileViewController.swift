@@ -54,6 +54,7 @@ class PetsProfileViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .clear
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.tintColor = .white
 
         moreButtonImageVIew.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapMoreButton)))
         moreButtonImageVIew.isUserInteractionEnabled = true
