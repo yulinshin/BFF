@@ -461,7 +461,7 @@
         <image name="message" catalog="system" width="128" height="113"/>
         <image name="paperplane.fill" catalog="system" width="128" height="118"/>
         <namedColor name="main">
-            <color red="0.35710123181343079" green="0.61046278476715088" blue="0.60665088891983032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.35699999332427979" green="0.61000001430511475" blue="0.60699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
