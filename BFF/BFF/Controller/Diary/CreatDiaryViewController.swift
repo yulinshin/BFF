@@ -35,6 +35,7 @@ class CreatDiaryViewController: UIViewController {
         super.viewDidLoad()
 
         diaryTextView.text = "寫下毛小孩的日記...."
+        diaryTextView.textColor = UIColor.lightGray
         diaryTextView.delegate = self
         selectedPetsCollectionView.delegate = self
         selectedPetsCollectionView.dataSource = self
