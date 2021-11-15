@@ -19,12 +19,24 @@ class SignInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBackGround()
-        setupAppleSignInButton()
+
+
+
+            setupBackGround()
+            setupAppleSignInButton()
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        if let user = Auth.auth().currentUser {
+
+            let viewController = TabBarController()
+            viewController.modalPresentationStyle = .fullScreen
+            self.present(viewController, animated: true, completion: nil)
+
+        } 
 
     }
 

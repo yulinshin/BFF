@@ -524,7 +524,7 @@
         <image name="plus.app" catalog="system" width="128" height="114"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="main">
-            <color red="1" green="0.61200004816055298" blue="0.30599990487098694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.6119999885559082" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

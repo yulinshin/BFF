@@ -119,7 +119,7 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return viewModel.diaries.value.count
+        return viewModel.showingDiaries.value.count
     }
 
 
