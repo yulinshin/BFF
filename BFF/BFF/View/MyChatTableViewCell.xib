@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyChatTableViewCell" rowHeight="91" id="NRc-vL-gkZ" customClass="MyChatTableViewCell" customModule="BFF" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NRc-vL-gkZ" id="Dfo-sz-ArG">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Z3-gp-AnP">
+                        <rect key="frame" x="301" y="16" width="58" height="59"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwi-c4-DFf">
+                                <rect key="frame" x="10" y="10" width="38" height="39"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
+                                <color key="textColor" name="B2"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="B5"/>
+                        <constraints>
+                            <constraint firstItem="Uwi-c4-DFf" firstAttribute="leading" secondItem="4Z3-gp-AnP" secondAttribute="leading" constant="10" id="13S-fS-d8o"/>
+                            <constraint firstAttribute="bottom" secondItem="Uwi-c4-DFf" secondAttribute="bottom" constant="10" id="1Zg-HV-ymu"/>
+                            <constraint firstAttribute="trailing" secondItem="Uwi-c4-DFf" secondAttribute="trailing" constant="10" id="9jp-5A-9MF"/>
+                            <constraint firstItem="Uwi-c4-DFf" firstAttribute="top" secondItem="4Z3-gp-AnP" secondAttribute="top" constant="10" id="pk5-v0-aI6"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="4Z3-gp-AnP" secondAttribute="trailing" constant="16" id="oiv-Jv-lV7"/>
+                    <constraint firstItem="4Z3-gp-AnP" firstAttribute="top" secondItem="Dfo-sz-ArG" secondAttribute="top" constant="16" id="p7Y-2j-Jwr"/>
+                    <constraint firstAttribute="bottom" secondItem="4Z3-gp-AnP" secondAttribute="bottom" constant="16" id="pYz-U8-PFK"/>
+                    <constraint firstItem="4Z3-gp-AnP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dfo-sz-ArG" secondAttribute="leading" constant="40" id="y8q-dt-T0R"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="sXS-VA-Zag"/>
+            <connections>
+                <outlet property="chatBubbleContent" destination="Uwi-c4-DFf" id="SHI-nx-t8d"/>
+                <outlet property="chectView" destination="4Z3-gp-AnP" id="AGE-ly-SZS"/>
+            </connections>
+            <point key="canvasLocation" x="396.37681159420293" y="67.96875"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="B2">
+            <color red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="B5">
+            <color red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

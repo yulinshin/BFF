@@ -11,22 +11,31 @@ import UIKit
 
 class HomePageViewModel: NSObject {
 
+    var user: User?
     let userName = Box("")
-    let notifiactions = Box([Notification]())
+    let notifications = Box([Notification]())
     let pets = Box([Pet]())
     let usersPetsIds = Box([String]())
     var userDataDidLoad: (() -> Void)?
-    var userNotifiactionsDidChange: (() -> Void)?
+    var userNotificationsDidChange: (() -> Void)?
 
 
     override init() {
         super.init()
         self.fetchUserData()
-        self.listenNotificationData()
+        self.fetchNotificationData()
     }
 
     deinit {
         print("HomePageViewModel DIE")
+    }
+
+    func removeNotification(indexPath:Int) {
+
+        let id = notifications.value[indexPath].id
+        FirebaseManager.shared.removeNotification(notifyId: id)
+        userNotificationsDidChange?()
+
     }
 
     func fetchUserData() {
@@ -36,6 +45,8 @@ class HomePageViewModel: NSObject {
             switch result {
 
             case .success(let user):
+
+                self.user = user
 
                 self.userName.value = user.userName
 
@@ -57,17 +68,22 @@ class HomePageViewModel: NSObject {
                             let userMo = UserMO(context:
                                                     appDelegate.persistentContainer.viewContext)
                             userMo.name = user.userName
+                            print("HEEEEEEEE\(user.userName)")
                             userMo.petsIds = user.petsIds
                             userMo.userId = user.userId
 
                             appDelegate.saveContext()
+
                         } else {
                         for request in requests {
 
                             if request.userId == user.userId {
                                 request.name = user.userName
                                 request.petsIds = user.petsIds
-
+                            } else {
+                                request.userId = user.userId
+                                request.name = user.userName
+                                request.petsIds = user.petsIds
                             }
                             appDelegate.saveContext()
                         }
@@ -152,6 +168,40 @@ class HomePageViewModel: NSObject {
         }
     }
 
+    func fetchNotificationData() {
+
+        FirebaseManager.shared.fetchNotifications { result in
+
+            switch result {
+
+            case .success(let notifications):
+
+                var showNotifications = [Notification]()
+                notifications.forEach { notification in
+                    if notification.notifyTime.dateValue() < Date(){
+                        print("Notify:\(notification.notifyTime.dateValue())")
+                        print("now:\(Date())")
+                        showNotifications.append(notification)
+                    }
+                }
+
+                showNotifications = showNotifications.sorted(by:{ $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
+
+                self.notifications.value = showNotifications
+
+                self.userNotificationsDidChange?()
+                print("upDated NotificationData at HomeVM")
+
+            case .failure(let error):
+
+                print("Can't Get Notifications Data \(error)")
+
+            }
+
+        }
+
+    }
+
     func listenNotificationData() {
 
         FirebaseManager.shared.listenNotifications { result in
@@ -167,9 +217,9 @@ class HomePageViewModel: NSObject {
                 }
                 }
                 showNotifications = showNotifications.sorted(by:{ $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
-                self.notifiactions.value = showNotifications
+                self.notifications.value = showNotifications
 
-                self.userNotifiactionsDidChange?()
+                self.userNotificationsDidChange?()
                 print("upDated NotificationData at HomeVM")
 
             case .failure(let error):

@@ -17,7 +17,7 @@ class DiaryViewController: UIViewController {
 
     private var lastContentOffset: CGFloat = 0
 
-    var lauoutType = LayoutType.single
+    var lauoutType = LayoutType.grid
 
     var showSelectedPetsCollectionView = true
 
@@ -63,12 +63,13 @@ class DiaryViewController: UIViewController {
         selectedPetsCollectionView.register(petNib, forCellWithReuseIdentifier: SelectedPetsCollectionViewCell.identifier)
         diariesCollectionView.dataSource = diariesDataSource
         selectedPetsCollectionView.dataSource = petsDataSource
-        diariesCollectionView.collectionViewLayout = creatLayout(type: .single)
+        diariesCollectionView.collectionViewLayout = creatLayout(type: .grid)
         selectedPetsCollectionView.allowsMultipleSelection = true
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Filter"), style: .done, target: self, action: #selector(switchShowList))
 
-        diaryWallViewModel.showingDiarys.bind {  [weak self] diaries in
+        diaryWallViewModel.showingDiaries.bind {  [weak self] diaries in
 
             var diaryItems = [Item]()
 
@@ -190,16 +191,92 @@ class DiaryViewController: UIViewController {
             switch type {
             case .grid:
 
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalWidth(1/3))
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                    // item
+                    // First type: 1/3 view.width square
+                    let tripletSquareItem = NSCollectionLayoutItem(
+                        layoutSize: NSCollectionLayoutSize(
+                            widthDimension: .fractionalWidth(1/3),
+                            heightDimension: .fractionalWidth(1/3)
+                        )
+                    )
+                    tripletSquareItem.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(1/3))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                    // First type: 1/3 view.width square
+                    let tripletSquareItemVertical = NSCollectionLayoutItem(
+                        layoutSize: NSCollectionLayoutSize(
+                            widthDimension: .fractionalWidth(1),
+                            heightDimension: .fractionalWidth(1)
+                        )
+                    )
+                    tripletSquareItemVertical.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
 
-                let section = NSCollectionLayoutSection(group: group)
-                section.orthogonalScrollingBehavior = .none
+                    // Second type: 3/2 view.width large square
+                    let largeSquareItem = NSCollectionLayoutItem(
+                        layoutSize: NSCollectionLayoutSize(
+                            widthDimension: .fractionalWidth(2/3),
+                            heightDimension: .fractionalWidth(2/3)
+                        )
+                    )
+                    largeSquareItem.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
 
-                return section
+                    // group
+                    // 1. MAIN, 1/3 square x 3
+                    let threeItemGroup = NSCollectionLayoutGroup.horizontal(
+                        layoutSize: NSCollectionLayoutSize(
+                            widthDimension: .fractionalWidth(1.0),
+                            heightDimension: .fractionalWidth(1/3)
+                        ),
+                        subitem: tripletSquareItem,
+                        count: 3
+                    )
+
+                    // 2. 1/3 square x 2 vertical
+                    let verticalGroup = NSCollectionLayoutGroup.vertical(
+                        layoutSize: NSCollectionLayoutSize(
+                            widthDimension: .fractionalWidth(1/3),
+                            heightDimension: .fractionalWidth(2/3)
+                        ),
+                        subitem: tripletSquareItemVertical,
+                        count: 2
+                    )
+
+                    // 3. MAIN, one large at left, 2 small at right
+                    let horizontalComboOneGroup = NSCollectionLayoutGroup.horizontal(
+                        layoutSize: NSCollectionLayoutSize(
+                            widthDimension: .fractionalWidth(1.0),
+                            heightDimension: .fractionalWidth(2/3)
+                        ),
+                        subitems: [
+                            largeSquareItem,
+                            verticalGroup
+                        ]
+                    )
+
+                    // 4. MAIN, 2 small at left, one large at right
+                    let horizontalComboTwoGroup = NSCollectionLayoutGroup.horizontal(
+                        layoutSize: NSCollectionLayoutSize(
+                            widthDimension: .fractionalWidth(1.0),
+                            heightDimension: .fractionalWidth(2/3)
+                        ),
+                        subitems: [
+                            verticalGroup,
+                            largeSquareItem
+                        ]
+                    )
+
+                    let finalGroup = NSCollectionLayoutGroup.vertical(
+                        layoutSize: NSCollectionLayoutSize(
+                            widthDimension: .fractionalWidth(1.0),
+                            heightDimension: .fractionalWidth(2.0)
+                        ),
+                        subitems: [
+                            horizontalComboOneGroup,
+                            threeItemGroup,
+                            horizontalComboTwoGroup,
+                            threeItemGroup
+                        ]
+                    )
+                    return NSCollectionLayoutSection(group: finalGroup)
 
             case .single:
 

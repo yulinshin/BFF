@@ -133,6 +133,7 @@ class ListTableViewController: UITableViewController {
                 guard let supply = viewModel.suppply else { return }
                 NotificationManger.shared.creatSupplyNotification(supply: supply )
                 viewModel.isNeedToRemind.value = true
+                viewModel.updateToDataBase()
             }))
 
         }

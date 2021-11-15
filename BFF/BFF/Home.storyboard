@@ -6,10 +6,20 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="GenJyuuGothic-Bold.ttf">
+            <string>GenJyuuGothic-Bold</string>
+        </array>
+        <array key="GenJyuuGothic-Medium.ttf">
+            <string>GenJyuuGothic-Medium</string>
+        </array>
+        <array key="GenJyuuGothic-Regular.ttf">
+            <string>GenJyuuGothic-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="bCJ-0R-dKZ">
@@ -71,53 +81,31 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Nj9-xa-hxM">
-                                                    <rect key="frame" x="0.0" y="0.0" width="283" height="70"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="278" height="70"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WellComeTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Yi-E1-mlo">
-                                                            <rect key="frame" x="0.0" y="0.0" width="220" height="44.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="278" height="46.5"/>
+                                                            <fontDescription key="fontDescription" name="GenJyuuGothic-Medium" family="Gen Jyuu Gothic" pointSize="40"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="subTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y4C-Wi-ws4">
-                                                            <rect key="frame" x="0.0" y="52.5" width="50.5" height="17.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <rect key="frame" x="0.0" y="54.5" width="52.5" height="15.5"/>
+                                                            <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="14"/>
                                                             <color key="textColor" name="Text"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZi-Hc-XyM">
-                                                    <rect key="frame" x="291" y="10" width="50" height="50"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="mZi-Hc-XyM" secondAttribute="height" multiplier="1:1" id="kQg-en-TKf"/>
-                                                    </constraints>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain">
-                                                        <backgroundConfiguration key="background" image="plus.circle" catalog="system"/>
-                                                        <attributedString key="attributedTitle">
-                                                            <fragment content="     "/>
-                                                        </attributedString>
-                                                    </buttonConfiguration>
-                                                    <connections>
-                                                        <action selector="creatButtonTap:" destination="LPJ-q0-BgR" eventType="touchUpInside" id="G0c-vx-HjX"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="mZi-Hc-XyM" secondAttribute="bottom" constant="10" id="7kz-MO-BRn"/>
-                                                <constraint firstAttribute="trailing" secondItem="mZi-Hc-XyM" secondAttribute="trailing" constant="10" id="8xA-xN-LIr"/>
-                                                <constraint firstItem="mZi-Hc-XyM" firstAttribute="leading" secondItem="Nj9-xa-hxM" secondAttribute="trailing" constant="8" id="ADe-tX-OlB"/>
                                                 <constraint firstAttribute="bottom" secondItem="Nj9-xa-hxM" secondAttribute="bottom" id="G1E-GH-bJO"/>
-                                                <constraint firstItem="mZi-Hc-XyM" firstAttribute="top" secondItem="Mew-L1-11r" secondAttribute="top" constant="10" id="VD4-my-8ul"/>
                                                 <constraint firstItem="Nj9-xa-hxM" firstAttribute="leading" secondItem="Mew-L1-11r" secondAttribute="leading" id="awp-tQ-TWY"/>
                                                 <constraint firstItem="Nj9-xa-hxM" firstAttribute="top" secondItem="Mew-L1-11r" secondAttribute="top" id="xm2-bD-nQm"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="351" height="70"/>
                                         <connections>
-                                            <outlet property="addDiaryButton" destination="mZi-Hc-XyM" id="6OM-Md-4BR"/>
                                             <outlet property="subTitleLabel" destination="Y4C-Wi-ws4" id="4Xi-ES-loA"/>
                                             <outlet property="titleLabel" destination="3Yi-E1-mlo" id="Keb-EL-c03"/>
                                         </connections>
@@ -145,7 +133,7 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mU-se-3re">
                                                     <rect key="frame" x="4" y="63" width="61" height="13"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="GenJyuuGothic-Medium" family="Gen Jyuu Gothic" pointSize="14"/>
                                                     <color key="textColor" name="Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -180,37 +168,58 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j4K-f5-K07">
                                                     <rect key="frame" x="16" y="16" width="319" height="86"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="PetName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLc-OB-OIN">
-                                                            <rect key="frame" x="86" y="16" width="225" height="33"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLc-OB-OIN">
+                                                            <rect key="frame" x="84" y="24" width="0.0" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="IRJ-3C-9bq"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="GenJyuuGothic-Medium" family="Gen Jyuu Gothic" pointSize="18"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="PhG-Hp-KgI">
-                                                            <rect key="frame" x="8" y="9.5" width="70" height="67"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="753" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ade-mm-6uZ">
+                                                            <rect key="frame" x="84" y="48" width="219" height="22"/>
+                                                            <fontDescription key="fontDescription" name="GenJyuuGothic-Medium" family="Gen Jyuu Gothic" pointSize="12"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="PhG-Hp-KgI">
+                                                            <rect key="frame" x="10" y="10" width="64" height="66"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="width" constant="64" id="5eh-wZ-Lq7"/>
+                                                                <constraint firstAttribute="height" constant="64" id="5uH-7m-l2n"/>
                                                                 <constraint firstAttribute="width" secondItem="PhG-Hp-KgI" secondAttribute="height" multiplier="1:1" id="iQQ-d9-b2X"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="contnet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ade-mm-6uZ">
-                                                            <rect key="frame" x="86" y="53" width="225" height="17"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4j-Rn-ExJ">
+                                                            <rect key="frame" x="279" y="10" width="30" height="22"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="30" id="lao-nh-RQh"/>
+                                                            </constraints>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal" image="xmark" catalog="system"/>
+                                                            <connections>
+                                                                <action selector="tapCancelButton:" destination="dr8-sw-a9R" eventType="touchUpInside" id="TAj-mw-Fgt"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" name="main"/>
                                                     <constraints>
-                                                        <constraint firstItem="PLc-OB-OIN" firstAttribute="top" secondItem="j4K-f5-K07" secondAttribute="top" constant="16" id="5YM-ku-vTz"/>
-                                                        <constraint firstAttribute="trailing" secondItem="PLc-OB-OIN" secondAttribute="trailing" constant="8" id="64r-5A-msZ"/>
-                                                        <constraint firstItem="PhG-Hp-KgI" firstAttribute="leading" secondItem="j4K-f5-K07" secondAttribute="leading" constant="8" id="Gjd-Yl-yQF"/>
-                                                        <constraint firstItem="PhG-Hp-KgI" firstAttribute="top" secondItem="j4K-f5-K07" secondAttribute="top" constant="8" id="a1U-tf-Gkj"/>
-                                                        <constraint firstAttribute="bottom" secondItem="ade-mm-6uZ" secondAttribute="bottom" constant="16" id="ccE-QW-glR"/>
-                                                        <constraint firstItem="ade-mm-6uZ" firstAttribute="top" secondItem="PLc-OB-OIN" secondAttribute="bottom" constant="4" id="cgY-CX-LXa"/>
-                                                        <constraint firstAttribute="bottom" secondItem="PhG-Hp-KgI" secondAttribute="bottom" constant="8" id="h0K-NM-dex"/>
-                                                        <constraint firstItem="ade-mm-6uZ" firstAttribute="leading" secondItem="PhG-Hp-KgI" secondAttribute="trailing" constant="8" id="hjK-MR-yPV"/>
-                                                        <constraint firstItem="PLc-OB-OIN" firstAttribute="leading" secondItem="PhG-Hp-KgI" secondAttribute="trailing" constant="8" id="vDr-QW-L1h"/>
-                                                        <constraint firstAttribute="trailing" secondItem="ade-mm-6uZ" secondAttribute="trailing" constant="8" id="vyD-dZ-c2a"/>
+                                                        <constraint firstItem="E4j-Rn-ExJ" firstAttribute="top" secondItem="j4K-f5-K07" secondAttribute="top" constant="10" id="09e-43-8Tk"/>
+                                                        <constraint firstItem="PLc-OB-OIN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="j4K-f5-K07" secondAttribute="top" constant="16" id="5qW-zl-EPN"/>
+                                                        <constraint firstItem="PhG-Hp-KgI" firstAttribute="leading" secondItem="j4K-f5-K07" secondAttribute="leading" constant="10" id="Gjd-Yl-yQF"/>
+                                                        <constraint firstAttribute="trailing" secondItem="E4j-Rn-ExJ" secondAttribute="trailing" constant="10" id="HDO-RB-TPZ"/>
+                                                        <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="ade-mm-6uZ" secondAttribute="bottom" constant="16" id="X9B-WI-BgJ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ade-mm-6uZ" secondAttribute="trailing" constant="16" id="Yta-xe-sjM"/>
+                                                        <constraint firstItem="PhG-Hp-KgI" firstAttribute="top" secondItem="j4K-f5-K07" secondAttribute="top" constant="10" id="a1U-tf-Gkj"/>
+                                                        <constraint firstItem="ade-mm-6uZ" firstAttribute="leading" secondItem="PhG-Hp-KgI" secondAttribute="trailing" constant="10" id="ajJ-yp-nto"/>
+                                                        <constraint firstItem="ade-mm-6uZ" firstAttribute="top" secondItem="PLc-OB-OIN" secondAttribute="bottom" constant="4" id="fF9-ad-IKM"/>
+                                                        <constraint firstAttribute="bottom" secondItem="PhG-Hp-KgI" secondAttribute="bottom" constant="10" id="h0K-NM-dex"/>
+                                                        <constraint firstItem="PLc-OB-OIN" firstAttribute="top" relation="lessThanOrEqual" secondItem="j4K-f5-K07" secondAttribute="top" constant="24" id="k2p-IM-zPQ"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ade-mm-6uZ" secondAttribute="bottom" constant="8" id="lKk-An-gxj"/>
+                                                        <constraint firstItem="PLc-OB-OIN" firstAttribute="leading" secondItem="PhG-Hp-KgI" secondAttribute="trailing" constant="10" id="pTb-Vh-3wa"/>
+                                                        <constraint firstItem="ade-mm-6uZ" firstAttribute="top" secondItem="PLc-OB-OIN" secondAttribute="bottom" constant="4" id="wuv-NO-kIU"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -239,25 +248,35 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ork-0Y-Nmk">
                                                     <rect key="frame" x="16" y="16" width="319" height="327"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AddPet" translatesAutoresizingMaskIntoConstraints="NO" id="wW5-HY-t0Y">
-                                                            <rect key="frame" x="100" y="100" width="119" height="127"/>
-                                                            <color key="tintColor" name="main"/>
-                                                        </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dDu-QH-w9n">
-                                                            <rect key="frame" x="0.0" y="0.0" width="319" height="327"/>
+                                                            <rect key="frame" x="16" y="16" width="287" height="236.5"/>
                                                             <color key="tintColor" red="1" green="0.65076244120000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72H-rM-RFy">
+                                                            <rect key="frame" x="16" y="262.5" width="287" height="25.5"/>
+                                                            <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="18"/>
+                                                            <color key="textColor" name="Text"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCa-L3-Si4">
+                                                            <rect key="frame" x="16" y="294" width="287" height="17"/>
+                                                            <fontDescription key="fontDescription" name="GenJyuuGothic-Medium" family="Gen Jyuu Gothic" pointSize="12"/>
+                                                            <color key="textColor" name="Text"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="dDu-QH-w9n" secondAttribute="trailing" id="1sg-69-XKP"/>
-                                                        <constraint firstItem="wW5-HY-t0Y" firstAttribute="leading" secondItem="ork-0Y-Nmk" secondAttribute="leading" constant="100" id="6Yb-WO-Dxy"/>
-                                                        <constraint firstItem="wW5-HY-t0Y" firstAttribute="top" secondItem="ork-0Y-Nmk" secondAttribute="top" constant="100" id="DpG-BG-28h"/>
-                                                        <constraint firstItem="dDu-QH-w9n" firstAttribute="top" secondItem="ork-0Y-Nmk" secondAttribute="top" id="Qbm-vg-cUY"/>
-                                                        <constraint firstAttribute="bottom" secondItem="wW5-HY-t0Y" secondAttribute="bottom" constant="100" id="VDz-dn-lyC"/>
-                                                        <constraint firstItem="dDu-QH-w9n" firstAttribute="leading" secondItem="ork-0Y-Nmk" secondAttribute="leading" id="b4U-Kf-qww"/>
-                                                        <constraint firstAttribute="bottom" secondItem="dDu-QH-w9n" secondAttribute="bottom" id="eNh-Tr-qp1"/>
-                                                        <constraint firstAttribute="trailing" secondItem="wW5-HY-t0Y" secondAttribute="trailing" constant="100" id="o2p-2D-i0X"/>
+                                                        <constraint firstAttribute="trailing" secondItem="dDu-QH-w9n" secondAttribute="trailing" constant="16" id="1sg-69-XKP"/>
+                                                        <constraint firstAttribute="trailing" secondItem="oCa-L3-Si4" secondAttribute="trailing" constant="16" id="5xa-tI-8ij"/>
+                                                        <constraint firstItem="72H-rM-RFy" firstAttribute="top" secondItem="dDu-QH-w9n" secondAttribute="bottom" constant="10" id="Q6A-0r-kKr"/>
+                                                        <constraint firstItem="dDu-QH-w9n" firstAttribute="top" secondItem="ork-0Y-Nmk" secondAttribute="top" constant="16" id="Qbm-vg-cUY"/>
+                                                        <constraint firstItem="oCa-L3-Si4" firstAttribute="top" secondItem="72H-rM-RFy" secondAttribute="bottom" constant="6" id="XMR-Q4-A2V"/>
+                                                        <constraint firstItem="dDu-QH-w9n" firstAttribute="leading" secondItem="ork-0Y-Nmk" secondAttribute="leading" constant="16" id="b4U-Kf-qww"/>
+                                                        <constraint firstAttribute="bottom" secondItem="oCa-L3-Si4" secondAttribute="bottom" constant="16" id="keZ-rb-W7k"/>
+                                                        <constraint firstAttribute="trailing" secondItem="72H-rM-RFy" secondAttribute="trailing" constant="16" id="pcq-hj-yzK"/>
+                                                        <constraint firstItem="72H-rM-RFy" firstAttribute="leading" secondItem="ork-0Y-Nmk" secondAttribute="leading" constant="16" id="wBI-N1-RjV"/>
+                                                        <constraint firstItem="oCa-L3-Si4" firstAttribute="leading" secondItem="ork-0Y-Nmk" secondAttribute="leading" constant="16" id="xug-cb-Tbh"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -270,8 +289,10 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="351" height="359"/>
                                         <connections>
+                                            <outlet property="birthdayLabel" destination="oCa-L3-Si4" id="jqq-sR-zgR"/>
                                             <outlet property="diaryCardBackground" destination="ork-0Y-Nmk" id="bYH-bi-idO"/>
                                             <outlet property="petImageView" destination="dDu-QH-w9n" id="W0F-aU-qed"/>
+                                            <outlet property="petNameLabel" destination="72H-rM-RFy" id="HC5-ug-YSk"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -296,8 +317,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="apM-iK-pjP"/>
                     <connections>
+                        <outlet property="backGroundCardConstraint" destination="OU2-Z0-ec5" id="CHV-dQ-4ap"/>
                         <outlet property="backGroundview" destination="kxS-u7-HlZ" id="WpL-8Y-gnU"/>
-                        <outlet property="backgroundcardConstraint" destination="OU2-Z0-ec5" id="CHV-dQ-4ap"/>
                         <outlet property="collectionView" destination="ymp-y4-v10" id="lLY-Hp-tE0"/>
                     </connections>
                 </viewController>
@@ -307,19 +328,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="AddPet" width="78" height="120"/>
         <image name="MyPetsTab" width="31" height="28"/>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
-        <image name="plus.circle" catalog="system" width="128" height="121"/>
         <image name="square.and.arrow.up.circle" catalog="system" width="128" height="121"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="Text">
             <color red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="main">
-            <color red="1" green="0.6119999885559082" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.35710123181343079" green="0.61046278476715088" blue="0.60665088891983032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

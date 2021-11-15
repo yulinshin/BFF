@@ -1,82 +1,243 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mUs-bc-sRb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uQN-nY-0xI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="GenJyuuGothic-Bold.ttf">
+            <string>GenJyuuGothic-Bold</string>
+        </array>
+        <array key="GenJyuuGothic-Normal.ttf">
+            <string>GenJyuuGothic-Normal</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="fsh-On-kBu">
+        <!--寵物醫院地圖-->
+        <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="mUs-bc-sRb" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="kTX-dm-ESQ">
+                <viewController storyboardIdentifier="MapViewController" id="Y6W-OH-hqX" customClass="MapViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LuT-gu-nU8">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OAP-AO-r7B">
-                                <rect key="frame" x="40" y="256" width="334" height="384"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="aTJ-nr-xHP">
+                                <rect key="frame" x="16" y="88" width="382" height="31"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OOPS!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VF0-CM-TCe">
-                                        <rect key="frame" x="70" y="0.0" width="194" height="100"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="hGU-wP-6Th"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="60"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PAGE UNDER CONSTRUCTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlK-wu-0UN">
-                                        <rect key="frame" x="41.5" y="100" width="251" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="omR-Vk-4s9"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="16"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="404" translatesAutoresizingMaskIntoConstraints="NO" id="d3m-yJ-M2b">
-                                        <rect key="frame" x="0.0" y="140" width="334" height="244"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="d3m-yJ-M2b" secondAttribute="height" multiplier="167:122" id="nVI-LB-efF"/>
-                                        </constraints>
-                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sg0-Lb-CZN">
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="31"/>
+                                        <color key="tintColor" name="main"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="全部"/>
+                                        <connections>
+                                            <action selector="showAllHostipal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="6iz-If-A1t"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1e-pL-09U">
+                                        <rect key="frame" x="131" y="0.0" width="120" height="31"/>
+                                        <color key="tintColor" name="main"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="一般寵物"/>
+                                        <connections>
+                                            <action selector="showNormailHostipal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="n9s-86-ctp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKw-vs-8Iq">
+                                        <rect key="frame" x="262" y="0.0" width="120" height="31"/>
+                                        <color key="tintColor" name="main"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="特殊寵物"/>
+                                        <connections>
+                                            <action selector="showSpecialHostipal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="f8o-Kt-C7U"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51M-rH-7FR" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="135" width="414" height="727"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="K9H-62-NP1"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" systemColor="systemGray6Color"/>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="OAP-AO-r7B" firstAttribute="leading" secondItem="kTX-dm-ESQ" secondAttribute="leading" constant="40" id="2xC-h1-pbk"/>
-                            <constraint firstItem="K9H-62-NP1" firstAttribute="bottom" secondItem="LuT-gu-nU8" secondAttribute="bottom" id="FnN-3x-cET"/>
-                            <constraint firstItem="LuT-gu-nU8" firstAttribute="leading" secondItem="K9H-62-NP1" secondAttribute="leading" id="IPC-Dd-aUs"/>
-                            <constraint firstAttribute="trailing" secondItem="OAP-AO-r7B" secondAttribute="trailing" constant="40" id="LsW-Cy-KFB"/>
-                            <constraint firstItem="LuT-gu-nU8" firstAttribute="top" secondItem="K9H-62-NP1" secondAttribute="top" id="QQi-pH-gzb"/>
-                            <constraint firstItem="OAP-AO-r7B" firstAttribute="centerY" secondItem="kTX-dm-ESQ" secondAttribute="centerY" id="YlT-cw-aBr"/>
-                            <constraint firstItem="LuT-gu-nU8" firstAttribute="trailing" secondItem="K9H-62-NP1" secondAttribute="trailing" id="cVe-ZY-sc3"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="aTJ-nr-xHP" secondAttribute="trailing" constant="16" id="2VJ-PL-VJb"/>
+                            <constraint firstItem="aTJ-nr-xHP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="B7C-1e-nah"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="51M-rH-7FR" secondAttribute="trailing" id="DHD-2O-aCx"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="51M-rH-7FR" secondAttribute="bottom" id="SdT-i7-wfA"/>
+                            <constraint firstItem="aTJ-nr-xHP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="fT6-Fv-01w"/>
+                            <constraint firstItem="51M-rH-7FR" firstAttribute="top" secondItem="aTJ-nr-xHP" secondAttribute="bottom" constant="16" id="tjV-SX-E0p"/>
+                            <constraint firstItem="51M-rH-7FR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="xzk-Lq-j9P"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="寵物醫院地圖" id="UyT-qg-eSp"/>
+                    <connections>
+                        <outlet property="allButton" destination="Sg0-Lb-CZN" id="RbH-Ek-uQK"/>
+                        <outlet property="mapView" destination="51M-rH-7FR" id="9zO-zZ-Z4g"/>
+                        <outlet property="normailButton" destination="S1e-pL-09U" id="UaE-cv-tjI"/>
+                        <outlet property="sepcialButton" destination="QKw-vs-8Iq" id="zFo-Tx-KeE"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zd7-EK-ToA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="82.608695652173921" y="116.51785714285714"/>
+            <point key="canvasLocation" x="1286.9565217391305" y="845.75892857142856"/>
+        </scene>
+        <!--寵物圖書館-->
+        <scene sceneID="BC6-Or-bXT">
+            <objects>
+                <viewController title="寵物圖書館" id="brY-lv-8dQ" customClass="LibaryViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Plz-GE-JdE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8cy-dT-8iF">
+                                <rect key="frame" x="16" y="103" width="382" height="743"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CDw-Bl-WbY">
+                                    <size key="itemSize" width="182" height="267"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BookCollectionViewCell" id="dId-KX-VTa" customClass="BookCollectionViewCell" customModule="BFF" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="182" height="267"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ekN-4y-MwH">
+                                            <rect key="frame" x="0.0" y="0.0" width="182" height="267"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cg8-fn-eZd">
+                                                    <rect key="frame" x="24" y="24" width="134" height="219"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3en-OT-sHX">
+                                                            <rect key="frame" x="8" y="8" width="118" height="118"/>
+                                                            <color key="tintColor" name="main"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="3en-OT-sHX" secondAttribute="height" multiplier="1:1" id="aN8-p0-6Bp"/>
+                                                            </constraints>
+                                                            <imageReference key="image" image="book.closed" catalog="system" symbolScale="default"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="全台寵物醫院地圖" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKJ-Ta-2Ah">
+                                                            <rect key="frame" x="16" y="134" width="102" height="17"/>
+                                                            <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="16"/>
+                                                            <color key="textColor" name="main"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="24小時寵物醫院、特殊寵物醫院" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymJ-9T-vcC">
+                                                            <rect key="frame" x="16" y="159" width="102" height="52"/>
+                                                            <fontDescription key="fontDescription" name="GenJyuuGothic-Normal" family="Gen Jyuu Gothic" pointSize="14"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="3en-OT-sHX" firstAttribute="top" secondItem="Cg8-fn-eZd" secondAttribute="top" constant="8" id="GqA-6k-Crr"/>
+                                                        <constraint firstAttribute="trailing" secondItem="3en-OT-sHX" secondAttribute="trailing" constant="8" id="JF8-gX-har"/>
+                                                        <constraint firstItem="ymJ-9T-vcC" firstAttribute="leading" secondItem="Cg8-fn-eZd" secondAttribute="leading" constant="16" id="KZl-Nz-wZr"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ymJ-9T-vcC" secondAttribute="bottom" constant="16" id="Om7-IE-BNp"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ymJ-9T-vcC" secondAttribute="trailing" constant="16" id="QhA-PE-Och"/>
+                                                        <constraint firstAttribute="trailing" secondItem="OKJ-Ta-2Ah" secondAttribute="trailing" constant="16" id="RsZ-aq-sZR"/>
+                                                        <constraint firstItem="OKJ-Ta-2Ah" firstAttribute="top" secondItem="3en-OT-sHX" secondAttribute="bottom" constant="6" id="fmH-IJ-XyR"/>
+                                                        <constraint firstItem="3en-OT-sHX" firstAttribute="leading" secondItem="Cg8-fn-eZd" secondAttribute="leading" constant="8" id="sbQ-ZB-YEc"/>
+                                                        <constraint firstItem="ymJ-9T-vcC" firstAttribute="top" secondItem="OKJ-Ta-2Ah" secondAttribute="bottom" constant="10" id="x9i-2w-bit"/>
+                                                        <constraint firstItem="OKJ-Ta-2Ah" firstAttribute="leading" secondItem="Cg8-fn-eZd" secondAttribute="leading" constant="16" id="yRM-eC-WI0"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Cg8-fn-eZd" secondAttribute="bottom" constant="24" id="DMP-bH-ijB"/>
+                                                <constraint firstAttribute="trailing" secondItem="Cg8-fn-eZd" secondAttribute="trailing" constant="24" id="KR2-K5-7si"/>
+                                                <constraint firstItem="Cg8-fn-eZd" firstAttribute="top" secondItem="ekN-4y-MwH" secondAttribute="top" constant="24" id="rUm-LJ-OTa"/>
+                                                <constraint firstItem="Cg8-fn-eZd" firstAttribute="leading" secondItem="ekN-4y-MwH" secondAttribute="leading" constant="24" id="ufa-rF-26T"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="182" height="267"/>
+                                        <connections>
+                                            <outlet property="bookCoverBackground" destination="Cg8-fn-eZd" id="QWZ-ST-7Yl"/>
+                                            <outlet property="bookIconImageView" destination="3en-OT-sHX" id="Sbi-LB-8Ff"/>
+                                            <outlet property="bookSubTitle" destination="ymJ-9T-vcC" id="3yJ-tp-Tk5"/>
+                                            <outlet property="bookTitle" destination="OKJ-Ta-2Ah" id="dQ8-Nk-0lf"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sdx-Jx-XPy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sdx-Jx-XPy" firstAttribute="trailing" secondItem="8cy-dT-8iF" secondAttribute="trailing" constant="16" id="YdX-8P-Tce"/>
+                            <constraint firstItem="sdx-Jx-XPy" firstAttribute="bottom" secondItem="8cy-dT-8iF" secondAttribute="bottom" constant="16" id="moI-Hv-BAV"/>
+                            <constraint firstItem="8cy-dT-8iF" firstAttribute="top" secondItem="sdx-Jx-XPy" secondAttribute="top" constant="15" id="w38-2Y-uzU"/>
+                            <constraint firstItem="8cy-dT-8iF" firstAttribute="leading" secondItem="sdx-Jx-XPy" secondAttribute="leading" constant="16" id="zZi-9k-LoY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="寵物圖書館" id="DWs-H8-Ls0"/>
+                    <connections>
+                        <outlet property="libaryCollectionView" destination="8cy-dT-8iF" id="qF2-bW-1Yk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bM0-qW-Nkb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="85.714285714285708"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="f4Y-zl-phZ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H5Y-SY-SOz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uyn-eM-y4Z">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="main"/>
+                        <color key="barTintColor" name="main"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" name="main"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="brY-lv-8dQ" kind="relationship" relationship="rootViewController" id="fCJ-tP-mEM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n1f-lJ-EAF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-778.26086956521749" y="85.714285714285708"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nu6-Qi-QS5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uQN-nY-0xI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cz9-1g-TVC">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="main"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="oWr-YL-55M"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YYf-bd-QyH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="376.81159420289856" y="845.75892857142856"/>
         </scene>
     </scenes>
     <resources>
-        <image name="404" width="487" height="244"/>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="book.closed" catalog="system" width="115" height="128"/>
+        <namedColor name="main">
+            <color red="0.35710123181343079" green="0.61046278476715088" blue="0.60665088891983032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
