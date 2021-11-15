@@ -8,6 +8,7 @@
 import UIKit
 import AuthenticationServices
 import FirebaseAuth
+import SafariServices
 
 class SignInViewController: UIViewController {
 
@@ -15,17 +16,45 @@ class SignInViewController: UIViewController {
     fileprivate var currentPos:Int = 0
     fileprivate var images:[UIImage] = [UIImage]()
     fileprivate var imageSliderView: ImageSliderView!
+    fileprivate var termLabel = UILabel()
+
+    let termText = "註冊等同於接受隱私權政策"
+    let policy = "隱私權政策"
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBackGround()
-        setupAppleSignInButton()
+
+            setupBackGround()
+            setupAppleSignInButton()
+            setupPrivacyLabel()
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        if let user = Auth.auth().currentUser {
+
+            let viewController = TabBarController()
+            viewController.modalPresentationStyle = .fullScreen
+            self.present(viewController, animated: true, completion: nil)
+
+        } 
+
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        timer.invalidate()
+        timer = nil
+
+
+    }
+
+    deinit {
+        print("SigInViewController DIE")
     }
 
     private func setupBackGround() {
@@ -54,11 +83,8 @@ class SignInViewController: UIViewController {
         
 
         // setup timer
-
-        Timer.scheduledTimer(timeInterval: 3.5, target: self, selector: #selector(SignInViewController.scaleImageEvent), userInfo: nil, repeats: true)
-
-//        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(SignInViewController.changeImageEvent), userInfo: nil, repeats: true)
-//        scaleImageEvent()
+        
+        timer = Timer.scheduledTimer(timeInterval: 3.5, target: self, selector: #selector(SignInViewController.scaleImageEvent), userInfo: nil, repeats: true)
 
     }
 
@@ -84,6 +110,44 @@ class SignInViewController: UIViewController {
         }
     }
 
+
+    func setupPrivacyLabel(){
+
+        let formattedText = String.format(strings: [policy],
+                                            boldFont: UIFont.boldSystemFont(ofSize: 12),
+                                            boldColor: UIColor.blue,
+                                            inString: termText,
+                                            font: UIFont.systemFont(ofSize: 12),
+                                            color: UIColor.white)
+        termLabel.attributedText = formattedText
+        termLabel.numberOfLines = 0
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTermTapped))
+        termLabel.addGestureRecognizer(tap)
+        termLabel.isUserInteractionEnabled = true
+        termLabel.textAlignment = .center
+
+
+
+    }
+
+
+    @objc func handleTermTapped(gesture: UITapGestureRecognizer) {
+        let termString = termText as NSString
+        let policyRange = termString.range(of: policy)
+
+        let tapLocation = gesture.location(in: termLabel)
+        let index = termLabel.indexOfAttributedTextCharacterAtPoint(point: tapLocation)
+
+        if checkRange(policyRange, contain: index) {
+            handleViewPrivacy()
+            return
+        }
+    }
+
+    func checkRange(_ range: NSRange, contain index: Int) -> Bool {
+        return index > range.location && index < range.location + range.length
+    }
+
     func setupAppleSignInButton(){
 
         let titleLabel = UILabel()
@@ -98,11 +162,13 @@ class SignInViewController: UIViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         subTitleLAbel.translatesAutoresizingMaskIntoConstraints = false
         textLable.translatesAutoresizingMaskIntoConstraints = false
+        termLabel.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(button)
         view.addSubview(titleLabel)
         view.addSubview(subTitleLAbel)
         view.addSubview(textLable)
+        view.addSubview(termLabel)
 
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100).isActive = true
@@ -121,6 +187,12 @@ class SignInViewController: UIViewController {
         textLable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36).isActive = true
         textLable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36).isActive = true
 
+        termLabel.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 10).isActive = true
+        termLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36).isActive = true
+        termLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36).isActive = true
+
+
+        termLabel.textAlignment = .center
 
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
@@ -236,7 +308,8 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
 
                 let viewController = TabBarController()
                 viewController.modalPresentationStyle = .fullScreen
-                self.present(viewController, animated: true, completion: nil)
+                self.view.window?.rootViewController = viewController
+                self.view.window?.makeKeyAndVisible()
 
             } else {
                 print ("Fail To Signed in")
@@ -331,4 +404,19 @@ fileprivate var currentNonce: String?
       return hashString
     }
 
+extension SignInViewController: SFSafariViewControllerDelegate {
 
+    func  handleViewPrivacy() {
+
+        guard let url = URL(string: "https://www.privacypolicies.com/live/401e5c9d-df2d-42b9-b5e2-33f1f04f6dea") else { return }
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.preferredBarTintColor = .black
+        safariVC.preferredControlTintColor = .white
+        safariVC.dismissButtonStyle = .close
+        safariVC.delegate = self
+        self.present(safariVC, animated: true, completion: nil)
+
+    }
+
+
+}

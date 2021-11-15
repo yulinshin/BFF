@@ -77,7 +77,6 @@ class CommentTableViewController: UIViewController {
                     first.createdTime.dateValue() < second.createdTime.dateValue()
                 }
 
-
                 comments.forEach { comment in
                     let chatViewModel = CommentViewModel(from: comment){
                         self.tableView.reloadData()
@@ -90,7 +89,6 @@ class CommentTableViewController: UIViewController {
             case .failure(let error):
 
                 print(error)
-
 
             }
 
@@ -113,6 +111,7 @@ extension CommentTableViewController: UITableViewDelegate, UITableViewDataSource
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableCell", for: indexPath) as? CommentTableCell else {
             return UITableViewCell() }
         cell.setup(viewModel: viewModels[indexPath.row])
+        cell.selectionStyle =  .none
         return cell
     }
 }
@@ -121,12 +120,23 @@ extension CommentTableViewController: UITableViewDelegate, UITableViewDataSource
 extension CommentTableViewController: UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-
+            animateViewMoving(up: true, moveValue: 300)
         }
 
         func textFieldDidEndEditing(_ textField: UITextField) {
-
+            animateViewMoving(up: false, moveValue: 300)
         }
+
+        func animateViewMoving (up:Bool, moveValue :CGFloat){
+            let movementDuration:TimeInterval = 0.3
+            let movement:CGFloat = ( up ? -moveValue : moveValue)
+            UIView.beginAnimations( "animateView", context: nil)
+            UIView.setAnimationBeginsFromCurrentState(true)
+            UIView.setAnimationDuration(movementDuration )
+            self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+            UIView.commitAnimations()
+        }
+
 }
 
 extension CommentTableViewController: UICollectionViewDataSource {
@@ -165,7 +175,7 @@ extension CommentTableViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
             guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-            cell.selectBackground.layer.borderColor = UIColor.orange.cgColor
+        cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
             cell.selectBackground.layer.borderWidth = 3
             guard let myPets = myPets else { return }
             selectedPet = myPets[indexPath.row].petId

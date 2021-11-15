@@ -112,9 +112,6 @@ class DiaryDetailViewController: UIViewController {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        // Block PetsId -> Only show on other's Diary
-        alertController.addAction(UIAlertAction(title: "Hide this diary", style: .default, handler: blockDiary))
-
         // Setting privacy Button
         viewModel.isPublic.bind(listener: { isPublic in
             if isPublic {
@@ -141,11 +138,6 @@ class DiaryDetailViewController: UIViewController {
 
 // MARK: - Diary Menu Function
 
-        // Block PetsId Action
-        func blockDiary(_ action: UIAlertAction) {
-            print("tapped \(action.title!)")
-
-        }
 
         // Setting privacy Action
         func editPrivacyToPublic(_ action: UIAlertAction) {

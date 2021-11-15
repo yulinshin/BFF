@@ -48,7 +48,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="rYn-iT-F05"/>
                                                 </constraints>
-                                                <color key="tintColor" name="orange"/>
+                                                <color key="tintColor" name="main"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="ellipsis" catalog="system">
                                                     <attributedString key="attributedTitle"/>
@@ -96,7 +96,7 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbX-KK-aGs">
                                 <rect key="frame" x="295" y="183" width="110" height="40"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <color key="backgroundColor" name="main"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="110" id="MP0-Gd-pmw"/>
                                     <constraint firstAttribute="height" constant="40" id="UvX-NM-v25"/>
@@ -169,7 +169,7 @@
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bell" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="QjX-kk-ueZ">
                                         <rect key="frame" x="0.0" y="0.0" width="20" height="39.5"/>
-                                        <color key="tintColor" name="orange"/>
+                                        <color key="tintColor" name="main"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="BtJ-xp-ho1"/>
                                             <constraint firstAttribute="height" constant="40" id="VZd-rk-CYB"/>
@@ -236,22 +236,16 @@
         <image name="bell" catalog="system" width="128" height="124"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <namedColor name="main">
-            <color red="1" green="0.6119999885559082" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="orange">
-            <color red="1" green="0.63099998235702515" blue="0.20999999344348907" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.35710123181343079" green="0.61046278476715088" blue="0.60665088891983032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="red">
-            <color red="1" green="0.3190000057220459" blue="0.44900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.92803531885147095" green="0.42471879720687866" blue="0.47419941425323486" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

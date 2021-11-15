@@ -31,7 +31,7 @@ class PetCollectionViewCell: UICollectionViewCell {
         petImageView.isHidden = false
         petImageView.loadImage(petImage)
         petImageView.contentMode = .scaleAspectFill
-        petImageView.layer.cornerRadius = 20
+        petImageView.layer.cornerRadius = 16
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.tapCard))
         petImageView.addGestureRecognizer(tapGR)
         petImageView.isUserInteractionEnabled = true
@@ -95,7 +95,7 @@ class PetCollectionViewCell: UICollectionViewCell {
         addPetAnimationView.centerXAnchor.constraint(equalTo: diaryCardBackground.centerXAnchor).isActive = true
         addPetAnimationView.heightAnchor.constraint(equalToConstant: 200).isActive = true
 
-        let keypath = AnimationKeypath(keys: ["**", "Fill", "**", "Color"])
+        let keypath = AnimationKeypath(keys: ["**", "Fill 1", "**", "Color"])
         if let color = UIColor(named: "main") {
             let colorProvider = ColorValueProvider(color.lottieColorValue)
             addPetAnimationView.setValueProvider(colorProvider, keypath: keypath)

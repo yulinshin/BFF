@@ -178,7 +178,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PNY-Sr-8aI">
-                                <rect key="frame" x="0.0" y="44" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="752"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentTableCell" rowHeight="66" id="T3M-yV-lPO" customClass="CommentTableCell" customModule="BFF" customModuleProvider="target">
@@ -230,7 +230,7 @@
                             <constraint firstItem="hZg-zj-86k" firstAttribute="trailing" secondItem="PNY-Sr-8aI" secondAttribute="trailing" id="LxU-vG-Jzp"/>
                             <constraint firstItem="hZg-zj-86k" firstAttribute="bottom" secondItem="7ZD-Pm-hiL" secondAttribute="bottom" constant="16" id="f0f-8h-Ifv"/>
                             <constraint firstItem="PNY-Sr-8aI" firstAttribute="top" secondItem="hZg-zj-86k" secondAttribute="top" id="fYv-5m-AHw"/>
-                            <constraint firstItem="PNY-Sr-8aI" firstAttribute="bottom" secondItem="7ZD-Pm-hiL" secondAttribute="top" id="fx7-Lm-FpD"/>
+                            <constraint firstItem="PNY-Sr-8aI" firstAttribute="bottom" secondItem="BXg-05-eb4" secondAttribute="bottom" constant="-100" id="fx7-Lm-FpD"/>
                             <constraint firstItem="7ZD-Pm-hiL" firstAttribute="leading" secondItem="hZg-zj-86k" secondAttribute="leading" id="qxj-48-npN"/>
                         </constraints>
                     </view>
@@ -268,7 +268,7 @@
         <image name="404" width="487" height="244"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <namedColor name="main">
-            <color red="1" green="0.6119999885559082" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.35710123181343079" green="0.61046278476715088" blue="0.60665088891983032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

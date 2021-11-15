@@ -50,6 +50,82 @@ class FirebaseManager {
         }
     }
 
+
+    func updateCurrentUserFollow(followPetId: String ) {
+
+
+        let currentUserDB = dateBase.collection("Users").document(userId)
+
+        currentUserDB.updateData(["followedPets": FieldValue.arrayUnion([followPetId])])
+    }
+
+    func removeCurrentUserFollow(followPetId: String ) {
+
+
+        let currentUserDB = dateBase.collection("Users").document(userId)
+
+        currentUserDB.updateData(["followedPets": FieldValue.arrayRemove([followPetId])])
+    }
+
+    func updateCurrentUserBlockPets(blockPetId: String ) {
+
+
+        let currentUserDB = dateBase.collection("Users").document(userId)
+
+        currentUserDB.updateData(["blockPets": FieldValue.arrayUnion([blockPetId])])
+    }
+
+    func unBlockPets(blockPetId: String ) {
+
+        let currentUserDB = dateBase.collection("Users").document(userId)
+
+        currentUserDB.updateData(["blockPets": FieldValue.arrayRemove([blockPetId])])
+    }
+
+    func updateUserInfo(user: User, newimage: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
+
+        print("Strat UpDateUser\(user.userId)....................")
+        if let pic = user.userThumbNail {
+            deletePhoto(fileName: pic.fileName, filePath: .userPhotos)
+        }
+        uploadPhoto(image: newimage, filePath: .userPhotos) { result in
+            print("Strat UpDatePetPhoto\(newimage)....................")
+            switch result {
+            case .success(let pic):
+                var newUserData = user
+                newUserData.userThumbNail?.url = pic.url
+                newUserData.userThumbNail?.fileName = pic.fileName
+
+                let userDB = self.dateBase.collection("Users").document(newUserData.userId)
+                do {
+                    try userDB.setData(from: newUserData)
+                    completion(.success("Succes"))
+                } catch {
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+
+    func updateUserInfo(user: User, completion: @escaping (Result<String, Error>) -> Void) {
+
+        print("Strat UpDateUser\(user.userId)....................")
+
+                let userDB = self.dateBase.collection("Users").document(user.userId)
+                do {
+                    try userDB.setData(from: user)
+                    completion(.success("Succes"))
+                } catch {
+                    completion(.failure(error))
+
+        }
+    }
+
+
+
+
     func fetchUserInfo(userId: String, completion: @escaping (Result<User, Error>) -> Void) {
 
         print("Start fetch UserData ........")
@@ -561,7 +637,7 @@ class FirebaseManager {
                     "userId": self.userId,
                     "healthInfo.birthday": data.healthInfo.birthday,
                     "healthInfo.chipId": data.healthInfo.chipId,
-                    "healthInfo.gender": data.healthInfo.chipId,
+                    "healthInfo.gender": data.healthInfo.gender,
                     "healthInfo.note": data.healthInfo.note,
                     "healthInfo.type": data.healthInfo.type,
                     "healthInfo.weight": data.healthInfo.weight,
@@ -610,6 +686,9 @@ class FirebaseManager {
 
 
 
+
+
+
     func fetchAllDiaries(completion: @escaping (Result<[Diary], Error>) -> Void) {
 
         dateBase.collection("Diaries").whereField("isPublic", isEqualTo: true).getDocuments { (querySnapshot, error) in
@@ -638,6 +717,37 @@ class FirebaseManager {
             }
         }
     }
+
+
+    func fetchPetAllDiaries(petId: String, completion: @escaping (Result<[Diary], Error>) -> Void) {
+
+        dateBase.collection("Diaries").whereField("petId", isEqualTo: petId).getDocuments { (querySnapshot, error) in
+
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                var diaries = [Diary]()
+                for document in querySnapshot!.documents {
+
+                    do {
+                        if let diary = try document.data(as: Diary.self, decoder: Firestore.Decoder()) {
+                            diaries.append(diary)
+                        }
+
+                    } catch {
+
+                        completion(.failure(error))
+                    }
+                }
+
+                let sortDiary = diaries.sorted { firstDiary, secondDiary in
+                    return firstDiary.createdTime.dateValue() > secondDiary.createdTime.dateValue()
+                }
+                completion(.success(sortDiary))
+            }
+        }
+    }
+
 
 
 
@@ -688,6 +798,7 @@ class FirebaseManager {
     enum FilePathName: String {
         case dairyPhotos = "DairyPhotos"
         case petPhotos = "PetPhotoss"
+        case userPhotos = "UserPhotos"
     }
 
     func uploadPhoto(image: UIImage, filePath: FilePathName, completion: @escaping (Result<Pic, Error>) -> Void) {

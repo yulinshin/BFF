@@ -37,6 +37,8 @@
 		62603AE227279A4600467E2D /* CubeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62603AE027279A4600467E2D /* CubeCollectionViewCell.xib */; };
 		62603AE52727B64F00467E2D /* AddNewItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62603AE32727B64F00467E2D /* AddNewItemTableViewCell.swift */; };
 		62603AE62727B64F00467E2D /* AddNewItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62603AE42727B64F00467E2D /* AddNewItemTableViewCell.xib */; };
+		62617495273DF552006F3635 /* BlockPetsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62617494273DF552006F3635 /* BlockPetsListTableViewController.swift */; };
+		62617497273DF5FD006F3635 /* BlocksVeiwModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62617496273DF5FD006F3635 /* BlocksVeiwModels.swift */; };
 		6264A85A2736BA6200FACF97 /* ChatListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6264A8592736BA6200FACF97 /* ChatListTableViewController.swift */; };
 		6264A85C2736BB9000FACF97 /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6264A85B2736BB9000FACF97 /* ChatListViewModel.swift */; };
 		6267CDE527338F3700CFA28D /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6267CDE427338F3700CFA28D /* AppTabBar.swift */; };
@@ -85,6 +87,9 @@
 		629FF5C9271D623F00C7C94A /* Supply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629FF5C8271D623F00C7C94A /* Supply.swift */; };
 		62AB33F827205D5000C8E582 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AB33F727205D5000C8E582 /* NoteViewController.swift */; };
 		62AB33FA27205D6E00C8E582 /* Pet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62AB33F927205D6E00C8E582 /* Pet.storyboard */; };
+		62B609E5273912F5007FB169 /* PetsProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B609E4273912F5007FB169 /* PetsProfileViewController.swift */; };
+		62B609E9273A26AE007FB169 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B609E8273A26AE007FB169 /* MenuTableViewCell.swift */; };
+		62B609EB273A52E5007FB169 /* UserAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B609EA273A52E5007FB169 /* UserAccountViewController.swift */; };
 		62B617D1273534D70062BBE5 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617D0273534D70062BBE5 /* UILabel+Extension.swift */; };
 		62B617D327365DF20062BBE5 /* CommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617D227365DF20062BBE5 /* CommentTableViewController.swift */; };
 		62B617D527365EA50062BBE5 /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B617D427365EA50062BBE5 /* CommentViewModel.swift */; };
@@ -127,7 +132,7 @@
 		62FC619827258C3B00292710 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC619727258C3B00292710 /* UIImage+Extension.swift */; };
 		62FC619A27258DF900292710 /* Soical.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FC619927258DF900292710 /* Soical.storyboard */; };
 		62FC619E27258E2100292710 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FC619D27258E2100292710 /* Message.storyboard */; };
-		62FC61A027258E3400292710 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FC619F27258E3400292710 /* Menu.storyboard */; };
+		62FC61A027258E3400292710 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FC619F27258E3400292710 /* User.storyboard */; };
 		6F556AA47000C71AFD333BA4 /* Pods_BFF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DF47BE281594C125C9DF5FB /* Pods_BFF.framework */; };
 /* End PBXBuildFile section */
 
@@ -167,6 +172,8 @@
 		62603AE32727B64F00467E2D /* AddNewItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewItemTableViewCell.swift; sourceTree = "<group>"; };
 		62603AE42727B64F00467E2D /* AddNewItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNewItemTableViewCell.xib; sourceTree = "<group>"; };
 		62603AE72727E73D00467E2D /* BFF.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BFF.entitlements; sourceTree = "<group>"; };
+		62617494273DF552006F3635 /* BlockPetsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPetsListTableViewController.swift; sourceTree = "<group>"; };
+		62617496273DF5FD006F3635 /* BlocksVeiwModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksVeiwModels.swift; sourceTree = "<group>"; };
 		6264A8592736BA6200FACF97 /* ChatListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListTableViewController.swift; sourceTree = "<group>"; };
 		6264A85B2736BB9000FACF97 /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
 		6267CDE427338F3700CFA28D /* AppTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBar.swift; sourceTree = "<group>"; };
@@ -215,6 +222,9 @@
 		629FF5C8271D623F00C7C94A /* Supply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supply.swift; sourceTree = "<group>"; };
 		62AB33F727205D5000C8E582 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		62AB33F927205D6E00C8E582 /* Pet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pet.storyboard; sourceTree = "<group>"; };
+		62B609E4273912F5007FB169 /* PetsProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsProfileViewController.swift; sourceTree = "<group>"; };
+		62B609E8273A26AE007FB169 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		62B609EA273A52E5007FB169 /* UserAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountViewController.swift; sourceTree = "<group>"; };
 		62B617D0273534D70062BBE5 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		62B617D227365DF20062BBE5 /* CommentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewController.swift; sourceTree = "<group>"; };
 		62B617D427365EA50062BBE5 /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
@@ -258,7 +268,7 @@
 		62FC619727258C3B00292710 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		62FC619927258DF900292710 /* Soical.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Soical.storyboard; sourceTree = "<group>"; };
 		62FC619D27258E2100292710 /* Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
-		62FC619F27258E3400292710 /* Menu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
+		62FC619F27258E3400292710 /* User.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
 		B4D199ED89E9ED7DFC5E8A35 /* Pods-BFF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BFF.debug.xcconfig"; path = "Target Support Files/Pods-BFF/Pods-BFF.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -297,6 +307,7 @@
 				62D454C127268CB6009DF0FF /* SuppliesViewMdoel.swift */,
 				62BA0102272E7EBE00A19478 /* PetHealthCellViewModel.swift */,
 				62892FE1273210F3001A7B32 /* bookViewModel.swift */,
+				62617496273DF5FD006F3635 /* BlocksVeiwModels.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -344,7 +355,7 @@
 				623340E1271C3B1B002B2429 /* Info.plist */,
 				62930BD9272C2DCA00BC1908 /* UserData.xcdatamodeld */,
 				62AB33F927205D6E00C8E582 /* Pet.storyboard */,
-				62FC619F27258E3400292710 /* Menu.storyboard */,
+				62FC619F27258E3400292710 /* User.storyboard */,
 				62FC619D27258E2100292710 /* Message.storyboard */,
 				62D454B727267CF2009DF0FF /* Supplies.storyboard */,
 				62FC61902725839F00292710 /* TabBar.storyboard */,
@@ -371,6 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				62B617E02736B1C20062BBE5 /* ChatViewController.swift */,
+				62B609EA273A52E5007FB169 /* UserAccountViewController.swift */,
 				623340D7271C3B19002B2429 /* HomePageViewController.swift */,
 				6285C796271DD08D006E13EC /* DiaryViewController.swift */,
 				6200C5FA272296970074DB64 /* DiaryVC+DiffDataSource.swift */,
@@ -394,6 +406,8 @@
 				6267CDEC2733BBD600CFA28D /* DiarysTableViewController.swift */,
 				6264A8592736BA6200FACF97 /* ChatListTableViewController.swift */,
 				62B617D227365DF20062BBE5 /* CommentTableViewController.swift */,
+				62B609E4273912F5007FB169 /* PetsProfileViewController.swift */,
+				62617494273DF552006F3635 /* BlockPetsListTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -462,6 +476,7 @@
 				624D5C4A2731321700602125 /* MapMarkerWindowView.xib */,
 				624D5C4C273132D900602125 /* MapMarkerWindow.swift */,
 				62892FDF27321046001A7B32 /* BookCollectionViewCell.swift */,
+				62B609E8273A26AE007FB169 /* MenuTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -597,7 +612,7 @@
 				628930002732F749001A7B32 /* GenJyuuGothic-Regular.ttf in Resources */,
 				62B617DF2736B0FF0062BBE5 /* MyChatTableViewCell.xib in Resources */,
 				624D5C4B2731321700602125 /* MapMarkerWindowView.xib in Resources */,
-				62FC61A027258E3400292710 /* Menu.storyboard in Resources */,
+				62FC61A027258E3400292710 /* User.storyboard in Resources */,
 				62FC6192272586FD00292710 /* Home.storyboard in Resources */,
 				62892FFE2732F749001A7B32 /* GenJyuuGothic-ExtraLight.ttf in Resources */,
 				62892FFD2732F749001A7B32 /* GenJyuuGothic-Medium.ttf in Resources */,
@@ -760,9 +775,11 @@
 				629FF5C1271D5DFF00C7C94A /* User.swift in Sources */,
 				6254041D271F23DD004F49DC /* Box.swift in Sources */,
 				62B617E12736B1C20062BBE5 /* ChatViewController.swift in Sources */,
+				62B609EB273A52E5007FB169 /* UserAccountViewController.swift in Sources */,
 				629FF5BD271D5A0800C7C94A /* KingfisherWrapper.swift in Sources */,
 				62C38D93272EEA96008DEE8B /* GoalCollectionViewCellB.swift in Sources */,
 				6285C79A271DD519006E13EC /* DairyPhotoCell.swift in Sources */,
+				62B609E5273912F5007FB169 /* PetsProfileViewController.swift in Sources */,
 				629FF5C9271D623F00C7C94A /* Supply.swift in Sources */,
 				62603AE127279A4600467E2D /* CubeCollectionViewCell.swift in Sources */,
 				62B617D327365DF20062BBE5 /* CommentTableViewController.swift in Sources */,
@@ -770,7 +787,9 @@
 				629FF5C7271D614D00C7C94A /* Notification.swift in Sources */,
 				624D5C4D273132D900602125 /* MapMarkerWindow.swift in Sources */,
 				62D454C227268CB6009DF0FF /* SuppliesViewMdoel.swift in Sources */,
+				62617495273DF552006F3635 /* BlockPetsListTableViewController.swift in Sources */,
 				62BA00FF272E7B7C00A19478 /* PetsListTableViewController.swift in Sources */,
+				62B609E9273A26AE007FB169 /* MenuTableViewCell.swift in Sources */,
 				629FF5BA271D416B00C7C94A /* PetCollectionViewCell.swift in Sources */,
 				6285C79E271DE49A006E13EC /* SelectedPetsCollectionViewCell.swift in Sources */,
 				629FF5C5271D5FCF00C7C94A /* Goal.swift in Sources */,
@@ -788,6 +807,7 @@
 				62C80D1C2720117800EE2FB1 /* PetInfoTableTableViewCell.swift in Sources */,
 				62B617D1273534D70062BBE5 /* UILabel+Extension.swift in Sources */,
 				62AB33F827205D5000C8E582 /* NoteViewController.swift in Sources */,
+				62617497273DF5FD006F3635 /* BlocksVeiwModels.swift in Sources */,
 				62C80D172720115B00EE2FB1 /* CreatPetsVC+UploadImge.swift in Sources */,
 				62C38D91272EE89D008DEE8B /* GoalCollectionViewCellA.swift in Sources */,
 				62930C2B272D24F700BC1908 /* UserMO+CoreDataClass.swift in Sources */,
@@ -938,13 +958,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BFF/BFF.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 94F23Z62YB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BFF/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -970,13 +991,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BFF/BFF.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 94F23Z62YB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BFF/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;

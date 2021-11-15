@@ -20,9 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
 
-        if let user = Auth.auth().currentUser {
+        if let user =  Auth.auth().currentUser {
 
-            print ("Suceess signed in as currentUser: \(user.uid), email:\(user.email), name:\(user.displayName)")
             let viewController = TabBarController()
             if let windowScene = scene as? UIWindowScene {
                 self.window = UIWindow(windowScene: windowScene)
@@ -30,18 +29,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 self.window?.makeKeyAndVisible()
             }
 
-        } else {
+        }
+        else {
 
-            print ("Falied to signed in as currentUser")
             let viewController = SignInViewController()
             if let windowScene = scene as? UIWindowScene {
                 self.window = UIWindow(windowScene: windowScene)
                 self.window?.rootViewController = viewController
                 self.window?.makeKeyAndVisible()
             }
+
         }
-
-
 
     }
 
