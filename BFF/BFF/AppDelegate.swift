@@ -34,6 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyCuIEN8YUXa-OS0S5L2nOW_O__u4NfzfdY")
         GMSPlacesClient.provideAPIKey("AIzaSyCuIEN8YUXa-OS0S5L2nOW_O__u4NfzfdY")
 
+        UINavigationBar.appearance().barTintColor = UIColor.white
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(named: "main")]
+
         center.delegate = notificationDelegate
 
         // MARK: set authorization

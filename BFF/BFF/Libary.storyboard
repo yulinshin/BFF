@@ -11,6 +11,14 @@
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="GenJyuuGothic-Bold.ttf">
+            <string>GenJyuuGothic-Bold</string>
+        </array>
+        <array key="GenJyuuGothic-Normal.ttf">
+            <string>GenJyuuGothic-Normal</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Map View Controller-->
         <scene sceneID="s0d-6b-0kx">
@@ -106,49 +114,48 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cg8-fn-eZd">
-                                                    <rect key="frame" x="16" y="16" width="150" height="235"/>
+                                                    <rect key="frame" x="24" y="24" width="134" height="219"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3en-OT-sHX">
-                                                            <rect key="frame" x="8" y="8" width="134" height="134"/>
+                                                            <rect key="frame" x="8" y="8" width="118" height="118"/>
                                                             <color key="tintColor" name="main"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="3en-OT-sHX" secondAttribute="height" multiplier="1:1" id="aN8-p0-6Bp"/>
                                                             </constraints>
                                                             <imageReference key="image" image="book.closed" catalog="system" symbolScale="default"/>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="全台寵物醫院地圖" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKJ-Ta-2Ah">
-                                                            <rect key="frame" x="8" y="150" width="134" height="17"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                            <nil key="textColor"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="全台寵物醫院地圖" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKJ-Ta-2Ah">
+                                                            <rect key="frame" x="16" y="134" width="102" height="17"/>
+                                                            <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="16"/>
+                                                            <color key="textColor" name="main"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24小時寵物醫院、特殊寵物醫院" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymJ-9T-vcC">
-                                                            <rect key="frame" x="8" y="175" width="134" height="52"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                                            <nil key="textColor"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="24小時寵物醫院、特殊寵物醫院" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymJ-9T-vcC">
+                                                            <rect key="frame" x="16" y="159" width="102" height="52"/>
+                                                            <fontDescription key="fontDescription" name="GenJyuuGothic-Normal" family="Gen Jyuu Gothic" pointSize="14"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                     <constraints>
                                                         <constraint firstItem="3en-OT-sHX" firstAttribute="top" secondItem="Cg8-fn-eZd" secondAttribute="top" constant="8" id="GqA-6k-Crr"/>
                                                         <constraint firstAttribute="trailing" secondItem="3en-OT-sHX" secondAttribute="trailing" constant="8" id="JF8-gX-har"/>
-                                                        <constraint firstItem="ymJ-9T-vcC" firstAttribute="leading" secondItem="Cg8-fn-eZd" secondAttribute="leading" constant="8" id="KZl-Nz-wZr"/>
-                                                        <constraint firstAttribute="bottom" secondItem="ymJ-9T-vcC" secondAttribute="bottom" constant="8" id="Om7-IE-BNp"/>
-                                                        <constraint firstAttribute="trailing" secondItem="ymJ-9T-vcC" secondAttribute="trailing" constant="8" id="QhA-PE-Och"/>
-                                                        <constraint firstAttribute="trailing" secondItem="OKJ-Ta-2Ah" secondAttribute="trailing" constant="8" id="RsZ-aq-sZR"/>
-                                                        <constraint firstItem="OKJ-Ta-2Ah" firstAttribute="top" secondItem="3en-OT-sHX" secondAttribute="bottom" constant="8" id="fmH-IJ-XyR"/>
+                                                        <constraint firstItem="ymJ-9T-vcC" firstAttribute="leading" secondItem="Cg8-fn-eZd" secondAttribute="leading" constant="16" id="KZl-Nz-wZr"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ymJ-9T-vcC" secondAttribute="bottom" constant="16" id="Om7-IE-BNp"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ymJ-9T-vcC" secondAttribute="trailing" constant="16" id="QhA-PE-Och"/>
+                                                        <constraint firstAttribute="trailing" secondItem="OKJ-Ta-2Ah" secondAttribute="trailing" constant="16" id="RsZ-aq-sZR"/>
+                                                        <constraint firstItem="OKJ-Ta-2Ah" firstAttribute="top" secondItem="3en-OT-sHX" secondAttribute="bottom" constant="6" id="fmH-IJ-XyR"/>
                                                         <constraint firstItem="3en-OT-sHX" firstAttribute="leading" secondItem="Cg8-fn-eZd" secondAttribute="leading" constant="8" id="sbQ-ZB-YEc"/>
-                                                        <constraint firstItem="ymJ-9T-vcC" firstAttribute="top" secondItem="OKJ-Ta-2Ah" secondAttribute="bottom" constant="8" id="x9i-2w-bit"/>
-                                                        <constraint firstItem="OKJ-Ta-2Ah" firstAttribute="leading" secondItem="Cg8-fn-eZd" secondAttribute="leading" constant="8" id="yRM-eC-WI0"/>
+                                                        <constraint firstItem="ymJ-9T-vcC" firstAttribute="top" secondItem="OKJ-Ta-2Ah" secondAttribute="bottom" constant="10" id="x9i-2w-bit"/>
+                                                        <constraint firstItem="OKJ-Ta-2Ah" firstAttribute="leading" secondItem="Cg8-fn-eZd" secondAttribute="leading" constant="16" id="yRM-eC-WI0"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Cg8-fn-eZd" secondAttribute="bottom" constant="16" id="DMP-bH-ijB"/>
-                                                <constraint firstAttribute="trailing" secondItem="Cg8-fn-eZd" secondAttribute="trailing" constant="16" id="KR2-K5-7si"/>
-                                                <constraint firstItem="Cg8-fn-eZd" firstAttribute="top" secondItem="ekN-4y-MwH" secondAttribute="top" constant="16" id="rUm-LJ-OTa"/>
-                                                <constraint firstItem="Cg8-fn-eZd" firstAttribute="leading" secondItem="ekN-4y-MwH" secondAttribute="leading" constant="16" id="ufa-rF-26T"/>
+                                                <constraint firstAttribute="bottom" secondItem="Cg8-fn-eZd" secondAttribute="bottom" constant="24" id="DMP-bH-ijB"/>
+                                                <constraint firstAttribute="trailing" secondItem="Cg8-fn-eZd" secondAttribute="trailing" constant="24" id="KR2-K5-7si"/>
+                                                <constraint firstItem="Cg8-fn-eZd" firstAttribute="top" secondItem="ekN-4y-MwH" secondAttribute="top" constant="24" id="rUm-LJ-OTa"/>
+                                                <constraint firstItem="Cg8-fn-eZd" firstAttribute="leading" secondItem="ekN-4y-MwH" secondAttribute="leading" constant="24" id="ufa-rF-26T"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="182" height="267"/>
@@ -190,6 +197,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" name="main"/>
                         <color key="barTintColor" name="main"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" name="main"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -208,9 +218,6 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
