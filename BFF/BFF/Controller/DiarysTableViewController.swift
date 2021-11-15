@@ -27,6 +27,7 @@ class DiariesViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         viewModel.fetchAllDiary()
+        tabBarController?.tabBar.backgroundColor = .white
     }
 }
 

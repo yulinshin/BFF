@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="H5Y-SY-SOz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uQN-nY-0xI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -20,7 +20,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Map View Controller-->
+        <!--寵物醫院地圖-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="Y6W-OH-hqX" customClass="MapViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
@@ -29,7 +29,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="aTJ-nr-xHP">
-                                <rect key="frame" x="16" y="44" width="382" height="31"/>
+                                <rect key="frame" x="16" y="88" width="382" height="31"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sg0-Lb-CZN">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="31"/>
@@ -61,7 +61,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51M-rH-7FR" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="91" width="414" height="771"/>
+                                <rect key="frame" x="0.0" y="135" width="414" height="727"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
@@ -77,6 +77,7 @@
                             <constraint firstItem="51M-rH-7FR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="xzk-Lq-j9P"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="寵物醫院地圖" id="UyT-qg-eSp"/>
                     <connections>
                         <outlet property="allButton" destination="Sg0-Lb-CZN" id="RbH-Ek-uQK"/>
                         <outlet property="mapView" destination="51M-rH-7FR" id="9zO-zZ-Z4g"/>
@@ -86,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042.0289855072465" y="85.714285714285708"/>
+            <point key="canvasLocation" x="1286.9565217391305" y="845.75892857142856"/>
         </scene>
         <!--寵物圖書館-->
         <scene sceneID="BC6-Or-bXT">
@@ -210,11 +211,30 @@
             </objects>
             <point key="canvasLocation" x="-778.26086956521749" y="85.714285714285708"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nu6-Qi-QS5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uQN-nY-0xI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cz9-1g-TVC">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="main"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="oWr-YL-55M"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YYf-bd-QyH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="376.81159420289856" y="845.75892857142856"/>
+        </scene>
     </scenes>
     <resources>
         <image name="book.closed" catalog="system" width="115" height="128"/>
         <namedColor name="main">
-            <color red="1" green="0.6119999885559082" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.35710123181343079" green="0.61046278476715088" blue="0.60665088891983032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -64,7 +64,7 @@ private enum Tab {
 
         case .libary:
             return UITabBarItem(
-                title: "寵物圖書館",
+                title: "寵物地圖",
                 image: UIImage.asset(.LibaryTab),
                 selectedImage: UIImage.asset(.LibaryTab)
             )
@@ -93,14 +93,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
     var showViewController = [UIViewController]()
     let actionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-    let sliderView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 2))
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.tabBar.tintColor = UIColor(named: "main")
-
-//        setValue(AppTabBar(frame: tabBar.frame), forKey: "tabBar")
 
         showViewController = tabs.map({ $0.controller() })
 
@@ -133,15 +130,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
 
     func setupMiddleButton() {
-
-//
-
-        var sliderViewFrame = CGRect(x: 0, y: 0, width: tabBar.bounds.width/5 , height: 4)
-        sliderView.frame = sliderViewFrame
-        sliderView.backgroundColor = UIColor(named: "main")
-        sliderView.layer.cornerRadius = sliderViewFrame.height/2
-        tabBar.addSubview(sliderView)
-
 
         var actionButtonFrame = actionButton.frame
         actionButtonFrame.origin.x = tabBar.bounds.width/2 - actionButtonFrame.size.width/2

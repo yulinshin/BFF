@@ -44,6 +44,19 @@ class SignInViewController: UIViewController {
 
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        timer.invalidate()
+        timer = nil
+
+
+    }
+
+    deinit {
+        print("SigInViewController DIE")
+    }
+
     private func setupBackGround() {
 
         images.append(UIImage(named: "WellcomPic-1")!)
@@ -70,11 +83,8 @@ class SignInViewController: UIViewController {
         
 
         // setup timer
-
-        Timer.scheduledTimer(timeInterval: 3.5, target: self, selector: #selector(SignInViewController.scaleImageEvent), userInfo: nil, repeats: true)
-
-//        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(SignInViewController.changeImageEvent), userInfo: nil, repeats: true)
-//        scaleImageEvent()
+        
+        timer = Timer.scheduledTimer(timeInterval: 3.5, target: self, selector: #selector(SignInViewController.scaleImageEvent), userInfo: nil, repeats: true)
 
     }
 
@@ -298,7 +308,8 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
 
                 let viewController = TabBarController()
                 viewController.modalPresentationStyle = .fullScreen
-                self.present(viewController, animated: true, completion: nil)
+                self.view.window?.rootViewController = viewController
+                self.view.window?.makeKeyAndVisible()
 
             } else {
                 print ("Fail To Signed in")
