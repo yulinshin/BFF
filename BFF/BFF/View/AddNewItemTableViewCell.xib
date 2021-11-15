@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -22,7 +24,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3Wc-mD-z5A">
                                 <rect key="frame" x="312.5" y="32" width="40" height="36"/>
-                                <color key="tintColor" name="orange"/>
+                                <color key="tintColor" name="main"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="J2P-gn-DqJ"/>
                                     <constraint firstAttribute="width" secondItem="3Wc-mD-z5A" secondAttribute="height" multiplier="1:1" id="OC6-wc-D0Z"/>
@@ -54,8 +56,8 @@
     </objects>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <namedColor name="orange">
-            <color red="1" green="0.63099998235702515" blue="0.20999999344348907" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="main">
+            <color red="0.35710123181343079" green="0.61046278476715088" blue="0.60665088891983032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

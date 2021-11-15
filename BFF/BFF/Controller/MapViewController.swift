@@ -56,9 +56,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
 
+
         getGCPKey()
         getLocation()
         getSpecialLocation()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        allButton.isSelected = true
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation] ) {

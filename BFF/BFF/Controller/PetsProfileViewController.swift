@@ -58,7 +58,6 @@ class PetsProfileViewController: UIViewController {
         moreButtonImageVIew.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapMoreButton)))
         moreButtonImageVIew.isUserInteractionEnabled = true
 
-
     }
 
     func createLayout() -> UICollectionViewLayout {

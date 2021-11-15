@@ -53,6 +53,10 @@ class CreatPetViewController: UIViewController {
         petImage.isUserInteractionEnabled = true
         self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
 
+        petImage.layer.cornerRadius = petImage.frame.height/2
+        petImage.clipsToBounds = true
+
+
 
     }
 
@@ -183,6 +187,7 @@ extension CreatPetViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PetInfoTableTableViewCell.identifier) as? PetInfoTableTableViewCell else { return UITableViewCell() }
+        
 
         switch fields[indexPath.row] {
 

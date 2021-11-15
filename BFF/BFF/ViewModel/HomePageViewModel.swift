@@ -13,11 +13,11 @@ class HomePageViewModel: NSObject {
 
     var user: User?
     let userName = Box("")
-    let notifiactions = Box([Notification]())
+    let notifications = Box([Notification]())
     let pets = Box([Pet]())
     let usersPetsIds = Box([String]())
     var userDataDidLoad: (() -> Void)?
-    var userNotifiactionsDidChange: (() -> Void)?
+    var userNotificationsDidChange: (() -> Void)?
 
 
     override init() {
@@ -28,6 +28,14 @@ class HomePageViewModel: NSObject {
 
     deinit {
         print("HomePageViewModel DIE")
+    }
+
+    func removeNotification(indexPath:Int) {
+
+        let id = notifications.value[indexPath].id
+        FirebaseManager.shared.removeNotification(notifyId: id)
+        userNotificationsDidChange?()
+
     }
 
     func fetchUserData() {
@@ -179,9 +187,9 @@ class HomePageViewModel: NSObject {
 
                 showNotifications = showNotifications.sorted(by:{ $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
 
-                self.notifiactions.value = showNotifications
+                self.notifications.value = showNotifications
 
-                self.userNotifiactionsDidChange?()
+                self.userNotificationsDidChange?()
                 print("upDated NotificationData at HomeVM")
 
             case .failure(let error):
@@ -209,9 +217,9 @@ class HomePageViewModel: NSObject {
                 }
                 }
                 showNotifications = showNotifications.sorted(by:{ $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
-                self.notifiactions.value = showNotifications
+                self.notifications.value = showNotifications
 
-                self.userNotifiactionsDidChange?()
+                self.userNotificationsDidChange?()
                 print("upDated NotificationData at HomeVM")
 
             case .failure(let error):

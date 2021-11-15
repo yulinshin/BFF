@@ -637,7 +637,7 @@ class FirebaseManager {
                     "userId": self.userId,
                     "healthInfo.birthday": data.healthInfo.birthday,
                     "healthInfo.chipId": data.healthInfo.chipId,
-                    "healthInfo.gender": data.healthInfo.chipId,
+                    "healthInfo.gender": data.healthInfo.gender,
                     "healthInfo.note": data.healthInfo.note,
                     "healthInfo.type": data.healthInfo.type,
                     "healthInfo.weight": data.healthInfo.weight,
