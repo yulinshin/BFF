@@ -11,8 +11,7 @@ import UIKit
 class MyChatTableViewCell: UITableViewCell {
     
  
-    
-    @IBOutlet weak var profileImg: UIImageView!
+
     
     @IBOutlet weak var chectView: UIView!
 
@@ -27,6 +26,8 @@ class MyChatTableViewCell: UITableViewCell {
         
         chectView.layer.cornerRadius = 10
         chectView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMinYCorner, .layerMinXMaxYCorner]
+        self.selectionStyle = .none
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -38,10 +39,6 @@ class MyChatTableViewCell: UITableViewCell {
     func setup(){
         guard let viewModel = viewModel else {
             return
-        }
-
-        viewModel.sender.bind { sender in
-            self.profileImg.loadImage(sender, placeHolder: UIImage(systemName: "person.fill"))
         }
 
         viewModel.content.bind { content in

@@ -203,7 +203,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHd-19-oGw">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHd-19-oGw">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" hidden="YES" contentMode="scaleToFill" id="bZW-TE-qa3">
@@ -269,10 +269,10 @@
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kI-2c-gax">
-                                                    <rect key="frame" x="32" y="32" width="86" height="40"/>
+                                                    <rect key="frame" x="32" y="32" width="84.5" height="40"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rU-Ay-484">
-                                                            <rect key="frame" x="50" y="24" width="36" height="14"/>
+                                                            <rect key="frame" x="50" y="20.5" width="34.5" height="12"/>
                                                             <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="10"/>
                                                             <color key="textColor" systemColor="systemGrayColor"/>
                                                             <nil key="highlightedColor"/>
@@ -285,7 +285,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ae-Ee-cmk">
-                                                            <rect key="frame" x="50" y="4" width="36" height="20"/>
+                                                            <rect key="frame" x="50" y="4" width="34.5" height="16.5"/>
                                                             <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -305,10 +305,10 @@
                                                     </constraints>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SRo-hr-Jdx">
-                                                    <rect key="frame" x="36" y="516" width="145" height="40"/>
+                                                    <rect key="frame" x="36" y="516" width="140" height="40"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="8kL-6s-Tfo">
-                                                            <rect key="frame" x="0.0" y="0.0" width="68.5" height="40"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="66" height="40"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="GEQ-Ng-29T">
                                                                     <rect key="frame" x="0.0" y="-2.5" width="27.5" height="44.5"/>
@@ -316,7 +316,7 @@
                                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVT-RO-Ks0">
-                                                                    <rect key="frame" x="31.5" y="0.0" width="37" height="40"/>
+                                                                    <rect key="frame" x="31.5" y="0.0" width="34.5" height="40"/>
                                                                     <attributedString key="attributedText">
                                                                         <fragment content="Label">
                                                                             <attributes>
@@ -331,7 +331,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PIT-Fs-9cX">
-                                                            <rect key="frame" x="78.5" y="0.0" width="66.5" height="40"/>
+                                                            <rect key="frame" x="76" y="0.0" width="64" height="40"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Vcw-e3-DTH">
                                                                     <rect key="frame" x="0.0" y="-0.5" width="25.5" height="41.5"/>
@@ -339,7 +339,7 @@
                                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vK7-1Z-He4">
-                                                                    <rect key="frame" x="29.5" y="0.0" width="37" height="40"/>
+                                                                    <rect key="frame" x="29.5" y="0.0" width="34.5" height="40"/>
                                                                     <attributedString key="attributedText">
                                                                         <fragment content="Label">
                                                                             <attributes>
@@ -367,7 +367,7 @@
                                                     <rect key="frame" x="32" y="80" width="350" height="62"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="center" text="5050505050505050505050505050505050505050" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKl-a4-lG0">
-                                                            <rect key="frame" x="0.0" y="42" width="288" height="20"/>
+                                                            <rect key="frame" x="0.0" y="45.5" width="288" height="16.5"/>
                                                             <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>

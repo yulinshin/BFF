@@ -25,6 +25,8 @@ class OtherChatTableViewCell: UITableViewCell {
         
         chectView.layer.cornerRadius = 10
         chectView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner]
+        profileImg.layer.cornerRadius = profileImg.frame.height/2
+        self.selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -38,8 +40,8 @@ class OtherChatTableViewCell: UITableViewCell {
             return
         }
 
-        viewModel.sender.bind { sender in
-            self.profileImg.loadImage(sender, placeHolder: UIImage(systemName: "person.fill"))
+        viewModel.userPic.bind { url in
+            self.profileImg.loadImage(url, placeHolder: UIImage(systemName: "person.fill"))
         }
 
         viewModel.content.bind { content in

@@ -81,7 +81,7 @@
             </objects>
             <point key="canvasLocation" x="-532" y="117"/>
         </scene>
-        <!--Chat List Table View Controller-->
+        <!--私訊-->
         <scene sceneID="7WM-U1-4QR">
             <objects>
                 <viewController storyboardIdentifier="ChatListTableViewController" id="yMT-RJ-3A3" customClass="ChatListTableViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
@@ -89,11 +89,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="h3L-yZ-ZBL">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="h3L-yZ-ZBL">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ChatListTableViewCell" rowHeight="66" id="9lz-ca-RdH" customClass="ChatListTableViewCell" customModule="BFF" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ChatListTableViewCell" rowHeight="66" id="9lz-ca-RdH" customClass="ChatListTableViewCell" customModule="BFF" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9lz-ca-RdH" id="BaM-ss-aRi">
@@ -160,7 +160,7 @@
                             <constraint firstItem="Jeq-ff-qGQ" firstAttribute="bottom" secondItem="h3L-yZ-ZBL" secondAttribute="bottom" id="bKX-F4-Ybe"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="yMZ-eT-3Z9"/>
+                    <navigationItem key="navigationItem" title="私訊" id="yMZ-eT-3Z9"/>
                     <connections>
                         <outlet property="tableView" destination="h3L-yZ-ZBL" id="jRm-ak-cao"/>
                     </connections>
@@ -181,7 +181,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="736"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentTableCell" rowHeight="66" id="T3M-yV-lPO" customClass="CommentTableCell" customModule="BFF" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentTableCell" rowHeight="66" id="T3M-yV-lPO" customClass="CommentTableCell" customModule="BFF" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T3M-yV-lPO" id="gGr-aa-Kzl">

@@ -137,6 +137,7 @@ class ChatViewModel {
 
     init(from message: Message) {
         getMessageData(from: message)
+        getUserInfo(userId: message.sender)
     }
     func getMessageData(from message: Message) {
 
@@ -145,6 +146,25 @@ class ChatViewModel {
         self.recevier.value = message.receiver
         self.sender.value = message.sender
 
+
+    }
+
+    func getUserInfo(userId:String){
+
+        FirebaseManager.shared.fetchUserInfo(userId: userId) { result in
+            switch result {
+
+            case .success(let user):
+
+                self.userName.value = user.userName
+                self.userPic.value = user.userThumbNail?.url ?? ""
+
+            case .failure(let error):
+                print(error)
+
+
+            }
+        }
 
     }
 
