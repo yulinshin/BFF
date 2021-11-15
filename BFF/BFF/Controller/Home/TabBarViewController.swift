@@ -11,9 +11,9 @@ private enum Tab {
 
     case home
 
-    case soical
+    case social
 
-    case libary
+    case library
 
     case message
 
@@ -27,9 +27,9 @@ private enum Tab {
 
         case .home: controller = UIStoryboard.home.instantiateInitialViewController()!
 
-        case .soical: controller = UIStoryboard.soical.instantiateInitialViewController()!
+        case .social: controller = UIStoryboard.social.instantiateInitialViewController()!
 
-        case .libary: controller = UIStoryboard.libary.instantiateInitialViewController()!
+        case .library: controller = UIStoryboard.library.instantiateInitialViewController()!
 
         case .midle: controller = UIViewController()
 
@@ -55,18 +55,18 @@ private enum Tab {
                 selectedImage: UIImage.asset(.MyPetsTab)
             )
 
-        case .soical:
+        case .social:
             return UITabBarItem(
                 title: "隨意逛",
                 image: UIImage.asset(.Social),
                 selectedImage: UIImage.asset(.Social)
             )
 
-        case .libary:
+        case .library:
             return UITabBarItem(
                 title: "寵物地圖",
-                image: UIImage.asset(.LibaryTab),
-                selectedImage: UIImage.asset(.LibaryTab)
+                image: UIImage.asset(.LibraryTab),
+                selectedImage: UIImage.asset(.LibraryTab)
             )
 
         case .message:
@@ -89,7 +89,7 @@ private enum Tab {
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
-    private let tabs: [Tab] = [  .home,.soical, .midle, .message, .libary]
+    private let tabs: [Tab] = [  .home,.social, .midle, .message, .library]
 
     var showViewController = [UIViewController]()
     let actionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))

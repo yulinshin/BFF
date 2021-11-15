@@ -92,7 +92,7 @@
         <!--寵物圖書館-->
         <scene sceneID="BC6-Or-bXT">
             <objects>
-                <viewController title="寵物圖書館" id="brY-lv-8dQ" customClass="LibaryViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="寵物圖書館" id="brY-lv-8dQ" customClass="LibraryViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Plz-GE-JdE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -181,7 +181,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="寵物圖書館" id="DWs-H8-Ls0"/>
                     <connections>
-                        <outlet property="libaryCollectionView" destination="8cy-dT-8iF" id="qF2-bW-1Yk"/>
+                        <outlet property="libraryCollectionView" destination="8cy-dT-8iF" id="qF2-bW-1Yk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bM0-qW-Nkb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -234,7 +234,7 @@
     <resources>
         <image name="book.closed" catalog="system" width="115" height="128"/>
         <namedColor name="main">
-            <color red="0.35710123181343079" green="0.61046278476715088" blue="0.60665088891983032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.35699999332427979" green="0.61000001430511475" blue="0.60699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

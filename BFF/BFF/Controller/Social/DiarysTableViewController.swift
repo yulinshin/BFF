@@ -72,7 +72,7 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.didTapComment = {
 
-                let storyboard = UIStoryboard(name: "Soical", bundle: nil)
+                let storyboard = UIStoryboard(name: "Social", bundle: nil)
 
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "CommentTableViewController") as? CommentTableViewController else { return }
                 controller.diary = diaries[indexPath.row]

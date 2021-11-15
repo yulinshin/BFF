@@ -18,7 +18,7 @@
 		6249617D2720F16E0079B244 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6249617C2720F16E0079B244 /* HomePageViewModel.swift */; };
 		624C8E082720473F00646C71 /* CreatPetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C8E072720473F00646C71 /* CreatPetViewModel.swift */; };
 		624CFD742729389B00D77CCA /* NotificationManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624CFD732729389B00D77CCA /* NotificationManger.swift */; };
-		624D5C472730CD4A00602125 /* Libary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624D5C462730CD4A00602125 /* Libary.storyboard */; };
+		624D5C472730CD4A00602125 /* Library.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624D5C462730CD4A00602125 /* Library.storyboard */; };
 		624D5C492730CD7D00602125 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624D5C482730CD7D00602125 /* MapViewController.swift */; };
 		624D5C4B2731321700602125 /* MapMarkerWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 624D5C4A2731321700602125 /* MapMarkerWindowView.xib */; };
 		624D5C4D273132D900602125 /* MapMarkerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624D5C4C273132D900602125 /* MapMarkerWindow.swift */; };
@@ -129,7 +129,7 @@
 		62FC6194272588F200292710 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC6193272588F200292710 /* TabBarViewController.swift */; };
 		62FC619627258B2300292710 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC619527258B2300292710 /* UIStoryboard+Extension.swift */; };
 		62FC619827258C3B00292710 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC619727258C3B00292710 /* UIImage+Extension.swift */; };
-		62FC619A27258DF900292710 /* Soical.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FC619927258DF900292710 /* Soical.storyboard */; };
+		62FC619A27258DF900292710 /* Social.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FC619927258DF900292710 /* Social.storyboard */; };
 		62FC619E27258E2100292710 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FC619D27258E2100292710 /* Message.storyboard */; };
 		62FC61A027258E3400292710 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FC619F27258E3400292710 /* User.storyboard */; };
 		6F556AA47000C71AFD333BA4 /* Pods_BFF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DF47BE281594C125C9DF5FB /* Pods_BFF.framework */; };
@@ -151,7 +151,7 @@
 		6249617C2720F16E0079B244 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		624C8E072720473F00646C71 /* CreatPetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatPetViewModel.swift; sourceTree = "<group>"; };
 		624CFD732729389B00D77CCA /* NotificationManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManger.swift; sourceTree = "<group>"; };
-		624D5C462730CD4A00602125 /* Libary.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Libary.storyboard; sourceTree = "<group>"; };
+		624D5C462730CD4A00602125 /* Library.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Library.storyboard; sourceTree = "<group>"; };
 		624D5C482730CD7D00602125 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		624D5C4A2731321700602125 /* MapMarkerWindowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapMarkerWindowView.xib; sourceTree = "<group>"; };
 		624D5C4C273132D900602125 /* MapMarkerWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerWindow.swift; sourceTree = "<group>"; };
@@ -264,7 +264,7 @@
 		62FC6193272588F200292710 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		62FC619527258B2300292710 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		62FC619727258C3B00292710 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
-		62FC619927258DF900292710 /* Soical.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Soical.storyboard; sourceTree = "<group>"; };
+		62FC619927258DF900292710 /* Social.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Social.storyboard; sourceTree = "<group>"; };
 		62FC619D27258E2100292710 /* Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
 		62FC619F27258E3400292710 /* User.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
 		B4D199ED89E9ED7DFC5E8A35 /* Pods-BFF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BFF.debug.xcconfig"; path = "Target Support Files/Pods-BFF/Pods-BFF.debug.xcconfig"; sourceTree = "<group>"; };
@@ -346,7 +346,10 @@
 				62DB93F62741F02900D884E3 /* Source */,
 				623340D3271C3B19002B2429 /* AppDelegate.swift */,
 				623340D5271C3B19002B2429 /* SceneDelegate.swift */,
+				623340E8271C3F82002B2429 /* GoogleService-Info.plist */,
+				62892FEA2732B1A4001A7B32 /* Keys.plist */,
 				6267CDE427338F3700CFA28D /* AppTabBar.swift */,
+				623340E1271C3B1B002B2429 /* Info.plist */,
 			);
 			path = BFF;
 			sourceTree = "<group>";
@@ -636,10 +639,10 @@
 				62FC619D27258E2100292710 /* Message.storyboard */,
 				62D454B727267CF2009DF0FF /* Supplies.storyboard */,
 				62FC61902725839F00292710 /* TabBar.storyboard */,
-				62FC619927258DF900292710 /* Soical.storyboard */,
+				62FC619927258DF900292710 /* Social.storyboard */,
 				62C38D8C272EDC0D008DEE8B /* Goal.storyboard */,
 				62FC6191272586FD00292710 /* Home.storyboard */,
-				624D5C462730CD4A00602125 /* Libary.storyboard */,
+				624D5C462730CD4A00602125 /* Library.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -649,9 +652,6 @@
 			children = (
 				62C38D8A272EB154008DEE8B /* AddPet.json */,
 				623340DC271C3B1B002B2429 /* Assets.xcassets */,
-				623340E8271C3F82002B2429 /* GoogleService-Info.plist */,
-				62892FEA2732B1A4001A7B32 /* Keys.plist */,
-				623340E1271C3B1B002B2429 /* Info.plist */,
 				62930BD9272C2DCA00BC1908 /* UserData.xcdatamodeld */,
 			);
 			path = Source;
@@ -764,7 +764,7 @@
 				62B617E42736B3890062BBE5 /* OtherChatTableViewCell.xib in Resources */,
 				623340E9271C3F82002B2429 /* GoogleService-Info.plist in Resources */,
 				623340DD271C3B1B002B2429 /* Assets.xcassets in Resources */,
-				62FC619A27258DF900292710 /* Soical.storyboard in Resources */,
+				62FC619A27258DF900292710 /* Social.storyboard in Resources */,
 				62892FFF2732F749001A7B32 /* GenJyuuGothic-Bold.ttf in Resources */,
 				6285C79F271DE49A006E13EC /* SelectedPetsCollectionViewCell.xib in Resources */,
 				62603AE62727B64F00467E2D /* AddNewItemTableViewCell.xib in Resources */,
@@ -776,7 +776,7 @@
 				62C38D8D272EDC0D008DEE8B /* Goal.storyboard in Resources */,
 				62AB33FA27205D6E00C8E582 /* Pet.storyboard in Resources */,
 				62C38D8B272EB154008DEE8B /* AddPet.json in Resources */,
-				624D5C472730CD4A00602125 /* Libary.storyboard in Resources */,
+				624D5C472730CD4A00602125 /* Library.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
