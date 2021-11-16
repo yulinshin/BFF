@@ -32,7 +32,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XiB-ii-PMG" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1299"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1283.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bSM-g6-3DG">
                                                 <rect key="frame" x="-200" y="-500" width="814" height="618"/>
@@ -47,25 +47,25 @@
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="YKo-k0-exd">
-                                                <rect key="frame" x="16" y="184" width="382" height="55.5"/>
+                                                <rect key="frame" x="16" y="184" width="382" height="46.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2e-va-3Yd">
-                                                        <rect key="frame" x="156.5" y="0.0" width="69.5" height="33.5"/>
+                                                        <rect key="frame" x="159" y="0.0" width="64" height="28"/>
                                                         <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="24"/>
                                                         <color key="textColor" name="main"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="fmO-k1-BMH">
-                                                        <rect key="frame" x="168.5" y="35.5" width="45.5" height="20"/>
+                                                        <rect key="frame" x="168.5" y="30" width="45" height="16.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jv-UA-Hqp">
-                                                                <rect key="frame" x="0.0" y="0.0" width="25.5" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="25" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="14"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Un6-hV-Z6f">
-                                                                <rect key="frame" x="27.5" y="0.0" width="18" height="20"/>
+                                                                <rect key="frame" x="27" y="0.0" width="18" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="10"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -75,26 +75,26 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hm1-ls-uZp">
-                                                <rect key="frame" x="16" y="255.5" width="382" height="1"/>
+                                                <rect key="frame" x="16" y="246.5" width="382" height="1"/>
                                                 <color key="backgroundColor" name="main"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="ac5-SV-9qg"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="7Jr-ik-OCd">
-                                                <rect key="frame" x="85.5" y="272.5" width="243.5" height="41.5"/>
+                                                <rect key="frame" x="88" y="263.5" width="238.5" height="35"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="WYJ-jO-70J">
-                                                        <rect key="frame" x="0.0" y="0.0" width="38.5" height="41.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="37" height="35"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Vg-LM-nZ2">
-                                                                <rect key="frame" x="5" y="0.0" width="28.5" height="22.5"/>
+                                                                <rect key="frame" x="5" y="0.0" width="27" height="19"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="16"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diaries" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUm-1L-ATa">
-                                                                <rect key="frame" x="0.0" y="24.5" width="38.5" height="17"/>
+                                                                <rect key="frame" x="0.0" y="21" width="37" height="14"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="12"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -102,16 +102,16 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="itc-3q-HuV">
-                                                        <rect key="frame" x="98.5" y="0.0" width="54.5" height="41.5"/>
+                                                        <rect key="frame" x="97" y="0.0" width="52" height="35"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bva-rC-W87">
-                                                                <rect key="frame" x="13" y="0.0" width="28.5" height="22.5"/>
+                                                                <rect key="frame" x="12.5" y="0.0" width="27" height="19"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="16"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Folloewrs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="231-q2-lGB">
-                                                                <rect key="frame" x="0.0" y="24.5" width="54.5" height="17"/>
+                                                                <rect key="frame" x="0.0" y="21" width="52" height="14"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="12"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -119,16 +119,16 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="mYh-56-wx9">
-                                                        <rect key="frame" x="213" y="0.0" width="30.5" height="41.5"/>
+                                                        <rect key="frame" x="209" y="0.0" width="29.5" height="35"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doC-fk-i31">
-                                                                <rect key="frame" x="1" y="0.0" width="28.5" height="22.5"/>
+                                                                <rect key="frame" x="1" y="0.0" width="27" height="19"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="16"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liked" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aI7-td-pTW">
-                                                                <rect key="frame" x="0.0" y="24.5" width="30.5" height="17"/>
+                                                                <rect key="frame" x="0.0" y="21" width="29.5" height="14"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="12"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -138,7 +138,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YOa-5L-pVf">
-                                                <rect key="frame" x="16" y="330" width="382" height="40"/>
+                                                <rect key="frame" x="16" y="314.5" width="382" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0t-59-fMW">
                                                         <rect key="frame" x="0.0" y="0.0" width="163" height="40"/>
@@ -182,14 +182,14 @@
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-bu-yYn">
-                                                <rect key="frame" x="16" y="386" width="382" height="1"/>
+                                                <rect key="frame" x="16" y="370.5" width="382" height="1"/>
                                                 <color key="backgroundColor" name="main"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="LNJ-E3-cth"/>
                                                 </constraints>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Xzl-J1-GtX">
-                                                <rect key="frame" x="0.0" y="403" width="414" height="896"/>
+                                                <rect key="frame" x="0.0" y="387.5" width="414" height="896"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XzF-3L-lRl">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -411,65 +411,62 @@
             </objects>
             <point key="canvasLocation" x="-633.33333333333337" y="849.77678571428567"/>
         </scene>
-        <!--Creat Pet View Controller-->
-        <scene sceneID="M2L-TO-4v3">
+        <!--建立毛小孩資料-->
+        <scene sceneID="ZUC-O8-CBh">
             <objects>
-                <viewController storyboardIdentifier="CreatPetViewController" id="qoI-dw-mZO" customClass="CreatPetViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="CAs-Rm-a3p">
+                <viewController id="eAp-Ui-nvq" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FP3-Ij-YM0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AddPic" translatesAutoresizingMaskIntoConstraints="NO" id="651-Kd-8gL">
-                                <rect key="frame" x="107" y="60" width="200" height="200"/>
-                                <color key="tintColor" name="main"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Collar" translatesAutoresizingMaskIntoConstraints="NO" id="JVh-HB-L3T">
+                                <rect key="frame" x="107" y="168" width="200" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="H8b-vo-f54"/>
-                                    <constraint firstAttribute="height" constant="200" id="knB-fs-aj6"/>
+                                    <constraint firstAttribute="height" constant="200" id="NQ5-43-OgX"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ykn-SC-eiK">
-                                <rect key="frame" x="16" y="276" width="382" height="586"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="p27-cI-jJN">
-                                        <rect key="frame" x="0.0" y="44.5" width="382" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="p27-cI-jJN" id="tKj-Oz-2av">
-                                            <rect key="frame" x="0.0" y="0.0" width="382" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="fYg-jA-shW">
-                                        <rect key="frame" x="0.0" y="88" width="382" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fYg-jA-shW" id="dbA-xO-lJL">
-                                            <rect key="frame" x="0.0" y="0.0" width="382" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="毛小孩的姓名？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFR-ly-O5g">
+                                <rect key="frame" x="137" y="398" width="140" height="23.5"/>
+                                <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ot-wh-RI3">
+                                <rect key="frame" x="87" y="437.5" width="240" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="CNs-Qf-Afx"/>
+                                    <constraint firstAttribute="height" constant="34" id="eX6-95-87f"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z55-gU-Kjr">
+                                <rect key="frame" x="165" y="551.5" width="84" height="37.5"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="下一步">
+                                    <fontDescription key="titleFontDescription" name="GenJyuuGothic-Normal" family="Gen Jyuu Gothic" pointSize="20"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="Z9n-fh-pDd" kind="show" id="VoL-V0-A4n"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="yRI-Ks-nhz"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="HWO-kb-AXW"/>
+                        <color key="backgroundColor" name="main"/>
                         <constraints>
-                            <constraint firstItem="651-Kd-8gL" firstAttribute="top" secondItem="yRI-Ks-nhz" secondAttribute="top" constant="16" id="03K-wx-eIY"/>
-                            <constraint firstItem="Ykn-SC-eiK" firstAttribute="leading" secondItem="yRI-Ks-nhz" secondAttribute="leading" constant="16" id="BI5-GJ-j9t"/>
-                            <constraint firstItem="651-Kd-8gL" firstAttribute="centerX" secondItem="CAs-Rm-a3p" secondAttribute="centerX" id="b0S-9X-BOQ"/>
-                            <constraint firstItem="Ykn-SC-eiK" firstAttribute="top" secondItem="651-Kd-8gL" secondAttribute="bottom" constant="16" id="hwJ-yb-Yjc"/>
-                            <constraint firstItem="yRI-Ks-nhz" firstAttribute="bottom" secondItem="Ykn-SC-eiK" secondAttribute="bottom" id="nDk-Ra-3Kg"/>
-                            <constraint firstItem="yRI-Ks-nhz" firstAttribute="trailing" secondItem="Ykn-SC-eiK" secondAttribute="trailing" constant="16" id="of8-du-AHV"/>
+                            <constraint firstItem="QFR-ly-O5g" firstAttribute="top" secondItem="JVh-HB-L3T" secondAttribute="bottom" constant="30" id="Mvn-6I-bj1"/>
+                            <constraint firstItem="1ot-wh-RI3" firstAttribute="top" secondItem="QFR-ly-O5g" secondAttribute="bottom" constant="16" id="UpS-pg-NLK"/>
+                            <constraint firstItem="JVh-HB-L3T" firstAttribute="top" secondItem="HWO-kb-AXW" secondAttribute="top" constant="80" id="cZC-w5-9KB"/>
+                            <constraint firstItem="z55-gU-Kjr" firstAttribute="top" secondItem="1ot-wh-RI3" secondAttribute="bottom" constant="80" id="dkJ-Pz-1KS"/>
+                            <constraint firstItem="1ot-wh-RI3" firstAttribute="centerX" secondItem="FP3-Ij-YM0" secondAttribute="centerX" id="fgO-TX-1hC"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="petImage" destination="651-Kd-8gL" id="2PF-9c-5ue"/>
-                        <outlet property="petInfoTableView" destination="Ykn-SC-eiK" id="Kpk-Em-qpi"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="建立毛小孩資料" id="41k-NB-6IR"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XBY-ot-Xtj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xDu-Nz-CYj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="78" y="850"/>
+            <point key="canvasLocation" x="276.81159420289856" y="1580.3571428571429"/>
         </scene>
         <!--Note View Controller-->
         <scene sceneID="Q92-RG-jQb">
@@ -515,16 +512,174 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w2h-ip-c1q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="826.08695652173924" y="849.77678571428567"/>
+            <point key="canvasLocation" x="1961" y="862"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vWQ-tm-2NC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Dje-Kq-Zek" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vLu-Xe-F3r">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eAp-Ui-nvq" kind="relationship" relationship="rootViewController" id="f8p-Iw-PpZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="05o-Xd-K0n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-633.33333333333337" y="1580.3571428571429"/>
+        </scene>
+        <!--建立毛小孩資料-->
+        <scene sceneID="HbD-gr-iqC">
+            <objects>
+                <viewController id="Z9n-fh-pDd" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XGQ-8g-uhe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwq-sZ-uIW">
+                                <rect key="frame" x="107" y="168" width="200" height="200"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="3ja-eq-JLP"/>
+                                    <constraint firstAttribute="height" constant="200" id="xsN-Lk-b0s"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xet-NI-mqv">
+                                <rect key="frame" x="107" y="168" width="200" height="200"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="幫毛小孩選張可愛的照片吧！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0b-0l-ijD">
+                                <rect key="frame" x="77" y="428" width="260" height="23.5"/>
+                                <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4O6-dF-UUN">
+                                <rect key="frame" x="165" y="556" width="84" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="下一步">
+                                    <fontDescription key="titleFontDescription" name="GenJyuuGothic-Normal" family="Gen Jyuu Gothic" pointSize="20"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="uuq-Ck-hep"/>
+                        <color key="backgroundColor" name="main"/>
+                        <constraints>
+                            <constraint firstItem="pwq-sZ-uIW" firstAttribute="centerX" secondItem="XGQ-8g-uhe" secondAttribute="centerX" id="EO3-g0-TQB"/>
+                            <constraint firstItem="p0b-0l-ijD" firstAttribute="top" secondItem="pwq-sZ-uIW" secondAttribute="bottom" constant="60" id="RAS-HA-Z8z"/>
+                            <constraint firstItem="xet-NI-mqv" firstAttribute="trailing" secondItem="pwq-sZ-uIW" secondAttribute="trailing" id="b8V-QX-qoQ"/>
+                            <constraint firstItem="xet-NI-mqv" firstAttribute="leading" secondItem="pwq-sZ-uIW" secondAttribute="leading" id="gxI-QK-xYM"/>
+                            <constraint firstItem="xet-NI-mqv" firstAttribute="bottom" secondItem="pwq-sZ-uIW" secondAttribute="bottom" id="mBF-79-5kv"/>
+                            <constraint firstItem="pwq-sZ-uIW" firstAttribute="top" secondItem="uuq-Ck-hep" secondAttribute="top" constant="80" id="pbl-bE-en3"/>
+                            <constraint firstItem="xet-NI-mqv" firstAttribute="top" secondItem="pwq-sZ-uIW" secondAttribute="top" id="pck-Cx-EDT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="建立毛小孩資料" id="8Yk-eM-oaP"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bwc-sI-PJ0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1171" y="1580"/>
+        </scene>
+        <!--Creat Pet View Controller-->
+        <scene sceneID="oBd-0l-fdq">
+            <objects>
+                <viewController storyboardIdentifier="CreatPetViewController" id="KvB-DV-Se9" customClass="CreatPetViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xfi-Oo-oW4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="QHE-86-Eij">
+                                <rect key="frame" x="127" y="60" width="160" height="160"/>
+                                <color key="tintColor" name="main"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="6OU-As-jz8"/>
+                                    <constraint firstAttribute="width" constant="160" id="vmr-n9-qXW"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Zhw-04-zWX">
+                                <rect key="frame" x="32" y="236" width="350" height="606"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="AcO-6u-ilN">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="543"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="EyN-q5-rAY">
+                                                <rect key="frame" x="0.0" y="44.5" width="350" height="43.5"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EyN-q5-rAY" id="sm8-0b-Yte">
+                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="PXX-mT-c2X">
+                                                <rect key="frame" x="0.0" y="88" width="350" height="43.5"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PXX-mT-c2X" id="WEc-e9-K3U">
+                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qb2-uC-dBs">
+                                        <rect key="frame" x="0.0" y="563" width="350" height="43"/>
+                                        <color key="backgroundColor" name="main"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="43" id="Jkb-ce-cJT"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="18"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="儲存">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didTapSaveButton:" destination="KvB-DV-Se9" eventType="touchUpInside" id="tFl-7g-y0l"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7xo-vQ-jZC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7xo-vQ-jZC" firstAttribute="trailing" secondItem="Zhw-04-zWX" secondAttribute="trailing" constant="32" id="3G0-dm-81g"/>
+                            <constraint firstItem="Zhw-04-zWX" firstAttribute="leading" secondItem="7xo-vQ-jZC" secondAttribute="leading" constant="32" id="Kum-bg-FOE"/>
+                            <constraint firstItem="QHE-86-Eij" firstAttribute="centerX" secondItem="xfi-Oo-oW4" secondAttribute="centerX" id="YRo-Ki-QVt"/>
+                            <constraint firstItem="Zhw-04-zWX" firstAttribute="top" secondItem="QHE-86-Eij" secondAttribute="bottom" constant="16" id="aM5-kD-Zhl"/>
+                            <constraint firstItem="7xo-vQ-jZC" firstAttribute="bottom" secondItem="Zhw-04-zWX" secondAttribute="bottom" constant="20" id="dxD-0m-z1I"/>
+                            <constraint firstItem="QHE-86-Eij" firstAttribute="top" secondItem="7xo-vQ-jZC" secondAttribute="top" constant="16" id="yAE-tB-93D"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="OPO-V7-cdk"/>
+                    <connections>
+                        <outlet property="petImage" destination="QHE-86-Eij" id="ZoU-PA-CkF"/>
+                        <outlet property="petInfoTableView" destination="AcO-6u-ilN" id="4LU-ek-TsQ"/>
+                        <outlet property="saveButton" destination="Qb2-uC-dBs" id="Imt-IK-W07"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qXO-H3-pg0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="143" y="850"/>
         </scene>
     </scenes>
     <resources>
         <image name="123" width="720" height="1280"/>
-        <image name="AddPic" width="114.5" height="115"/>
+        <image name="Collar" width="138" height="110"/>
+        <image name="addPhoto" width="186" height="157"/>
         <image name="arrowtriangle.down.square" catalog="system" width="128" height="114"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="main">
-            <color red="0.35710123181343079" green="0.61046278476715088" blue="0.60665088891983032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.35699999332427979" green="0.61000001430511475" blue="0.60699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

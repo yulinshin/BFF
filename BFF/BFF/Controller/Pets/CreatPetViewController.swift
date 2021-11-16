@@ -14,6 +14,8 @@ class CreatPetViewController: UIViewController {
 
     @IBOutlet weak var petInfoTableView: UITableView!
 
+    @IBOutlet weak var saveButton: UIButton!
+
     var viewModel = CreatPetViewModel()
 
     var fields  = [
@@ -56,12 +58,13 @@ class CreatPetViewController: UIViewController {
         petImage.layer.cornerRadius = petImage.frame.height/2
         petImage.clipsToBounds = true
 
+        saveButton.layer.cornerRadius = 10
+
 
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
-
 
         switch presentMode {
 
@@ -74,36 +77,48 @@ class CreatPetViewController: UIViewController {
 
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .done, target: self, action: #selector(cancel))
 
+            self.saveButton.isHidden = true
+
 
         case .edit:
 
             self.navigationItem.title = "\(viewModel.name.value)"
 
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "儲存", style: .done, target: self, action: #selector(updatePet))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem()
 
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .done, target: self, action: #selector(cancel))
+
+            self.saveButton.isHidden = false
 
         case .creat:
 
             self.navigationItem.title = "新增毛小孩"
 
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "新增", style: .done, target: self, action: #selector(savePet))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem()
 
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .done, target: self, action: #selector(cancel))
 
+            self.saveButton.isHidden = false
+
+
 
         case .none:
+
             return
         }
-
+        self.petInfoTableView.reloadData()
 
     }
 
     @objc func coverToEditMode(){
-        self.presentMode = .edit
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "儲存", style: .done, target: self, action: #selector(self.updatePet))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .done, target: self, action: #selector(self.cancel))
-        petInfoTableView.reloadData()
+
+        let storyboard = UIStoryboard(name: "Pet", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatPetViewController") as? CreatPetViewController else { return }
+        controller.presentMode = .edit
+        controller.viewModel = self.viewModel
+        controller.presentMode = .edit
+        controller.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 
 
@@ -134,6 +149,26 @@ class CreatPetViewController: UIViewController {
 
     }
 
+    @IBAction func didTapSaveButton(_ sender: Any) {
+
+
+        switch presentMode {
+
+        case .edit:
+            updatePet()
+
+        case .creat:
+            savePet()
+
+        case .read:
+            return
+
+        case .none:
+
+            return
+        }
+
+    }
 
     @objc func savePet() {
 

@@ -124,7 +124,6 @@
 		62D454BE27267D82009DF0FF /* SupplyListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62D454BC27267D82009DF0FF /* SupplyListTableViewCell.xib */; };
 		62D454C027268522009DF0FF /* SupplyCellViewMdoel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D454BF27268522009DF0FF /* SupplyCellViewMdoel.swift */; };
 		62D454C227268CB6009DF0FF /* SuppliesViewMdoel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D454C127268CB6009DF0FF /* SuppliesViewMdoel.swift */; };
-		62DB93F92743526500D884E3 /* GuidedTour.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62DB93F82743526500D884E3 /* GuidedTour.storyboard */; };
 		62EF088E2723BCAF006C7D62 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EF088D2723BCAF006C7D62 /* File.swift */; };
 		62FC6192272586FD00292710 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FC6191272586FD00292710 /* Home.storyboard */; };
 		62FC6194272588F200292710 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC6193272588F200292710 /* TabBarViewController.swift */; };
@@ -259,7 +258,6 @@
 		62D454BC27267D82009DF0FF /* SupplyListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SupplyListTableViewCell.xib; sourceTree = "<group>"; };
 		62D454BF27268522009DF0FF /* SupplyCellViewMdoel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplyCellViewMdoel.swift; sourceTree = "<group>"; };
 		62D454C127268CB6009DF0FF /* SuppliesViewMdoel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuppliesViewMdoel.swift; sourceTree = "<group>"; };
-		62DB93F82743526500D884E3 /* GuidedTour.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GuidedTour.storyboard; sourceTree = "<group>"; };
 		62EF088D2723BCAF006C7D62 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		62FC61902725839F00292710 /* TabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = TabBar.storyboard; path = /Users/yulin/Desktop/AppWorksSchool/BFF/BFF/BFF/TabBar.storyboard; sourceTree = "<absolute>"; };
 		62FC6191272586FD00292710 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -663,7 +661,6 @@
 		62DB93F72743522100D884E3 /* GuidedTour */ = {
 			isa = PBXGroup;
 			children = (
-				62DB93F82743526500D884E3 /* GuidedTour.storyboard */,
 			);
 			path = GuidedTour;
 			sourceTree = "<group>";
@@ -765,7 +762,6 @@
 				62B617DF2736B0FF0062BBE5 /* MyChatTableViewCell.xib in Resources */,
 				624D5C4B2731321700602125 /* MapMarkerWindowView.xib in Resources */,
 				62FC61A027258E3400292710 /* User.storyboard in Resources */,
-				62DB93F92743526500D884E3 /* GuidedTour.storyboard in Resources */,
 				62FC6192272586FD00292710 /* Home.storyboard in Resources */,
 				62892FFE2732F749001A7B32 /* GenJyuuGothic-ExtraLight.ttf in Resources */,
 				62892FFD2732F749001A7B32 /* GenJyuuGothic-Medium.ttf in Resources */,

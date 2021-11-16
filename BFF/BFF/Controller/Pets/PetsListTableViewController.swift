@@ -112,7 +112,11 @@ class PetsListTableViewController: UITableViewController {
             guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatPetViewController") as? CreatPetViewController else { return }
             controller.presentMode = .read
             controller.viewModel = self.viewModels[indexPath.row]
-            self.navigationController?.pushViewController(controller, animated: true)
+
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
+
 
         }
 
