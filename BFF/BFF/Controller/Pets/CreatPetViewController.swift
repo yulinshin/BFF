@@ -253,7 +253,7 @@ extension CreatPetViewController: UITableViewDataSource {
 
                 cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
                 cell.textField.text = weightUnit
-                cell.creatPicker(pickerData: ["kg", "g"])
+                cell.creatPicker(pickerData: ["", "kg", "g"])
 
             }
             cell.button.isHidden = true
@@ -267,7 +267,7 @@ extension CreatPetViewController: UITableViewDataSource {
 
                 cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
                 cell.textField.text = gender
-                cell.creatPicker(pickerData: ["boy", "girl"])
+                cell.creatPicker(pickerData: ["", "boy", "girl"])
 
             }
             cell.button.isHidden = true

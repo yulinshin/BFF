@@ -88,9 +88,22 @@ class PetsListTableViewController: UITableViewController {
         }
 
         cell.didTapdeleteButton = {
-            self.viewModels[indexPath.row].deleatePet()
-            self.viewModels.remove(at: indexPath.row)
-            tableView.reloadData()
+
+            let alertController = UIAlertController(title: "刪除寵物", message: "此為不可逆的動作，你確定要刪除寵物嗎？", preferredStyle: .alert)
+
+            var deleteAction = UIAlertAction(title: "刪除", style: .default) { action in
+                self.viewModels[indexPath.row].deleatePet()
+                self.viewModels.remove(at: indexPath.row)
+                tableView.reloadData()
+            }
+
+            alertController.addAction(deleteAction)
+
+            alertController.addAction(UIAlertAction(title: "取消", style: .cancel))
+
+                self.present(alertController, animated: true, completion: nil)
+
+
         }
 
         cell.didTapMoreInfoButton = {

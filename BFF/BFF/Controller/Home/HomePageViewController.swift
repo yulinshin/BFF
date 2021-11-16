@@ -359,12 +359,12 @@ extension HomePageViewController {
 
             case .catalog:
 
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.28), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(110))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
-                group.interItemSpacing  = .fixed(30)
+                group.interItemSpacing  = .fixed(20)
                 let layoutSection = NSCollectionLayoutSection(group: group)
 
                 layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 40, bottom: 6, trailing: 40)
