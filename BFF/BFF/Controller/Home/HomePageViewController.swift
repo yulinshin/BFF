@@ -52,7 +52,7 @@ class HomePageViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.fetchUserData()
+        viewModel.listenUserData()
         viewModel.fetchUserPetsData()
         let barAppearance =  UINavigationBarAppearance()
         barAppearance.configureWithTransparentBackground()

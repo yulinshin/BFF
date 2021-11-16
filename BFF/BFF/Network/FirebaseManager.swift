@@ -20,9 +20,15 @@ class FirebaseManager {
     lazy var dateBase = Firestore.firestore()
     lazy var storage = Storage.storage()
 
-    let userId = Auth.auth().currentUser?.uid ?? ""
-    let userEmail = Auth.auth().currentUser?.email ?? ""
-    let userName = Auth.auth().currentUser?.displayName ?? ""
+    var userId: String {
+        Auth.auth().currentUser?.uid ?? ""
+    }
+    var userEmail: String {
+        Auth.auth().currentUser?.email ?? ""
+    }
+    var userName: String {
+        Auth.auth().currentUser?.displayName ?? ""
+    }
 
     func fetchUser(completion: @escaping (Result<User, Error>) -> Void) {
 
@@ -41,6 +47,29 @@ class FirebaseManager {
             } else {
                 let newUserDoc = self.dateBase.collection("Users").document(self.userId)
                 let newUserData = User(userId: self.userId, email: self.userEmail, userName: self.userName)
+
+                do {
+                    try newUserDoc.setData(from: newUserData)
+                } catch {
+                }
+            }
+        }
+    }
+
+    func creatUser(){
+
+        print("Start create UserData ........")
+
+        dateBase.collection("Users").document(userId).getDocument { (document, error) in
+            let newUserData = User(userId: self.userId, email: self.userEmail, userName: self.userName)
+            if let document = document, document.exists {
+                do {
+                    try  self.dateBase.collection("Users").document(self.userId).setData(from: newUserData)
+                } catch {
+
+                }
+            } else {
+                let newUserDoc = self.dateBase.collection("Users").document(self.userId)
 
                 do {
                     try newUserDoc.setData(from: newUserData)

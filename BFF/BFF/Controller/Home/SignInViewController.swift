@@ -301,11 +301,10 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
 
                     let displayName = givenName + familyName
                     self.updateDisplayName(displayName: displayName)
+                    FirebaseManager.shared.creatUser()
                     print ("Suceess signed in as \(user.uid), email:\(user.email), name:\(displayName)")
 
                 }
-
-
                 let viewController = TabBarController()
                 viewController.modalPresentationStyle = .fullScreen
                 self.view.window?.rootViewController = viewController
