@@ -34,7 +34,9 @@ class PetsProfileViewController: UIViewController {
     @IBOutlet weak var diariesCollectionView: UICollectionView!
 
     @IBOutlet weak var topColorBackground: UIView!
+    @IBOutlet weak var petScrollView: UIScrollView!
 
+    @IBOutlet weak var actionStaclview: UIStackView!
     var viewModel: ProfileViewModel?
 
     override func viewDidLoad() {
@@ -45,7 +47,7 @@ class PetsProfileViewController: UIViewController {
         diariesCollectionView.dataSource = self
         let diaryNib = UINib(nibName: "DairyPhotoCell", bundle: nil)
         diariesCollectionView.register(diaryNib, forCellWithReuseIdentifier: DairyPhotoCell.identifier)
-
+        petScrollView.delegate = self
         viewModel?.gotData = {
             self.diariesCollectionView.reloadData()
             self.setUp()
@@ -161,8 +163,17 @@ class PetsProfileViewController: UIViewController {
     func setUp(){
 
 
+
         guard let viewModel = viewModel else {
             return
+        }
+
+
+
+        if viewModel.ownerUserId.value == FirebaseManager.shared.userId {
+            actionStaclview.isHidden = true
+        } else {
+            actionStaclview.isHidden = false
         }
 
         viewModel.petImageThumbnailUrl.bind { url in
@@ -352,6 +363,10 @@ extension PetsProfileViewController: UICollectionViewDataSource {
 
 extension PetsProfileViewController: UICollectionViewDelegate {
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print ("didTap at \(indexPath.row)")
+    }
+
 
 }
 
@@ -449,6 +464,15 @@ class ProfileViewModel {
         }
 
     }
+
+
+}
+
+
+extension PetsProfileViewController: UIScrollViewDelegate {
+
+
+ 
 
 
 }
