@@ -293,9 +293,9 @@ class FirebaseManager {
     }
 
     // swiftlint:disable cyclomatic_complexity
-    func listMessages(completion: @escaping (Result<[Message], Error>) -> Void) {
+    func listenAllMessages(completion: @escaping (Result<[Message], Error>) -> Void) {
 
-
+        print("Start Listen Message Data")
         var messages = [Message]()
         dateBase.collection("Messages").whereField("receiver", isEqualTo: userId).addSnapshotListener { querySnapshot, error in
             if let error = error {
@@ -344,7 +344,7 @@ class FirebaseManager {
     }
 
 
-    func listMessages(otherUserId: String,completion: @escaping (Result<[Message], Error>) -> Void) {
+    func listenMessages(otherUserId: String,completion: @escaping (Result<[Message], Error>) -> Void) {
 
         var messages = [Message]()
         dateBase.collection("Messages").whereField("receiver", isEqualTo: otherUserId).whereField("sender", isEqualTo: userId).addSnapshotListener { querySnapshot, error in

@@ -33,14 +33,20 @@ private enum Tab {
 
         case .midle: controller = UIViewController()
 
-        case .message: controller = UIStoryboard.message.instantiateInitialViewController()!
-
-        }
-
+        case .message:
+            let storyboard = UIStoryboard.message
+            if let chatController = storyboard.instantiateViewController(withIdentifier: "ChatListTableViewController") as? ChatListTableViewController {
+                chatController.viewModel = ChatListViewModel(updateNotify: {
+                    chatController.tableView?.reloadData()
+            })
+                let nav = UINavigationController(rootViewController: chatController)
+                controller = nav
+            } else {
+                controller = UIViewController()
+            }
+    }
         controller.tabBarItem = tabBarItem()
-//
         controller.tabBarItem.imageInsets = UIEdgeInsets(top: 2.0, left: 2.0, bottom: 2.0, right: 2.0)
-
         return controller
     }
 

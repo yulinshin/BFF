@@ -19,9 +19,6 @@ class ChatListTableViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        viewModel = ChatListViewModel(updateNotify: {
-            self.tableView.reloadData()
-        })
 
     }
 
@@ -49,13 +46,20 @@ extension ChatListTableViewController: UITableViewDelegate, UITableViewDataSourc
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatListTableViewCell", for: indexPath) as? ChatListTableViewCell else {
             return UITableViewCell() }
 
-        guard let viewModel = viewModel else { return cell}
+        guard let viewModel = viewModel else { return cell }
+        
         cell.setup(viewModel: (viewModel.showingUserList.value[indexPath.row]))
 
-        viewModel.showingUserList.value[indexPath.row].didGetData = {
-            cell.nameLabel.text =  viewModel.showingUserList.value[indexPath.row].userName.value
-            cell.photImageView.loadImage( viewModel.showingUserList.value[indexPath.row].userPic.value , placeHolder: UIImage(systemName: "person.fill"))
-        }
+
+            //            viewModel.showingUserList.value[indexPath.row].userName.bind { name in
+            //                cell.nameLabel.text = name
+            //            }
+            //
+            //            viewModel.showingUserList.value[indexPath.row].userPic.bind { url in
+            //                cell.photImageView.loadImage(url, placeHolder:  UIImage(systemName: "person.fill"))
+            //            }
+
+
         return cell
     }
 
@@ -96,6 +100,16 @@ class ChatListTableViewCell: UITableViewCell{
         viewModel.lastMassageDate.bind { date in
             self.dateLabel.text = date
         }
+
+
+        viewModel.userName.bind { name in
+            self.nameLabel.text = name
+        }
+
+        viewModel.userPic.bind{ url in
+            self.photImageView.loadImage(url, placeHolder:  UIImage(systemName: "person.fill"))
+        }
+
 
     }
 
