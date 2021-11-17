@@ -30,6 +30,8 @@ class FirebaseManager {
         Auth.auth().currentUser?.displayName ?? ""
     }
 
+    var user: User?
+
     func fetchUser(completion: @escaping (Result<User, Error>) -> Void) {
 
         print("Start fetch UserData ........")
@@ -40,6 +42,7 @@ class FirebaseManager {
                 do {
                     if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
                         completion(.success(user))
+                        self.user = user
                     }
                 } catch {
                     completion(.failure(error))
@@ -96,19 +99,35 @@ class FirebaseManager {
         currentUserDB.updateData(["followedPets": FieldValue.arrayRemove([followPetId])])
     }
 
-    func updateCurrentUserBlockPets(blockPetId: String ) {
+    func updateCurrentUserBlockUsers(blockUserId: String ) {
 
+        let currentUserDB = dateBase.collection("Users").document(userId)
+        currentUserDB.updateData(["blockUsers": FieldValue.arrayUnion([blockUserId])])
+
+    }
+    
+    
+
+    func updateCurrentUserBlockUsers(blockUserId: String, completion: @escaping (Result<String, Error>) -> Void ) {
 
         let currentUserDB = dateBase.collection("Users").document(userId)
 
-        currentUserDB.updateData(["blockPets": FieldValue.arrayUnion([blockPetId])])
+        currentUserDB.updateData(["blockUsers": FieldValue.arrayUnion([blockUserId])]) { error in
+            guard let error = error else {
+                completion(.success("sucess"))
+                return
+            }
+            completion(.failure(error))
+
+        }
+
     }
 
-    func unBlockPets(blockPetId: String ) {
+    func unblockUser(blockUserId: String ) {
 
         let currentUserDB = dateBase.collection("Users").document(userId)
 
-        currentUserDB.updateData(["blockPets": FieldValue.arrayRemove([blockPetId])])
+        currentUserDB.updateData(["blockUsers": FieldValue.arrayRemove([blockUserId])])
     }
 
     func updateUserInfo(user: User, newimage: UIImage, completion: @escaping (Result<String, Error>) -> Void) {

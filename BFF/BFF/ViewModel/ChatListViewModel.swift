@@ -22,37 +22,78 @@ class ChatListViewModel { // For ListTableViewController
         self.didGetData = updateNotify
         getChatData()
     }
+
     func getChatData() {
 
         FirebaseManager.shared.listenAllMessages { result in
+
             switch result {
 
             case .success(let messages):
 
                 self.messages.value = messages
+
          
                 messages.forEach { message in
 
-                    if !self.contactList .contains(message.sender) {
-                        self.contactList .append(message.sender) // If is sender is new Contact, Add to List
-                    }
-                    if !self.contactList .contains(message.receiver){
-                        self.contactList .append(message.receiver) // If is receiver is new Contact, Add to List
+                    if let blockUser = FirebaseManager.shared.user?.blockUsers {
+
+                        if !self.contactList .contains(message.sender) && blockUser.contains(message.sender) {
+                            self.contactList .append(message.sender) // If is sender is new Contact, Add to List
+                        }
+                        if !self.contactList .contains(message.receiver) && blockUser.contains(message.sender){
+                            self.contactList .append(message.receiver) // If is receiver is new Contact, Add to List
+                        }
+
+                    } else {
+                        if !self.contactList .contains(message.sender) {
+                            self.contactList .append(message.sender) // If is sender is new Contact, Add to List
+                        }
+                        if !self.contactList .contains(message.receiver){
+                            self.contactList .append(message.receiver) // If is receiver is new Contact, Add to List
+                        }
                     }
 
                 }
 
-                self.showingUserList.value = [ChatGroupViewModel]() // CleaUp the List Array
-                self.contactList .forEach { contactId in
-                    if contactId != FirebaseManager.shared.userId { // Remove Self from list array
-                    let group = messages.filter { $0.receiver == contactId || $0.sender == contactId } // merge same Contact in One group
-                    let groupModel = ChatGroupViewModel(messages: group, userId: contactId)
-                    self.showingUserList.value.append(groupModel) // Add fetched Contact List
+
+
+                FirebaseManager.shared.fetchUser { result in
+
+
+                    switch result {
+
+                    case.success( let user ):
+                        self.showingUserList.value = [ChatGroupViewModel]() // CleaUp the List Array
+
+                        if let blockIds = user.blockUsers {
+                        self.contactList .forEach { contactId in
+                            if contactId != FirebaseManager.shared.userId && !blockIds.contains(contactId){ // Remove Self from list array
+                            let group = messages.filter { $0.receiver == contactId || $0.sender == contactId } // merge same Contact in One group
+                            let groupModel = ChatGroupViewModel(messages: group, userId: contactId)
+                            self.showingUserList.value.append(groupModel) // Add fetched Contact List
+
+                            }
+                        }
+                        } else {
+                            self.contactList .forEach { contactId in
+                                if contactId != FirebaseManager.shared.userId { // Remove Self from list array
+                                let group = messages.filter { $0.receiver == contactId || $0.sender == contactId } // merge same Contact in One group
+                                let groupModel = ChatGroupViewModel(messages: group, userId: contactId)
+                                self.showingUserList.value.append(groupModel) // Add fetched Contact List
+                                }
+                            }
+                        }
+
+
+                    case.failure( let error ):
+
+                        print (error)
+
                     }
-                }
 
                 self.didGetData?() // NotifyView to update List
-
+                }
             case .failure(let error):
                 print("ERROR:::::\(error)")
 

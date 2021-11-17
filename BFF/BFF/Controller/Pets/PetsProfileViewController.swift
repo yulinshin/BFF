@@ -283,11 +283,11 @@ class PetsProfileViewController: UIViewController {
 
             if viewModel.isBlocked.value {
 
-                action = UIAlertAction(title: "解除封鎖", style: .default, handler: blockPet)
+                action = UIAlertAction(title: "解除封鎖此寵物的主人", style: .default, handler: blockUser)
 
             } else {
 
-            action = UIAlertAction(title: "封鎖此寵物", style: .default, handler: blockPet)
+            action = UIAlertAction(title: "封鎖並檢舉此寵物的主人", style: .default, handler: blockUser)
             }
 
 
@@ -301,7 +301,7 @@ class PetsProfileViewController: UIViewController {
     }
 
 
-    func blockPet(_ action: UIAlertAction) {
+    func blockUser(_ action: UIAlertAction) {
 
         guard let viewModel = viewModel else {
             return
@@ -311,14 +311,14 @@ class PetsProfileViewController: UIViewController {
             if viewModel.isBlocked.value {
 
 
-                FirebaseManager.shared.unBlockPets(blockPetId: viewModel.petId.value)
+                FirebaseManager.shared.unblockUser(blockUserId: viewModel.ownerUserId.value)
 
                 viewModel.isBlocked.value = false
 
 
             } else {
 
-                FirebaseManager.shared.updateCurrentUserBlockPets(blockPetId: viewModel.petId.value)
+                FirebaseManager.shared.updateCurrentUserBlockUsers(blockUserId: viewModel.ownerUserId.value)
 
 
                 viewModel.isBlocked.value = true
@@ -425,8 +425,8 @@ class ProfileViewModel {
 
                         self.isFollowed.value = user.followedPets?.contains(petId) ?? false
                         print ("IS Follwed \(user.followedPets)")
-                        self.isBlocked.value = user.blockPets?.contains(petId) ?? false
-                        print ("IS Block \(user.blockPets)")
+                        self.isBlocked.value = user.blockUsers?.contains(self.ownerUserId.value) ?? false
+                        print ("IS Block \(user.blockUsers)")
                         self.gotData?()
 
                     case .failure(let error):

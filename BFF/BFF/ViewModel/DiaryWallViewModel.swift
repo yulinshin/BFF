@@ -100,34 +100,36 @@ class DiaryWallViewModel {
 
     func filterDiaris() {
 
+
         FirebaseManager.shared.fetchUser { result in
+
 
             switch result {
 
-            case .success(let user):
+            case.success( let user ):
 
-                user.blockPets?.forEach({ petId in
+                guard let blockUsers = user.blockUsers else { return }
+                blockUsers.forEach({ userId in
 
-                    self.showingDiaries.value = self.showingDiaries.value.filter { diary in
-                        if diary.petId == petId {
-                            print(self.showingDiaries.value.count)
-                            return false
-                        } else {
-                            print(self.showingDiaries.value.count)
-                            return true
-                        }
-                    }
-                })
+                            self.showingDiaries.value = self.showingDiaries.value.filter { diary in
+                                if diary.userId == userId {
+                                    print(self.showingDiaries.value.count)
+                                    return false
+                                } else {
+                                    print(self.showingDiaries.value.count)
+                                    return true
+                                }
+                            }
+                    })
+                print("*** showingDiaries: \(self.showingDiaries.value.count)")
                 self.didUpDateData?()
-            case .failure(let error):
-                break
+            case.failure( let error ):
 
-
+                print (error)
+                self.didUpDateData?()
             }
 
-
         }
-
 
     }
 

@@ -41,7 +41,47 @@ class ChatViewController: UIViewController {
 
         self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
 
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "．．．", style: .done, target: self, action: #selector(showSetting))
+
     }
+
+   @objc func showSetting() {
+
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        var action = UIAlertAction()
+
+        action = UIAlertAction(title: "封鎖並檢舉此寵物的主人", style: .default, handler: { action in
+            self.blockUser(userId: self.viewModel?.userId.value ?? "")
+        })
+
+
+        // Block PetsId -> Only show on other's Diary
+        alertController.addAction(action)
+
+        alertController.addAction(UIAlertAction(title: "取消", style: .cancel))
+
+            self.present(alertController, animated: true, completion: nil)
+
+    }
+
+
+    func blockUser(userId: String) {
+
+        FirebaseManager.shared.updateCurrentUserBlockUsers(blockUserId: userId) { result in
+
+            switch result {
+
+            case .success(let message):
+                self.navigationController?.popViewController(animated: true)
+            case .failure(let error):
+                print(error)
+
+            }
+
+        }
+    }
+
 
     override func viewWillAppear(_ animated: Bool) {
 

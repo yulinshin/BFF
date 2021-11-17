@@ -67,8 +67,6 @@ class CommentTableViewController: UIViewController {
         self.viewModels.append(chatViewModel)
 
         FirebaseManager.shared.fetchComments(diaryId: diary.diaryId) { result in
-
-
             switch result {
 
             case .success(var comments):
@@ -77,18 +75,52 @@ class CommentTableViewController: UIViewController {
                     first.createdTime.dateValue() < second.createdTime.dateValue()
                 }
 
+
                 comments.forEach { comment in
-                    let chatViewModel = CommentViewModel(from: comment){
-                        self.tableView.reloadData()
+                    FirebaseManager.shared.fetchPet(petId: comment.petId) { result in
+
+                        switch result{
+
+                        case .success(let pet):
+                            guard let blockUsers = FirebaseManager.shared.user?.blockUsers else {
+                                let chatViewModel = CommentViewModel(from: comment){
+                                            self.tableView.reloadData()
+                                        }
+                                        self.viewModels.append(chatViewModel)
+                                self.viewModels = self.viewModels.sorted { first, second in
+                                    first.creatTime.value < second.creatTime.value
+                                }
+                                print("*** \(self.viewModels.count) in \(chatViewModel.content.value)")
+                                        return
+                                    }
+
+
+                            if !blockUsers.contains(pet.userId) {
+                                    let chatViewModel = CommentViewModel(from: comment){
+                                        self.tableView.reloadData()
+                                    }
+                                    self.viewModels.append(chatViewModel)
+                                self.viewModels = self.viewModels.sorted { first, second in
+                                    first.creatTime.value < second.creatTime.value
+                                }
+                                print("*** \(self.viewModels.count) in \(chatViewModel.content.value)")
+                            }
+                        case .failure(let error):
+
+                            print (error)
+
+
+                        }
+
                     }
-                    self.viewModels.append(chatViewModel)
+
                 }
 
                 self.tableView.reloadData()
 
             case .failure(let error):
 
-                print(error)
+                print("HERE\(error)")
 
             }
 
