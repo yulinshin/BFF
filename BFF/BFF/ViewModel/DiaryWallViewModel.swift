@@ -12,6 +12,7 @@ class DiaryWallViewModel {
     var diaries = Box([Diary]())
     var showingDiaries = Box([Diary]())
     var didUpDateData: (() -> Void)?
+    var getDataFailure: (() -> Void )?
 
     func fetchDiary() {
         FirebaseManager.shared.fetchDiaries() { result in
@@ -20,11 +21,21 @@ class DiaryWallViewModel {
 
             case .success(let diaries):
 
+                if diaries.count == 0 {
+
+                    self.getDataFailure
+
+                } else {
+
                 self.diaries.value = diaries
                 self.showingDiaries.value = diaries
                 self.updatePetData()
 
+                }
+
             case.failure(let error):
+
+                self.getDataFailure
 
                 print(error)
 
@@ -40,12 +51,21 @@ class DiaryWallViewModel {
 
             case .success(let diaries):
 
+                if  diaries.count == 0 {
+
+                    self.getDataFailure
+
+                } else {
+
                 self.diaries.value = diaries
 
                 self.updatePetData()
 
+                }
+
             case.failure(let error):
 
+                self.getDataFailure
                 print(error)
 
             }

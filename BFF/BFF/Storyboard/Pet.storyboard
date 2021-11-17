@@ -32,7 +32,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XiB-ii-PMG" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1283.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1299"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bSM-g6-3DG">
                                                 <rect key="frame" x="-200" y="-500" width="814" height="618"/>
@@ -47,25 +47,25 @@
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="YKo-k0-exd">
-                                                <rect key="frame" x="16" y="184" width="382" height="46.5"/>
+                                                <rect key="frame" x="16" y="184" width="382" height="55.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2e-va-3Yd">
-                                                        <rect key="frame" x="159" y="0.0" width="64" height="28"/>
+                                                        <rect key="frame" x="156.5" y="0.0" width="69.5" height="33.5"/>
                                                         <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="24"/>
                                                         <color key="textColor" name="main"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="fmO-k1-BMH">
-                                                        <rect key="frame" x="168.5" y="30" width="45" height="16.5"/>
+                                                        <rect key="frame" x="168.5" y="35.5" width="45.5" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jv-UA-Hqp">
-                                                                <rect key="frame" x="0.0" y="0.0" width="25" height="16.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="25.5" height="20"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="14"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Un6-hV-Z6f">
-                                                                <rect key="frame" x="27" y="0.0" width="18" height="16.5"/>
+                                                                <rect key="frame" x="27.5" y="0.0" width="18" height="20"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="10"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -75,26 +75,26 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hm1-ls-uZp">
-                                                <rect key="frame" x="16" y="246.5" width="382" height="1"/>
+                                                <rect key="frame" x="16" y="255.5" width="382" height="1"/>
                                                 <color key="backgroundColor" name="main"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="ac5-SV-9qg"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="7Jr-ik-OCd">
-                                                <rect key="frame" x="88" y="263.5" width="238.5" height="35"/>
+                                                <rect key="frame" x="85.5" y="272.5" width="243.5" height="41.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="WYJ-jO-70J">
-                                                        <rect key="frame" x="0.0" y="0.0" width="37" height="35"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="38.5" height="41.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Vg-LM-nZ2">
-                                                                <rect key="frame" x="5" y="0.0" width="27" height="19"/>
+                                                                <rect key="frame" x="5" y="0.0" width="28.5" height="22.5"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="16"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diaries" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUm-1L-ATa">
-                                                                <rect key="frame" x="0.0" y="21" width="37" height="14"/>
+                                                                <rect key="frame" x="0.0" y="24.5" width="38.5" height="17"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="12"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -102,16 +102,16 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="itc-3q-HuV">
-                                                        <rect key="frame" x="97" y="0.0" width="52" height="35"/>
+                                                        <rect key="frame" x="98.5" y="0.0" width="54.5" height="41.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bva-rC-W87">
-                                                                <rect key="frame" x="12.5" y="0.0" width="27" height="19"/>
+                                                                <rect key="frame" x="13" y="0.0" width="28.5" height="22.5"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="16"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Folloewrs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="231-q2-lGB">
-                                                                <rect key="frame" x="0.0" y="21" width="52" height="14"/>
+                                                                <rect key="frame" x="0.0" y="24.5" width="54.5" height="17"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="12"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -119,16 +119,16 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="mYh-56-wx9">
-                                                        <rect key="frame" x="209" y="0.0" width="29.5" height="35"/>
+                                                        <rect key="frame" x="213" y="0.0" width="30.5" height="41.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doC-fk-i31">
-                                                                <rect key="frame" x="1" y="0.0" width="27" height="19"/>
+                                                                <rect key="frame" x="1" y="0.0" width="28.5" height="22.5"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="16"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liked" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aI7-td-pTW">
-                                                                <rect key="frame" x="0.0" y="21" width="29.5" height="14"/>
+                                                                <rect key="frame" x="0.0" y="24.5" width="30.5" height="17"/>
                                                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="12"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -138,7 +138,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YOa-5L-pVf">
-                                                <rect key="frame" x="16" y="314.5" width="382" height="40"/>
+                                                <rect key="frame" x="16" y="330" width="382" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0t-59-fMW">
                                                         <rect key="frame" x="0.0" y="0.0" width="163" height="40"/>
@@ -182,14 +182,14 @@
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-bu-yYn">
-                                                <rect key="frame" x="16" y="370.5" width="382" height="1"/>
+                                                <rect key="frame" x="16" y="386" width="382" height="1"/>
                                                 <color key="backgroundColor" name="main"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="LNJ-E3-cth"/>
                                                 </constraints>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Xzl-J1-GtX">
-                                                <rect key="frame" x="0.0" y="387.5" width="414" height="896"/>
+                                                <rect key="frame" x="0.0" y="403" width="414" height="896"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XzF-3L-lRl">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -426,13 +426,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="毛小孩的姓名？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFR-ly-O5g">
-                                <rect key="frame" x="137" y="398" width="140" height="23.5"/>
+                                <rect key="frame" x="137" y="398" width="140" height="28"/>
                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ot-wh-RI3">
-                                <rect key="frame" x="87" y="437.5" width="240" height="34"/>
+                                <rect key="frame" x="87" y="442" width="240" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="CNs-Qf-Afx"/>
                                     <constraint firstAttribute="height" constant="34" id="eX6-95-87f"/>
@@ -441,7 +441,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z55-gU-Kjr">
-                                <rect key="frame" x="165" y="551.5" width="84" height="37.5"/>
+                                <rect key="frame" x="165" y="556" width="84" height="42"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="下一步">
                                     <fontDescription key="titleFontDescription" name="GenJyuuGothic-Normal" family="Gen Jyuu Gothic" pointSize="20"/>
@@ -556,7 +556,7 @@
                                 <rect key="frame" x="107" y="168" width="200" height="200"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="幫毛小孩選張可愛的照片吧！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0b-0l-ijD">
-                                <rect key="frame" x="77" y="428" width="260" height="23.5"/>
+                                <rect key="frame" x="77" y="428" width="260" height="28"/>
                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>

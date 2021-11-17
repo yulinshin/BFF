@@ -14,6 +14,8 @@ class DiaryViewController: UIViewController {
 
     @IBOutlet weak var petsTopConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var statusImage: UIImageView!
 
     private var lastContentOffset: CGFloat = 0
 
@@ -23,7 +25,6 @@ class DiaryViewController: UIViewController {
 
 
     var diaryWallViewModel = DiaryWallViewModel()
-
     var diaries = [Item]() {
         didSet {
             applySnapshot()
@@ -71,6 +72,18 @@ class DiaryViewController: UIViewController {
 
         diaryWallViewModel.showingDiaries.bind {  [weak self] diaries in
 
+
+                if diaries.count != 0 {
+                    self?.statusLabel.isHidden = true
+                    self?.statusImage.isHidden = true
+
+                } else {
+                    self?.statusLabel.isHidden = false
+                    self?.statusLabel.text = "尚未新增毛小孩日記唷！"
+                    self?.statusImage.image = UIImage(named: "NoDiary")
+                    self?.statusImage.isHidden = false
+                }
+
             var diaryItems = [Item]()
 
             diaries.forEach { diary in
@@ -79,7 +92,13 @@ class DiaryViewController: UIViewController {
             self?.diaries = diaryItems
         }
 
-        fetchData()
+
+        diaryWallViewModel.getDataFailure = {
+
+                self.statusLabel.text = "無法取得毛小孩日記！ 請確認網路連線狀態"
+                self.statusImage.image = UIImage(named: "NoDiary")
+        }
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +114,11 @@ class DiaryViewController: UIViewController {
             self.selectedPetsCollectionView.isHidden = true
             
         }
+
+      statusLabel.isHidden = false
+      statusLabel.text = "翻閱日記中..."
+      statusImage.isHidden = false
+      statusImage.image = UIImage(named: "LoadDiary")
 
         diaryWallViewModel.fetchDiary()
         fetchData()
