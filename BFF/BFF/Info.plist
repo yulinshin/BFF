@@ -19,6 +19,10 @@
 		<string>GenJyuuGothic-ExtraLight.ttf</string>
 		<string>GenJyuuGothic-Bold.ttf</string>
 	</array>
+	<key>NSLocationUsageDescription</key>
+	<string>We need your current location to fetch nearby pet facilities</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your current location to fetch nearby pet facilities</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
