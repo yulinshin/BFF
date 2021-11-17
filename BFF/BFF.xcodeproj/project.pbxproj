@@ -86,6 +86,7 @@
 		629FF5C9271D623F00C7C94A /* Supply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629FF5C8271D623F00C7C94A /* Supply.swift */; };
 		62AB33F827205D5000C8E582 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AB33F727205D5000C8E582 /* NoteViewController.swift */; };
 		62AB33FA27205D6E00C8E582 /* Pet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62AB33F927205D6E00C8E582 /* Pet.storyboard */; };
+		62AC841C2745212F00249E62 /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62AC841B2745212F00249E62 /* TabBar.storyboard */; };
 		62B609E5273912F5007FB169 /* PetsProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B609E4273912F5007FB169 /* PetsProfileViewController.swift */; };
 		62B609E9273A26AE007FB169 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B609E8273A26AE007FB169 /* MenuTableViewCell.swift */; };
 		62B609EB273A52E5007FB169 /* UserAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B609EA273A52E5007FB169 /* UserAccountViewController.swift */; };
@@ -220,6 +221,7 @@
 		629FF5C8271D623F00C7C94A /* Supply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supply.swift; sourceTree = "<group>"; };
 		62AB33F727205D5000C8E582 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		62AB33F927205D6E00C8E582 /* Pet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pet.storyboard; sourceTree = "<group>"; };
+		62AC841B2745212F00249E62 /* TabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
 		62B609E4273912F5007FB169 /* PetsProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsProfileViewController.swift; sourceTree = "<group>"; };
 		62B609E8273A26AE007FB169 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		62B609EA273A52E5007FB169 /* UserAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountViewController.swift; sourceTree = "<group>"; };
@@ -259,7 +261,6 @@
 		62D454BF27268522009DF0FF /* SupplyCellViewMdoel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplyCellViewMdoel.swift; sourceTree = "<group>"; };
 		62D454C127268CB6009DF0FF /* SuppliesViewMdoel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuppliesViewMdoel.swift; sourceTree = "<group>"; };
 		62EF088D2723BCAF006C7D62 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		62FC61902725839F00292710 /* TabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = TabBar.storyboard; path = /Users/yulin/Desktop/AppWorksSchool/BFF/BFF/BFF/TabBar.storyboard; sourceTree = "<absolute>"; };
 		62FC6191272586FD00292710 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		62FC6193272588F200292710 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		62FC619527258B2300292710 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
@@ -637,9 +638,9 @@
 				623340DE271C3B1B002B2429 /* LaunchScreen.storyboard */,
 				62AB33F927205D6E00C8E582 /* Pet.storyboard */,
 				62FC619F27258E3400292710 /* User.storyboard */,
+				62AC841B2745212F00249E62 /* TabBar.storyboard */,
 				62FC619D27258E2100292710 /* Message.storyboard */,
 				62D454B727267CF2009DF0FF /* Supplies.storyboard */,
-				62FC61902725839F00292710 /* TabBar.storyboard */,
 				62FC619927258DF900292710 /* Social.storyboard */,
 				62C38D8C272EDC0D008DEE8B /* Goal.storyboard */,
 				62FC6191272586FD00292710 /* Home.storyboard */,
@@ -774,6 +775,7 @@
 				623340DD271C3B1B002B2429 /* Assets.xcassets in Resources */,
 				62FC619A27258DF900292710 /* Social.storyboard in Resources */,
 				62892FFF2732F749001A7B32 /* GenJyuuGothic-Bold.ttf in Resources */,
+				62AC841C2745212F00249E62 /* TabBar.storyboard in Resources */,
 				6285C79F271DE49A006E13EC /* SelectedPetsCollectionViewCell.xib in Resources */,
 				62603AE62727B64F00467E2D /* AddNewItemTableViewCell.xib in Resources */,
 				62D454B827267CF2009DF0FF /* Supplies.storyboard in Resources */,
@@ -1106,11 +1108,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BFF/BFF.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 94F23Z62YB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BFF/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your current location to fetch nearby pet facilities";
+				INFOPLIST_KEY_NSLocationUsageDescription = "We need your current location to fetch nearby pet facilities";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your current location to fetch nearby pet facilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1139,11 +1143,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BFF/BFF.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 94F23Z62YB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BFF/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your current location to fetch nearby pet facilities";
+				INFOPLIST_KEY_NSLocationUsageDescription = "We need your current location to fetch nearby pet facilities";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your current location to fetch nearby pet facilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
