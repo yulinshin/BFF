@@ -12,7 +12,7 @@ enum ImageAsset: String {
     // Profile tab - Tab
 
     // swiftlint:disable identifier_name
-    case LibaryTab
+    case LibraryTab
     case MenuTab
     case MessageTab
     case MyPetsTab

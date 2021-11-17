@@ -11,9 +11,9 @@ private struct StoryboardCategory {
 
     static let home = "Home"
 
-    static let soical = "Soical"
+    static let social = "Social"
 
-    static let libary = "Libary"
+    static let library = "Library"
 
     static let message = "Message"
 
@@ -28,9 +28,9 @@ extension UIStoryboard {
 
     static var home: UIStoryboard { return stStoryboard(name: StoryboardCategory.home) }
 
-    static var soical: UIStoryboard { return stStoryboard(name: StoryboardCategory.soical) }
+    static var social: UIStoryboard { return stStoryboard(name: StoryboardCategory.social) }
 
-    static var libary: UIStoryboard { return stStoryboard(name: StoryboardCategory.libary) }
+    static var library: UIStoryboard { return stStoryboard(name: StoryboardCategory.library) }
 
     static var message: UIStoryboard { return stStoryboard(name: StoryboardCategory.message) }
 

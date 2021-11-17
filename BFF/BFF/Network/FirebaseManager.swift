@@ -20,9 +20,17 @@ class FirebaseManager {
     lazy var dateBase = Firestore.firestore()
     lazy var storage = Storage.storage()
 
-    let userId = Auth.auth().currentUser?.uid ?? ""
-    let userEmail = Auth.auth().currentUser?.email ?? ""
-    let userName = Auth.auth().currentUser?.displayName ?? ""
+    var userId: String {
+        Auth.auth().currentUser?.uid ?? ""
+    }
+    var userEmail: String {
+        Auth.auth().currentUser?.email ?? ""
+    }
+    var userName: String {
+        Auth.auth().currentUser?.displayName ?? ""
+    }
+
+    var user: User?
 
     func fetchUser(completion: @escaping (Result<User, Error>) -> Void) {
 
@@ -34,6 +42,7 @@ class FirebaseManager {
                 do {
                     if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
                         completion(.success(user))
+                        self.user = user
                     }
                 } catch {
                     completion(.failure(error))
@@ -41,6 +50,29 @@ class FirebaseManager {
             } else {
                 let newUserDoc = self.dateBase.collection("Users").document(self.userId)
                 let newUserData = User(userId: self.userId, email: self.userEmail, userName: self.userName)
+
+                do {
+                    try newUserDoc.setData(from: newUserData)
+                } catch {
+                }
+            }
+        }
+    }
+
+    func creatUser(){
+
+        print("Start create UserData ........")
+
+        dateBase.collection("Users").document(userId).getDocument { (document, error) in
+            let newUserData = User(userId: self.userId, email: self.userEmail, userName: self.userName)
+            if let document = document, document.exists {
+                do {
+                    try  self.dateBase.collection("Users").document(self.userId).setData(from: newUserData)
+                } catch {
+
+                }
+            } else {
+                let newUserDoc = self.dateBase.collection("Users").document(self.userId)
 
                 do {
                     try newUserDoc.setData(from: newUserData)
@@ -67,19 +99,35 @@ class FirebaseManager {
         currentUserDB.updateData(["followedPets": FieldValue.arrayRemove([followPetId])])
     }
 
-    func updateCurrentUserBlockPets(blockPetId: String ) {
+    func updateCurrentUserBlockUsers(blockUserId: String ) {
 
+        let currentUserDB = dateBase.collection("Users").document(userId)
+        currentUserDB.updateData(["blockUsers": FieldValue.arrayUnion([blockUserId])])
+
+    }
+    
+    
+
+    func updateCurrentUserBlockUsers(blockUserId: String, completion: @escaping (Result<String, Error>) -> Void ) {
 
         let currentUserDB = dateBase.collection("Users").document(userId)
 
-        currentUserDB.updateData(["blockPets": FieldValue.arrayUnion([blockPetId])])
+        currentUserDB.updateData(["blockUsers": FieldValue.arrayUnion([blockUserId])]) { error in
+            guard let error = error else {
+                completion(.success("sucess"))
+                return
+            }
+            completion(.failure(error))
+
+        }
+
     }
 
-    func unBlockPets(blockPetId: String ) {
+    func unblockUser(blockUserId: String ) {
 
         let currentUserDB = dateBase.collection("Users").document(userId)
 
-        currentUserDB.updateData(["blockPets": FieldValue.arrayRemove([blockPetId])])
+        currentUserDB.updateData(["blockUsers": FieldValue.arrayRemove([blockUserId])])
     }
 
     func updateUserInfo(user: User, newimage: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
@@ -264,9 +312,9 @@ class FirebaseManager {
     }
 
     // swiftlint:disable cyclomatic_complexity
-    func listMessages(completion: @escaping (Result<[Message], Error>) -> Void) {
+    func listenAllMessages(completion: @escaping (Result<[Message], Error>) -> Void) {
 
-
+        print("Start Listen Message Data")
         var messages = [Message]()
         dateBase.collection("Messages").whereField("receiver", isEqualTo: userId).addSnapshotListener { querySnapshot, error in
             if let error = error {
@@ -315,7 +363,7 @@ class FirebaseManager {
     }
 
 
-    func listMessages(otherUserId: String,completion: @escaping (Result<[Message], Error>) -> Void) {
+    func listenMessages(otherUserId: String,completion: @escaping (Result<[Message], Error>) -> Void) {
 
         var messages = [Message]()
         dateBase.collection("Messages").whereField("receiver", isEqualTo: otherUserId).whereField("sender", isEqualTo: userId).addSnapshotListener { querySnapshot, error in
