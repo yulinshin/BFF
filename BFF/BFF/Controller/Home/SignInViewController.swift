@@ -18,8 +18,9 @@ class SignInViewController: UIViewController {
     fileprivate var imageSliderView: ImageSliderView!
     fileprivate var termLabel = UILabel()
 
-    let termText = "註冊等同於接受隱私權政策"
+    let termText = "註冊等同於接受隱私權政策與Apple標準許可協議"
     let policy = "隱私權政策"
+    let eula = "Apple標準許可協議"
 
 
     override func viewDidLoad() {
@@ -50,7 +51,12 @@ class SignInViewController: UIViewController {
         timer.invalidate()
         timer = nil
 
+    }
 
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        timer = Timer.scheduledTimer(timeInterval: 3.5, target: self, selector: #selector(SignInViewController.scaleImageEvent), userInfo: nil, repeats: true)
     }
 
     deinit {
@@ -80,12 +86,7 @@ class SignInViewController: UIViewController {
         gradient.locations = [0.3, 0.8]
         gradientView.layer.addSublayer(gradient)
 
-        
-
-        // setup timer
-        
-        timer = Timer.scheduledTimer(timeInterval: 3.5, target: self, selector: #selector(SignInViewController.scaleImageEvent), userInfo: nil, repeats: true)
-
+    
     }
 
     @objc func scaleImageEvent() {
@@ -113,12 +114,13 @@ class SignInViewController: UIViewController {
 
     func setupPrivacyLabel(){
 
-        let formattedText = String.format(strings: [policy],
+        let formattedText = String.format(strings: [policy, eula],
                                             boldFont: UIFont.boldSystemFont(ofSize: 12),
                                             boldColor: UIColor.blue,
                                             inString: termText,
                                             font: UIFont.systemFont(ofSize: 12),
                                             color: UIColor.white)
+
         termLabel.attributedText = formattedText
         termLabel.numberOfLines = 0
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTermTapped))
@@ -126,14 +128,13 @@ class SignInViewController: UIViewController {
         termLabel.isUserInteractionEnabled = true
         termLabel.textAlignment = .center
 
-
-
     }
 
 
     @objc func handleTermTapped(gesture: UITapGestureRecognizer) {
         let termString = termText as NSString
         let policyRange = termString.range(of: policy)
+        let eulaRange = termString.range(of: eula)
 
         let tapLocation = gesture.location(in: termLabel)
         let index = termLabel.indexOfAttributedTextCharacterAtPoint(point: tapLocation)
@@ -142,7 +143,12 @@ class SignInViewController: UIViewController {
             handleViewPrivacy()
             return
         }
+        if checkRange(eulaRange, contain: index) {
+            handleViewEula()
+            return
+        }
     }
+
 
     func checkRange(_ range: NSRange, contain index: Int) -> Bool {
         return index > range.location && index < range.location + range.length
@@ -416,6 +422,19 @@ extension SignInViewController: SFSafariViewControllerDelegate {
         self.present(safariVC, animated: true, completion: nil)
 
     }
+
+    func  handleViewEula() {
+
+        guard let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") else { return }
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.preferredBarTintColor = .black
+        safariVC.preferredControlTintColor = .white
+        safariVC.dismissButtonStyle = .close
+        safariVC.delegate = self
+        self.present(safariVC, animated: true, completion: nil)
+
+    }
+
 
 
 }
