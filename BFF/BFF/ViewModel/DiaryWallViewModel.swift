@@ -108,7 +108,7 @@ class DiaryWallViewModel {
 
             case.success( let user ):
 
-                guard let blockUsers = user.blockUsers else { return }
+                if let blockUsers = user.blockUsers {
                 blockUsers.forEach({ userId in
 
                             self.showingDiaries.value = self.showingDiaries.value.filter { diary in
@@ -120,7 +120,11 @@ class DiaryWallViewModel {
                                     return true
                                 }
                             }
-                    })
+                }) } else {
+                    self.didUpDateData?()
+                }
+
+
                 print("*** showingDiaries: \(self.showingDiaries.value.count)")
                 self.didUpDateData?()
             case.failure( let error ):
