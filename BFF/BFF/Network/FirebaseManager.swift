@@ -141,9 +141,7 @@ class FirebaseManager {
             switch result {
             case .success(let pic):
                 var newUserData = user
-                newUserData.userThumbNail?.url = pic.url
-                newUserData.userThumbNail?.fileName = pic.fileName
-
+                newUserData.userThumbNail = pic
                 let userDB = self.dateBase.collection("Users").document(newUserData.userId)
                 do {
                     try userDB.setData(from: newUserData)
@@ -155,7 +153,6 @@ class FirebaseManager {
             }
         }
     }
-
 
     func updateUserInfo(user: User, completion: @escaping (Result<String, Error>) -> Void) {
 
@@ -170,8 +167,6 @@ class FirebaseManager {
 
         }
     }
-
-
 
 
     func fetchUserInfo(userId: String, completion: @escaping (Result<User, Error>) -> Void) {

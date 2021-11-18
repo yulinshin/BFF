@@ -445,7 +445,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
             let storyboard = UIStoryboard(name: "User", bundle: nil)
 
             guard let controller = storyboard.instantiateViewController(withIdentifier: "UserAccountTableViewController") as? UserAccountTableViewController else { return }
-            controller.user = viewModel.user
+            controller.user = FirebaseManager.shared.user
 
             guard let window =  UIApplication.shared.windows.filter { $0.isKeyWindow}.first else { return }
             transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)

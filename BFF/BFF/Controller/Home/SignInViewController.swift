@@ -86,7 +86,7 @@ class SignInViewController: UIViewController {
         gradient.locations = [0.3, 0.8]
         gradientView.layer.addSublayer(gradient)
 
-    
+
     }
 
     @objc func scaleImageEvent() {
@@ -306,8 +306,21 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
                    let familyName = fullName.familyName {
 
                     let displayName = givenName + familyName
-                    self.updateDisplayName(displayName: displayName)
-                    FirebaseManager.shared.creatUser()
+                    self.updateDisplayName(displayName: displayName){ result in
+
+                        switch result{
+
+                        case.success(let name):
+                            print ("Sucee \(name)")
+                            FirebaseManager.shared.creatUser()
+                        case .failure(let error):
+                            print (error)
+
+                        }
+
+
+                    }
+
                     print ("Suceess signed in as \(user.uid), email:\(user.email), name:\(displayName)")
 
                 }
@@ -325,15 +338,17 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
       }
 
 
-    func updateDisplayName(displayName: String) {
+    func updateDisplayName(displayName: String, completion: @escaping (Result<String, Error>) -> Void) {
         if let user = Auth.auth().currentUser {
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = displayName
             changeRequest.commitChanges { error in
                 if let error = error {
                     print("Set userName to DB Failed")
+                    completion(.failure(error))
                 }
                 else {
+                    completion(.success(Auth.auth().currentUser?.displayName ?? ""))
                     print("Set userName to DB Success")
                 }
             }

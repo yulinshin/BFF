@@ -255,7 +255,7 @@ extension CreatPetViewController: UITableViewDataSource {
 
         case "生日" :
 
-            cell.creatDatePicker()
+
 
             viewModel.birthday.bind { birthday in
 
