@@ -58,10 +58,17 @@ class CreatDiaryViewController: UIViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "main")
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+         if petsData.count == 0 {
+            self.showNoPetAlert()
+        }
+    }
+
     @objc func saveDiary() {
 
         guard let petId = selectedPetId,
               let image = imageView.image else {
+                  showDiaryNotComplictedAlert()
                   return
               }
 
@@ -119,6 +126,37 @@ class CreatDiaryViewController: UIViewController {
             
         }
         
+    }
+
+    func showNoPetAlert() {
+
+        let alertController = UIAlertController(title: "您尚無毛小孩唷", message: "請至少新增一隻毛小孩才能進行填寫日記唷", preferredStyle: .alert)
+
+        var deleteAction = UIAlertAction(title: "前往新增", style: .default) { action in
+
+            let storyboard = UIStoryboard(name: "Pet", bundle: nil)
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatPetViewController") as? CreatPetViewController else { return }
+            controller.presentMode = .creat
+            self.navigationController?.present(controller, animated: true, completion: nil)
+
+        }
+
+        alertController.addAction(deleteAction)
+
+        alertController.addAction(UIAlertAction(title: "取消", style: .cancel))
+
+        self.present(alertController, animated: true, completion: nil)
+
+    }
+
+    func showDiaryNotComplictedAlert() {
+
+        let alertController = UIAlertController(title: "日記不完整", message: "請確認日記資訊是否完整（至少上傳一張照片與選擇一隻毛小孩唷！）", preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: "了解！", style: .cancel))
+
+        self.present(alertController, animated: true, completion: nil)
+
     }
 }
 
