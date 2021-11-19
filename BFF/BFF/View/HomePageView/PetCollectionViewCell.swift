@@ -15,7 +15,7 @@ class PetCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var diaryCardBackground: UIView!
     @IBOutlet weak var petNameLabel: UILabel!
     @IBOutlet weak var birthdayLabel: UILabel!
-
+    @IBOutlet weak var petKindIcon: UIImageView!
 
     var didTapCard: (() -> Void)?
     let addPetAnimationView = AnimationView(name: "AddPet")
@@ -29,6 +29,7 @@ class PetCollectionViewCell: UICollectionViewCell {
         petImageView.isHidden = false
         petNameLabel.isHidden = false
         petImageView.isHidden = false
+        petKindIcon.isHidden = false
         petImageView.loadImage(petImage)
         petImageView.contentMode = .scaleAspectFill
         petImageView.layer.cornerRadius = 16
@@ -43,7 +44,7 @@ class PetCollectionViewCell: UICollectionViewCell {
         petNameLabel.text = petName
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-yyyy"
-        guard let date = dateFormatter.date(from:petBirthday) else { return }
+        guard let date = dateFormatter.date(from: petBirthday) else { return }
         let now = Date()
 
         let ageComponents = Calendar.current.dateComponents([.year, .month], from: date, to: now)
@@ -65,9 +66,8 @@ class PetCollectionViewCell: UICollectionViewCell {
 
 
 
-
     func setupBlankDiaryBook() {
-
+        petKindIcon.isHidden = true
         petImageView.isHidden = true
         petNameLabel.isHidden = true
         addPetAnimationView.isHidden = false
