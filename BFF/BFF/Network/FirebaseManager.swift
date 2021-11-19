@@ -1117,7 +1117,58 @@ class FirebaseManager {
         }
     }
 
+    func listenMessageGroup(completion: @escaping (Result<[MessageGroup], FireBaseError>) -> Void) {
 
+        print("Start Listen UserMessageGroup")
+
+        dateBase.collection("MessageGroups").whereField("users", arrayContains: userId)
+            .addSnapshotListener { querySnapshot, error in
+
+                guard let documents = querySnapshot?.documents else {
+                    completion(.failure(FireBaseError.gotFirebaseError(error!)))
+                    return
+                }
+                var groups = [MessageGroup]()
+
+                documents.forEach { document in
+                    do {
+                        if let messageGroup = try document.data(as: MessageGroup.self, decoder: Firestore.Decoder()) {
+                            groups.append(messageGroup)
+                        }
+                    } catch {
+                        print("Decord Error: \(error)")
+                    }
+                }
+                completion(.success(groups))
+            }
+    }
+
+
+
+
+    func listenFromMessageGroup(groupId: String, completion: @escaping (Result<[Message], FireBaseError>) -> Void) {
+
+        print("Start Listen UserMessageGroup")
+
+        dateBase.collection("MessageGroups").document(groupId).collection("Messages")
+            .addSnapshotListener { querySnapshot, error in
+
+                guard let documents = querySnapshot?.documents else {
+                    completion(.failure(FireBaseError.gotFirebaseError(error!)))
+                    return
+                }
+                var messages = [Message]()
+
+                documents.forEach { document in
+                    do {
+                        if let message = try document.data(as: Message.self, decoder: Firestore.Decoder()) {
+                            messages.append(message)
+                        }
+                    } catch {
+                        print("Decord Error: \(error)")
+                    }
+                }
+                completion(.success(messages))
+            }
+    }
 }
-
-

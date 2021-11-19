@@ -45,6 +45,7 @@
 		6267CDED2733BBD600CFA28D /* DiarysTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6267CDEC2733BBD600CFA28D /* DiarysTableViewController.swift */; };
 		627648A8271D6B840026C3C3 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627648A7271D6B840026C3C3 /* FirebaseManager.swift */; };
 		627ADBCB272A7876000D0457 /* FillSupplyAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627ADBC2272A3370000D0457 /* FillSupplyAlertView.swift */; };
+		627FC66B27478B9000E4453B /* NChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627FC66A27478B8F00E4453B /* NChatListViewModel.swift */; };
 		6285C797271DD08D006E13EC /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6285C796271DD08D006E13EC /* DiaryViewController.swift */; };
 		6285C79A271DD519006E13EC /* DairyPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6285C798271DD519006E13EC /* DairyPhotoCell.swift */; };
 		6285C79B271DD519006E13EC /* DairyPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6285C799271DD519006E13EC /* DairyPhotoCell.xib */; };
@@ -181,6 +182,7 @@
 		6267CDEC2733BBD600CFA28D /* DiarysTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiarysTableViewController.swift; sourceTree = "<group>"; };
 		627648A7271D6B840026C3C3 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		627ADBC2272A3370000D0457 /* FillSupplyAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillSupplyAlertView.swift; sourceTree = "<group>"; };
+		627FC66A27478B8F00E4453B /* NChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NChatListViewModel.swift; sourceTree = "<group>"; };
 		6285C796271DD08D006E13EC /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		6285C798271DD519006E13EC /* DairyPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyPhotoCell.swift; sourceTree = "<group>"; };
 		6285C799271DD519006E13EC /* DairyPhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DairyPhotoCell.xib; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				62BA0102272E7EBE00A19478 /* PetHealthCellViewModel.swift */,
 				62892FE1273210F3001A7B32 /* bookViewModel.swift */,
 				62617496273DF5FD006F3635 /* BlocksVeiwModels.swift */,
+				627FC66A27478B8F00E4453B /* NChatListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -970,6 +973,7 @@
 				629FF5C5271D5FCF00C7C94A /* Goal.swift in Sources */,
 				62930C1B272D0E2B00BC1908 /* PetMO+CoreDataClass.swift in Sources */,
 				6200C5FB272296970074DB64 /* DiaryVC+DiffDataSource.swift in Sources */,
+				627FC66B27478B9000E4453B /* NChatListViewModel.swift in Sources */,
 				6267CDE527338F3700CFA28D /* AppTabBar.swift in Sources */,
 				62FC6194272588F200292710 /* TabBarViewController.swift in Sources */,
 				629FF5B8271D413C00C7C94A /* PetNotificationCollectionViewCell.swift in Sources */,
