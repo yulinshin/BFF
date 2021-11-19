@@ -59,9 +59,21 @@ class CreatDiaryViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
          if petsData.count == 0 {
             self.showNoPetAlert()
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        NetStatusManger.share.startMonitoring()
+
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        NetStatusManger.share.stopMonitoring()
     }
 
     @objc func saveDiary() {
@@ -80,9 +92,35 @@ class CreatDiaryViewController: UIViewController {
 
             case .success(let pic):
 
-                FirebaseManager.shared.creatDiary(content: self.diaryTextView.text, pics: [pic], isPublic: true, petTags: self.petTags, petId: petId)
+                FirebaseManager.shared.creatDiary(content: self.diaryTextView.text, pics: [pic], isPublic: true, petTags: self.petTags, petId: petId) { result in
 
-                ProgressHUD.showSuccess(text:"新增日記成功")
+                    switch result {
+
+                    case.success(let message):
+                        print (message)
+                        ProgressHUD.showSuccess(text:"新增日記成功")
+
+                    case.failure(let error):
+
+                        switch error {
+
+                        case .noNetWorkContent:
+
+                            ProgressHUD.showFailure(text: "無網路連線")
+
+                        case .gotFirebaseError( let error ):
+
+                            ProgressHUD.showFailure(text: "上傳失敗，請重新上傳")
+                            print (error)
+                        }
+
+
+                    }
+
+
+                }
+
+
 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                     self.navigationController?.dismiss(animated: true, completion: nil)
@@ -90,7 +128,18 @@ class CreatDiaryViewController: UIViewController {
 
 
             case .failure(let error):
-                print("fetchData.failure\(error)")
+
+                                                                                                                      switch error {
+
+                case .noNetWorkContent:
+
+                    ProgressHUD.showFailure(text: "無網路連線")
+
+                case .gotFirebaseError( let error ):
+
+                    ProgressHUD.showFailure(text: "上傳失敗，請重新上傳")
+                    print (error)
+                }
 
             }
 

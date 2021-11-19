@@ -80,17 +80,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="351" height="70"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Nj9-xa-hxM">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Nj9-xa-hxM">
                                                     <rect key="frame" x="0.0" y="0.0" width="278" height="70"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WellComeTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Yi-E1-mlo">
-                                                            <rect key="frame" x="0.0" y="0.0" width="278" height="46.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="278" height="45.5"/>
                                                             <fontDescription key="fontDescription" name="GenJyuuGothic-Medium" family="Gen Jyuu Gothic" pointSize="40"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="subTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y4C-Wi-ws4">
-                                                            <rect key="frame" x="0.0" y="54.5" width="52.5" height="15.5"/>
+                                                            <rect key="frame" x="0.0" y="55.5" width="52.5" height="14.5"/>
                                                             <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="14"/>
                                                             <color key="textColor" name="Text"/>
                                                             <nil key="highlightedColor"/>
@@ -252,29 +252,39 @@
                                                             <rect key="frame" x="16" y="16" width="287" height="236.5"/>
                                                             <color key="tintColor" red="1" green="0.65076244120000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72H-rM-RFy">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72H-rM-RFy">
                                                             <rect key="frame" x="16" y="262.5" width="287" height="25.5"/>
                                                             <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="18"/>
                                                             <color key="textColor" name="Text"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCa-L3-Si4">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCa-L3-Si4">
                                                             <rect key="frame" x="16" y="294" width="287" height="17"/>
                                                             <fontDescription key="fontDescription" name="GenJyuuGothic-Medium" family="Gen Jyuu Gothic" pointSize="12"/>
                                                             <color key="textColor" name="Text"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="Social" translatesAutoresizingMaskIntoConstraints="NO" id="hfu-7r-pON">
+                                                            <rect key="frame" x="254.5" y="262.5" width="48.5" height="48.5"/>
+                                                            <color key="tintColor" name="main"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="hfu-7r-pON" secondAttribute="height" multiplier="1:1" id="vZ9-9V-mrY"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="dDu-QH-w9n" secondAttribute="trailing" constant="16" id="1sg-69-XKP"/>
                                                         <constraint firstAttribute="trailing" secondItem="oCa-L3-Si4" secondAttribute="trailing" constant="16" id="5xa-tI-8ij"/>
+                                                        <constraint firstItem="hfu-7r-pON" firstAttribute="bottom" secondItem="oCa-L3-Si4" secondAttribute="bottom" id="CM1-hk-ffA"/>
                                                         <constraint firstItem="72H-rM-RFy" firstAttribute="top" secondItem="dDu-QH-w9n" secondAttribute="bottom" constant="10" id="Q6A-0r-kKr"/>
                                                         <constraint firstItem="dDu-QH-w9n" firstAttribute="top" secondItem="ork-0Y-Nmk" secondAttribute="top" constant="16" id="Qbm-vg-cUY"/>
                                                         <constraint firstItem="oCa-L3-Si4" firstAttribute="top" secondItem="72H-rM-RFy" secondAttribute="bottom" constant="6" id="XMR-Q4-A2V"/>
+                                                        <constraint firstItem="hfu-7r-pON" firstAttribute="trailing" secondItem="dDu-QH-w9n" secondAttribute="trailing" id="aM4-rK-NBA"/>
                                                         <constraint firstItem="dDu-QH-w9n" firstAttribute="leading" secondItem="ork-0Y-Nmk" secondAttribute="leading" constant="16" id="b4U-Kf-qww"/>
                                                         <constraint firstAttribute="bottom" secondItem="oCa-L3-Si4" secondAttribute="bottom" constant="16" id="keZ-rb-W7k"/>
                                                         <constraint firstAttribute="trailing" secondItem="72H-rM-RFy" secondAttribute="trailing" constant="16" id="pcq-hj-yzK"/>
+                                                        <constraint firstItem="hfu-7r-pON" firstAttribute="top" secondItem="72H-rM-RFy" secondAttribute="top" id="sv2-hC-FBa"/>
                                                         <constraint firstItem="72H-rM-RFy" firstAttribute="leading" secondItem="ork-0Y-Nmk" secondAttribute="leading" constant="16" id="wBI-N1-RjV"/>
                                                         <constraint firstItem="oCa-L3-Si4" firstAttribute="leading" secondItem="ork-0Y-Nmk" secondAttribute="leading" constant="16" id="xug-cb-Tbh"/>
                                                     </constraints>
@@ -292,6 +302,7 @@
                                             <outlet property="birthdayLabel" destination="oCa-L3-Si4" id="jqq-sR-zgR"/>
                                             <outlet property="diaryCardBackground" destination="ork-0Y-Nmk" id="bYH-bi-idO"/>
                                             <outlet property="petImageView" destination="dDu-QH-w9n" id="W0F-aU-qed"/>
+                                            <outlet property="petKindIcon" destination="hfu-7r-pON" id="UuG-NF-nrl"/>
                                             <outlet property="petNameLabel" destination="72H-rM-RFy" id="HC5-ug-YSk"/>
                                         </connections>
                                     </collectionViewCell>
@@ -329,13 +340,14 @@
     </scenes>
     <resources>
         <image name="MyPetsTab" width="31" height="28"/>
+        <image name="Social" width="31" height="28"/>
         <image name="square.and.arrow.up.circle" catalog="system" width="128" height="121"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="Text">
             <color red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="main">
-            <color red="0.35710123181343079" green="0.61046278476715088" blue="0.60665088891983032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.35699999332427979" green="0.61000001430511475" blue="0.60699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

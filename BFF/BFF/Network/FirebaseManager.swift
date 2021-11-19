@@ -13,6 +13,12 @@ import FirebaseStorage
 import UIKit
 
 
+enum FireBaseError: Error {
+    case noNetWorkContent
+    case gotFirebaseError(Error)
+}
+
+
 // swiftlint:disable file_length
 class FirebaseManager {
 
@@ -58,6 +64,26 @@ class FirebaseManager {
             }
         }
     }
+
+
+    func creatDiary(content: String, pics: [Pic], isPublic: Bool, petTags: [String], petId:String, completion: @escaping(Result<String, FireBaseError>) -> Void) {
+
+        guard NetStatusManger.share.isConnected else {
+            completion(.failure(FireBaseError.noNetWorkContent))
+            return
+        }
+        let diariesRef = dateBase.collection("Diaries")
+        let document = diariesRef.document()
+
+        let diary = Diary(content: content, diaryId: document.documentID, images: pics, isPublic: isPublic, petTags: petTags, userId: userId, petId: petId)
+        do {
+            try document.setData(from: diary)
+            completion(.success("Success upload Diary-\(diary.diaryId)"))
+        } catch {
+            completion(.failure(FireBaseError.gotFirebaseError(error)))
+        }
+    }
+
 
     func creatUser(){
 
@@ -823,20 +849,7 @@ class FirebaseManager {
         }
     }
 
-    func creatDiary(content: String, pics: [Pic], isPublic: Bool, petTags: [String], petId:String) {
 
-        let diariesRef = dateBase.collection("Diaries")
-        let document = diariesRef.document()
-
-        let diary = Diary(content: content, diaryId: document.documentID, images: pics, isPublic: isPublic, petTags: petTags, userId: userId, petId: petId)
-
-        do {
-            try document.setData(from: diary)
-            print(document)
-        } catch {
-            print(error)
-        }
-    }
 
     enum FilePathName: String {
         case dairyPhotos = "DairyPhotos"
@@ -844,7 +857,12 @@ class FirebaseManager {
         case userPhotos = "UserPhotos"
     }
 
-    func uploadPhoto(image: UIImage, filePath: FilePathName, completion: @escaping (Result<Pic, Error>) -> Void) {
+    func uploadPhoto(image: UIImage, filePath: FilePathName, completion: @escaping (Result<Pic, FireBaseError>) -> Void) {
+
+        guard NetStatusManger.share.isConnected else {
+            completion(.failure(FireBaseError.noNetWorkContent))
+            return
+        }
 
         let fileName = "\(NSUUID().uuidString).jpg"
         print(fileName)
@@ -855,12 +873,12 @@ class FirebaseManager {
         storageRef.putData(data, metadata: nil) { (_, error) in
 
             if let error = error {
-                completion(.failure(error))
+                completion(.failure(.gotFirebaseError(error)))
             } else {
 
                 storageRef.downloadURL { (url, error) in
                     if let error = error {
-                        completion(.failure(error))
+                        completion(.failure(.gotFirebaseError(error)))
                     } else {
                         guard let downloadURL = url else {
                             return

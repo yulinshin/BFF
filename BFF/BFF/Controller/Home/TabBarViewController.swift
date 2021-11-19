@@ -46,7 +46,7 @@ private enum Tab {
             }
     }
         controller.tabBarItem = tabBarItem()
-        controller.tabBarItem.imageInsets = UIEdgeInsets(top: 2.0, left: 2.0, bottom: 2.0, right: 2.0)
+        controller.tabBarItem.imageInsets = UIEdgeInsets(top: 0.5, left: 0, bottom: 0.5, right: 0)
         return controller
     }
 
@@ -104,6 +104,17 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
 
         self.tabBar.tintColor = UIColor(named: "main")
+
+        let appearance = tabBar.standardAppearance
+        appearance.shadowImage = nil
+        appearance.shadowColor = nil
+        appearance.backgroundColor = .white
+        tabBar.standardAppearance = appearance
+
+        tabBar.layer.shadowOffset = CGSize(width: 0, height: 0)
+        tabBar.layer.shadowRadius = 4
+        tabBar.layer.shadowColor = UIColor.black.cgColor
+        tabBar.layer.shadowOpacity = 0.1
 
         showViewController = tabs.map({ $0.controller() })
 

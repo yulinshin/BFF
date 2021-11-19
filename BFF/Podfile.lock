@@ -513,12 +513,17 @@ PODS:
   - Kingfisher (7.1.1)
   - leveldb-library (1.22.1)
   - lottie-ios (3.2.3)
+  - MarqueeLabel (4.0.5)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - NotificationBannerSwift (3.0.6):
+    - MarqueeLabel (~> 4.0.5)
+    - SnapKit (~> 5.0.1)
   - PromisesObjC (2.0.0)
+  - SnapKit (5.0.1)
   - SwiftLint (0.45.0)
 
 DEPENDENCIES:
@@ -535,6 +540,7 @@ DEPENDENCIES:
   - JGProgressHUD
   - Kingfisher
   - lottie-ios
+  - NotificationBannerSwift (~> 3.0.0)
   - SwiftLint
 
 SPEC REPOS:
@@ -565,8 +571,11 @@ SPEC REPOS:
     - Kingfisher
     - leveldb-library
     - lottie-ios
+    - MarqueeLabel
     - nanopb
+    - NotificationBannerSwift
     - PromisesObjC
+    - SnapKit
     - SwiftLint
 
 SPEC CHECKSUMS:
@@ -596,10 +605,13 @@ SPEC CHECKSUMS:
   Kingfisher: f738f9c4a3415823b8e2985d10aa2d6a9f37bc4d
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
+  MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  NotificationBannerSwift: 7021be2338f8f29cf424b0aca43da462bf9e2a1a
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
 
-PODFILE CHECKSUM: 7ed4e1fd6bef55712594ebca5fc8a202d614e03d
+PODFILE CHECKSUM: c3ab7e9e6fb1ef3bb44fd6bf07ca1218b4429b00
 
 COCOAPODS: 1.11.2

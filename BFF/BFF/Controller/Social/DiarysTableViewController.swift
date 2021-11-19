@@ -12,6 +12,7 @@ class DiariesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    @IBOutlet weak var backGroundView: UIView!
 
     var viewModel = DiaryWallViewModel()
 
@@ -23,7 +24,6 @@ class DiariesViewController: UIViewController {
         viewModel.didUpDateData = {
             self.tableView.reloadData()
         }
-
 
     }
 

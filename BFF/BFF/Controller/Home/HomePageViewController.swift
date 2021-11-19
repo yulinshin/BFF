@@ -82,6 +82,7 @@ class HomePageViewController: UIViewController {
         tableView.isScrollEnabled = true
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: "Cell")
     }
 

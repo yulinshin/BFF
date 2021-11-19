@@ -21,5 +21,6 @@ target 'BFF' do
  pod 'GoogleMaps', '5.2.0'
  pod 'GooglePlaces', '5.1.0'
  pod 'Firebase/Crashlytics'
+ pod 'NotificationBannerSwift', '~> 3.0.0'
 
 end

@@ -125,6 +125,7 @@
 		62D454BE27267D82009DF0FF /* SupplyListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62D454BC27267D82009DF0FF /* SupplyListTableViewCell.xib */; };
 		62D454C027268522009DF0FF /* SupplyCellViewMdoel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D454BF27268522009DF0FF /* SupplyCellViewMdoel.swift */; };
 		62D454C227268CB6009DF0FF /* SuppliesViewMdoel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D454C127268CB6009DF0FF /* SuppliesViewMdoel.swift */; };
+		62DC920E27473AFE001BB69F /* NetStatusManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC920D27473AFE001BB69F /* NetStatusManger.swift */; };
 		62EF088E2723BCAF006C7D62 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EF088D2723BCAF006C7D62 /* File.swift */; };
 		62FC6192272586FD00292710 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FC6191272586FD00292710 /* Home.storyboard */; };
 		62FC6194272588F200292710 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC6193272588F200292710 /* TabBarViewController.swift */; };
@@ -260,6 +261,7 @@
 		62D454BC27267D82009DF0FF /* SupplyListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SupplyListTableViewCell.xib; sourceTree = "<group>"; };
 		62D454BF27268522009DF0FF /* SupplyCellViewMdoel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplyCellViewMdoel.swift; sourceTree = "<group>"; };
 		62D454C127268CB6009DF0FF /* SuppliesViewMdoel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuppliesViewMdoel.swift; sourceTree = "<group>"; };
+		62DC920D27473AFE001BB69F /* NetStatusManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetStatusManger.swift; sourceTree = "<group>"; };
 		62EF088D2723BCAF006C7D62 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		62FC6191272586FD00292710 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		62FC6193272588F200292710 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 				627648A7271D6B840026C3C3 /* FirebaseManager.swift */,
 				624CFD732729389B00D77CCA /* NotificationManger.swift */,
 				62B617D8273682B30062BBE5 /* CoreDataManger.swift */,
+				62DC920D27473AFE001BB69F /* NetStatusManger.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -941,6 +944,7 @@
 				6264A85A2736BA6200FACF97 /* ChatListTableViewController.swift in Sources */,
 				62B617D727365FFE0062BBE5 /* Comment.swift in Sources */,
 				624C8E082720473F00646C71 /* CreatPetViewModel.swift in Sources */,
+				62DC920E27473AFE001BB69F /* NetStatusManger.swift in Sources */,
 				6297925C271E947C00B68E86 /* CreatDiaryViewController.swift in Sources */,
 				629FF5C3271D5F4200C7C94A /* Pet.swift in Sources */,
 				629FF5C1271D5DFF00C7C94A /* User.swift in Sources */,
