@@ -12,6 +12,7 @@ import Kingfisher
 class ChatListVM {
 
     var data = Box([MessageGroup]())
+    var chatGroupList = Box([ChatGroupVM]())
     var showingList = Box([ChatGroupVM]())
 
     var didUpdateShowingData: (() -> Void )?
@@ -59,13 +60,14 @@ class ChatListVM {
             groupVMs.append(groupVM)
         }
 
-        self.showingList.value = groupVMs
+        self.chatGroupList.value = groupVMs
+        filterBlockUser()
 
     }
 
     func filterBlockUser() {
 
-        self.showingList.value = self.showingList.value.filter({ chatGroupVM in
+        self.showingList.value = self.chatGroupList.value.filter({ chatGroupVM in
 
             if let blockUsers = FirebaseManager.shared.user?.blockUsers {
                 return !blockUsers.contains(chatGroupVM.otherUserId.value)
@@ -73,6 +75,19 @@ class ChatListVM {
                 return true
             }
         })
+
+        self.showingList.value = self.showingList.value.filter({ chatGroupVM in
+
+            if chatGroupVM.lastContent.value == "" {
+                return false
+            } else {
+                return true
+            }
+
+
+        })
+
+
         self.didUpdateShowingData?()
     }
 
@@ -87,6 +102,7 @@ class ChatGroupVM {
     var otherUserName = Box("")
     var otherUsrPic = Box("")
     var lastContent = Box("")
+    var lastCreatedTime = Box("")
     var didChatUpdate: (() -> Void)?
 
     init (groupId: String, otherUserId: String) {
@@ -94,12 +110,43 @@ class ChatGroupVM {
         self.groupId.value = groupId
         self.otherUserId.value = otherUserId
         getOtherUserInfo()
-        listenMessageFromGroup(groupId: groupId)
+        listenMessageFromGroup()
 
     }
 
-    func listenMessageFromGroup(groupId: String) {
-        FirebaseManager.shared.listenFromMessageGroup(groupId: groupId) { result in
+    init (otherUserId: String) {
+
+        self.otherUserId.value = otherUserId
+        getOtherUserInfo()
+        listenMessageFromUserId()
+    }
+
+    func listenMessageFromUserId() {
+
+
+        FirebaseManager.shared.listenMessageFromUserID(otherUseId: self.otherUserId.value) { result in
+            switch result {
+
+            case .success(let data):
+                self.messageData.value = data.messages.sorted(by: { $0.createdTime.dateValue() < $1.createdTime.dateValue() })
+                self.groupId.value = data.groupId
+                self.getLastChat()
+                self.coverToVM()
+
+
+            case .failure(let error):
+                print(error)
+
+            }
+        }
+    }
+
+
+    func listenMessageFromGroup() {
+
+        guard groupId.value != "" else { return }
+
+        FirebaseManager.shared.listenFromMessageGroup(groupId: groupId.value) { result in
 
             switch result {
 
@@ -118,10 +165,14 @@ class ChatGroupVM {
     }
 
     func getLastChat() {
-        guard let lastChat = messageData.value.last?.content else {
+
+        guard let lastChat = messageData.value.last else {
             return
         }
-        self.lastContent.value = lastChat
+
+        self.lastContent.value = lastChat.content
+        self.lastCreatedTime.value = lastChat.createdTime.dateValue().toString()
+
     }
 
     func getOtherUserInfo() {
@@ -165,12 +216,10 @@ class ChatGroupVM {
 class ChatVM {
 
     var userId = Box("")
-    var otherUserPic = Box("")
     var content = Box("")
 
     init(userId: String, otherUserPic: String, content: String) {
         self.userId.value = userId
-        self.otherUserPic.value = otherUserPic
         self.content.value = content
     }
 }

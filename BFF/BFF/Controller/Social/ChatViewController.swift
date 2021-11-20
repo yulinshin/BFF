@@ -11,7 +11,7 @@ import FirebaseAuth
 
 class ChatViewController: UIViewController {
 
-    var viewModel: ChatGroupViewModel?
+    var viewModel: ChatGroupVM?
 
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
@@ -33,11 +33,13 @@ class ChatViewController: UIViewController {
         let otherChatNib = UINib(nibName: "OtherChatTableViewCell", bundle: nil)
         tableView.register(otherChatNib, forCellReuseIdentifier: "OtherChatTableViewCell")
 
-        viewModel?.setlisiten()
-        viewModel?.didGetData = {
+        viewModel?.didChatUpdate = {
             self.tableView.reloadData()
-            self.title = self.viewModel?.userName.value
         }
+
+        viewModel?.otherUserName.bind(listener: { name in
+            self.title = name
+        })
 
         self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
 
@@ -52,7 +54,7 @@ class ChatViewController: UIViewController {
         var action = UIAlertAction()
 
         action = UIAlertAction(title: "封鎖並檢舉此寵物的主人", style: .default, handler: { action in
-            self.blockUser(userId: self.viewModel?.userId.value ?? "")
+            self.blockUser(userId: self.viewModel?.otherUserId.value ?? "")
         })
 
 
@@ -64,7 +66,6 @@ class ChatViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
 
     }
-
 
     func blockUser(userId: String) {
 
@@ -81,26 +82,17 @@ class ChatViewController: UIViewController {
 
         }
     }
-
-
-    override func viewWillAppear(_ animated: Bool) {
-
-        guard let viewModel = viewModel else {
-            return
-        }
-        self.title = viewModel.userName.value
-        
-    }
-
     
     @IBAction func sendMessage(_ sender: Any) {
         
         guard let message = messageTextField.text,
-        let reciverId = self.viewModel?.userId.value else {
+              let groupId = self.viewModel?.groupId.value,
+        let otherUserId = self.viewModel?.otherUserId.value else {
             return
+
         }
 
-        FirebaseManager.shared.sendMessage(reciverId: reciverId, content: message)
+        FirebaseManager.shared.sendMessage(reciverId: otherUserId, groupId: groupId, content: message)
 
         messageTextField.text = ""
 
@@ -112,27 +104,21 @@ class ChatViewController: UIViewController {
 
 extension ChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.messages.value.count ?? 0
+        return viewModel?.chatVMs.value.count ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         var cell = UITableViewCell()
 
 
 
-       let reverseMessage = viewModel?.messages.value.sorted { firstMessage, secondMessage in
-                return firstMessage.createdTime.dateValue() < secondMessage.createdTime.dateValue()
-            }
-
-        if let reverseMessage = reverseMessage {
-
-            if reverseMessage[indexPath.row].sender == FirebaseManager.shared.userId {
+        if viewModel?.chatVMs.value[indexPath.row].userId.value == FirebaseManager.shared.userId {
 
                 guard let myCell = tableView.dequeueReusableCell(
                     withIdentifier: "MyChatTableViewCell",
                     for: indexPath) as? MyChatTableViewCell else { return cell}
-                myCell.viewModel = ChatViewModel(from: reverseMessage[indexPath.row])
+            myCell.viewModel = viewModel?.chatVMs.value[indexPath.row]
                 myCell.setup()
                 cell = myCell
 
@@ -141,12 +127,12 @@ extension ChatViewController: UITableViewDataSource {
                 guard let otherCell = tableView.dequeueReusableCell(
                     withIdentifier: "OtherChatTableViewCell",
                     for: indexPath) as? OtherChatTableViewCell else { return  cell}
-                otherCell.viewModel = ChatViewModel(from: reverseMessage[indexPath.row])
-                otherCell.setup()
+                otherCell.viewModel = viewModel?.chatVMs.value[indexPath.row]
+                otherCell.setup(with: viewModel?.otherUserId.value ?? "")
                 cell = otherCell
 
             }
-        }
+
 
 
         return cell

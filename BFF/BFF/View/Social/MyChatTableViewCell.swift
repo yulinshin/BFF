@@ -19,7 +19,7 @@ class MyChatTableViewCell: UITableViewCell {
     
     var identifier = "MyChatTableViewCell"
 
-    var viewModel: ChatViewModel?
+    var viewModel: ChatVM?
 
     override func awakeFromNib() {
         super.awakeFromNib()
