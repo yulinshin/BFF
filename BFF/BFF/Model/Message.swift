@@ -17,3 +17,11 @@ struct Message: Codable {
     var messageId: String
 
 }
+
+
+struct MessageGroup: Codable {
+
+    var groupId: String
+    var users: [String]
+
+}

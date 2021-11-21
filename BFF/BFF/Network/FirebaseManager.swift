@@ -13,6 +13,12 @@ import FirebaseStorage
 import UIKit
 
 
+enum FireBaseError: Error {
+    case noNetWorkContent
+    case gotFirebaseError(Error)
+}
+
+
 // swiftlint:disable file_length
 class FirebaseManager {
 
@@ -20,9 +26,17 @@ class FirebaseManager {
     lazy var dateBase = Firestore.firestore()
     lazy var storage = Storage.storage()
 
-    let userId = Auth.auth().currentUser?.uid ?? ""
-    let userEmail = Auth.auth().currentUser?.email ?? ""
-    let userName = Auth.auth().currentUser?.displayName ?? ""
+    var userId: String {
+        Auth.auth().currentUser?.uid ?? ""
+    }
+    var userEmail: String {
+        Auth.auth().currentUser?.email ?? ""
+    }
+    var userName: String {
+        Auth.auth().currentUser?.displayName ?? ""
+    }
+
+    var user: User?
 
     func fetchUser(completion: @escaping (Result<User, Error>) -> Void) {
 
@@ -34,6 +48,7 @@ class FirebaseManager {
                 do {
                     if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
                         completion(.success(user))
+                        self.user = user
                     }
                 } catch {
                     completion(.failure(error))
@@ -51,35 +66,94 @@ class FirebaseManager {
     }
 
 
-    func updateCurrentUserFollow(followPetId: String ) {
+    func creatDiary(content: String, pics: [Pic], isPublic: Bool, petTags: [String], petId:String, completion: @escaping(Result<String, FireBaseError>) -> Void) {
 
+        guard NetStatusManger.share.isConnected else {
+            completion(.failure(FireBaseError.noNetWorkContent))
+            return
+        }
+        let diariesRef = dateBase.collection("Diaries")
+        let document = diariesRef.document()
 
-        let currentUserDB = dateBase.collection("Users").document(userId)
-
-        currentUserDB.updateData(["followedPets": FieldValue.arrayUnion([followPetId])])
+        let diary = Diary(content: content, diaryId: document.documentID, images: pics, isPublic: isPublic, petTags: petTags, userId: userId, petId: petId)
+        do {
+            try document.setData(from: diary)
+            completion(.success("Success upload Diary-\(diary.diaryId)"))
+        } catch {
+            completion(.failure(FireBaseError.gotFirebaseError(error)))
+        }
     }
 
-    func removeCurrentUserFollow(followPetId: String ) {
 
+    func creatUser(){
 
-        let currentUserDB = dateBase.collection("Users").document(userId)
+        print("Start create UserData ........")
 
-        currentUserDB.updateData(["followedPets": FieldValue.arrayRemove([followPetId])])
+        dateBase.collection("Users").document(userId).getDocument { (document, error) in
+            let newUserData = User(userId: self.userId, email: self.userEmail, userName: self.userName)
+            if let document = document, document.exists {
+                do {
+                    try  self.dateBase.collection("Users").document(self.userId).setData(from: newUserData)
+                } catch {
+
+                }
+            } else {
+                let newUserDoc = self.dateBase.collection("Users").document(self.userId)
+
+                do {
+                    try newUserDoc.setData(from: newUserData)
+                } catch {
+                }
+            }
+        }
     }
 
-    func updateCurrentUserBlockPets(blockPetId: String ) {
+
+    func updateTargetUserFollow(followPetId: String ) {
 
 
-        let currentUserDB = dateBase.collection("Users").document(userId)
-
-        currentUserDB.updateData(["blockPets": FieldValue.arrayUnion([blockPetId])])
+        let currentUserDB = dateBase.collection("Pets").document(followPetId)
+        let target =
+        currentUserDB.updateData(["followers": FieldValue.arrayUnion([userId])])
     }
 
-    func unBlockPets(blockPetId: String ) {
+    func removeCurrentUserFromTagetFollow(followPetId: String ) {
+
+
+        let currentUserDB = dateBase.collection("Pets").document(followPetId)
+
+        currentUserDB.updateData(["followers": FieldValue.arrayRemove([userId])])
+    }
+
+    func updateCurrentUserBlockUsers(blockUserId: String ) {
+
+        let currentUserDB = dateBase.collection("Users").document(userId)
+        currentUserDB.updateData(["blockUsers": FieldValue.arrayUnion([blockUserId])])
+
+    }
+    
+    
+
+    func updateCurrentUserBlockUsers(blockUserId: String, completion: @escaping (Result<String, Error>) -> Void ) {
 
         let currentUserDB = dateBase.collection("Users").document(userId)
 
-        currentUserDB.updateData(["blockPets": FieldValue.arrayRemove([blockPetId])])
+        currentUserDB.updateData(["blockUsers": FieldValue.arrayUnion([blockUserId])]) { error in
+            guard let error = error else {
+                completion(.success("sucess"))
+                return
+            }
+            completion(.failure(error))
+
+        }
+
+    }
+
+    func unblockUser(blockUserId: String ) {
+
+        let currentUserDB = dateBase.collection("Users").document(userId)
+
+        currentUserDB.updateData(["blockUsers": FieldValue.arrayRemove([blockUserId])])
     }
 
     func updateUserInfo(user: User, newimage: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
@@ -93,9 +167,7 @@ class FirebaseManager {
             switch result {
             case .success(let pic):
                 var newUserData = user
-                newUserData.userThumbNail?.url = pic.url
-                newUserData.userThumbNail?.fileName = pic.fileName
-
+                newUserData.userThumbNail = pic
                 let userDB = self.dateBase.collection("Users").document(newUserData.userId)
                 do {
                     try userDB.setData(from: newUserData)
@@ -108,22 +180,19 @@ class FirebaseManager {
         }
     }
 
-
     func updateUserInfo(user: User, completion: @escaping (Result<String, Error>) -> Void) {
 
         print("Strat UpDateUser\(user.userId)....................")
 
-                let userDB = self.dateBase.collection("Users").document(user.userId)
-                do {
-                    try userDB.setData(from: user)
-                    completion(.success("Succes"))
-                } catch {
-                    completion(.failure(error))
+        let userDB = self.dateBase.collection("Users").document(user.userId)
+        do {
+            try userDB.setData(from: user)
+            completion(.success("Succes"))
+        } catch {
+            completion(.failure(error))
 
         }
     }
-
-
 
 
     func fetchUserInfo(userId: String, completion: @escaping (Result<User, Error>) -> Void) {
@@ -263,10 +332,26 @@ class FirebaseManager {
 
     }
 
+
+
+    func creatNotificationFor(usrId: String, newNotify: Notification) {
+
+        let document =   dateBase.collection("Users").document(usrId).collection("Notifications").document(newNotify.id)
+        do {
+            try document.setData(from: newNotify)
+            print("upLoad NotificationInFo Success - \(newNotify) ")
+        } catch {
+            print("upLoad NotificationInFo Success - \(error) ")
+        }
+    }
+
+
+
+
     // swiftlint:disable cyclomatic_complexity
-    func listMessages(completion: @escaping (Result<[Message], Error>) -> Void) {
+    func listenAllMessages(completion: @escaping (Result<[Message], Error>) -> Void) {
 
-
+        print("Start Listen Message Data")
         var messages = [Message]()
         dateBase.collection("Messages").whereField("receiver", isEqualTo: userId).addSnapshotListener { querySnapshot, error in
             if let error = error {
@@ -315,7 +400,7 @@ class FirebaseManager {
     }
 
 
-    func listMessages(otherUserId: String,completion: @escaping (Result<[Message], Error>) -> Void) {
+    func listenMessages(otherUserId: String,completion: @escaping (Result<[Message], Error>) -> Void) {
 
         var messages = [Message]()
         dateBase.collection("Messages").whereField("receiver", isEqualTo: otherUserId).whereField("sender", isEqualTo: userId).addSnapshotListener { querySnapshot, error in
@@ -366,17 +451,71 @@ class FirebaseManager {
     }
 
 
-    func sendMessage(reciverId: String, content: String ){
+    func creatGroup(reciverId: String, content: String) {
 
-        let douctment = dateBase.collection("Messages").document()
-        let message = Message(content: content, createdTime: Timestamp.init(date: Date()), receiver: reciverId, sender: userId, messageId: douctment.documentID)
+        let douctment = dateBase.collection("MessageGroups").document()
+
+        let newGroup = MessageGroup(groupId: douctment.documentID, users: [userId,reciverId])
         do {
-            try douctment.setData(from: message)
+            try douctment.setData(from: newGroup)
+            let messageDoc = douctment.collection("Messages").document()
+            let message = Message(content: content, createdTime: Timestamp.init(date: Date()), receiver: reciverId, sender: userId, messageId: messageDoc.documentID)
+            do{
+                try messageDoc.setData(from: message)
+            }catch{
+                print(error)
+            }
 
-        } catch {
-            print(error)
+        }catch{
+            print (error)
         }
 
+    }
+
+
+    func creatGroupOnly(reciverId: String, completion: @escaping (Result<String, Error>) -> Void) {
+
+        let douctment = dateBase.collection("MessageGroups").document()
+        do {
+            try douctment.setData([
+                "groupId": douctment.documentID,
+                "users": [userId, reciverId]
+            ]) {
+                err in
+                    if let err = err {
+                        completion(.failure(err))
+                    } else {
+                        completion(.success(douctment.documentID))
+                    }
+            }
+
+
+        }catch{
+            print (error)
+            completion(.failure(error))
+        }
+
+    }
+
+
+
+    func sendMessage(reciverId: String, groupId: String, content: String ){
+
+        if groupId == "" {
+            creatGroup(reciverId: reciverId, content: content)
+        } else {
+            let douctment = dateBase.collection("MessageGroups").document(groupId).collection("Messages").document()
+
+            let message = Message(content: content, createdTime: Timestamp.init(date: Date()), receiver: reciverId, sender: userId, messageId: douctment.documentID)
+
+            do {
+                try douctment.setData(from: message)
+
+            } catch {
+                print(error)
+            }
+
+        }
 
     }
 
@@ -719,6 +858,25 @@ class FirebaseManager {
     }
 
 
+
+
+    func fetchDiary(diaryId: String, completion: @escaping (Result<Diary, Error>) -> Void) {
+
+        dateBase.collection("Diaries").document(diaryId).getDocument { (document, error) in
+
+            if let document = document, document.exists {
+                do {
+                    if let diary = try document.data(as: Diary.self, decoder: Firestore.Decoder()) {
+                        completion(.success(diary))
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+
+
     func fetchPetAllDiaries(petId: String, completion: @escaping (Result<[Diary], Error>) -> Void) {
 
         dateBase.collection("Diaries").whereField("petId", isEqualTo: petId).getDocuments { (querySnapshot, error) in
@@ -780,20 +938,7 @@ class FirebaseManager {
         }
     }
 
-    func creatDiary(content: String, pics: [Pic], isPublic: Bool, petTags: [String], petId:String) {
 
-        let diariesRef = dateBase.collection("Diaries")
-        let document = diariesRef.document()
-
-        let diary = Diary(content: content, diaryId: document.documentID, images: pics, isPublic: isPublic, petTags: petTags, userId: userId, petId: petId)
-
-        do {
-            try document.setData(from: diary)
-            print(document)
-        } catch {
-            print(error)
-        }
-    }
 
     enum FilePathName: String {
         case dairyPhotos = "DairyPhotos"
@@ -801,7 +946,12 @@ class FirebaseManager {
         case userPhotos = "UserPhotos"
     }
 
-    func uploadPhoto(image: UIImage, filePath: FilePathName, completion: @escaping (Result<Pic, Error>) -> Void) {
+    func uploadPhoto(image: UIImage, filePath: FilePathName, completion: @escaping (Result<Pic, FireBaseError>) -> Void) {
+
+        guard NetStatusManger.share.isConnected else {
+            completion(.failure(FireBaseError.noNetWorkContent))
+            return
+        }
 
         let fileName = "\(NSUUID().uuidString).jpg"
         print(fileName)
@@ -812,12 +962,12 @@ class FirebaseManager {
         storageRef.putData(data, metadata: nil) { (_, error) in
 
             if let error = error {
-                completion(.failure(error))
+                completion(.failure(.gotFirebaseError(error)))
             } else {
 
                 storageRef.downloadURL { (url, error) in
                     if let error = error {
-                        completion(.failure(error))
+                        completion(.failure(.gotFirebaseError(error)))
                     } else {
                         guard let downloadURL = url else {
                             return
@@ -943,7 +1093,7 @@ class FirebaseManager {
         }
     }
 
-    func creatComments(content: String, petId: String, diaryId: String) {
+    func creatComments(content: String, petId: String, diaryId: String, diaryOwner: String) {
 
         let commentsRef = dateBase.collection("Comments")
         let document = commentsRef.document()
@@ -952,7 +1102,16 @@ class FirebaseManager {
         do {
             try document.setData(from: comment)
             dateBase.collection("Diaries").document(diaryId).updateData(["comments": FieldValue.arrayUnion([document.documentID])])
+
+
+            if diaryId != userId {
+                // swiftlint:disable:next line_length
+                let notifycation = Notification(content: "回覆了你的日記貼文", notifyTime: Timestamp(date: Date()), fromPets: [petId], title: "", type: "comment", id: "Comment\(document.documentID)", diaryId: diaryId)
+                creatNotificationFor(usrId: diaryOwner, newNotify: notifycation)
+            }
+
             print(document)
+
         } catch {
             print(error)
         }
@@ -1056,7 +1215,132 @@ class FirebaseManager {
         }
     }
 
+    func listenMessageGroup(completion: @escaping (Result<[MessageGroup], FireBaseError>) -> Void) {
+        print("Start Listen UserMessageGroup")
+
+        dateBase.collection("MessageGroups").whereField("users", arrayContains: userId)
+            .addSnapshotListener { querySnapshot, error in
+
+                guard let documents = querySnapshot?.documents else {
+                    completion(.failure(FireBaseError.gotFirebaseError(error!)))
+                    return
+                }
+
+                var groups = [MessageGroup]()
+
+                documents.forEach { document in
+
+//                    self.dateBase.collection("MessageGroups").document(document.documentID).delete()
+                    if document.exists {
+
+                    do {
+                        if let messageGroup = try document.data(as: MessageGroup.self, decoder: Firestore.Decoder()) {
+                            groups.append(messageGroup)
+                        }
+                    } catch {
+                        print("Decord Error: \(error)")
+                    }
+                }
+                }
+                completion(.success(groups))
+            }
+    }
+
+
+
+
+    func listenFromMessageGroup(groupId: String, completion: @escaping (Result<[Message], FireBaseError>) -> Void) {
+
+        print("Start Listen UserMessageGroup")
+
+        dateBase.collection("MessageGroups").document(groupId).collection("Messages")
+            .addSnapshotListener { querySnapshot, error in
+
+                guard let documents = querySnapshot?.documents else {
+                    completion(.failure(FireBaseError.gotFirebaseError(error!)))
+                    return
+                }
+                var messages = [Message]()
+
+                documents.forEach { document in
+                    do {
+                        if let message = try document.data(as: Message.self, decoder: Firestore.Decoder()) {
+                            messages.append(message)
+                        }
+                    } catch {
+                        print("Decord Error: \(error)")
+                    }
+                }
+                completion(.success(messages))
+            }
+    }
+
+
+
+    func listenMessageFromUserID(otherUseId: String, completion: @escaping (Result<(messages:[Message], groupId: String), FireBaseError>) -> Void) {
+
+        dateBase.collection("MessageGroups").whereField("users", in: [[userId, otherUseId], [otherUseId, userId]]).getDocuments { querySnapshot, error in
+
+            if let error = error {
+
+                        completion(.failure(FireBaseError.gotFirebaseError(error)))
+
+            } else {
+                if let querySnapshot = querySnapshot {
+
+                    guard let groupId = querySnapshot.documents.first?.documentID else {
+
+                        self.creatGroupOnly(reciverId: otherUseId) { result in
+
+                            switch result {
+
+                            case.success(let groupId):
+                                self.listenFromMessageGroup(groupId: groupId) { result in
+
+                                    switch result {
+
+                                    case.success(let messages):
+                                        completion(.success((messages: messages, groupId: groupId)))
+
+                                    case.failure(let error):
+                                        completion(.failure(FireBaseError.gotFirebaseError(error)))
+
+                                    }
+
+                                }
+
+                            case .failure(let error):
+                                completion(.failure(FireBaseError.gotFirebaseError(error)))
+
+                            }
+
+                        }
+
+                        return
+                    }
+
+                    self.listenFromMessageGroup(groupId: groupId) { result in
+
+                        switch result {
+
+
+                        case.success(let messages):
+                            completion(.success((messages: messages, groupId: groupId)))
+
+                        case.failure(let error):
+                            completion(.failure(FireBaseError.gotFirebaseError(error)))
+
+                        }
+
+                    }
+                }
+            }
+        }
+
+    }
+
+
+
 
 }
-
 

@@ -21,10 +21,10 @@ class BlocksViewModelList {
 
             case .success(let user):
 
-                guard let blocks = user.blockPets else { return }
-                blocks.forEach { petId in
+                guard let blocks = user.blockUsers else { return }
+                blocks.forEach { userId in
 
-                    let block =  BlocksViewModel(petId: petId)
+                    let block =  BlocksViewModel(userId: userId)
                     block.didUpdateData = {
                         self.blocks.value.append(block)
                         self.didUpdateData?()
@@ -42,7 +42,7 @@ class BlocksViewModelList {
 
     func ubBlock(indexPath: Int){
 
-        FirebaseManager.shared.unBlockPets(blockPetId: self.blocks.value[indexPath].id.value)
+        FirebaseManager.shared.unblockUser(blockUserId: self.blocks.value[indexPath].id.value)
         blocks.value.remove(at: indexPath)
         self.didUpdateData?()
 
@@ -60,17 +60,18 @@ class BlocksViewModel {
     var id = Box(" ")
     var didUpdateData: (()->Void)?
 
-    init(petId: String){
+    init(userId: String){
 
-        self.id.value = petId
-        FirebaseManager.shared.fetchPet(petId: petId) { result in
+        self.id.value = userId
+
+        FirebaseManager.shared.fetchUserInfo(userId: userId) { result in
 
             switch result {
 
-            case .success(let pet):
+            case .success(let user):
 
-                self.image.value = pet.petThumbnail?.url ?? ""
-                self.name.value = pet.name
+                self.image.value = user.userThumbNail?.url ?? ""
+                self.name.value = user.userName
                 self.didUpdateData?()
 
             case .failure(let error):
@@ -78,7 +79,9 @@ class BlocksViewModel {
                 print(error)
 
             }
+
         }
+
     }
 
 

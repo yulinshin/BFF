@@ -15,7 +15,7 @@ class PetCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var diaryCardBackground: UIView!
     @IBOutlet weak var petNameLabel: UILabel!
     @IBOutlet weak var birthdayLabel: UILabel!
-
+    @IBOutlet weak var petKindIcon: UIImageView!
 
     var didTapCard: (() -> Void)?
     let addPetAnimationView = AnimationView(name: "AddPet")
@@ -29,6 +29,7 @@ class PetCollectionViewCell: UICollectionViewCell {
         petImageView.isHidden = false
         petNameLabel.isHidden = false
         petImageView.isHidden = false
+        petKindIcon.isHidden = false
         petImageView.loadImage(petImage)
         petImageView.contentMode = .scaleAspectFill
         petImageView.layer.cornerRadius = 16
@@ -43,7 +44,7 @@ class PetCollectionViewCell: UICollectionViewCell {
         petNameLabel.text = petName
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-yyyy"
-        guard let date = dateFormatter.date(from:petBirthday) else { return }
+        guard let date = dateFormatter.date(from: petBirthday) else { return }
         let now = Date()
 
         let ageComponents = Calendar.current.dateComponents([.year, .month], from: date, to: now)
@@ -65,9 +66,8 @@ class PetCollectionViewCell: UICollectionViewCell {
 
 
 
-
     func setupBlankDiaryBook() {
-        title.isHidden = false
+        petKindIcon.isHidden = true
         petImageView.isHidden = true
         petNameLabel.isHidden = true
         addPetAnimationView.isHidden = false
@@ -78,22 +78,12 @@ class PetCollectionViewCell: UICollectionViewCell {
         diaryCardBackground.addSubview(addPetAnimationView)
         diaryCardBackground.addSubview(title)
 
-        title.translatesAutoresizingMaskIntoConstraints = false
-        title.bottomAnchor.constraint(equalTo: diaryCardBackground.bottomAnchor, constant: -80).isActive = true
-        title.leadingAnchor.constraint(equalTo: diaryCardBackground.leadingAnchor, constant: 40).isActive = true
-        title.trailingAnchor.constraint(equalTo: diaryCardBackground.trailingAnchor, constant: -30).isActive = true
-        title.heightAnchor.constraint(equalToConstant: 24).isActive = true
-
-        title.text = "新增毛小孩"
-        title.textAlignment = .center
-        title.textColor = UIColor(named: "main")
-        title.font = .systemFont(ofSize: 16, weight: .bold)
 
         addPetAnimationView.translatesAutoresizingMaskIntoConstraints = false
         addPetAnimationView.topAnchor.constraint(equalTo: diaryCardBackground.topAnchor, constant: 60).isActive = true
-        addPetAnimationView.bottomAnchor.constraint(equalTo: title.topAnchor, constant: -10).isActive = true
         addPetAnimationView.centerXAnchor.constraint(equalTo: diaryCardBackground.centerXAnchor).isActive = true
-        addPetAnimationView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        addPetAnimationView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+
 
         let keypath = AnimationKeypath(keys: ["**", "Fill 1", "**", "Color"])
         if let color = UIColor(named: "main") {
