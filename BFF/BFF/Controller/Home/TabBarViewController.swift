@@ -36,7 +36,7 @@ private enum Tab {
         case .message:
             let storyboard = UIStoryboard.message
             if let chatController = storyboard.instantiateViewController(withIdentifier: "ChatListTableViewController") as? ChatListTableViewController {
-                chatController.viewModel = ChatListViewModel(updateNotify: {
+                chatController.viewModel = ChatListVM(upDataNotify: {
                     chatController.tableView?.reloadData()
             })
                 let nav = UINavigationController(rootViewController: chatController)

@@ -273,7 +273,7 @@ class PetsProfileViewController: UIViewController {
             return
         }
 
-        controller.viewModel = ChatGroupViewModel(userid: viewModel.ownerUserId.value)
+        controller.viewModel = ChatGroupVM( otherUserId: viewModel.ownerUserId.value)
 
 
         self.navigationController?.show(controller, sender: nil)

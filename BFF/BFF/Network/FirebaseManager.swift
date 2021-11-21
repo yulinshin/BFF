@@ -184,12 +184,12 @@ class FirebaseManager {
 
         print("Strat UpDateUser\(user.userId)....................")
 
-                let userDB = self.dateBase.collection("Users").document(user.userId)
-                do {
-                    try userDB.setData(from: user)
-                    completion(.success("Succes"))
-                } catch {
-                    completion(.failure(error))
+        let userDB = self.dateBase.collection("Users").document(user.userId)
+        do {
+            try userDB.setData(from: user)
+            completion(.success("Succes"))
+        } catch {
+            completion(.failure(error))
 
         }
     }
@@ -435,17 +435,71 @@ class FirebaseManager {
     }
 
 
-    func sendMessage(reciverId: String, content: String ){
+    func creatGroup(reciverId: String, content: String) {
 
-        let douctment = dateBase.collection("Messages").document()
-        let message = Message(content: content, createdTime: Timestamp.init(date: Date()), receiver: reciverId, sender: userId, messageId: douctment.documentID)
+        let douctment = dateBase.collection("MessageGroups").document()
+
+        let newGroup = MessageGroup(groupId: douctment.documentID, users: [userId,reciverId])
         do {
-            try douctment.setData(from: message)
+            try douctment.setData(from: newGroup)
+            let messageDoc = douctment.collection("Messages").document()
+            let message = Message(content: content, createdTime: Timestamp.init(date: Date()), receiver: reciverId, sender: userId, messageId: messageDoc.documentID)
+            do{
+                try messageDoc.setData(from: message)
+            }catch{
+                print(error)
+            }
 
-        } catch {
-            print(error)
+        }catch{
+            print (error)
         }
 
+    }
+
+
+    func creatGroupOnly(reciverId: String, completion: @escaping (Result<String, Error>) -> Void) {
+
+        let douctment = dateBase.collection("MessageGroups").document()
+        do {
+            try douctment.setData([
+                "groupId": douctment.documentID,
+                "users": [userId, reciverId]
+            ]) {
+                err in
+                    if let err = err {
+                        completion(.failure(err))
+                    } else {
+                        completion(.success(douctment.documentID))
+                    }
+            }
+
+
+        }catch{
+            print (error)
+            completion(.failure(error))
+        }
+
+    }
+
+
+
+    func sendMessage(reciverId: String, groupId: String, content: String ){
+
+        if groupId == "" {
+            creatGroup(reciverId: reciverId, content: content)
+        } else {
+            let douctment = dateBase.collection("MessageGroups").document(groupId).collection("Messages").document()
+
+            let message = Message(content: content, createdTime: Timestamp.init(date: Date()), receiver: reciverId, sender: userId, messageId: douctment.documentID)
+
+            do {
+                try douctment.setData(from: message)
+
+            } catch {
+                print(error)
+            }
+
+        }
 
     }
 
@@ -1117,7 +1171,132 @@ class FirebaseManager {
         }
     }
 
+    func listenMessageGroup(completion: @escaping (Result<[MessageGroup], FireBaseError>) -> Void) {
+        print("Start Listen UserMessageGroup")
+
+        dateBase.collection("MessageGroups").whereField("users", arrayContains: userId)
+            .addSnapshotListener { querySnapshot, error in
+
+                guard let documents = querySnapshot?.documents else {
+                    completion(.failure(FireBaseError.gotFirebaseError(error!)))
+                    return
+                }
+
+                var groups = [MessageGroup]()
+
+                documents.forEach { document in
+
+//                    self.dateBase.collection("MessageGroups").document(document.documentID).delete()
+                    if document.exists {
+
+                    do {
+                        if let messageGroup = try document.data(as: MessageGroup.self, decoder: Firestore.Decoder()) {
+                            groups.append(messageGroup)
+                        }
+                    } catch {
+                        print("Decord Error: \(error)")
+                    }
+                }
+                }
+                completion(.success(groups))
+            }
+    }
+
+
+
+
+    func listenFromMessageGroup(groupId: String, completion: @escaping (Result<[Message], FireBaseError>) -> Void) {
+
+        print("Start Listen UserMessageGroup")
+
+        dateBase.collection("MessageGroups").document(groupId).collection("Messages")
+            .addSnapshotListener { querySnapshot, error in
+
+                guard let documents = querySnapshot?.documents else {
+                    completion(.failure(FireBaseError.gotFirebaseError(error!)))
+                    return
+                }
+                var messages = [Message]()
+
+                documents.forEach { document in
+                    do {
+                        if let message = try document.data(as: Message.self, decoder: Firestore.Decoder()) {
+                            messages.append(message)
+                        }
+                    } catch {
+                        print("Decord Error: \(error)")
+                    }
+                }
+                completion(.success(messages))
+            }
+    }
+
+
+
+    func listenMessageFromUserID(otherUseId: String, completion: @escaping (Result<(messages:[Message], groupId: String), FireBaseError>) -> Void) {
+
+        dateBase.collection("MessageGroups").whereField("users", in: [[userId, otherUseId], [otherUseId, userId]]).getDocuments { querySnapshot, error in
+
+            if let error = error {
+
+                        completion(.failure(FireBaseError.gotFirebaseError(error)))
+
+            } else {
+                if let querySnapshot = querySnapshot {
+
+                    guard let groupId = querySnapshot.documents.first?.documentID else {
+
+                        self.creatGroupOnly(reciverId: otherUseId) { result in
+
+                            switch result {
+
+                            case.success(let groupId):
+                                self.listenFromMessageGroup(groupId: groupId) { result in
+
+                                    switch result {
+
+                                    case.success(let messages):
+                                        completion(.success((messages: messages, groupId: groupId)))
+
+                                    case.failure(let error):
+                                        completion(.failure(FireBaseError.gotFirebaseError(error)))
+
+                                    }
+
+                                }
+
+                            case .failure(let error):
+                                completion(.failure(FireBaseError.gotFirebaseError(error)))
+
+                            }
+
+                        }
+
+                        return
+                    }
+
+                    self.listenFromMessageGroup(groupId: groupId) { result in
+
+                        switch result {
+
+
+                        case.success(let messages):
+                            completion(.success((messages: messages, groupId: groupId)))
+
+                        case.failure(let error):
+                            completion(.failure(FireBaseError.gotFirebaseError(error)))
+
+                        }
+
+                    }
+                }
+            }
+        }
+
+    }
+
+
+
 
 }
-
 

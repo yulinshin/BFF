@@ -18,7 +18,7 @@ class OtherChatTableViewCell: UITableViewCell {
 
     var identifier = "OtherChatTableViewCell"
 
-    var viewModel: ChatViewModel?
+    var viewModel: ChatVM?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,18 +35,14 @@ class OtherChatTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setup(){
+    func setup(with otherUserPic: String){
         guard let viewModel = viewModel else {
             return
         }
-
-        viewModel.userPic.bind { url in
-            self.profileImg.loadImage(url, placeHolder: UIImage(systemName: "person.fill"))
-        }
-
         viewModel.content.bind { content in
             self.chatBubbleContent.text = content
         }
+        self.profileImg.loadImage(otherUserPic)
 
     }
     
