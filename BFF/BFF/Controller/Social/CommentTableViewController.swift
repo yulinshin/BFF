@@ -48,7 +48,7 @@ class CommentTableViewController: UIViewController {
         let selectedPet = selectedPet else {
             return
         }
-        FirebaseManager.shared.creatComments(content: message, petId: selectedPet, diaryId: diary.diaryId)
+        FirebaseManager.shared.creatComments(content: message, petId: selectedPet, diaryId: diary.diaryId, diaryOwner: diary.userId)
         getComments()
         messageTextField.text = ""
     }

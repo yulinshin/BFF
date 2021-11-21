@@ -45,15 +45,10 @@ class HomePageViewController: UIViewController {
         setMenu()
         setCollectionView()
         setTableView()
-        viewModel.listenNotificationData()
-
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.listenUserData()
-        viewModel.fetchUserPetsData()
         let barAppearance =  UINavigationBarAppearance()
         barAppearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = barAppearance
@@ -82,6 +77,7 @@ class HomePageViewController: UIViewController {
         tableView.isScrollEnabled = true
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: "Cell")
     }
 
@@ -166,7 +162,7 @@ extension HomePageViewController: UICollectionViewDataSource {
 
         case 2:
 
-            return viewModel.notifications.value.count // Notifications Section
+            return viewModel.notificationModels.value.count // Notifications Section
 
         case 3:
 
@@ -203,18 +199,41 @@ extension HomePageViewController: UICollectionViewDataSource {
 
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PetNotificationCollectionViewCell", for: indexPath)as? PetNotificationCollectionViewCell else { fatalError() }
 
-            let notification = viewModel.notifications.value[indexPath.row]
-            viewModel.pets.value.forEach { pet in
+            cell.setup(viewModel:     viewModel.notificationModels.value[indexPath.row])
+            cell.didTapCancle = {
+                self.viewModel.removeNotification(indexPath: indexPath.row)
+            }
+            cell.didTapSupplyNotification = { supplyId in
 
-                if notification.fromPets.contains(pet.petId) {
+                let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
+                guard let controller = storyboard.instantiateViewController(withIdentifier: "ListTableViewController") as? ListTableViewController else { return }
 
-                    cell.setup(petName: pet.name, content: notification.content, petImage: pet.petThumbnail?.url ?? "")
-                    cell.didTapCancle = {
-                        self.viewModel.removeNotification(indexPath: indexPath.row)
+                self.navigationController?.show(controller, sender: nil)
+
+            }
+
+            cell.didTapCommentNotification = { diaryId in
+
+
+                FirebaseManager.shared.fetchDiary(diaryId: diaryId){
+                    result in
+
+                    switch result {
+
+                    case .success(let diary):
+
+                        let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+                        guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
+                        controller.viewModel = DetialViewModel(from: diary)
+                        self.navigationController?.show(controller, sender: nil)
+
+
+                    case .failure(let error):
+                        print(error)
+
                     }
-
-                    return
                 }
+
             }
 
             return cell
@@ -445,7 +464,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
             let storyboard = UIStoryboard(name: "User", bundle: nil)
 
             guard let controller = storyboard.instantiateViewController(withIdentifier: "UserAccountTableViewController") as? UserAccountTableViewController else { return }
-            controller.user = viewModel.user
+            controller.user = FirebaseManager.shared.user
 
             guard let window =  UIApplication.shared.windows.filter { $0.isKeyWindow}.first else { return }
             transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)

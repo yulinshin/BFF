@@ -17,6 +17,7 @@ struct Pet: Codable {
     var medicalRecords: [MedicalRecord]?
     var petThumbnail: Pic?
     var followers: [String]?
+    var fans: [String]?
     var liked: Int?
 }
 

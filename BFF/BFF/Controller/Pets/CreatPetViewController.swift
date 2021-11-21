@@ -65,6 +65,9 @@ class CreatPetViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        NetStatusManger.share.startMonitoring()
 
         switch presentMode {
 
@@ -108,6 +111,11 @@ class CreatPetViewController: UIViewController {
         }
         self.petInfoTableView.reloadData()
 
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NetStatusManger.share.stopMonitoring()
     }
 
     @objc func coverToEditMode(){
@@ -255,10 +263,10 @@ extension CreatPetViewController: UITableViewDataSource {
 
         case "生日" :
 
-            cell.creatDatePicker()
+
 
             viewModel.birthday.bind { birthday in
-
+                cell.creatDatePicker()
                 cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
                 cell.textField.text = birthday
 

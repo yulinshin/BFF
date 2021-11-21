@@ -34,7 +34,9 @@ class PetsProfileViewController: UIViewController {
     @IBOutlet weak var diariesCollectionView: UICollectionView!
 
     @IBOutlet weak var topColorBackground: UIView!
+    @IBOutlet weak var petScrollView: UIScrollView!
 
+    @IBOutlet weak var actionStaclview: UIStackView!
     var viewModel: ProfileViewModel?
 
     override func viewDidLoad() {
@@ -45,7 +47,7 @@ class PetsProfileViewController: UIViewController {
         diariesCollectionView.dataSource = self
         let diaryNib = UINib(nibName: "DairyPhotoCell", bundle: nil)
         diariesCollectionView.register(diaryNib, forCellWithReuseIdentifier: DairyPhotoCell.identifier)
-
+        petScrollView.delegate = self
         viewModel?.gotData = {
             self.diariesCollectionView.reloadData()
             self.setUp()
@@ -60,6 +62,13 @@ class PetsProfileViewController: UIViewController {
         moreButtonImageVIew.isUserInteractionEnabled = true
 
     }
+
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+    }
+
 
     func createLayout() -> UICollectionViewLayout {
 
@@ -161,8 +170,17 @@ class PetsProfileViewController: UIViewController {
     func setUp(){
 
 
+
         guard let viewModel = viewModel else {
             return
+        }
+
+
+
+        if viewModel.ownerUserId.value == FirebaseManager.shared.userId {
+            actionStaclview.isHidden = true
+        } else {
+            actionStaclview.isHidden = false
         }
 
         viewModel.petImageThumbnailUrl.bind { url in
@@ -235,17 +253,17 @@ class PetsProfileViewController: UIViewController {
 
             if viewModel.isFollowed.value {
 
-                FirebaseManager.shared.removeCurrentUserFollow(followPetId: viewModel.petId.value)
+                FirebaseManager.shared.removeCurrentUserFromTagetFollow(followPetId: viewModel.petId.value)
 
-
+                viewModel.followersCount.value -= 1
                 viewModel.isFollowed.value = false
 
 
             } else {
 
-                FirebaseManager.shared.updateCurrentUserFollow(followPetId: viewModel.petId.value)
+                FirebaseManager.shared.updateTargetUserFollow(followPetId: viewModel.petId.value)
 
-
+                viewModel.followersCount.value += 1
                 viewModel.isFollowed.value = true
 
             }
@@ -262,7 +280,7 @@ class PetsProfileViewController: UIViewController {
             return
         }
 
-        controller.viewModel = ChatGroupViewModel(userid: viewModel.ownerUserId.value)
+        controller.viewModel = ChatGroupVM( otherUserId: viewModel.ownerUserId.value)
 
 
         self.navigationController?.show(controller, sender: nil)
@@ -352,6 +370,16 @@ extension PetsProfileViewController: UICollectionViewDataSource {
 
 extension PetsProfileViewController: UICollectionViewDelegate {
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        guard let diary = viewModel?.diaries.value[indexPath.row] else { return }
+        let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
+        controller.viewModel = DetialViewModel(from: diary)
+        self.navigationController?.show(controller, sender: nil)
+
+    }
+
 
 }
 
@@ -388,7 +416,16 @@ class ProfileViewModel {
                 self.petName.value = pet.name
                 self.age.value = Date().getAge(from: pet.healthInfo.birthday)
                 self.birthDay.value = pet.healthInfo.birthday
-                self.followersCount.value = pet.followers?.count ?? 0
+                if let followers = pet.followers {
+                    self.followersCount.value = followers.count
+                    if followers.contains(FirebaseManager.shared.userId){
+                        self.isFollowed.value = true
+                    } else {
+                        self.isFollowed.value = false
+                    }
+                } else {
+                    self.isFollowed.value = false
+                }
                 self.likedCount.value = pet.liked ?? 0
                 self.ownerUserId.value = pet.userId
 
@@ -399,9 +436,12 @@ class ProfileViewModel {
 
 
                     case .success(let diaries):
-
+                        self.likedCount.value = 0
                         self.diaries.value = diaries
                         self.diariesCount.value = diaries.count
+                        diaries.forEach { diary in
+                            self.likedCount.value += diary.whoLiked.count
+                        }
                         self.gotData?()
 
 
@@ -414,31 +454,6 @@ class ProfileViewModel {
                 }
 
 
-                FirebaseManager.shared.fetchUser { result in
-
-
-                    switch result {
-
-
-                    case .success(let user):
-
-
-                        self.isFollowed.value = user.followedPets?.contains(petId) ?? false
-                        print ("IS Follwed \(user.followedPets)")
-                        self.isBlocked.value = user.blockUsers?.contains(self.ownerUserId.value) ?? false
-                        print ("IS Block \(user.blockUsers)")
-                        self.gotData?()
-
-                    case .failure(let error):
-
-                        print("Get user's info  Error /n \(error)")
-
-                    }
-
-
-
-                }
-
             case .failure(let error):
 
                 print("Get pet's Info Error /n \(error)")
@@ -449,6 +464,15 @@ class ProfileViewModel {
         }
 
     }
+
+
+}
+
+
+extension PetsProfileViewController: UIScrollViewDelegate {
+
+
+ 
 
 
 }

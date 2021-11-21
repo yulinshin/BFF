@@ -34,12 +34,23 @@ class DiaryDetailViewController: UIViewController {
     
     private var oldContent = ""
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         contentTextView.sizeToFit()
 
         postPetImageView.layer.cornerRadius = postPetImageView.frame.height / 2
+
+        if viewModel.diary?.userId != FirebaseManager.shared.userId{
+            settingButton.isHidden = true
+        } else {
+            settingButton.isHidden = false
+        }
 
         viewModel.postImageUrl.bind {  [weak self] urlStr in
             self?.image.kf.setImage(with: URL(string: urlStr))

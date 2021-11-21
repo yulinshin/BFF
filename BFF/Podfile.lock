@@ -354,6 +354,9 @@ PODS:
     - FirebaseAnalytics (~> 8.8.0)
   - Firebase/CoreOnly (8.8.0):
     - FirebaseCore (= 8.8.0)
+  - Firebase/Crashlytics (8.8.0):
+    - Firebase/CoreOnly
+    - FirebaseCrashlytics (~> 8.8.0)
   - Firebase/Messaging (8.8.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 8.8.0)
@@ -392,6 +395,13 @@ PODS:
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/Logger (~> 7.4)
     - nanopb (~> 2.30908.0)
+  - FirebaseCrashlytics (8.8.0):
+    - FirebaseCore (~> 8.0)
+    - FirebaseInstallations (~> 8.0)
+    - GoogleDataTransport (~> 9.0)
+    - GoogleUtilities/Environment (~> 7.4)
+    - nanopb (~> 2.30908.0)
+    - PromisesObjC (< 3.0, >= 1.2)
   - FirebaseFirestore (8.8.0):
     - abseil/algorithm (= 0.20200225.0)
     - abseil/base (= 0.20200225.0)
@@ -503,18 +513,24 @@ PODS:
   - Kingfisher (7.1.1)
   - leveldb-library (1.22.1)
   - lottie-ios (3.2.3)
+  - MarqueeLabel (4.0.5)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - NotificationBannerSwift (3.0.6):
+    - MarqueeLabel (~> 4.0.5)
+    - SnapKit (~> 5.0.1)
   - PromisesObjC (2.0.0)
+  - SnapKit (5.0.1)
   - SwiftLint (0.45.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
+  - Firebase/Crashlytics
   - Firebase/Messaging
   - Firebase/Storage
   - FirebaseFirestoreSwift (> 7.0-beta)
@@ -524,6 +540,7 @@ DEPENDENCIES:
   - JGProgressHUD
   - Kingfisher
   - lottie-ios
+  - NotificationBannerSwift (~> 3.0.0)
   - SwiftLint
 
 SPEC REPOS:
@@ -535,6 +552,7 @@ SPEC REPOS:
     - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreDiagnostics
+    - FirebaseCrashlytics
     - FirebaseFirestore
     - FirebaseFirestoreSwift
     - FirebaseInstallations
@@ -553,8 +571,11 @@ SPEC REPOS:
     - Kingfisher
     - leveldb-library
     - lottie-ios
+    - MarqueeLabel
     - nanopb
+    - NotificationBannerSwift
     - PromisesObjC
+    - SnapKit
     - SwiftLint
 
 SPEC CHECKSUMS:
@@ -565,6 +586,7 @@ SPEC CHECKSUMS:
   FirebaseAuth: bcf0adeff88bda5dcb3beeabe5760f1226ab7b2f
   FirebaseCore: 98b29e3828f0a53651c363937a7f7d92a19f1ba2
   FirebaseCoreDiagnostics: fe77f42da6329d6d83d21fd9d621a6b704413bfc
+  FirebaseCrashlytics: 3660c045c8e45cc4276110562a0ef44cf43c8157
   FirebaseFirestore: 29baf05d5e7e0d5003eb34e5805d92b9858b36d4
   FirebaseFirestoreSwift: d05ce56ad492ba92d72abdecc46f7eafb861370c
   FirebaseInstallations: 2563cb18a723ef9c6ef18318a49519b75dce613c
@@ -583,10 +605,13 @@ SPEC CHECKSUMS:
   Kingfisher: f738f9c4a3415823b8e2985d10aa2d6a9f37bc4d
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
+  MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  NotificationBannerSwift: 7021be2338f8f29cf424b0aca43da462bf9e2a1a
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
 
-PODFILE CHECKSUM: 2e39f169bd7437b7fdb725fc7c00976456e212be
+PODFILE CHECKSUM: c3ab7e9e6fb1ef3bb44fd6bf07ca1218b4429b00
 
 COCOAPODS: 1.11.2

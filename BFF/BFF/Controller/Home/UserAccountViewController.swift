@@ -6,6 +6,23 @@
 //
 
 import UIKit
+import AVFoundation
+
+
+
+class UserInfoViewModel {
+
+    var name = Box("")
+    var email = Box("")
+
+    init(user: User){
+        self.name.value = user.userName
+        self.email.value = user.email
+    }
+
+}
+
+
 
 class UserAccountTableViewController: UITableViewController {
 
@@ -13,6 +30,7 @@ class UserAccountTableViewController: UITableViewController {
     var userInFo = ["姓名", "Email"]
 
     var user: User?
+    var viewModel: UserInfoViewModel?
 
     var selectedImage: UIImage? {
         didSet{
@@ -25,45 +43,86 @@ class UserAccountTableViewController: UITableViewController {
         super.viewDidLoad()
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "儲存", style: .done, target: self, action: #selector(saveUserInfo))
-
         // Do any additional setup after loading the view.
+    }
+
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        FirebaseManager.shared.fetchUser { result in
+
+            switch result {
+
+
+            case.success( let user ):
+
+
+                self.user = user
+                self.viewModel = UserInfoViewModel(user: user)
+                self.tableView.reloadData()
+
+            case.failure( let error ):
+                print (error )
+
+            }
+
+
+        }
+
+
     }
 
 
     @objc func saveUserInfo() {
 
+        ProgressHUD.show()
+
+
         guard let user = user else {
             return
         }
 
+        var newUser = user
+        newUser.email = viewModel?.email.value ?? user.email
+        newUser.userName = viewModel?.name.value ?? user.userName
+        print ("******\(newUser)")
+
         guard let selectedImage = selectedImage else {
 
-            FirebaseManager.shared.updateUserInfo(user: user) { result in
+            FirebaseManager.shared.updateUserInfo(user: newUser) { result in
+
+                ProgressHUD.dismiss()
 
                 switch result {
 
                 case .success(let message):
                     print(message)
-
+                    ProgressHUD.showSuccess(text: "修改成功")
+                    self.dismiss(animated: true, completion: nil)
                 case.failure(let error):
                     print(error)
+                    ProgressHUD.showFailure(text: "修改失敗")
                 }
             }
 
             return
 
-
             }
 
-        FirebaseManager.shared.updateUserInfo(user: user, newimage: selectedImage) { result in
+        FirebaseManager.shared.updateUserInfo(user: newUser, newimage: selectedImage) { result in
+
+            ProgressHUD.dismiss()
 
             switch result {
 
             case .success(let message):
                 print(message)
-
+                ProgressHUD.showSuccess(text: "修改成功")
+                self.dismiss(animated: true, completion: nil)
             case.failure(let error):
                 print(error)
+                ProgressHUD.showFailure(text: "修改失敗")
             }
 
         }
@@ -97,8 +156,6 @@ class UserAccountTableViewController: UITableViewController {
             guard let selectedImage = selectedImage else {
                 cell.setup(userPic: user.userThumbNail?.url ?? "" )
                 return cell
-
-
             }
 
             cell.userPicImageVIew.image = selectedImage
@@ -115,10 +172,23 @@ class UserAccountTableViewController: UITableViewController {
             switch indexPath.row {
 
             case 0:
-                cell.contentTextField.text = user.userName
+
+                viewModel?.name.bind(listener: { name in
+                    cell.contentTextField.text = name
+                })
+                cell.contentTextField.delegate = cell
+                cell.callback = { text in
+                    self.viewModel?.name.value = text
+                }
 
             case 1:
-                cell.contentTextField.text = user.email
+                viewModel?.email.bind(listener: { email in
+                    cell.contentTextField.text = email
+                })
+                cell.callback = { text in
+                    self.viewModel?.email.value = text
+                }
+                cell.contentTextField.delegate = cell
 
             default:
                 print("outOfRange")
@@ -165,6 +235,7 @@ class UserPicCell: UITableViewCell {
 
     @IBOutlet weak var addIcon: UIImageView!
 
+
     override class func awakeFromNib() {
 
     }
@@ -173,7 +244,7 @@ class UserPicCell: UITableViewCell {
 
     func setup(userPic: String){
 
-        userPicImageVIew.loadImage(userPic, placeHolder: UIImage(named: "UserPicPalceHolder"))
+        userPicImageVIew.loadImage(userPic, placeHolder: UIImage(systemName: "person.fill"))
         addIcon.backgroundColor = .white
         addIcon.layer.borderWidth = 2
         addIcon.layer.borderColor = UIColor.white.cgColor
@@ -202,7 +273,20 @@ class UserInfoCell: UITableViewCell {
     @IBOutlet weak var contentTextField: UITextField!
     @IBOutlet weak var titleLabel: UILabel!
 
+    var callback: ((_ text: String) -> Void)?
+
     override class func awakeFromNib() {
+    }
+
+
+}
+
+extension UserInfoCell: UITextFieldDelegate {
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
+        guard let text = textField.text else { return }
+        callback?(text)
 
     }
 

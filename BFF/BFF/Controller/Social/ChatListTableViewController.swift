@@ -13,7 +13,7 @@ class ChatListTableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    var viewModel: ChatListViewModel?
+    var viewModel: ChatListVM?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +23,13 @@ class ChatListTableViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.viewModel?.getChatData()
+        NetStatusManger.share.startMonitoring()
+        viewModel?.filterBlockUser()
+        self.tableView.reloadData()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
+        NetStatusManger.share.stopMonitoring()
     }
 
 
@@ -38,7 +41,7 @@ extension ChatListTableViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0}
-        return viewModel.showingUserList.value.count
+        return viewModel.showingList.value.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,17 +51,7 @@ extension ChatListTableViewController: UITableViewDelegate, UITableViewDataSourc
 
         guard let viewModel = viewModel else { return cell }
         
-        cell.setup(viewModel: (viewModel.showingUserList.value[indexPath.row]))
-
-
-            //            viewModel.showingUserList.value[indexPath.row].userName.bind { name in
-            //                cell.nameLabel.text = name
-            //            }
-            //
-            //            viewModel.showingUserList.value[indexPath.row].userPic.bind { url in
-            //                cell.photImageView.loadImage(url, placeHolder:  UIImage(systemName: "person.fill"))
-            //            }
-
+        cell.setup(viewModel: (viewModel.showingList.value[indexPath.row]))
 
         return cell
     }
@@ -68,7 +61,7 @@ extension ChatListTableViewController: UITableViewDelegate, UITableViewDataSourc
         let storyboard = UIStoryboard(name: "Message", bundle: nil)
 
         guard let controller = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
-        controller.viewModel = self.viewModel?.showingUserList.value[indexPath.row]
+        controller.viewModel = self.viewModel?.showingList.value[indexPath.row]
         self.navigationController?.show(controller, sender: nil)
 
 
@@ -91,25 +84,23 @@ class ChatListTableViewCell: UITableViewCell{
 
     }
 
-    func setup(viewModel: ChatGroupViewModel) {
+    func setup(viewModel: ChatGroupVM) {
 
-        viewModel.lastMassage.bind { content in
+        viewModel.lastContent.bind { content in
             self.commentLabel.text = content
         }
 
-        viewModel.lastMassageDate.bind { date in
+        viewModel.lastCreatedTime.bind { date in
             self.dateLabel.text = date
         }
 
-
-        viewModel.userName.bind { name in
+        viewModel.otherUserName.bind { name in
             self.nameLabel.text = name
         }
 
-        viewModel.userPic.bind{ url in
+        viewModel.otherUsrPic.bind{ url in
             self.photImageView.loadImage(url, placeHolder:  UIImage(systemName: "person.fill"))
         }
-
 
     }
 

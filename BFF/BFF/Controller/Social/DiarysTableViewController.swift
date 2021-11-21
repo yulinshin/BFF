@@ -12,6 +12,7 @@ class DiariesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    @IBOutlet weak var backGroundView: UIView!
 
     var viewModel = DiaryWallViewModel()
 
@@ -23,7 +24,6 @@ class DiariesViewController: UIViewController {
         viewModel.didUpDateData = {
             self.tableView.reloadData()
         }
-
 
     }
 
@@ -105,6 +105,12 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
             cell.settingIcon.isHidden = false
         }
 
+        if viewModel.showingDiaries.value[indexPath.row].userId == FirebaseManager.shared.userId {
+            cell.sendMessageButton.isHidden = true
+        }else {
+            cell.sendMessageButton.isHidden = false
+        }
+
             cell.petNameLabel.text =    viewModel.showingDiaries.value [indexPath.row].petname
             cell.petImageView.loadImage(   viewModel.showingDiaries.value [indexPath.row].petThumbnail?.url)
 
@@ -128,10 +134,11 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
             }
 
             cell.didTapSendMessageButton = {
-
                 let storyboard = UIStoryboard(name: "Message", bundle: nil)
+
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
-                controller.viewModel = ChatGroupViewModel(messages: [Message](), userId:    self.viewModel.showingDiaries.value [indexPath.row].userId)
+
+                controller.viewModel = ChatGroupVM( otherUserId: self.viewModel.showingDiaries.value[indexPath.row].userId)
 
                 self.navigationController?.pushViewController(controller, animated: true)
 

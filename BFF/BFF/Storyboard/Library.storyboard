@@ -29,7 +29,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="aTJ-nr-xHP">
-                                <rect key="frame" x="16" y="88" width="382" height="31"/>
+                                <rect key="frame" x="16" y="96" width="382" height="31"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sg0-Lb-CZN">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="31"/>
@@ -59,20 +59,24 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="S1e-pL-09U" firstAttribute="width" secondItem="Sg0-Lb-CZN" secondAttribute="width" id="jS1-NQ-axo"/>
+                                    <constraint firstItem="QKw-vs-8Iq" firstAttribute="width" secondItem="Sg0-Lb-CZN" secondAttribute="width" id="s8a-7a-gHH"/>
+                                </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51M-rH-7FR" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="135" width="414" height="727"/>
+                                <rect key="frame" x="0.0" y="143" width="414" height="719"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="aTJ-nr-xHP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="08l-Wn-5zL"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="aTJ-nr-xHP" secondAttribute="trailing" constant="16" id="2VJ-PL-VJb"/>
                             <constraint firstItem="aTJ-nr-xHP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="B7C-1e-nah"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="51M-rH-7FR" secondAttribute="trailing" id="DHD-2O-aCx"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="51M-rH-7FR" secondAttribute="bottom" id="SdT-i7-wfA"/>
-                            <constraint firstItem="aTJ-nr-xHP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="fT6-Fv-01w"/>
                             <constraint firstItem="51M-rH-7FR" firstAttribute="top" secondItem="aTJ-nr-xHP" secondAttribute="bottom" constant="16" id="tjV-SX-E0p"/>
                             <constraint firstItem="51M-rH-7FR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="xzk-Lq-j9P"/>
                         </constraints>

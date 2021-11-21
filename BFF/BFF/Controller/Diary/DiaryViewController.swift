@@ -70,26 +70,35 @@ class DiaryViewController: UIViewController {
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Filter"), style: .done, target: self, action: #selector(switchShowList))
 
+        statusLabel.isHidden = false
+        statusLabel.text = "翻閱日記中..."
+        statusImage.isHidden = false
+        statusImage.image = UIImage(named: "LoadDiary")
+
         diaryWallViewModel.showingDiaries.bind {  [weak self] diaries in
-
-
-                if diaries.count != 0 {
-                    self?.statusLabel.isHidden = true
-                    self?.statusImage.isHidden = true
-
-                } else {
-                    self?.statusLabel.isHidden = false
-                    self?.statusLabel.text = "尚未新增毛小孩日記唷！"
-                    self?.statusImage.image = UIImage(named: "NoDiary")
-                    self?.statusImage.isHidden = false
-                }
 
             var diaryItems = [Item]()
 
+            let showUserPet = self?.userPetIds ?? [String]()
+
             diaries.forEach { diary in
-                diaryItems.append(Item.diary(diary))
+                if showUserPet.contains(diary.petId) {
+                    diaryItems.append(Item.diary(diary))
+                }
             }
             self?.diaries = diaryItems
+
+            if diaryItems.count != 0 {
+                self?.statusLabel.isHidden = true
+                self?.statusImage.isHidden = true
+
+            } else {
+                self?.statusLabel.isHidden = false
+                self?.statusLabel.text = "尚未新增毛小孩日記唷！"
+                self?.statusImage.image = UIImage(named: "NoDiary")
+                self?.statusImage.isHidden = false
+            }
+
         }
 
 
@@ -100,6 +109,8 @@ class DiaryViewController: UIViewController {
         }
 
     }
+
+
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -114,12 +125,6 @@ class DiaryViewController: UIViewController {
             self.selectedPetsCollectionView.isHidden = true
             
         }
-
-      statusLabel.isHidden = false
-      statusLabel.text = "翻閱日記中..."
-      statusImage.isHidden = false
-      statusImage.image = UIImage(named: "LoadDiary")
-
         diaryWallViewModel.fetchDiary()
         fetchData()
     }

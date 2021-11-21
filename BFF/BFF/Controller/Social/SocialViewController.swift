@@ -98,10 +98,13 @@ class SocialViewController: UIViewController {
 
         diaryWallViewModel.fetchDiary()
         fetchData()
+
+        NetStatusManger.share.startMonitoring()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.navigationBar.backgroundColor = .clear
+        NetStatusManger.share.stopMonitoring()
     }
 
     @objc func creatDiary(){

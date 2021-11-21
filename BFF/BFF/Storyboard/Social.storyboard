@@ -203,6 +203,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ho6-wR-WmA">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHd-19-oGw">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -328,15 +332,15 @@
                                                     <rect key="frame" x="32" y="80" width="350" height="62"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="center" text="5050505050505050505050505050505050505050" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKl-a4-lG0">
-                                                            <rect key="frame" x="0.0" y="42" width="288" height="20"/>
+                                                            <rect key="frame" x="0.0" y="42" width="276" height="20"/>
                                                             <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtn-5s-SOj">
-                                                            <rect key="frame" x="290" y="42" width="58" height="20"/>
+                                                            <rect key="frame" x="278" y="42" width="70" height="20"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="58" id="ZPu-EF-KtJ"/>
+                                                                <constraint firstAttribute="width" constant="70" id="ZPu-EF-KtJ"/>
                                                                 <constraint firstAttribute="height" constant="20" id="xvP-q5-cwX"/>
                                                             </constraints>
                                                             <color key="tintColor" name="main"/>
@@ -401,14 +405,19 @@
                         <viewLayoutGuide key="safeArea" id="y09-Vm-R76"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="ho6-wR-WmA" firstAttribute="leading" secondItem="y09-Vm-R76" secondAttribute="leading" id="1Dz-ch-QVy"/>
                             <constraint firstItem="IHd-19-oGw" firstAttribute="leading" secondItem="y09-Vm-R76" secondAttribute="leading" id="1G9-sQ-DHM"/>
                             <constraint firstItem="IHd-19-oGw" firstAttribute="top" secondItem="y09-Vm-R76" secondAttribute="top" id="BZX-bx-1XT"/>
+                            <constraint firstAttribute="bottom" secondItem="ho6-wR-WmA" secondAttribute="bottom" id="DSN-O6-2zj"/>
+                            <constraint firstItem="y09-Vm-R76" firstAttribute="trailing" secondItem="ho6-wR-WmA" secondAttribute="trailing" id="FGi-St-py1"/>
+                            <constraint firstItem="ho6-wR-WmA" firstAttribute="top" secondItem="oLi-Je-bL9" secondAttribute="top" id="UAJ-Rb-Cxm"/>
                             <constraint firstItem="y09-Vm-R76" firstAttribute="bottom" secondItem="IHd-19-oGw" secondAttribute="bottom" id="h3g-ZI-BtB"/>
                             <constraint firstItem="y09-Vm-R76" firstAttribute="trailing" secondItem="IHd-19-oGw" secondAttribute="trailing" id="tD4-Mq-kFO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="隨意逛" id="KBv-YQ-LIi"/>
                     <connections>
+                        <outlet property="backGroundView" destination="ho6-wR-WmA" id="zam-QD-BF4"/>
                         <outlet property="tableView" destination="IHd-19-oGw" id="o8r-tT-yhe"/>
                     </connections>
                 </viewController>
