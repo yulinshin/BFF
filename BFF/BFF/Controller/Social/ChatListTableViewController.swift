@@ -23,10 +23,12 @@ class ChatListTableViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.viewModel?.getChatData()
+        NetStatusManger.share.startMonitoring()
+
     }
 
     override func viewDidDisappear(_ animated: Bool) {
+        NetStatusManger.share.stopMonitoring()
     }
 
 

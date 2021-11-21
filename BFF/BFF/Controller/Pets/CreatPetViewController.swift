@@ -255,10 +255,10 @@ extension CreatPetViewController: UITableViewDataSource {
 
         case "生日" :
 
-            cell.creatDatePicker()
+
 
             viewModel.birthday.bind { birthday in
-
+                cell.creatDatePicker()
                 cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
                 cell.textField.text = birthday
 

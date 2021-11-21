@@ -69,7 +69,7 @@ class PetInfoTableTableViewCell: UITableViewCell {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
 
-        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressedFromDate))
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressedFromDate))
 
         toolbar.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
@@ -110,7 +110,7 @@ class PetInfoTableTableViewCell: UITableViewCell {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
 
-        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressedFromPicker))
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressedFromPicker))
 
         toolbar.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 

@@ -58,10 +58,29 @@ class CreatDiaryViewController: UIViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "main")
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+         if petsData.count == 0 {
+            self.showNoPetAlert()
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        NetStatusManger.share.startMonitoring()
+
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        NetStatusManger.share.stopMonitoring()
+    }
+
     @objc func saveDiary() {
 
         guard let petId = selectedPetId,
               let image = imageView.image else {
+                  showDiaryNotComplictedAlert()
                   return
               }
 
@@ -73,9 +92,35 @@ class CreatDiaryViewController: UIViewController {
 
             case .success(let pic):
 
-                FirebaseManager.shared.creatDiary(content: self.diaryTextView.text, pics: [pic], isPublic: true, petTags: self.petTags, petId: petId)
+                FirebaseManager.shared.creatDiary(content: self.diaryTextView.text, pics: [pic], isPublic: true, petTags: self.petTags, petId: petId) { result in
 
-                ProgressHUD.showSuccess(text:"新增日記成功")
+                    switch result {
+
+                    case.success(let message):
+                        print (message)
+                        ProgressHUD.showSuccess(text:"新增日記成功")
+
+                    case.failure(let error):
+
+                        switch error {
+
+                        case .noNetWorkContent:
+
+                            ProgressHUD.showFailure(text: "無網路連線")
+
+                        case .gotFirebaseError( let error ):
+
+                            ProgressHUD.showFailure(text: "上傳失敗，請重新上傳")
+                            print (error)
+                        }
+
+
+                    }
+
+
+                }
+
+
 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                     self.navigationController?.dismiss(animated: true, completion: nil)
@@ -83,7 +128,18 @@ class CreatDiaryViewController: UIViewController {
 
 
             case .failure(let error):
-                print("fetchData.failure\(error)")
+
+                                                                                                                      switch error {
+
+                case .noNetWorkContent:
+
+                    ProgressHUD.showFailure(text: "無網路連線")
+
+                case .gotFirebaseError( let error ):
+
+                    ProgressHUD.showFailure(text: "上傳失敗，請重新上傳")
+                    print (error)
+                }
 
             }
 
@@ -119,6 +175,37 @@ class CreatDiaryViewController: UIViewController {
             
         }
         
+    }
+
+    func showNoPetAlert() {
+
+        let alertController = UIAlertController(title: "您尚無毛小孩唷", message: "請至少新增一隻毛小孩才能進行填寫日記唷", preferredStyle: .alert)
+
+        var deleteAction = UIAlertAction(title: "前往新增", style: .default) { action in
+
+            let storyboard = UIStoryboard(name: "Pet", bundle: nil)
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatPetViewController") as? CreatPetViewController else { return }
+            controller.presentMode = .creat
+            self.navigationController?.present(controller, animated: true, completion: nil)
+
+        }
+
+        alertController.addAction(deleteAction)
+
+        alertController.addAction(UIAlertAction(title: "取消", style: .cancel))
+
+        self.present(alertController, animated: true, completion: nil)
+
+    }
+
+    func showDiaryNotComplictedAlert() {
+
+        let alertController = UIAlertController(title: "日記不完整", message: "請確認日記資訊是否完整（至少上傳一張照片與選擇一隻毛小孩唷！）", preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: "了解！", style: .cancel))
+
+        self.present(alertController, animated: true, completion: nil)
+
     }
 }
 

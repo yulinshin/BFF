@@ -84,12 +84,11 @@ class NotificationManger {
 
         print("countDate: \(triggerDate)")
 
-//        triggerDate.hour = triggerDate.hour
-        guard let second = triggerDate.second else { return }
-        triggerDate.second = second + 10
-//        triggerDate.second = 0
+        triggerDate.hour = 6
+        triggerDate.minute = 30
+        triggerDate.second = 0
 
-        print("TestDate: \(triggerDate)")
+        print("TriggerDate: \(triggerDate)")
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
 
@@ -97,9 +96,6 @@ class NotificationManger {
 
         setNotification.notifyTime = Timestamp(date: notifyTime)
         print("SetedNotification: \(setNotification.notifyTime.dateValue())")
-
-        //ForTese 10s
-        let testTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
 
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
 
