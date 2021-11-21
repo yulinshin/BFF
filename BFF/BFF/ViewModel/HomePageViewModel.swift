@@ -8,12 +8,15 @@
 import Foundation
 import CoreData
 import UIKit
+import Kingfisher
+import AVFoundation
 
 class HomePageViewModel: NSObject {
 
     var user: User?
     let userName = Box("")
     let notifications = Box([Notification]())
+    let notificationModels = Box([NotificationViewModel]())
     let pets = Box([Pet]())
     let usersPetsIds = Box([String]())
     var userDataDidLoad: (() -> Void)?
@@ -23,7 +26,7 @@ class HomePageViewModel: NSObject {
     override init() {
         super.init()
         self.fetchUserData()
-        self.fetchNotificationData()
+        self.listenNotificationData()
     }
 
     deinit {
@@ -34,7 +37,6 @@ class HomePageViewModel: NSObject {
 
         let id = notifications.value[indexPath].id
         FirebaseManager.shared.removeNotification(notifyId: id)
-        userNotificationsDidChange?()
 
     }
 
@@ -186,10 +188,8 @@ class HomePageViewModel: NSObject {
                 }
 
                 showNotifications = showNotifications.sorted(by:{ $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
-
                 self.notifications.value = showNotifications
-
-                self.userNotificationsDidChange?()
+                self.coverToNotificationVM()
                 print("upDated NotificationData at HomeVM")
 
             case .failure(let error):
@@ -200,6 +200,16 @@ class HomePageViewModel: NSObject {
 
         }
 
+    }
+    func coverToNotificationVM(){
+
+        notificationModels.value = [NotificationViewModel]()
+        self.notifications.value.forEach { notification in
+            let viewModel = NotificationViewModel(notification: notification)
+            notificationModels.value.append(viewModel)
+        }
+
+        self.userNotificationsDidChange?()
     }
 
     func listenNotificationData() {
@@ -219,7 +229,7 @@ class HomePageViewModel: NSObject {
                 showNotifications = showNotifications.sorted(by:{ $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
                 self.notifications.value = showNotifications
 
-                self.userNotificationsDidChange?()
+                self.coverToNotificationVM()
                 print("upDated NotificationData at HomeVM")
 
             case .failure(let error):
@@ -284,6 +294,45 @@ class HomePageViewModel: NSObject {
     }
 }
 
+
 extension HomePageViewModel: NSFetchedResultsControllerDelegate {
 
+}
+
+
+class NotificationViewModel {
+
+    var content = Box("")
+    var petId = Box("")
+    var petPicUrl = Box("")
+    var petName = Box("")
+    var type = Box("")
+    var diaryId = Box("")
+    var supplyId = Box("")
+
+    init(notification: Notification){
+
+        self.content.value = notification.content
+        self.petId.value = notification.fromPets.first ?? ""
+        self.type.value = notification.type
+        FirebaseManager.shared.fetchPet(petId: self.petId.value) { result in
+            switch result {
+
+            case .success(let pet):
+                self.petPicUrl.value = pet.petThumbnail?.url ?? ""
+                self.petName.value = pet.name
+            case .failure(let error):
+                print (error)
+
+            }
+        }
+        if let diaryId = notification.diaryId {
+            self.diaryId.value = diaryId
+        }
+
+        if let supplyId = notification.supplyId {
+            self.supplyId.value = supplyId
+        }
+
+    }
 }

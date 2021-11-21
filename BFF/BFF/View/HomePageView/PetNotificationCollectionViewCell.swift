@@ -16,12 +16,26 @@ class PetNotificationCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var notificationCard: UIView!
 
     var didTapCancle: (() -> Void)?
-    
-    func setup(petName: String, content: String, petImage: String ) {
-        petThumbnailImageView.loadImage(petImage, placeHolder: UIImage(systemName: "person.fill"))
-        contentLabel.text = content
-        petNameLabel.text = petName
+    var didTapSupplyNotification: ((String) -> ())?
+    var didTapCommentNotification: ((String) -> ())?
+    var viewModel: NotificationViewModel?
+    func setup(viewModel: NotificationViewModel) {
 
+        self.viewModel = viewModel
+
+        viewModel.petPicUrl.bind { url in
+            self.petThumbnailImageView.loadImage(url, placeHolder: UIImage(systemName: "person.fill"))
+        }
+
+        viewModel.content.bind { content in
+            self.contentLabel.text = content
+        }
+
+        viewModel.petName.bind { name in
+            self.petNameLabel.text = name
+        }
+        notificationCard.isUserInteractionEnabled = true
+        notificationCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapNotification)))
     }
 
     override func layoutSubviews() {
@@ -40,6 +54,19 @@ class PetNotificationCollectionViewCell: UICollectionViewCell {
     @IBAction func tapCancelButton(_ sender: UIButton) {
         
         self.didTapCancle?()
+
+    }
+
+    @objc func didTapNotification(){
+
+        if viewModel?.type.value == "comment" {
+            guard let diaryId = viewModel?.diaryId.value else { return }
+            didTapCommentNotification?(diaryId)
+
+        } else {
+            guard let supplyId = viewModel?.supplyId.value else { return }
+            didTapSupplyNotification?(supplyId)
+        }
 
     }
 }

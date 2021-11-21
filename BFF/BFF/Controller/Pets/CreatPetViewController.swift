@@ -65,6 +65,9 @@ class CreatPetViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        NetStatusManger.share.startMonitoring()
 
         switch presentMode {
 
@@ -108,6 +111,11 @@ class CreatPetViewController: UIViewController {
         }
         self.petInfoTableView.reloadData()
 
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NetStatusManger.share.stopMonitoring()
     }
 
     @objc func coverToEditMode(){
