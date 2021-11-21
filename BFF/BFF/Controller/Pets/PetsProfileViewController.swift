@@ -63,6 +63,13 @@ class PetsProfileViewController: UIViewController {
 
     }
 
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+    }
+
+
     func createLayout() -> UICollectionViewLayout {
 
             let layout = UICollectionViewCompositionalLayout { index, _ -> NSCollectionLayoutSection? in
@@ -246,17 +253,17 @@ class PetsProfileViewController: UIViewController {
 
             if viewModel.isFollowed.value {
 
-                FirebaseManager.shared.removeCurrentUserFollow(followPetId: viewModel.petId.value)
+                FirebaseManager.shared.removeCurrentUserFromTagetFollow(followPetId: viewModel.petId.value)
 
-
+                viewModel.followersCount.value -= 1
                 viewModel.isFollowed.value = false
 
 
             } else {
 
-                FirebaseManager.shared.updateCurrentUserFollow(followPetId: viewModel.petId.value)
+                FirebaseManager.shared.updateTargetUserFollow(followPetId: viewModel.petId.value)
 
-
+                viewModel.followersCount.value += 1
                 viewModel.isFollowed.value = true
 
             }
@@ -364,7 +371,13 @@ extension PetsProfileViewController: UICollectionViewDataSource {
 extension PetsProfileViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print ("didTap at \(indexPath.row)")
+
+        guard let diary = viewModel?.diaries.value[indexPath.row] else { return }
+        let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
+        controller.viewModel = DetialViewModel(from: diary)
+        self.navigationController?.show(controller, sender: nil)
+
     }
 
 
@@ -403,7 +416,16 @@ class ProfileViewModel {
                 self.petName.value = pet.name
                 self.age.value = Date().getAge(from: pet.healthInfo.birthday)
                 self.birthDay.value = pet.healthInfo.birthday
-                self.followersCount.value = pet.followers?.count ?? 0
+                if let followers = pet.followers {
+                    self.followersCount.value = followers.count
+                    if followers.contains(FirebaseManager.shared.userId){
+                        self.isFollowed.value = true
+                    } else {
+                        self.isFollowed.value = false
+                    }
+                } else {
+                    self.isFollowed.value = false
+                }
                 self.likedCount.value = pet.liked ?? 0
                 self.ownerUserId.value = pet.userId
 
@@ -414,9 +436,12 @@ class ProfileViewModel {
 
 
                     case .success(let diaries):
-
+                        self.likedCount.value = 0
                         self.diaries.value = diaries
                         self.diariesCount.value = diaries.count
+                        diaries.forEach { diary in
+                            self.likedCount.value += diary.whoLiked.count
+                        }
                         self.gotData?()
 
 
@@ -428,31 +453,6 @@ class ProfileViewModel {
 
                 }
 
-
-                FirebaseManager.shared.fetchUser { result in
-
-
-                    switch result {
-
-
-                    case .success(let user):
-
-
-                        self.isFollowed.value = user.followedPets?.contains(petId) ?? false
-                        print ("IS Follwed \(user.followedPets)")
-                        self.isBlocked.value = user.blockUsers?.contains(self.ownerUserId.value) ?? false
-                        print ("IS Block \(user.blockUsers)")
-                        self.gotData?()
-
-                    case .failure(let error):
-
-                        print("Get user's info  Error /n \(error)")
-
-                    }
-
-
-
-                }
 
             case .failure(let error):
 
