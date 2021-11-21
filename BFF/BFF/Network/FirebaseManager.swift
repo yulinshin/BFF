@@ -109,20 +109,20 @@ class FirebaseManager {
     }
 
 
-    func updateCurrentUserFollow(followPetId: String ) {
+    func updateTargetUserFollow(followPetId: String ) {
 
 
-        let currentUserDB = dateBase.collection("Users").document(userId)
-
-        currentUserDB.updateData(["followedPets": FieldValue.arrayUnion([followPetId])])
+        let currentUserDB = dateBase.collection("Pets").document(followPetId)
+        let target =
+        currentUserDB.updateData(["followers": FieldValue.arrayUnion([userId])])
     }
 
-    func removeCurrentUserFollow(followPetId: String ) {
+    func removeCurrentUserFromTagetFollow(followPetId: String ) {
 
 
-        let currentUserDB = dateBase.collection("Users").document(userId)
+        let currentUserDB = dateBase.collection("Pets").document(followPetId)
 
-        currentUserDB.updateData(["followedPets": FieldValue.arrayRemove([followPetId])])
+        currentUserDB.updateData(["followers": FieldValue.arrayRemove([userId])])
     }
 
     func updateCurrentUserBlockUsers(blockUserId: String ) {
