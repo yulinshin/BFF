@@ -332,6 +332,22 @@ class FirebaseManager {
 
     }
 
+
+
+    func creatNotificationFor(usrId: String, newNotify: Notification) {
+
+        let document =   dateBase.collection("Users").document(usrId).collection("Notifications").document(newNotify.id)
+        do {
+            try document.setData(from: newNotify)
+            print("upLoad NotificationInFo Success - \(newNotify) ")
+        } catch {
+            print("upLoad NotificationInFo Success - \(error) ")
+        }
+    }
+
+
+
+
     // swiftlint:disable cyclomatic_complexity
     func listenAllMessages(completion: @escaping (Result<[Message], Error>) -> Void) {
 
@@ -842,6 +858,25 @@ class FirebaseManager {
     }
 
 
+
+
+    func fetchDiary(diaryId: String, completion: @escaping (Result<Diary, Error>) -> Void) {
+
+        dateBase.collection("Diaries").document(diaryId).getDocument { (document, error) in
+
+            if let document = document, document.exists {
+                do {
+                    if let diary = try document.data(as: Diary.self, decoder: Firestore.Decoder()) {
+                        completion(.success(diary))
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+
+
     func fetchPetAllDiaries(petId: String, completion: @escaping (Result<[Diary], Error>) -> Void) {
 
         dateBase.collection("Diaries").whereField("petId", isEqualTo: petId).getDocuments { (querySnapshot, error) in
@@ -1058,7 +1093,7 @@ class FirebaseManager {
         }
     }
 
-    func creatComments(content: String, petId: String, diaryId: String) {
+    func creatComments(content: String, petId: String, diaryId: String, diaryOwner: String) {
 
         let commentsRef = dateBase.collection("Comments")
         let document = commentsRef.document()
@@ -1067,7 +1102,16 @@ class FirebaseManager {
         do {
             try document.setData(from: comment)
             dateBase.collection("Diaries").document(diaryId).updateData(["comments": FieldValue.arrayUnion([document.documentID])])
+
+
+            if diaryId != userId {
+                // swiftlint:disable:next line_length
+                let notifycation = Notification(content: "回覆了你的日記貼文", notifyTime: Timestamp(date: Date()), fromPets: [petId], title: "", type: "comment", id: "Comment\(document.documentID)", diaryId: diaryId)
+                creatNotificationFor(usrId: diaryOwner, newNotify: notifycation)
+            }
+
             print(document)
+
         } catch {
             print(error)
         }

@@ -16,5 +16,7 @@ struct Notification: Codable {
     var title: String
     var type: String
     var id: String
+    var diaryId: String?
+    var supplyId: String?
 
 }
