@@ -85,8 +85,8 @@
                     <connections>
                         <outlet property="allButton" destination="Sg0-Lb-CZN" id="RbH-Ek-uQK"/>
                         <outlet property="mapView" destination="51M-rH-7FR" id="9zO-zZ-Z4g"/>
-                        <outlet property="normailButton" destination="S1e-pL-09U" id="UaE-cv-tjI"/>
-                        <outlet property="sepcialButton" destination="QKw-vs-8Iq" id="zFo-Tx-KeE"/>
+                        <outlet property="normalButton" destination="S1e-pL-09U" id="UaE-cv-tjI"/>
+                        <outlet property="specialButton" destination="QKw-vs-8Iq" id="zFo-Tx-KeE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

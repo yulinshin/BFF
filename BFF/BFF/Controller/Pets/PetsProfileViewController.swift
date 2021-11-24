@@ -36,7 +36,7 @@ class PetsProfileViewController: UIViewController {
     @IBOutlet weak var topColorBackground: UIView!
     @IBOutlet weak var petScrollView: UIScrollView!
 
-    @IBOutlet weak var actionStaclview: UIStackView!
+    @IBOutlet weak var actionStackView: UIStackView!
     var viewModel: ProfileViewModel?
 
     override func viewDidLoad() {
@@ -63,19 +63,15 @@ class PetsProfileViewController: UIViewController {
 
     }
 
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.tintColor = UIColor.white
     }
 
-
     func createLayout() -> UICollectionViewLayout {
 
-            let layout = UICollectionViewCompositionalLayout { index, _ -> NSCollectionLayoutSection? in
+            let layout = UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection? in
 
-                // item
-                // First type: 1/3 view.width square
                 let tripletSquareItem = NSCollectionLayoutItem(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1/3),
@@ -84,7 +80,6 @@ class PetsProfileViewController: UIViewController {
                 )
                 tripletSquareItem.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
 
-                // First type: 1/3 view.width square
                 let tripletSquareItemVertical = NSCollectionLayoutItem(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1),
@@ -93,7 +88,6 @@ class PetsProfileViewController: UIViewController {
                 )
                 tripletSquareItemVertical.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
 
-                // Second type: 3/2 view.width large square
                 let largeSquareItem = NSCollectionLayoutItem(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(2/3),
@@ -102,8 +96,6 @@ class PetsProfileViewController: UIViewController {
                 )
                 largeSquareItem.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
 
-                // group
-                // 1. MAIN, 1/3 square x 3
                 let threeItemGroup = NSCollectionLayoutGroup.horizontal(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
@@ -113,7 +105,6 @@ class PetsProfileViewController: UIViewController {
                     count: 3
                 )
 
-                // 2. 1/3 square x 2 vertical
                 let verticalGroup = NSCollectionLayoutGroup.vertical(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1/3),
@@ -123,7 +114,6 @@ class PetsProfileViewController: UIViewController {
                     count: 2
                 )
 
-                // 3. MAIN, one large at left, 2 small at right
                 let horizontalComboOneGroup = NSCollectionLayoutGroup.horizontal(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
@@ -135,7 +125,6 @@ class PetsProfileViewController: UIViewController {
                     ]
                 )
 
-                // 4. MAIN, 2 small at left, one large at right
                 let horizontalComboTwoGroup = NSCollectionLayoutGroup.horizontal(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
@@ -166,21 +155,16 @@ class PetsProfileViewController: UIViewController {
 
     }
 
-
-    func setUp(){
-
-
+    func setUp() {
 
         guard let viewModel = viewModel else {
             return
         }
 
-
-
         if viewModel.ownerUserId.value == FirebaseManager.shared.userId {
-            actionStaclview.isHidden = true
+            actionStackView.isHidden = true
         } else {
-            actionStaclview.isHidden = false
+            actionStackView.isHidden = false
         }
 
         viewModel.petImageThumbnailUrl.bind { url in
@@ -245,7 +229,7 @@ class PetsProfileViewController: UIViewController {
 
     }
 
-    @IBAction func didTapFolloweButton(_ sender: UIButton) {
+    @IBAction func didTapFollowButton(_ sender: UIButton) {
 
         guard let viewModel = viewModel else {
             return
@@ -253,11 +237,10 @@ class PetsProfileViewController: UIViewController {
 
             if viewModel.isFollowed.value {
 
-                FirebaseManager.shared.removeCurrentUserFromTagetFollow(followPetId: viewModel.petId.value)
+                FirebaseManager.shared.removeCurrentUserFromTargetFollow(followPetId: viewModel.petId.value)
 
                 viewModel.followersCount.value -= 1
                 viewModel.isFollowed.value = false
-
 
             } else {
 
@@ -282,16 +265,13 @@ class PetsProfileViewController: UIViewController {
 
         controller.viewModel = ChatGroupVM( otherUserId: viewModel.ownerUserId.value)
 
-
         self.navigationController?.show(controller, sender: nil)
-
 
     }
 
     @objc func didTapMoreButton() {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
 
         guard let viewModel = viewModel else {
             return
@@ -308,7 +288,6 @@ class PetsProfileViewController: UIViewController {
             action = UIAlertAction(title: "封鎖並檢舉此寵物的主人", style: .default, handler: blockUser)
             }
 
-
         // Block PetsId -> Only show on other's Diary
         alertController.addAction(action)
 
@@ -318,36 +297,28 @@ class PetsProfileViewController: UIViewController {
 
     }
 
-
     func blockUser(_ action: UIAlertAction) {
 
         guard let viewModel = viewModel else {
             return
         }
 
-
             if viewModel.isBlocked.value {
-
 
                 FirebaseManager.shared.unblockUser(blockUserId: viewModel.ownerUserId.value)
 
                 viewModel.isBlocked.value = false
 
-
             } else {
 
                 FirebaseManager.shared.updateCurrentUserBlockUsers(blockUserId: viewModel.ownerUserId.value)
 
-
                 viewModel.isBlocked.value = true
 
             }
-
-
     }
 
 }
-
 
 extension PetsProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -375,31 +346,27 @@ extension PetsProfileViewController: UICollectionViewDelegate {
         guard let diary = viewModel?.diaries.value[indexPath.row] else { return }
         let storyboard = UIStoryboard(name: "Diary", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
-        controller.viewModel = DetialViewModel(from: diary)
+        controller.viewModel = DetailViewModel(from: diary)
         self.navigationController?.show(controller, sender: nil)
 
     }
-
-
 }
-
-
 
 class ProfileViewModel {
 
-    let petId = Box(" ")
-    let petImageThumbnailUrl = Box(" ")
-    let petName = Box(" ")
-    let birthDay = Box(" ")
-    let age = Box(" ")
+    let petId = Box("")
+    let petImageThumbnailUrl = Box("")
+    let petName = Box("")
+    let birthDay = Box("")
+    let age = Box("")
     let diariesCount = Box(0)
     let followersCount = Box(0)
     let likedCount = Box(0)
     let isFollowed = Box(false)
     let isBlocked = Box(false)
     let diaries = Box([Diary]())
-    var gotData: (()->Void)?
-    var ownerUserId = Box(" ")
+    var gotData: (() -> Void)?
+    var ownerUserId = Box("")
 
     init(petId: String) {
 
@@ -418,7 +385,7 @@ class ProfileViewModel {
                 self.birthDay.value = pet.healthInfo.birthday
                 if let followers = pet.followers {
                     self.followersCount.value = followers.count
-                    if followers.contains(FirebaseManager.shared.userId){
+                    if followers.contains(FirebaseManager.shared.userId) {
                         self.isFollowed.value = true
                     } else {
                         self.isFollowed.value = false
@@ -431,9 +398,7 @@ class ProfileViewModel {
 
                 FirebaseManager.shared.fetchPetAllDiaries(petId: pet.petId) { result in
 
-
                     switch result {
-
 
                     case .success(let diaries):
                         self.likedCount.value = 0
@@ -444,7 +409,6 @@ class ProfileViewModel {
                         }
                         self.gotData?()
 
-
                     case .failure(let error):
 
                         print("Get pet's Diaries Error /n \(error)")
@@ -453,26 +417,11 @@ class ProfileViewModel {
 
                 }
 
-
             case .failure(let error):
 
                 print("Get pet's Info Error /n \(error)")
 
-
             }
-
         }
-
     }
-
-
-}
-
-
-extension PetsProfileViewController: UIScrollViewDelegate {
-
-
- 
-
-
 }

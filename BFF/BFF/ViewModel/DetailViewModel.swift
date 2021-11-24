@@ -10,14 +10,14 @@ import UIKit
 import Kingfisher
 import FirebaseFirestoreSwift
 
-class DetialViewModel {
+class DetailViewModel {
 
-    private static let defaultDiray = Diary(content: " ", diaryId: " ", images: [Pic](), isPublic: true, petTags: [String](), userId: " ", petId: " ")
+    private static let defaultDiary = Diary(content: " ", diaryId: " ", images: [Pic](), isPublic: true, petTags: [String](), userId: " ", petId: " ")
     let postImageUrl = Box(" ")
     let postPetsName = Box(" ")
     let postPetImageUrl = Box(" ")
     let postPetFileName = Box(" ")
-    let creatDate = Box(" ")
+    let createDate = Box(" ")
     let contentText = Box(" ")
     let petTags = Box([String]())
     let numberOfComments = Box(0)
@@ -27,21 +27,21 @@ class DetialViewModel {
     var diary: Diary?
 
     init() {
-        getdiaryData(from: Self.defaultDiray)
+        getDiaryData(from: Self.defaultDiary)
     }
 
     init(from diary: Diary) {
-        getdiaryData(from: diary)
+        getDiaryData(from: diary)
         self.diary = diary
     }
 
-    private func getdiaryData(from diary: Diary) {
+    private func getDiaryData(from diary: Diary) {
         if let image = diary.images.first {
             self.postImageUrl.value = image.url
             self.postPetFileName.value = image.fileName
         }
         
-        self.creatDate.value =  diary.createdTime.dateValue().toString()
+        self.createDate.value =  diary.createdTime.dateValue().toString()
         self.contentText.value = diary.content
         self.petTags.value = diary.petTags
         self.numberOfComments.value = diary.comments.count
@@ -72,13 +72,13 @@ class DetialViewModel {
         FirebaseManager.shared.updateDiaryContent(diaryId: diaryId.value, content: content)
     }
 
-    func deleteDiary(){
-        var pic = Pic(url: postImageUrl.value, fileName: postPetFileName.value)
+    func deleteDiary() {
+        let pic = Pic(url: postImageUrl.value, fileName: postPetFileName.value)
         print("Delete\(pic)")
-        FirebaseManager.shared.delateDiary(diaryId: diaryId.value, diatyPics:[pic]) { result in
+        FirebaseManager.shared.delateDiary(diaryId: diaryId.value, diaryPics: [pic]) { result in
             switch result {
-            case .success(let sucessMessage):
-                print(sucessMessage)
+            case .success(let successMessage):
+                print(successMessage)
 
             case .failure(let error):
                 print("fetchData.failure\(error)")
@@ -86,4 +86,3 @@ class DetialViewModel {
         }
     }
 }
-

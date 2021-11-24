@@ -60,7 +60,7 @@ extension DiaryViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DairyPhotoCell.identifier, for: indexPath) as? DairyPhotoCell
 
             guard let imageStr = item.diary?.images.first?.url else { return cell }
-            cell?.configure(with: PhotoCellViewlModel(with: imageStr))
+            cell?.configure(with: PhotoCellViewModel(with: imageStr))
 
             return cell
         }
@@ -77,7 +77,7 @@ extension DiaryViewController {
 
             guard let imageStr = item.pet?.petThumbnail?.url,
                   let petId = item.pet?.petId else { return cell }
-            cell?.congfigure(with: PhotoCellViewlModel(with: imageStr), petId: petId)
+            cell?.configure(with: PhotoCellViewModel(with: imageStr), petId: petId)
             return cell
 
         }

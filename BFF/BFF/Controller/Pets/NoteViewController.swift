@@ -20,7 +20,7 @@ class NoteViewController: UIViewController, UITextViewDelegate {
 
         case edit
 
-        case creat
+        case create
 
     }
 
@@ -41,7 +41,7 @@ class NoteViewController: UIViewController, UITextViewDelegate {
         noteTextView.text = note
         if petsName == ""{
             titleLabel.text = "毛小孩的的備註事項"
-        }else{
+        } else {
             titleLabel.text = "\(petsName)的備註事項"
         }
 

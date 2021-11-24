@@ -24,8 +24,6 @@ class HomePageViewController: UIViewController {
 
     // MARK: - Can consider moving to VM -
     var sections = Section.allCases
-//    var catalogIcon = ["diary", "supply", "heart", "goal"]
-//    var catalogLabel =  ["相簿集", "用品", "健康", "成就"]
     var catalogIcon = ["diary", "supply", "heart"]
     var catalogLabel =  ["相簿集", "用品", "健康"]
     var viewModel = HomePageViewModel()
@@ -33,7 +31,7 @@ class HomePageViewController: UIViewController {
     var transparentView = UIView()
     var tableView = UITableView()
     var settingArray = ["帳戶設定", "黑名單管理", "登出"]
-    var settingPicArray = ["person.circle", "x.square.fill", "rectangle.portrait.and.arrow.right.fill"] // Change Icon if time allows
+    var settingPicArray = ["person.circle", "x.square.fill", "rectangle.portrait.and.arrow.right.fill"]
     let menuHeight: CGFloat = 250
 
 
@@ -58,7 +56,6 @@ class HomePageViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
         let barAppearance =  UINavigationBarAppearance()
         barAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "main") ]
         barAppearance.backgroundColor = .white
@@ -89,11 +86,9 @@ class HomePageViewController: UIViewController {
     }
 
     fileprivate func setViewModels() {
-        // After obtaining user data, perform reloadCollectionView
         viewModel.userDataDidLoad = {
             self.collectionView.reloadData()
         }
-        // When the monitored Notification data is updated, perform reloadCollectionView
         viewModel.userNotificationsDidChange = {
             self.collectionView.reloadData()
         }
@@ -155,19 +150,18 @@ extension HomePageViewController: UICollectionViewDataSource {
         switch section {
         case 0:
 
-            return 1    // Welcome title
+            return 1
 
         case 1:
 
-            return catalogIcon.count    // Action Catalog Section
+            return catalogIcon.count
 
         case 2:
 
-            return viewModel.notificationModels.value.count // Notifications Section
-
+            return viewModel.notificationModels.value.count
         case 3:
 
-            return viewModel.pets.value.count + 1 // User pets section, last one for add new pet
+            return viewModel.pets.value.count + 1
 
         default:
 
@@ -180,15 +174,14 @@ extension HomePageViewController: UICollectionViewDataSource {
 
         switch indexPath.section {
 
-        case 0: // Welcome title
-
+        case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WellcomeCollectionViewCell", for: indexPath)as? WellcomeCollectionViewCell else { return UICollectionViewCell() }
 
             cell.setup(userName: viewModel.userName.value, petsCount: viewModel.usersPetsIds.value.count)
 
             return cell
 
-        case 1: // Action Catalog Section
+        case 1:
 
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatalogCollectionViewCell", for: indexPath)as? CatalogCollectionViewCell else { fatalError() }
 
@@ -196,28 +189,25 @@ extension HomePageViewController: UICollectionViewDataSource {
 
             return cell
 
-        case 2: // Notifications Section
+        case 2:
 
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PetNotificationCollectionViewCell", for: indexPath)as? PetNotificationCollectionViewCell else { fatalError() }
 
-            cell.setup(viewModel:     viewModel.notificationModels.value[indexPath.row])
-            cell.didTapCancle = {
+            cell.setup(viewModel: viewModel.notificationModels.value[indexPath.row])
+            cell.didTapCancel = {
                 self.viewModel.removeNotification(indexPath: indexPath.row)
             }
-            cell.didTapSupplyNotification = { supplyId in
+            cell.didTapSupplyNotification = { _ in
 
                 let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "ListTableViewController") as? ListTableViewController else { return }
-
                 self.navigationController?.show(controller, sender: nil)
 
             }
 
             cell.didTapCommentNotification = { diaryId in
 
-
-                FirebaseManager.shared.fetchDiary(diaryId: diaryId){
-                    result in
+                FirebaseManager.shared.fetchDiary(diaryId: diaryId) { result in
 
                     switch result {
 
@@ -225,9 +215,8 @@ extension HomePageViewController: UICollectionViewDataSource {
 
                         let storyboard = UIStoryboard(name: "Diary", bundle: nil)
                         guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
-                        controller.viewModel = DetialViewModel(from: diary)
+                        controller.viewModel = DetailViewModel(from: diary)
                         self.navigationController?.show(controller, sender: nil)
-
 
                     case .failure(let error):
                         print(error)
@@ -249,11 +238,11 @@ extension HomePageViewController: UICollectionViewDataSource {
                 cell.didTapCard = {
 
                     let storyboard = UIStoryboard(name: "Pet", bundle: nil)
-                    guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatPetViewController") as? CreatPetViewController else { return }
+                    guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatePetViewController") as? CreatePetViewController else { return }
                     let nav = UINavigationController(rootViewController: controller)
                     nav.modalPresentationStyle = .fullScreen
                     nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor:UIColor(named: "main")]
-                    controller.presentMode = .creat
+                    controller.presentMode = .create
                     self.present(nav, animated: true, completion: nil)
 
                 }
@@ -292,7 +281,7 @@ extension HomePageViewController: UICollectionViewDelegate {
         if indexPath.section == 1 {
             switch indexPath.row {
 
-            case 0: // Diary
+            case 0:
 
                 let storyboard = UIStoryboard(name: "Diary", bundle: nil)
 
@@ -302,29 +291,26 @@ extension HomePageViewController: UICollectionViewDelegate {
 
                 self.navigationController?.show(controller, sender: nil)
 
-            case 1: // Supply
+            case 1:
 
                 let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "ListTableViewController") as? ListTableViewController else { return }
 
                 self.navigationController?.show(controller, sender: nil)
 
-
-            case 2: // Health
+            case 2:
 
                 let storyboard = UIStoryboard(name: "Pet", bundle: nil)
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "PetsListTableViewController") as? PetsListTableViewController else { return }
 
                 self.navigationController?.show(controller, sender: nil)
 
-            case 3: // Goal
+            case 3:
 
                 let storyboard = UIStoryboard(name: "Goal", bundle: nil)
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "GoalViewController") as? GoalViewController else { return }
 
                 self.navigationController?.pushViewController(controller, animated: true)
-
-
 
             default:
                 return
@@ -333,7 +319,6 @@ extension HomePageViewController: UICollectionViewDelegate {
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
 
         guard let tempScrollYPosition = tempScrollYPosition else {
 
@@ -422,13 +407,10 @@ extension HomePageViewController {
                 group.contentInsets.leading = 0
                 group.contentInsets.trailing = 20
 
-
                 let layoutSection = NSCollectionLayoutSection(group: group)
                 layoutSection.orthogonalScrollingBehavior = .groupPaging
                 layoutSection.interGroupSpacing = -40
                 layoutSection.contentInsets.leading = 8
-
-
 
                 return layoutSection
             }
@@ -465,9 +447,9 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
             let storyboard = UIStoryboard(name: "User", bundle: nil)
 
             guard let controller = storyboard.instantiateViewController(withIdentifier: "UserAccountTableViewController") as? UserAccountTableViewController else { return }
-            controller.user = FirebaseManager.shared.user
+            controller.user = FirebaseManager.shared.currentUser
 
-            guard let window =  UIApplication.shared.windows.filter { $0.isKeyWindow}.first else { return }
+            guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
             transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
             transparentView.frame = self.view.frame
             window.subviews.last?.removeFromSuperview()
@@ -481,14 +463,13 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
 
             guard let controller = storyboard.instantiateViewController(withIdentifier: "BlockPetsListTableViewController") as?    BlockPetsListTableViewController else { return }
 
-            guard let window =  UIApplication.shared.windows.filter { $0.isKeyWindow }.first else { return }
+            guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
             transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
             transparentView.frame = self.view.frame
             window.subviews.last?.removeFromSuperview()
             window.subviews.last?.removeFromSuperview()
 
             self.navigationController?.show(controller, sender: nil)
-
 
         case "登出":
 
@@ -499,9 +480,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
                 print("Error signing out: %@", signOutError)
             }
 
-
-
-            guard let window =  UIApplication.shared.windows.filter { $0.isKeyWindow }.first else { return }
+            guard let window =  UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
             transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
             transparentView.frame = self.view.frame
             window.subviews.last?.removeFromSuperview()
@@ -512,7 +491,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
             window.makeKeyAndVisible()
 
         default:
-            print("outOFrange")
+            print("out of range")
         }
 
     }

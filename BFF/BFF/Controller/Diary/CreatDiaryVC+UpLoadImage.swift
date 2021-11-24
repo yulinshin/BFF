@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension CreatDiaryViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension CreateDiaryViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @objc func handleSelectedDiaryImage() {
         let picker = UIImagePickerController()
@@ -24,16 +24,16 @@ extension CreatDiaryViewController: UIImagePickerControllerDelegate, UINavigatio
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 
-        var slectedImageFromPicker: UIImage?
+        var selectedImageFromPicker: UIImage?
 
         if let editedImage = info[.editedImage] as? UIImage {
-            slectedImageFromPicker = editedImage
+            selectedImageFromPicker = editedImage
         } else if let originalImage = info[.originalImage] as? UIImage {
             print(originalImage.size)
-            slectedImageFromPicker = originalImage
+            selectedImageFromPicker = originalImage
         }
 
-        if let selectedImage = slectedImageFromPicker {
+        if let selectedImage = selectedImageFromPicker {
             imageView.image = selectedImage
         }
         picker.dismiss(animated: true, completion: nil)

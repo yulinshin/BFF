@@ -14,16 +14,15 @@ struct Location {
     var phone: String
     var latitude: Double
     var longitude: Double
-    var adderass: String
+    var adders: String
 }
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
 
-
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var allButton: UIButton!
-    @IBOutlet weak var normailButton: UIButton!
-    @IBOutlet weak var sepcialButton: UIButton!
+    @IBOutlet weak var normalButton: UIButton!
+    @IBOutlet weak var specialButton: UIButton!
     private var placesClient: GMSPlacesClient!
 
     var locationManager = CLLocationManager()
@@ -49,13 +48,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
         self.infoWindow = loadNiB()
 
-        // User Location
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
-
 
         getGCPKey()
         getLocation()
@@ -77,10 +74,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
     }
 
-    func getGCPKey(){
+    func getGCPKey() {
+
         guard let path = Bundle.main.path(forResource: "Keys", ofType: "plist") else { return }
 
-        if let myDict = NSDictionary(contentsOfFile: path){
+        if let myDict = NSDictionary(contentsOfFile: path) {
             self.gcpKey = myDict["GCP_KEY"] as? String ?? ""
         }
 
@@ -92,7 +90,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let key = URLQueryItem(name: "key", value: gcpKey)
         let address = URLQueryItem(name: "majorDimension", value: "ROWS")
         components.queryItems = [key, address]
-        print( " KEY = ===== = = = == = \(gcpKey)")
 
         let task = URLSession.shared.dataTask(with: components.url!) { data, response, error in
             guard let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, error == nil else {
@@ -108,15 +105,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             }
             guard let results = json["values"] as? [[String]] else { return }
 
-            results.forEach { hostipal in
-                guard let latitude = Double(hostipal[3]),
-                      let longitude = Double(hostipal[4])
+            results.forEach { hospital in
+                guard let latitude = Double(hospital[3]),
+                      let longitude = Double(hospital[4])
                 else { return }
-                let location = Location(name: hostipal[0], phone: hostipal[2], latitude: latitude, longitude: longitude, adderass: hostipal[1])
+                let location = Location(name: hospital[0], phone: hospital[2], latitude: latitude, longitude: longitude, adders: hospital[1])
                 let marker = GMSMarker()
                 marker.position = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-//                marker.title = location.name
-//                marker.snippet = location.phone
                 marker.map = self.mapView
                 marker.userData = location
                 self.locationsNormal.append(marker)
@@ -129,7 +124,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func getSpecialLocation() {
 
         var components = URLComponents(string: "https://sheets.googleapis.com/v4/spreadsheets/1ZfgSLKt-SW73SnaTXZAsslwmdJPEW3JlZMS7NxXJ-kQ/values/Hospital_special?")!
-        let key = URLQueryItem(name: "key", value: gcpKey) // use your key
+        let key = URLQueryItem(name: "key", value: gcpKey)
         let address = URLQueryItem(name: "majorDimension", value: "ROWS")
         components.queryItems = [key, address]
 
@@ -146,15 +141,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 return
             }
             guard let results = json["values"] as? [[String]] else { return }
-            results.forEach { hostipal in
-                guard let latitude = Double(hostipal[3]),
-                      let longitude = Double(hostipal[4])
+            results.forEach { hospital in
+                guard let latitude = Double(hospital[3]),
+                      let longitude = Double(hospital[4])
                 else { return }
-                let location = Location(name: hostipal[0], phone: hostipal[2], latitude: latitude, longitude: longitude, adderass: hostipal[1])
+                let location = Location(name: hospital[0], phone: hospital[2], latitude: latitude, longitude: longitude, adders: hospital[1])
                 let marker = GMSMarker()
                 marker.position = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-//                marker.title = location.name
-//                marker.snippet = location.phone
                 marker.icon =  GMSMarker.markerImage(with: .yellow)
                 marker.map = self.mapView
                 marker.userData = location
@@ -170,7 +163,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         return infoWindow
     }
 
-    @IBAction func showAllHostipal(_ sender: Any) {
+    @IBAction func showAllHospital(_ sender: Any) {
         locationsNormal.forEach { marker in
             marker.map = mapView
         }
@@ -178,12 +171,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             marker.map = mapView
         }
         allButton.isSelected = true
-        normailButton.isSelected = false
-        sepcialButton.isSelected = false
+        normalButton.isSelected = false
+        specialButton.isSelected = false
 
     }
 
-    @IBAction func showNormailHostipal(_ sender: Any) {
+    @IBAction func showNormalHospital(_ sender: Any) {
 
         locationsNormal.forEach { marker in
             marker.map = mapView
@@ -193,9 +186,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
 
         allButton.isSelected = false
-        normailButton.isSelected = true
-        sepcialButton.isSelected = false
-
+        normalButton.isSelected = true
+        specialButton.isSelected = false
 
     }
     @IBAction func showSpecialHostipal(_ sender: Any) {
@@ -207,59 +199,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
 
         allButton.isSelected = false
-        normailButton.isSelected = false
-        sepcialButton.isSelected = true
+        normalButton.isSelected = false
+        specialButton.isSelected = true
     }
 }
-
-//    func performGoogleSearch(for string: String) {
-//
-//        var components = URLComponents(string: "https://maps.googleapis.com/maps/api/geocode/json")!
-//        let key = URLQueryItem(name: "key", value: "AIzaSyCuIEN8YUXa-OS0S5L2nOW_O__u4NfzfdY") // use your key
-//        let address = URLQueryItem(name: "address", value: string)
-//        components.queryItems = [key, address]
-//
-//        let task = URLSession.shared.dataTask(with: components.url!) { data, response, error in
-//            guard let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, error == nil else {
-//                print(String(describing: response))
-//                print(String(describing: error))
-//                return
-//            }
-//
-//            guard let json = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any] else {
-//                print("not JSON format expected")
-//                print(String(data: data, encoding: .utf8) ?? "Not string?!?")
-//                return
-//            }
-//
-//            guard let results = json["results"] as? [[String: Any]],
-//                let status = json["status"] as? String,
-//                status == "OK" else {
-//                    print("no results")
-//                    print(String(describing: json))
-//                    return
-//            }
-//
-//            DispatchQueue.main.async {
-//                // now do something with the results, e.g. grab `formatted_address`:
-//                let strings = results.compactMap { $0["formatted_address"] as? String }
-//                print (results)
-//                print (strings)
-//            }
-//        }
-//
-//        task.resume()
-//    }
-
-/*
- // MARK: - Navigation
-
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destination.
- // Pass the selected object to the new view controller.
- }
- */
 
 extension MapViewController: GMSMapViewDelegate, MapMarkerDelegate {
 
@@ -293,22 +236,19 @@ extension MapViewController: GMSMapViewDelegate, MapMarkerDelegate {
         infoWindow.removeFromSuperview()
         infoWindow = loadNiB()
         let location = locationMarker.position
-        // Pass the spot data to the info window, and set its delegate to self
         infoWindow.spotData = markerData
         infoWindow.delegate = self
 
-        // Configure UI properties of info window
         infoWindow.alpha = 0.9
         infoWindow.layer.cornerRadius = 12
         infoWindow.layer.borderWidth = 2
         infoWindow.layer.borderColor = UIColor.orange.cgColor
         infoWindow.linkButton.layer.cornerRadius = infoWindow.linkButton.frame.height / 2
 
-        infoWindow.addressLabel.text = markerData?.adderass
+        infoWindow.addressLabel.text = markerData?.adders
         infoWindow.nameLabel.text = markerData?.name
         infoWindow.phoneLabel.text = markerData?.phone
 
-        // Offset the info window to be directly above the tapped marker
         infoWindow.center = mapView.projection.point(for: location)
         infoWindow.center.y -=  60
         self.view.addSubview(infoWindow)

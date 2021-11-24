@@ -311,7 +311,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="actionStaclview" destination="YOa-5L-pVf" id="NRB-Cs-SOV"/>
+                        <outlet property="actionStackView" destination="YOa-5L-pVf" id="NRB-Cs-SOV"/>
                         <outlet property="ageLabel" destination="0jv-UA-Hqp" id="50J-V6-b6t"/>
                         <outlet property="birthdayLabel" destination="Un6-hV-Z6f" id="43C-0L-sfl"/>
                         <outlet property="diariesCollectionView" destination="Xzl-J1-GtX" id="G1x-wv-dbh"/>
@@ -427,8 +427,8 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="backGroundView" destination="F9d-Nj-35h" id="XgN-qe-w3f"/>
-                                    <outlet property="bitrhdayLabel" destination="MCk-LG-c5b" id="7qX-i9-hbz"/>
-                                    <outlet property="healthButtom" destination="ani-yF-AUR" id="sc9-z3-9bA"/>
+                                    <outlet property="birthdayLabel" destination="MCk-LG-c5b" id="7qX-i9-hbz"/>
+                                    <outlet property="healthButton" destination="ani-yF-AUR" id="sc9-z3-9bA"/>
                                     <outlet property="nameLabel" destination="Bbc-As-Oa5" id="xI6-Ka-iYp"/>
                                     <outlet property="petImage" destination="zDf-a8-FI4" id="IJV-u1-S7X"/>
                                 </connections>
@@ -622,10 +622,10 @@
             </objects>
             <point key="canvasLocation" x="1171" y="1580"/>
         </scene>
-        <!--Creat Pet View Controller-->
+        <!--Create Pet View Controller-->
         <scene sceneID="oBd-0l-fdq">
             <objects>
-                <viewController storyboardIdentifier="CreatPetViewController" id="KvB-DV-Se9" customClass="CreatPetViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreatePetViewController" id="KvB-DV-Se9" customClass="CreatePetViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xfi-Oo-oW4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

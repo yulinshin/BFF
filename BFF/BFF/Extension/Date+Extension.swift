@@ -9,14 +9,14 @@ import Foundation
 
 extension Date {
 
-    func daysBetweenDate(toDate:Date) -> Int {
+    func daysBetweenDate(toDate: Date) -> Int {
 
         let components = Calendar.current.dateComponents([.day], from: self, to: toDate)
         return components.day ?? 0
 
     }
 
-    func toString() -> String{
+    func toString() -> String {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-yyyy hh:mm"
@@ -28,22 +28,22 @@ extension Date {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-yyyy"
-        guard let date = dateFormatter.date(from:strData) else { return ""}
+        guard let date = dateFormatter.date(from: strData) else { return ""}
         let now = Date()
 
         let ageComponents = Calendar.current.dateComponents([.year, .month], from: date, to: now)
 
         var birthday = ""
         if let age = ageComponents.year {
-            if let month = ageComponents.month{
+            if let month = ageComponents.month {
                 birthday = "\(age)歲\(month)個月"
-            }else{
+            } else {
                 birthday = "\(age)歲"
             }
         } else {
-            if let month = ageComponents.month{
+            if let month = ageComponents.month {
                 birthday = "\(month)個月"
-            }else {
+            } else {
 
                 birthday = "0個月"
                 }
@@ -51,6 +51,5 @@ extension Date {
 
         return birthday
     }
-
 
 }

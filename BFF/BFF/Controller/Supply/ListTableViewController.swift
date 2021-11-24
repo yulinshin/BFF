@@ -11,7 +11,7 @@ import UserNotifications
 class ListTableViewController: UITableViewController {
 
 
-    var viewModel = SuppliesViewMdoel()
+    var viewModel = SuppliesViewModel()
 
     var notificationManger = NotificationManger()
 
@@ -27,7 +27,7 @@ class ListTableViewController: UITableViewController {
         tableView.register(addCellNib, forCellReuseIdentifier:    AddNewItemTableViewCell.identifier )
         notificationManger.setUp()
 
-        viewModel.suppiesDidChange = {
+        viewModel.suppliesDidChange = {
             self.tableView.reloadData()
         }
 
@@ -48,7 +48,7 @@ class ListTableViewController: UITableViewController {
 
         case 0:
 
-            return viewModel.suppiesViewModel.value.count
+            return viewModel.suppliesViewModel.value.count
 
         case 1:
             return  1
@@ -69,10 +69,10 @@ class ListTableViewController: UITableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SupplyListTableViewCell.identifier, for: indexPath) as? SupplyListTableViewCell else { return UITableViewCell() }
 
 
-                let cellViewModel = viewModel.suppiesViewModel.value[indexPath.row]
+                let cellViewModel = viewModel.suppliesViewModel.value[indexPath.row]
                 cell.viewModel = cellViewModel
-                cell.configur()
-                cell.didTapMoreButtom = {
+                cell.configure()
+                cell.didTapMoreButton = {
                     self.showMenu( viewModel: cellViewModel )
                 }
 
@@ -130,8 +130,8 @@ class ListTableViewController: UITableViewController {
 
             alert.addAction(UIAlertAction(title: "開啟提醒", style: .default, handler: {  _ in
 
-                guard let supply = viewModel.suppply else { return }
-                NotificationManger.shared.creatSupplyNotification(supply: supply )
+                guard let supply = viewModel.supply else { return }
+                NotificationManger.shared.createSupplyNotification(supply: supply )
                 viewModel.isNeedToRemind.value = true
                 viewModel.updateToDataBase()
             }))
@@ -142,13 +142,12 @@ class ListTableViewController: UITableViewController {
 
         }))
 
-
         self.present(alert, animated: true, completion: nil)
 
     }
 
 
-    func showNextPage(style:SupplyDetailViewController.ConstrolleMode , supplyModel: SupplyViewModel = SupplyViewModel()) {
+    func showNextPage(style: SupplyDetailViewController.ControllerMode, supplyModel: SupplyViewModel = SupplyViewModel()) {
         let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "SupplyDetailViewController") as? SupplyDetailViewController else { return }
 

@@ -12,17 +12,16 @@ class DiaryWallViewModel {
     var diaries = Box([Diary]())
     var showingDiaries = Box([Diary]())
     var didUpDateData: (() -> Void)?
-    var getDataFailure: (() -> Void )?
+    var getDataFailure: (() -> Void)?
 
     func fetchDiary() {
-        FirebaseManager.shared.fetchDiaries() { result in
+        FirebaseManager.shared.fetchDiaries { result in
 
             switch result {
 
             case .success(let diaries):
 
                 if diaries.count == 0 {
-
                     self.getDataFailure
 
                 } else {
@@ -43,9 +42,8 @@ class DiaryWallViewModel {
         }
     }
 
-
     func fetchAllDiary() {
-        FirebaseManager.shared.fetchAllDiaries() { result in
+        FirebaseManager.shared.fetchAllDiaries { result in
 
             switch result {
 
@@ -58,15 +56,14 @@ class DiaryWallViewModel {
                 } else {
 
                 self.diaries.value = diaries
-
                 self.updatePetData()
 
                 }
 
             case.failure(let error):
 
-                self.getDataFailure
                 print(error)
+                self.getDataFailure
 
             }
         }
@@ -85,7 +82,7 @@ class DiaryWallViewModel {
                     self.diaries.value[index].petname = pet.name
                     self.diaries.value[index].petThumbnail = pet.petThumbnail ?? Pic(url: "", fileName: "")
                     self.showingDiaries.value = self.diaries.value
-                    self.filterDiaris()
+                    self.filterDiaries()
 
 
                 case.failure(let error):
@@ -98,11 +95,10 @@ class DiaryWallViewModel {
         }
     }
 
-    func filterDiaris() {
+    func filterDiaries() {
 
 
-        FirebaseManager.shared.fetchUser { result in
-
+        FirebaseManager.shared.fetchCurrentUserInfo { result in
 
             switch result {
 
@@ -129,7 +125,7 @@ class DiaryWallViewModel {
                 self.didUpDateData?()
             case.failure( let error ):
 
-                print (error)
+                print(error)
                 self.didUpDateData?()
             }
 
@@ -156,7 +152,7 @@ class DiaryWallViewModel {
         }
     }
 
-    func fielter(petIds: [String]) {
+    func filter(petIds: [String]) {
 
         showingDiaries.value = diaries.value.filter({ diary in
             if petIds.contains(diary.petId) {

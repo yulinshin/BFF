@@ -10,12 +10,11 @@ import Foundation
 class BlocksViewModelList {
 
     var blocks = Box([BlocksViewModel]())
-    var didUpdateData: (()->Void)?
+    var didUpdateData: (() -> Void)?
 
-    init(userId: String){
+    init(userId: String) {
 
-        FirebaseManager.shared.fetchUser { result in
-
+        FirebaseManager.shared.fetchCurrentUserInfo { result in
 
             switch result {
 
@@ -31,16 +30,15 @@ class BlocksViewModelList {
                     }
                 }
 
-
             case .failure(let error):
-                print (error)
+                print(error)
 
             }
         }
     }
 
 
-    func ubBlock(indexPath: Int){
+    func unBlock(indexPath: Int){
 
         FirebaseManager.shared.unblockUser(blockUserId: self.blocks.value[indexPath].id.value)
         blocks.value.remove(at: indexPath)
@@ -49,16 +47,12 @@ class BlocksViewModelList {
     }
 }
 
-
-
-
-
 class BlocksViewModel {
 
     var image = Box(" ")
     var name = Box(" ")
     var id = Box(" ")
-    var didUpdateData: (()->Void)?
+    var didUpdateData: (() -> Void)?
 
     init(userId: String){
 

@@ -49,21 +49,20 @@ class PetCollectionViewCell: UICollectionViewCell {
 
         let ageComponents = Calendar.current.dateComponents([.year, .month], from: date, to: now)
         if let age = ageComponents.year {
-            if let month = ageComponents.month{
+            if let month = ageComponents.month {
                 birthdayLabel.text = "\(age)歲\(month)個月"
-            }else{
+            } else {
                 birthdayLabel.text = "\(age)歲"
             }
         } else {
-            if let month = ageComponents.month{
+            if let month = ageComponents.month {
                 birthdayLabel.text = "\(month)個月"
-            }else {
+            } else {
 
                     birthdayLabel.text = "0個月"
                 }
             }
     }
-
 
 
     func setupBlankDiaryBook() {
@@ -85,10 +84,10 @@ class PetCollectionViewCell: UICollectionViewCell {
         addPetAnimationView.heightAnchor.constraint(equalToConstant: 300).isActive = true
 
 
-        let keypath = AnimationKeypath(keys: ["**", "Fill 1", "**", "Color"])
+        let keyPath = AnimationKeypath(keys: ["**", "Fill 1", "**", "Color"])
         if let color = UIColor(named: "main") {
             let colorProvider = ColorValueProvider(color.lottieColorValue)
-            addPetAnimationView.setValueProvider(colorProvider, keypath: keypath)
+            addPetAnimationView.setValueProvider(colorProvider, keypath: keyPath)
         }
         addPetAnimationView.center = diaryCardBackground.center
         addPetAnimationView.contentMode = .scaleAspectFit

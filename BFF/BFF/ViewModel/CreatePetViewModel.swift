@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 import AVFoundation
 
-class CreatPetViewModel {
+class CreatePetViewModel {
 
     let name = Box("")
     let petThumbnail = Box("")
@@ -23,7 +23,6 @@ class CreatPetViewModel {
     let weightUnit = Box("")
     let photoFile = Box("")
     let petId = Box("")
-
 
     init(from pet: Pet) {
         name.value = pet.name
@@ -41,7 +40,6 @@ class CreatPetViewModel {
 
     init() {
     }
-
 
     func updateData(name: String) {
         self.name.value = name
@@ -111,7 +109,7 @@ class CreatPetViewModel {
         // swiftlint:disable:next line_length
         var pet = Pet(petId: self.petId.value, name: self.name.value, userId: "", healthInfo: HealthInfo(birthday: self.birthday.value, chipId: self.chipId.value, gender: self.gender.value, note: self.note.value, type: self.type.value, weight: self.weight.value, weightUnit: self.weightUnit.value), petThumbnail: Pic(url: self.petThumbnail.value, fileName: self.photoFile.value))
 
-        FirebaseManager.shared.updatePet(upDatepetId: pet.petId, newimage: image, data: pet) { result in
+        FirebaseManager.shared.updatePet(updatePetId: pet.petId, newImage: image, data: pet) { result in
             switch result {
 
 
@@ -129,7 +127,7 @@ class CreatPetViewModel {
     }
 
 
-    func deleatePet() {
+    func deletePet() {
 
         FirebaseManager.shared.deletePhoto(fileName: photoFile.value, filePath: .petPhotos)
 

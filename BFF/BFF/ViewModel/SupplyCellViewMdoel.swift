@@ -17,7 +17,7 @@ class SupplyViewModel {
     // swiftlint:disable:next line_length
     let deFultSupply = Supply(color: "red", cycleTime: " ", forPets: [String](), fullStock: 0, iconImage: "bag", isReminder: true, perCycleTime: 0, reminderPercent: 0, stock: 0, supplyId: " ", supplyName: " ", unit: " ", lastUpdate: Timestamp.init(date: Date()))
 
-    var suppply: Supply?
+    var supply: Supply?
 
     let supplyIconImage = Box(" ")
     var iconColor = Box(" ")
@@ -25,7 +25,7 @@ class SupplyViewModel {
     let inventoryStatusText = Box(" ")
     let inventoryStatusPercentage = Box(0.0)
     let maxInventory = Box(0)
-    let reminingInventory = Box(0)
+    let remainingInventory = Box(0)
     let cycleDosage = Box(0)
     let supplyUseByPets = Box([String]())
     let isNeedToRemind = Box(true)
@@ -40,11 +40,9 @@ class SupplyViewModel {
         getSupplyData(from: supply)
     }
 
-
     init() {
 
     }
-
 
     func getSupplyData(from supply: Supply) {
         self.supplyId.value = supply.supplyId
@@ -52,36 +50,35 @@ class SupplyViewModel {
         self.iconColor.value = supply.color
         self.supplyName.value = supply.supplyName
         let stockInMax = Double(supply.stock) / Double(supply.fullStock)
-        if (stockInMax.isNaN || stockInMax.isInfinite) {
+        if stockInMax.isNaN || stockInMax.isInfinite {
             self.inventoryStatusText.value = "\(stockInMax)"
-        }else{
+        } else {
             self.inventoryStatusText.value = "\(Int(stockInMax * 100))%"
         }
         self.inventoryStatusPercentage.value = stockInMax
         self.maxInventory.value = supply.fullStock
-        self.reminingInventory.value = supply.stock
+        self.remainingInventory.value = supply.stock
         self.cycleDosage.value = supply.perCycleTime
         self.supplyUseByPets.value = supply.forPets
         self.isNeedToRemind.value = supply.isReminder
         self.remindPercentage.value = supply.reminderPercent
         self.supplyUnit.value = supply.unit
         self.cycleTime.value = supply.cycleTime
-        self.suppply = supply
+        self.supply = supply
     }
 
     func updateToDataBase() {
         // swiftlint:disable:next line_length
-        let supply = Supply(color: self.iconColor.value, cycleTime: self.cycleTime.value, forPets: self.supplyUseByPets.value, fullStock: self.maxInventory.value, iconImage: self.supplyIconImage.value, isReminder: self.isNeedToRemind.value, perCycleTime: self.cycleDosage.value, reminderPercent: self.remindPercentage.value, stock: self.reminingInventory.value, supplyId: self.supplyId.value, supplyName: self.supplyName.value, unit: self.supplyUnit.value, lastUpdate: Timestamp.init(date: Date()))
+        let supply = Supply(color: self.iconColor.value, cycleTime: self.cycleTime.value, forPets: self.supplyUseByPets.value, fullStock: self.maxInventory.value, iconImage: self.supplyIconImage.value, isReminder: self.isNeedToRemind.value, perCycleTime: self.cycleDosage.value, reminderPercent: self.remindPercentage.value, stock: self.remainingInventory.value, supplyId: self.supplyId.value, supplyName: self.supplyName.value, unit: self.supplyUnit.value, lastUpdate: Timestamp.init(date: Date()))
 
         FirebaseManager.shared.updateSupply(supplyId: supply.supplyId, data: supply)
     }
-
 
     func deleteSuppliesData() {
 
         print("Start fetch supplies data")
 
-        FirebaseManager.shared.delateSupply(supplyId:self.supplyId.value) { result in
+        FirebaseManager.shared.delateSupply(supplyId: self.supplyId.value) { result in
 
             switch result {
             case .success(let message):
@@ -92,10 +89,9 @@ class SupplyViewModel {
         }
     }
 
-
-    func packSupply() -> Supply{
+    func packSupply() -> Supply {
         // swiftlint:disable:next line_length
-        let supply = Supply(color: self.iconColor.value, cycleTime: self.cycleTime.value, forPets: self.supplyUseByPets.value, fullStock: self.maxInventory.value, iconImage: self.supplyIconImage.value, isReminder: self.isNeedToRemind.value, perCycleTime: self.cycleDosage.value, reminderPercent: self.remindPercentage.value, stock: self.reminingInventory.value, supplyId: self.supplyId.value, supplyName: self.supplyName.value, unit: self.supplyUnit.value, lastUpdate: self.updateTime.value)
+        let supply = Supply(color: self.iconColor.value, cycleTime: self.cycleTime.value, forPets: self.supplyUseByPets.value, fullStock: self.maxInventory.value, iconImage: self.supplyIconImage.value, isReminder: self.isNeedToRemind.value, perCycleTime: self.cycleDosage.value, reminderPercent: self.remindPercentage.value, stock: self.remainingInventory.value, supplyId: self.supplyId.value, supplyName: self.supplyName.value, unit: self.supplyUnit.value, lastUpdate: self.updateTime.value)
         return supply
     }
 

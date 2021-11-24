@@ -22,7 +22,6 @@ class HomePageViewModel: NSObject {
     var userDataDidLoad: (() -> Void)?
     var userNotificationsDidChange: (() -> Void)?
 
-
     override init() {
         super.init()
         self.fetchUserData()
@@ -33,7 +32,7 @@ class HomePageViewModel: NSObject {
         print("HomePageViewModel DIE")
     }
 
-    func removeNotification(indexPath:Int) {
+    func removeNotification(indexPath: Int) {
 
         let id = notifications.value[indexPath].id
         FirebaseManager.shared.removeNotification(notifyId: id)
@@ -42,7 +41,7 @@ class HomePageViewModel: NSObject {
 
     func fetchUserData() {
 
-        FirebaseManager.shared.fetchUser { result in
+        FirebaseManager.shared.fetchCurrentUserInfo { result in
 
             switch result {
 
@@ -56,15 +55,12 @@ class HomePageViewModel: NSObject {
 
                 print("upDate UserData at HomeVM")
 
-
-                // Update data to Local
-
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-
 
                     let context = appDelegate.persistentContainer.viewContext
                     do {
-                        var requests = try context.fetch(UserMO.fetchRequest())
+
+                        let requests = try context.fetch(UserMO.fetchRequest())
 
                         if requests.isEmpty {
                             let userMo = UserMO(context:
@@ -107,7 +103,6 @@ class HomePageViewModel: NSObject {
         }
     }
 
-
     func fetchUserPetsData() {
 
         FirebaseManager.shared.fetchUserPets { result in
@@ -128,7 +123,7 @@ class HomePageViewModel: NSObject {
                     pets.forEach { pet in
                         let context = appDelegate.persistentContainer.viewContext
                         do {
-                            var requests = try context.fetch(PetMO.fetchRequest())
+                            let requests = try context.fetch(PetMO.fetchRequest())
                             var isContain = false
 
                             for request in requests {
@@ -159,8 +154,6 @@ class HomePageViewModel: NSObject {
 
                 }
 
-                //
-
             case .failure(let error):
 
                 print("Can't Get Pets Data \(error)")
@@ -180,14 +173,14 @@ class HomePageViewModel: NSObject {
 
                 var showNotifications = [Notification]()
                 notifications.forEach { notification in
-                    if notification.notifyTime.dateValue() < Date(){
+                    if notification.notifyTime.dateValue() < Date() {
                         print("Notify:\(notification.notifyTime.dateValue())")
                         print("now:\(Date())")
                         showNotifications.append(notification)
                     }
                 }
 
-                showNotifications = showNotifications.sorted(by:{ $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
+                showNotifications = showNotifications.sorted(by: { $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
                 self.notifications.value = showNotifications
                 self.coverToNotificationVM()
                 print("upDated NotificationData at HomeVM")
@@ -201,7 +194,7 @@ class HomePageViewModel: NSObject {
         }
 
     }
-    func coverToNotificationVM(){
+    func coverToNotificationVM() {
 
         notificationModels.value = [NotificationViewModel]()
         self.notifications.value.forEach { notification in
@@ -222,11 +215,11 @@ class HomePageViewModel: NSObject {
 
                 var showNotifications = [Notification]()
                 notifications.forEach { notification in
-                    if notification.notifyTime.dateValue() < Date(){
+                    if notification.notifyTime.dateValue() < Date() {
                         showNotifications.append(notification)
                 }
                 }
-                showNotifications = showNotifications.sorted(by:{ $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
+                showNotifications = showNotifications.sorted(by: { $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
                 self.notifications.value = showNotifications
 
                 self.coverToNotificationVM()
@@ -294,12 +287,6 @@ class HomePageViewModel: NSObject {
     }
 }
 
-
-extension HomePageViewModel: NSFetchedResultsControllerDelegate {
-
-}
-
-
 class NotificationViewModel {
 
     var content = Box("")
@@ -310,7 +297,7 @@ class NotificationViewModel {
     var diaryId = Box("")
     var supplyId = Box("")
 
-    init(notification: Notification){
+    init(notification: Notification) {
 
         self.content.value = notification.content
         self.petId.value = notification.fromPets.first ?? ""
@@ -322,7 +309,7 @@ class NotificationViewModel {
                 self.petPicUrl.value = pet.petThumbnail?.url ?? ""
                 self.petName.value = pet.name
             case .failure(let error):
-                print (error)
+                print(error)
 
             }
         }

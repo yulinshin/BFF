@@ -19,7 +19,7 @@ class DiaryViewController: UIViewController {
 
     private var lastContentOffset: CGFloat = 0
 
-    var lauoutType = LayoutType.grid
+    var layoutType = LayoutType.grid
 
     var showSelectedPetsCollectionView = true
 
@@ -43,7 +43,7 @@ class DiaryViewController: UIViewController {
 
     var showPets = [String]() {
         didSet {
-            diaryWallViewModel.fielter(petIds: showPets)
+            diaryWallViewModel.filter(petIds: showPets)
         }
     }
 
@@ -64,7 +64,7 @@ class DiaryViewController: UIViewController {
         selectedPetsCollectionView.register(petNib, forCellWithReuseIdentifier: SelectedPetsCollectionViewCell.identifier)
         diariesCollectionView.dataSource = diariesDataSource
         selectedPetsCollectionView.dataSource = petsDataSource
-        diariesCollectionView.collectionViewLayout = creatLayout(type: .grid)
+        diariesCollectionView.collectionViewLayout = createLayout(type: .grid)
         selectedPetsCollectionView.allowsMultipleSelection = true
         self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
 
@@ -101,7 +101,6 @@ class DiaryViewController: UIViewController {
 
         }
 
-
         diaryWallViewModel.getDataFailure = {
 
                 self.statusLabel.text = "無法取得毛小孩日記！ 請確認網路連線狀態"
@@ -110,13 +109,10 @@ class DiaryViewController: UIViewController {
 
     }
 
-
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 
         self.navigationController?.navigationBar.backgroundColor = .white
-
 
         if showSelectedPetsCollectionView {
             self.selectedPetsCollectionView.isHidden = false
@@ -133,30 +129,29 @@ class DiaryViewController: UIViewController {
         self.navigationController?.navigationBar.backgroundColor = .clear
     }
 
-    @objc func creatDiary(){
+    @objc func creatDiary() {
 
             let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-            guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatDiaryViewController") as? CreatDiaryViewController else { return }
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "CreateDiaryViewController") as? CreateDiaryViewController else { return }
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
-            nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor:UIColor(named: "main")]
+        nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor: UIColor(named: "main") ?? .orange]
             self.present(nav, animated: true, completion: nil)
-
     }
 
-    @objc func switchShowList(){
-        switch lauoutType {
+    @objc func switchShowList() {
+        switch layoutType {
 
         case .grid:
-            
-            lauoutType = .single
-            diariesCollectionView.collectionViewLayout = creatLayout(type: .single)
+
+            layoutType = .single
+            diariesCollectionView.collectionViewLayout = createLayout(type: .single)
             diariesCollectionView.reloadData()
 
         case .single:
 
-            lauoutType = .grid
-            diariesCollectionView.collectionViewLayout = creatLayout(type: .grid)
+            layoutType = .grid
+            diariesCollectionView.collectionViewLayout = createLayout(type: .grid)
             diariesCollectionView.reloadData()
         }
     }
@@ -169,15 +164,15 @@ class DiaryViewController: UIViewController {
 
             case .success(let pets):
 
-                var defultShowingPetsId = [String]()
+                var defaultShowingPetsId = [String]()
                 var petsDataItem = [Item]()
                 pets.forEach { pet in
-                    defultShowingPetsId.append(pet.petId)
+                    defaultShowingPetsId.append(pet.petId)
                     petsDataItem.append(Item.pet(pet))
                     print("Pet = \(pet)")
                 }
                 self.userPetsData = petsDataItem
-                self.showPets = defultShowingPetsId
+                self.showPets = defaultShowingPetsId
 
             case .failure(let error):
                 print("fetchData.failure\(error)")
@@ -211,11 +206,11 @@ class DiaryViewController: UIViewController {
         }
     }
     
-    // MARK: - diariesCollectionViewCompostionLayout
+    // MARK: - diariesCollectionViewCompositionLayout
 
-    func creatLayout(type: LayoutType) -> UICollectionViewLayout {
+    func createLayout(type: LayoutType) -> UICollectionViewLayout {
 
-        let layout = UICollectionViewCompositionalLayout{ (sectionIndex, layoutEnviroment) -> NSCollectionLayoutSection in
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection in
 
             switch type {
             case .grid:
@@ -346,7 +341,7 @@ extension DiaryViewController: UICollectionViewDelegate {
 
             let storyboard = UIStoryboard(name: "Diary", bundle: nil)
             guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
-            controller.viewModel = DetialViewModel(from: diaries[indexPath.row].diary!)
+            controller.viewModel = DetailViewModel(from: diaries[indexPath.row].diary!)
             self.navigationController?.show(controller, sender: nil)
 
         }
@@ -378,14 +373,9 @@ extension DiaryViewController: UICollectionViewDelegate {
                 self.petsTopConstraint.constant = 0
                 self.selectedPetsCollectionView.alpha = 1
                 self.view.layoutIfNeeded()
-
-
             }
 
-        }
-        else if (self.lastContentOffset < scrollView.contentOffset.y) {
-
-
+        } else if (self.lastContentOffset < scrollView.contentOffset.y) {
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
 
                 self.petsTopConstraint.constant = -70
@@ -398,10 +388,6 @@ extension DiaryViewController: UICollectionViewDelegate {
         // update the new position acquired
         self.lastContentOffset = scrollView.contentOffset.y
     }
-
-
-
-
 
 }
 

@@ -19,7 +19,7 @@ class DiaryDetailViewController: UIViewController {
 
     @IBOutlet weak var createdTimeLabel: UILabel!
 
-    @IBOutlet weak var ccommentImage: UIImageView!
+    @IBOutlet weak var commentImage: UIImageView!
 
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var likeCountLabel: UILabel!
@@ -27,7 +27,7 @@ class DiaryDetailViewController: UIViewController {
     @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var diaryStateLabel: UILabel!
 
-    var viewModel = DetialViewModel()
+    var viewModel = DetailViewModel()
     var comments = [String]()
     var petTags = [String]()
     var diaryId = ""
@@ -46,7 +46,7 @@ class DiaryDetailViewController: UIViewController {
 
         postPetImageView.layer.cornerRadius = postPetImageView.frame.height / 2
 
-        if viewModel.diary?.userId != FirebaseManager.shared.userId{
+        if viewModel.diary?.userId != FirebaseManager.shared.userId {
             settingButton.isHidden = true
         } else {
             settingButton.isHidden = false
@@ -69,7 +69,7 @@ class DiaryDetailViewController: UIViewController {
             self?.postPetNameLabel.text = name
         }
 
-        viewModel.creatDate.bind {  [weak self] dateStr in
+        viewModel.createDate.bind {  [weak self] dateStr in
             self?.createdTimeLabel.text = dateStr
         }
 
@@ -93,7 +93,7 @@ class DiaryDetailViewController: UIViewController {
         viewModel.isPublic.bind { isPublic in
             if isPublic {
                 self.diaryStateLabel.text = "Public"
-            }else{
+            } else {
                 self.diaryStateLabel.text = "Private"
             }
         }
@@ -102,12 +102,12 @@ class DiaryDetailViewController: UIViewController {
 
         }
 
-        ccommentImage.isUserInteractionEnabled = true
-        ccommentImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapComment)))
+        commentImage.isUserInteractionEnabled = true
+        commentImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapComment)))
 
     }
 
-    @objc func didTapComment(){
+    @objc func didTapComment() {
 
         let storyboard = UIStoryboard(name: "Social", bundle: nil)
 
@@ -116,8 +116,6 @@ class DiaryDetailViewController: UIViewController {
         self.navigationController?.pushViewController(controller, animated: true)
 
     }
-
-
 
     @IBAction func showMenu(_ sender: Any) {
 
@@ -148,7 +146,6 @@ class DiaryDetailViewController: UIViewController {
         }
 
 // MARK: - Diary Menu Function
-
 
         // Setting privacy Action
         func editPrivacyToPublic(_ action: UIAlertAction) {
@@ -210,17 +207,4 @@ class DiaryDetailViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
 
         }
-//
-//        func setPetsTag() {
-//            tagStackView.subviews.forEach { subview in
-//                tagStackView.removeArrangedSubview(subview)
-//            }
-//            petTags.forEach { petName in
-//                let tag = UILabel()
-//                tag.text = petName
-//                tagStackView.addArrangedSubview(tag)
-//            }
-//        }
-
     }
-

@@ -1,5 +1,5 @@
 //
-//  CreatPetViewController.swift
+//  CreatePetViewController.swift
 //  BFF
 //
 //  Created by yulin on 2021/10/20.
@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-class CreatPetViewController: UIViewController {
+class CreatePetViewController: UIViewController {
 
     @IBOutlet weak var petImage: UIImageView!
 
@@ -16,7 +16,7 @@ class CreatPetViewController: UIViewController {
 
     @IBOutlet weak var saveButton: UIButton!
 
-    var viewModel = CreatPetViewModel()
+    var viewModel = CreatePetViewModel()
 
     var fields  = [
         "名字",
@@ -35,7 +35,7 @@ class CreatPetViewController: UIViewController {
 
         case edit
 
-        case creat
+        case create
 
     }
 
@@ -60,8 +60,6 @@ class CreatPetViewController: UIViewController {
 
         saveButton.layer.cornerRadius = 10
 
-
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -75,13 +73,11 @@ class CreatPetViewController: UIViewController {
 
             self.navigationItem.title = "\(viewModel.name.value)"
 
-
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "編輯", style: .done, target: self, action: #selector(coverToEditMode))
 
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .done, target: self, action: #selector(cancel))
 
             self.saveButton.isHidden = true
-
 
         case .edit:
 
@@ -93,7 +89,7 @@ class CreatPetViewController: UIViewController {
 
             self.saveButton.isHidden = false
 
-        case .creat:
+        case .create:
 
             self.navigationItem.title = "新增毛小孩"
 
@@ -102,8 +98,6 @@ class CreatPetViewController: UIViewController {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .done, target: self, action: #selector(cancel))
 
             self.saveButton.isHidden = false
-
-
 
         case .none:
 
@@ -118,17 +112,16 @@ class CreatPetViewController: UIViewController {
         NetStatusManger.share.stopMonitoring()
     }
 
-    @objc func coverToEditMode(){
+    @objc func coverToEditMode() {
 
         let storyboard = UIStoryboard(name: "Pet", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatPetViewController") as? CreatPetViewController else { return }
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatePetViewController") as? CreatePetViewController else { return }
         controller.presentMode = .edit
         controller.viewModel = self.viewModel
         controller.presentMode = .edit
         controller.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(controller, animated: true)
     }
-
 
     @objc func updatePet() {
 
@@ -159,13 +152,12 @@ class CreatPetViewController: UIViewController {
 
     @IBAction func didTapSaveButton(_ sender: Any) {
 
-
         switch presentMode {
 
         case .edit:
             updatePet()
 
-        case .creat:
+        case .create:
             savePet()
 
         case .read:
@@ -183,7 +175,6 @@ class CreatPetViewController: UIViewController {
         guard let image = petImage.image else { return }
 
         ProgressHUD.show()
-        
 
         viewModel.creatPet(image: image) { result in
 
@@ -199,7 +190,6 @@ class CreatPetViewController: UIViewController {
                       }
                 print(message)
 
-
             case .failure(let error):
 
                 ProgressHUD.showFailure(text: "建立失敗")
@@ -210,7 +200,6 @@ class CreatPetViewController: UIViewController {
         }
     }
 
-
     @objc func cancel() {
         self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
@@ -218,11 +207,11 @@ class CreatPetViewController: UIViewController {
     }
 }
 
-extension CreatPetViewController: UITableViewDelegate {
+extension CreatePetViewController: UITableViewDelegate {
 
 }
 
-extension CreatPetViewController: UITableViewDataSource {
+extension CreatePetViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         fields.count
     }
@@ -230,7 +219,6 @@ extension CreatPetViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PetInfoTableTableViewCell.identifier) as? PetInfoTableTableViewCell else { return UITableViewCell() }
-        
 
         switch fields[indexPath.row] {
 
@@ -238,7 +226,7 @@ extension CreatPetViewController: UITableViewDataSource {
 
             viewModel.name.bind { name in
 
-                cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
+                cell.configure(cellStyle: .textfield, title: self.fields[indexPath.row] )
                 cell.textField.text = name
 
             }
@@ -252,7 +240,7 @@ extension CreatPetViewController: UITableViewDataSource {
 
             viewModel.type.bind { type in
 
-                cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
+                cell.configure(cellStyle: .textfield, title: self.fields[indexPath.row] )
                 cell.textField.text = type
 
             }
@@ -263,11 +251,9 @@ extension CreatPetViewController: UITableViewDataSource {
 
         case "生日" :
 
-
-
             viewModel.birthday.bind { birthday in
-                cell.creatDatePicker()
-                cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
+                cell.createDatePicker()
+                cell.configure(cellStyle: .textfield, title: self.fields[indexPath.row] )
                 cell.textField.text = birthday
 
             }
@@ -280,7 +266,7 @@ extension CreatPetViewController: UITableViewDataSource {
 
             viewModel.weight.bind { weight in
 
-                cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
+                cell.configure(cellStyle: .textfield, title: self.fields[indexPath.row] )
                 cell.textField.text = "\(weight)"
                 cell.textField.keyboardType = .numbersAndPunctuation
 
@@ -294,9 +280,9 @@ extension CreatPetViewController: UITableViewDataSource {
 
             viewModel.weightUnit.bind { weightUnit in
 
-                cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
+                cell.configure(cellStyle: .textfield, title: self.fields[indexPath.row] )
                 cell.textField.text = weightUnit
-                cell.creatPicker(pickerData: ["", "kg", "g"])
+                cell.createPicker(pickerData: ["", "kg", "g"])
 
             }
             cell.button.isHidden = true
@@ -308,9 +294,9 @@ extension CreatPetViewController: UITableViewDataSource {
 
             viewModel.gender.bind { gender in
 
-                cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
+                cell.configure(cellStyle: .textfield, title: self.fields[indexPath.row] )
                 cell.textField.text = gender
-                cell.creatPicker(pickerData: ["", "boy", "girl"])
+                cell.createPicker(pickerData: ["", "boy", "girl"])
 
             }
             cell.button.isHidden = true
@@ -322,7 +308,7 @@ extension CreatPetViewController: UITableViewDataSource {
 
             viewModel.chipId.bind { chipId in
 
-                cell.configur(cellStyle: .textfield, title: self.fields[indexPath.row] )
+                cell.configure(cellStyle: .textfield, title: self.fields[indexPath.row] )
                 cell.textField.text = chipId
 
             }
@@ -333,7 +319,7 @@ extension CreatPetViewController: UITableViewDataSource {
 
         case "備註" :
 
-            cell.configur(cellStyle: .more, title: fields[indexPath.row] )
+            cell.configure(cellStyle: .more, title: fields[indexPath.row] )
             cell.button.isHidden = false
             cell.textField.isHidden = true
             cell.moreButtonTap = {
@@ -352,10 +338,9 @@ extension CreatPetViewController: UITableViewDataSource {
                     controller.mode = .read
                 } else if self.presentMode == .edit {
                     controller.mode = .edit
-                }else {
-                    controller.mode = .creat
+                } else {
+                    controller.mode = .create
                 }
-
 
                 self.navigationController?.show(controller, sender: nil)
 

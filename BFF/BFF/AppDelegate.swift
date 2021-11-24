@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // delegate for receiving or delivering notification
     let notificationDelegate = NotificationDelegate()
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
@@ -36,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UINavigationBar.appearance().barTintColor = UIColor.white
         UINavigationBar.appearance().tintColor = UIColor(named: "main")
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(named: "main")]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "main") ?? UIColor.orange]
 
         center.delegate = notificationDelegate
 
@@ -46,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             switch settings.authorizationStatus {
             case .notDetermined:
                 self.center.requestAuthorization(options: options) {
-                    (granted, error) in
+                    (granted, _) in
                     if !granted {
                         print("Something went wrong")
                     }
@@ -70,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let userDefaults = UserDefaults.standard
 
-        if !userDefaults.bool(forKey:"hasRunBefore") {
+        if !userDefaults.bool(forKey: "hasRunBefore") {
 
             print("First time launch, setting UserDefults")
 
@@ -121,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var persistentContainer: NSPersistentContainer = {
 
         let container = NSPersistentContainer(name: "UserData")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
 
                 fatalError("CoreData:Unresolved error \(error), \(error.userInfo)")
@@ -153,20 +152,16 @@ extension AppDelegate: MessagingDelegate {
 
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("fcm Token", fcmToken ?? "")
-        // 將 fcm token 傳送給後台
     }
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
-    // 使用者點選推播時觸發
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         print(#function)
         let content = response.notification.request.content
         print(content.userInfo)
         completionHandler()
     }
-
-    // 讓 App 在前景也能顯示推播
     // swiftlint:disable:next line_length
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         if #available(iOS 14.0, *) {
@@ -176,4 +171,3 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
     }
 }
-

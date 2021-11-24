@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -15,10 +13,10 @@
                 <outlet property="alertView" destination="715-6n-JpH" id="tsZ-Od-sGy"/>
                 <outlet property="doneBtn" destination="hTG-r8-od5" id="qTv-fb-Zpe"/>
                 <outlet property="img" destination="tvQ-Tg-ECi" id="Fcu-6D-u4g"/>
-                <outlet property="messageLbl" destination="HSF-1V-CHJ" id="COb-Er-ff0"/>
+                <outlet property="messageLabel" destination="HSF-1V-CHJ" id="COb-Er-ff0"/>
                 <outlet property="parentView" destination="iN0-l3-epB" id="fem-3O-VIy"/>
                 <outlet property="reFillStockTextField" destination="qIV-0j-4gk" id="dbv-sc-pwR"/>
-                <outlet property="titleLbl" destination="qQn-ZA-pHb" id="fnW-sV-AYj"/>
+                <outlet property="titleLabel" destination="qQn-ZA-pHb" id="fnW-sV-AYj"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

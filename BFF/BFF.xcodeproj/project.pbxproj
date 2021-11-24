@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6200C5FB272296970074DB64 /* DiaryVC+DiffDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6200C5FA272296970074DB64 /* DiaryVC+DiffDataSource.swift */; };
-		621FCEAD271E5B990049F42C /* PhotoCellViewlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621FCEAC271E5B990049F42C /* PhotoCellViewlModel.swift */; };
+		621FCEAD271E5B990049F42C /* PhotoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621FCEAC271E5B990049F42C /* PhotoCellViewModel.swift */; };
 		623340D4271C3B19002B2429 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623340D3271C3B19002B2429 /* AppDelegate.swift */; };
 		623340D6271C3B19002B2429 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623340D5271C3B19002B2429 /* SceneDelegate.swift */; };
 		623340D8271C3B19002B2429 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623340D7271C3B19002B2429 /* HomePageViewController.swift */; };
@@ -16,13 +16,13 @@
 		623340E0271C3B1B002B2429 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 623340DE271C3B1B002B2429 /* LaunchScreen.storyboard */; };
 		623340E9271C3F82002B2429 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 623340E8271C3F82002B2429 /* GoogleService-Info.plist */; };
 		6249617D2720F16E0079B244 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6249617C2720F16E0079B244 /* HomePageViewModel.swift */; };
-		624C8E082720473F00646C71 /* CreatPetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C8E072720473F00646C71 /* CreatPetViewModel.swift */; };
+		624C8E082720473F00646C71 /* CreatePetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C8E072720473F00646C71 /* CreatePetViewModel.swift */; };
 		624CFD742729389B00D77CCA /* NotificationManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624CFD732729389B00D77CCA /* NotificationManger.swift */; };
 		624D5C472730CD4A00602125 /* Library.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624D5C462730CD4A00602125 /* Library.storyboard */; };
 		624D5C492730CD7D00602125 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624D5C482730CD7D00602125 /* MapViewController.swift */; };
 		624D5C4B2731321700602125 /* MapMarkerWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 624D5C4A2731321700602125 /* MapMarkerWindowView.xib */; };
 		624D5C4D273132D900602125 /* MapMarkerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624D5C4C273132D900602125 /* MapMarkerWindow.swift */; };
-		62540417271F187D004F49DC /* DetialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62540416271F187D004F49DC /* DetialViewModel.swift */; };
+		62540417271F187D004F49DC /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62540416271F187D004F49DC /* DetailViewModel.swift */; };
 		6254041B271F219B004F49DC /* DiaryWallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6254041A271F219B004F49DC /* DiaryWallViewModel.swift */; };
 		6254041D271F23DD004F49DC /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6254041C271F23DD004F49DC /* Box.swift */; };
 		62548773272F80C90007B080 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62548772272F80C90007B080 /* Date+Extension.swift */; };
@@ -41,7 +41,6 @@
 		62617497273DF5FD006F3635 /* BlocksVeiwModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62617496273DF5FD006F3635 /* BlocksVeiwModels.swift */; };
 		6264A85A2736BA6200FACF97 /* ChatListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6264A8592736BA6200FACF97 /* ChatListTableViewController.swift */; };
 		6264A85C2736BB9000FACF97 /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6264A85B2736BB9000FACF97 /* ChatListViewModel.swift */; };
-		6267CDE527338F3700CFA28D /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6267CDE427338F3700CFA28D /* AppTabBar.swift */; };
 		6267CDED2733BBD600CFA28D /* DiarysTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6267CDEC2733BBD600CFA28D /* DiarysTableViewController.swift */; };
 		627648A8271D6B840026C3C3 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627648A7271D6B840026C3C3 /* FirebaseManager.swift */; };
 		627ADBCB272A7876000D0457 /* FillSupplyAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627ADBC2272A3370000D0457 /* FillSupplyAlertView.swift */; };
@@ -73,7 +72,7 @@
 		62930C2C272D24F700BC1908 /* UserMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62930C2A272D24F700BC1908 /* UserMO+CoreDataProperties.swift */; };
 		62979258271E64D800B68E86 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62979257271E64D800B68E86 /* Diary.swift */; };
 		6297925A271E8A8800B68E86 /* Diary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62979259271E8A8800B68E86 /* Diary.storyboard */; };
-		6297925C271E947C00B68E86 /* CreatDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6297925B271E947C00B68E86 /* CreatDiaryViewController.swift */; };
+		6297925C271E947C00B68E86 /* CreateDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6297925B271E947C00B68E86 /* CreateDiaryViewController.swift */; };
 		6297925E271EAD8900B68E86 /* CreatDiaryVC+UpLoadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6297925D271EAD8900B68E86 /* CreatDiaryVC+UpLoadImage.swift */; };
 		629FF5B4271D3F8300C7C94A /* WellcomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629FF5B3271D3F8300C7C94A /* WellcomeCollectionViewCell.swift */; };
 		629FF5B6271D40A400C7C94A /* CatalogCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629FF5B5271D40A400C7C94A /* CatalogCollectionViewCell.swift */; };
@@ -116,7 +115,7 @@
 		62C6E5E8272F93750097AEE1 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C6E5E7272F93750097AEE1 /* SocialViewController.swift */; };
 		62C6E5EA272F94110097AEE1 /* SocialVC-Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C6E5E9272F94110097AEE1 /* SocialVC-Extention.swift */; };
 		62C80D172720115B00EE2FB1 /* CreatPetsVC+UploadImge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C80D152720115B00EE2FB1 /* CreatPetsVC+UploadImge.swift */; };
-		62C80D182720115B00EE2FB1 /* CreatPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C80D162720115B00EE2FB1 /* CreatPetViewController.swift */; };
+		62C80D182720115B00EE2FB1 /* CreatePetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C80D162720115B00EE2FB1 /* CreatePetViewController.swift */; };
 		62C80D1B2720117800EE2FB1 /* PetInfoTableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62C80D192720117800EE2FB1 /* PetInfoTableTableViewCell.xib */; };
 		62C80D1C2720117800EE2FB1 /* PetInfoTableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C80D1A2720117800EE2FB1 /* PetInfoTableTableViewCell.swift */; };
 		62CF7A98271EEF68003A25C4 /* DiaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CF7A97271EEF68003A25C4 /* DiaryDetailViewController.swift */; };
@@ -125,7 +124,7 @@
 		62D454BD27267D82009DF0FF /* SupplyListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D454BB27267D82009DF0FF /* SupplyListTableViewCell.swift */; };
 		62D454BE27267D82009DF0FF /* SupplyListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62D454BC27267D82009DF0FF /* SupplyListTableViewCell.xib */; };
 		62D454C027268522009DF0FF /* SupplyCellViewMdoel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D454BF27268522009DF0FF /* SupplyCellViewMdoel.swift */; };
-		62D454C227268CB6009DF0FF /* SuppliesViewMdoel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D454C127268CB6009DF0FF /* SuppliesViewMdoel.swift */; };
+		62D454C227268CB6009DF0FF /* SuppliesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D454C127268CB6009DF0FF /* SuppliesViewModel.swift */; };
 		62DC920E27473AFE001BB69F /* NetStatusManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC920D27473AFE001BB69F /* NetStatusManger.swift */; };
 		62EF088E2723BCAF006C7D62 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EF088D2723BCAF006C7D62 /* File.swift */; };
 		62FC6192272586FD00292710 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FC6191272586FD00292710 /* Home.storyboard */; };
@@ -142,7 +141,7 @@
 		4DF47BE281594C125C9DF5FB /* Pods_BFF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BFF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		560E57137BD3932E8DA0D583 /* Pods-BFF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BFF.release.xcconfig"; path = "Target Support Files/Pods-BFF/Pods-BFF.release.xcconfig"; sourceTree = "<group>"; };
 		6200C5FA272296970074DB64 /* DiaryVC+DiffDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiaryVC+DiffDataSource.swift"; sourceTree = "<group>"; };
-		621FCEAC271E5B990049F42C /* PhotoCellViewlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCellViewlModel.swift; sourceTree = "<group>"; };
+		621FCEAC271E5B990049F42C /* PhotoCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCellViewModel.swift; sourceTree = "<group>"; };
 		623340D0271C3B19002B2429 /* BFF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		623340D3271C3B19002B2429 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		623340D5271C3B19002B2429 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,13 +151,13 @@
 		623340E1271C3B1B002B2429 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		623340E8271C3F82002B2429 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6249617C2720F16E0079B244 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
-		624C8E072720473F00646C71 /* CreatPetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatPetViewModel.swift; sourceTree = "<group>"; };
+		624C8E072720473F00646C71 /* CreatePetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePetViewModel.swift; sourceTree = "<group>"; };
 		624CFD732729389B00D77CCA /* NotificationManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManger.swift; sourceTree = "<group>"; };
 		624D5C462730CD4A00602125 /* Library.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Library.storyboard; sourceTree = "<group>"; };
 		624D5C482730CD7D00602125 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		624D5C4A2731321700602125 /* MapMarkerWindowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapMarkerWindowView.xib; sourceTree = "<group>"; };
 		624D5C4C273132D900602125 /* MapMarkerWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerWindow.swift; sourceTree = "<group>"; };
-		62540416271F187D004F49DC /* DetialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetialViewModel.swift; sourceTree = "<group>"; };
+		62540416271F187D004F49DC /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		6254041A271F219B004F49DC /* DiaryWallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryWallViewModel.swift; sourceTree = "<group>"; };
 		6254041C271F23DD004F49DC /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		62548772272F80C90007B080 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -178,7 +177,6 @@
 		62617496273DF5FD006F3635 /* BlocksVeiwModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksVeiwModels.swift; sourceTree = "<group>"; };
 		6264A8592736BA6200FACF97 /* ChatListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListTableViewController.swift; sourceTree = "<group>"; };
 		6264A85B2736BB9000FACF97 /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
-		6267CDE427338F3700CFA28D /* AppTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBar.swift; sourceTree = "<group>"; };
 		6267CDEC2733BBD600CFA28D /* DiarysTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiarysTableViewController.swift; sourceTree = "<group>"; };
 		627648A7271D6B840026C3C3 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		627ADBC2272A3370000D0457 /* FillSupplyAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillSupplyAlertView.swift; sourceTree = "<group>"; };
@@ -210,7 +208,7 @@
 		62930C2A272D24F700BC1908 /* UserMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		62979257271E64D800B68E86 /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
 		62979259271E8A8800B68E86 /* Diary.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Diary.storyboard; sourceTree = "<group>"; };
-		6297925B271E947C00B68E86 /* CreatDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatDiaryViewController.swift; sourceTree = "<group>"; };
+		6297925B271E947C00B68E86 /* CreateDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiaryViewController.swift; sourceTree = "<group>"; };
 		6297925D271EAD8900B68E86 /* CreatDiaryVC+UpLoadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreatDiaryVC+UpLoadImage.swift"; sourceTree = "<group>"; };
 		629FF5B3271D3F8300C7C94A /* WellcomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellcomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		629FF5B5271D40A400C7C94A /* CatalogCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -253,7 +251,7 @@
 		62C6E5E7272F93750097AEE1 /* SocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		62C6E5E9272F94110097AEE1 /* SocialVC-Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SocialVC-Extention.swift"; sourceTree = "<group>"; };
 		62C80D152720115B00EE2FB1 /* CreatPetsVC+UploadImge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CreatPetsVC+UploadImge.swift"; sourceTree = "<group>"; };
-		62C80D162720115B00EE2FB1 /* CreatPetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatPetViewController.swift; sourceTree = "<group>"; };
+		62C80D162720115B00EE2FB1 /* CreatePetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePetViewController.swift; sourceTree = "<group>"; };
 		62C80D192720117800EE2FB1 /* PetInfoTableTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PetInfoTableTableViewCell.xib; sourceTree = "<group>"; };
 		62C80D1A2720117800EE2FB1 /* PetInfoTableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetInfoTableTableViewCell.swift; sourceTree = "<group>"; };
 		62CF7A97271EEF68003A25C4 /* DiaryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewController.swift; sourceTree = "<group>"; };
@@ -262,7 +260,7 @@
 		62D454BB27267D82009DF0FF /* SupplyListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplyListTableViewCell.swift; sourceTree = "<group>"; };
 		62D454BC27267D82009DF0FF /* SupplyListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SupplyListTableViewCell.xib; sourceTree = "<group>"; };
 		62D454BF27268522009DF0FF /* SupplyCellViewMdoel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplyCellViewMdoel.swift; sourceTree = "<group>"; };
-		62D454C127268CB6009DF0FF /* SuppliesViewMdoel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuppliesViewMdoel.swift; sourceTree = "<group>"; };
+		62D454C127268CB6009DF0FF /* SuppliesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuppliesViewModel.swift; sourceTree = "<group>"; };
 		62DC920D27473AFE001BB69F /* NetStatusManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetStatusManger.swift; sourceTree = "<group>"; };
 		62EF088D2723BCAF006C7D62 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		62FC6191272586FD00292710 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -301,13 +299,13 @@
 			children = (
 				62B617D427365EA50062BBE5 /* CommentViewModel.swift */,
 				6264A85B2736BB9000FACF97 /* ChatListViewModel.swift */,
-				621FCEAC271E5B990049F42C /* PhotoCellViewlModel.swift */,
-				62540416271F187D004F49DC /* DetialViewModel.swift */,
+				621FCEAC271E5B990049F42C /* PhotoCellViewModel.swift */,
+				62540416271F187D004F49DC /* DetailViewModel.swift */,
 				6254041A271F219B004F49DC /* DiaryWallViewModel.swift */,
-				624C8E072720473F00646C71 /* CreatPetViewModel.swift */,
+				624C8E072720473F00646C71 /* CreatePetViewModel.swift */,
 				6249617C2720F16E0079B244 /* HomePageViewModel.swift */,
 				62D454BF27268522009DF0FF /* SupplyCellViewMdoel.swift */,
-				62D454C127268CB6009DF0FF /* SuppliesViewMdoel.swift */,
+				62D454C127268CB6009DF0FF /* SuppliesViewModel.swift */,
 				62BA0102272E7EBE00A19478 /* PetHealthCellViewModel.swift */,
 				62892FE1273210F3001A7B32 /* bookViewModel.swift */,
 				62617496273DF5FD006F3635 /* BlocksVeiwModels.swift */,
@@ -354,7 +352,6 @@
 				623340D5271C3B19002B2429 /* SceneDelegate.swift */,
 				623340E8271C3F82002B2429 /* GoogleService-Info.plist */,
 				62892FEA2732B1A4001A7B32 /* Keys.plist */,
-				6267CDE427338F3700CFA28D /* AppTabBar.swift */,
 				623340E1271C3B1B002B2429 /* Info.plist */,
 			);
 			path = BFF;
@@ -483,7 +480,7 @@
 				62CF7A97271EEF68003A25C4 /* DiaryDetailViewController.swift */,
 				6200C5FA272296970074DB64 /* DiaryVC+DiffDataSource.swift */,
 				6285C796271DD08D006E13EC /* DiaryViewController.swift */,
-				6297925B271E947C00B68E86 /* CreatDiaryViewController.swift */,
+				6297925B271E947C00B68E86 /* CreateDiaryViewController.swift */,
 				6297925D271EAD8900B68E86 /* CreatDiaryVC+UpLoadImage.swift */,
 			);
 			path = Diary;
@@ -509,7 +506,7 @@
 				62B609E4273912F5007FB169 /* PetsProfileViewController.swift */,
 				62AB33F727205D5000C8E582 /* NoteViewController.swift */,
 				62C80D152720115B00EE2FB1 /* CreatPetsVC+UploadImge.swift */,
-				62C80D162720115B00EE2FB1 /* CreatPetViewController.swift */,
+				62C80D162720115B00EE2FB1 /* CreatePetViewController.swift */,
 			);
 			path = Pets;
 			sourceTree = "<group>";
@@ -908,7 +905,7 @@
 				62C38D97272EEAB4008DEE8B /* GoalCollectionViewCellD.swift in Sources */,
 				624CFD742729389B00D77CCA /* NotificationManger.swift in Sources */,
 				62603AD627278D8300467E2D /* SupplyNameTableViewCell.swift in Sources */,
-				62540417271F187D004F49DC /* DetialViewModel.swift in Sources */,
+				62540417271F187D004F49DC /* DetailViewModel.swift in Sources */,
 				62FC619827258C3B00292710 /* UIImage+Extension.swift in Sources */,
 				62B617E52736B3890062BBE5 /* OtherChatTableViewCell.swift in Sources */,
 				62548773272F80C90007B080 /* Date+Extension.swift in Sources */,
@@ -946,9 +943,9 @@
 				62892FDE27320D4C001A7B32 /* LibaryViewController.swift in Sources */,
 				6264A85A2736BA6200FACF97 /* ChatListTableViewController.swift in Sources */,
 				62B617D727365FFE0062BBE5 /* Comment.swift in Sources */,
-				624C8E082720473F00646C71 /* CreatPetViewModel.swift in Sources */,
+				624C8E082720473F00646C71 /* CreatePetViewModel.swift in Sources */,
 				62DC920E27473AFE001BB69F /* NetStatusManger.swift in Sources */,
-				6297925C271E947C00B68E86 /* CreatDiaryViewController.swift in Sources */,
+				6297925C271E947C00B68E86 /* CreateDiaryViewController.swift in Sources */,
 				629FF5C3271D5F4200C7C94A /* Pet.swift in Sources */,
 				629FF5C1271D5DFF00C7C94A /* User.swift in Sources */,
 				6254041D271F23DD004F49DC /* Box.swift in Sources */,
@@ -964,7 +961,7 @@
 				62603ADA27278DCB00467E2D /* SupplyPetsTableViewCell.swift in Sources */,
 				629FF5C7271D614D00C7C94A /* Notification.swift in Sources */,
 				624D5C4D273132D900602125 /* MapMarkerWindow.swift in Sources */,
-				62D454C227268CB6009DF0FF /* SuppliesViewMdoel.swift in Sources */,
+				62D454C227268CB6009DF0FF /* SuppliesViewModel.swift in Sources */,
 				62617495273DF552006F3635 /* BlockPetsListTableViewController.swift in Sources */,
 				62BA00FF272E7B7C00A19478 /* PetsListTableViewController.swift in Sources */,
 				62B609E9273A26AE007FB169 /* MenuTableViewCell.swift in Sources */,
@@ -974,15 +971,14 @@
 				62930C1B272D0E2B00BC1908 /* PetMO+CoreDataClass.swift in Sources */,
 				6200C5FB272296970074DB64 /* DiaryVC+DiffDataSource.swift in Sources */,
 				627FC66B27478B9000E4453B /* NChatListViewModel.swift in Sources */,
-				6267CDE527338F3700CFA28D /* AppTabBar.swift in Sources */,
 				62FC6194272588F200292710 /* TabBarViewController.swift in Sources */,
 				629FF5B8271D413C00C7C94A /* PetNotificationCollectionViewCell.swift in Sources */,
 				62C38D95272EEAA6008DEE8B /* GoalCollectionViewCellC.swift in Sources */,
 				62603AD427278D6100467E2D /* SupplyIconCellTableViewCell.swift in Sources */,
-				621FCEAD271E5B990049F42C /* PhotoCellViewlModel.swift in Sources */,
+				621FCEAD271E5B990049F42C /* PhotoCellViewModel.swift in Sources */,
 				6297925E271EAD8900B68E86 /* CreatDiaryVC+UpLoadImage.swift in Sources */,
 				62603AE52727B64F00467E2D /* AddNewItemTableViewCell.swift in Sources */,
-				62C80D182720115B00EE2FB1 /* CreatPetViewController.swift in Sources */,
+				62C80D182720115B00EE2FB1 /* CreatePetViewController.swift in Sources */,
 				62C80D1C2720117800EE2FB1 /* PetInfoTableTableViewCell.swift in Sources */,
 				62B617D1273534D70062BBE5 /* UILabel+Extension.swift in Sources */,
 				62AB33F827205D5000C8E582 /* NoteViewController.swift in Sources */,
@@ -1137,7 +1133,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BFF/BFF.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 94F23Z62YB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BFF/Info.plist;
@@ -1155,7 +1151,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = yulin.BFF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1172,7 +1168,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BFF/BFF.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 94F23Z62YB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BFF/Info.plist;
@@ -1190,7 +1186,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = yulin.BFF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

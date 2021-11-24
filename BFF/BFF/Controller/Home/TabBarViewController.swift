@@ -17,7 +17,7 @@ private enum Tab {
 
     case message
 
-    case midle
+    case middle
 
     func controller() -> UIViewController {
 
@@ -31,7 +31,7 @@ private enum Tab {
 
         case .library: controller = UIStoryboard.library.instantiateInitialViewController()!
 
-        case .midle: controller = UIViewController()
+        case .middle: controller = UIViewController()
 
         case .message:
             let storyboard = UIStoryboard.message
@@ -81,7 +81,7 @@ private enum Tab {
                 image: UIImage.asset(.MessageTab),
                 selectedImage: UIImage.asset(.MessageTab)
             )
-        case .midle:
+        case .middle:
             return UITabBarItem(
                 title: "新增日記",
                 image: UIImage(),
@@ -95,7 +95,7 @@ private enum Tab {
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
-    private let tabs: [Tab] = [  .home,.social, .midle, .message, .library]
+    private let tabs: [Tab] = [  .home,.social, .middle, .message, .library]
 
     var showViewController = [UIViewController]()
     let actionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -162,20 +162,14 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         view.layoutIfNeeded()
     }
 
-
-
     @objc private func actionButtonAction(sender: UIButton) {
 
        let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-       guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatDiaryViewController") as? CreatDiaryViewController else { return }
+       guard let controller = storyboard.instantiateViewController(withIdentifier: "CreateDiaryViewController") as? CreateDiaryViewController else { return }
        let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor: UIColor(named: "main")]
        controller.title = "新增寵物日記"
         self.present(nav, animated: true, completion: nil)
        }
-
-
-
-
 }

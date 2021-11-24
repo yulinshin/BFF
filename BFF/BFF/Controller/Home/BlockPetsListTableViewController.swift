@@ -43,14 +43,12 @@ class BlockPetsListTableViewController: UITableViewController {
         cell.setup(viewModel: viewModel.blocks.value[indexPath.row])
 
         cell.didTapBlockButton = {
-            self.viewModel.ubBlock(indexPath: indexPath.row)
+            self.viewModel.unBlock(indexPath: indexPath.row)
         }
-
 
         return cell
     }
 }
-
 
 class BlockTableViewCell: UITableViewCell {
 
@@ -74,6 +72,4 @@ class BlockTableViewCell: UITableViewCell {
         self.didTapBlockButton?()
 
     }
-
-
 }

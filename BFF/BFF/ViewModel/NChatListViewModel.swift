@@ -69,7 +69,7 @@ class ChatListVM {
 
         self.showingList.value = self.chatGroupList.value.filter({ chatGroupVM in
 
-            if let blockUsers = FirebaseManager.shared.user?.blockUsers {
+            if let blockUsers = FirebaseManager.shared.currentUser?.blockUsers {
                 return !blockUsers.contains(chatGroupVM.otherUserId.value)
             } else {
                 return true

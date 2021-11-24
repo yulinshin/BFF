@@ -27,15 +27,12 @@ class MenuTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         addSubview(backView)
         backView.addSubview(settingImage)
         backView.addSubview(lbl)
-        // Configure the view for the selected state
     }
 }

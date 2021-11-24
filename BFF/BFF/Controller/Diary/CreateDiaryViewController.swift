@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreatDiaryViewController: UIViewController {
+class CreateDiaryViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     
@@ -60,7 +60,7 @@ class CreatDiaryViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-         if petsData.count == 0 {
+        if petsData.count == 0 {
             self.showNoPetAlert()
         }
     }
@@ -92,13 +92,14 @@ class CreatDiaryViewController: UIViewController {
 
             case .success(let pic):
 
-                FirebaseManager.shared.creatDiary(content: self.diaryTextView.text, pics: [pic], isPublic: true, petTags: self.petTags, petId: petId) { result in
+                
+                FirebaseManager.shared.createDiary(content: self.diaryTextView.text, pics: [pic], isPublic: true, petTags: self.petTags, petId: petId) { result in
 
                     switch result {
 
                     case.success(let message):
-                        print (message)
-                        ProgressHUD.showSuccess(text:"新增日記成功")
+                        print(message)
+                        ProgressHUD.showSuccess(text: "新增日記成功")
 
                     case.failure(let error):
 
@@ -111,34 +112,27 @@ class CreatDiaryViewController: UIViewController {
                         case .gotFirebaseError( let error ):
 
                             ProgressHUD.showFailure(text: "上傳失敗，請重新上傳")
-                            print (error)
+                            print(error)
                         }
-
-
                     }
-
-
                 }
-
-
 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                     self.navigationController?.dismiss(animated: true, completion: nil)
-                      }
-
+                }
 
             case .failure(let error):
 
-                                                                                                                      switch error {
+                switch error {
 
                 case .noNetWorkContent:
 
                     ProgressHUD.showFailure(text: "無網路連線")
 
-                case .gotFirebaseError( let error ):
+                case .gotFirebaseError(let error):
 
                     ProgressHUD.showFailure(text: "上傳失敗，請重新上傳")
-                    print (error)
+                    print(error)
                 }
 
             }
@@ -181,11 +175,11 @@ class CreatDiaryViewController: UIViewController {
 
         let alertController = UIAlertController(title: "您尚無毛小孩唷", message: "請至少新增一隻毛小孩才能進行填寫日記唷", preferredStyle: .alert)
 
-        var deleteAction = UIAlertAction(title: "前往新增", style: .default) { action in
+        let deleteAction = UIAlertAction(title: "前往新增", style: .default) { _ in
 
             let storyboard = UIStoryboard(name: "Pet", bundle: nil)
-            guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatPetViewController") as? CreatPetViewController else { return }
-            controller.presentMode = .creat
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatePetViewController") as? CreatePetViewController else { return }
+            controller.presentMode = .create
             self.navigationController?.present(controller, animated: true, completion: nil)
 
         }
@@ -209,7 +203,7 @@ class CreatDiaryViewController: UIViewController {
     }
 }
 
-extension CreatDiaryViewController: UICollectionViewDataSource {
+extension CreateDiaryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         petsData.count
     }
@@ -221,14 +215,14 @@ extension CreatDiaryViewController: UICollectionViewDataSource {
         
         let imageStr = petsData[indexPath.row].petThumbnail?.url
         let petId = petsData[indexPath.row].petId
-        cell.congfigure(with: PhotoCellViewlModel(with: imageStr ?? ""), petId: petId)
+        cell.configure(with: PhotoCellViewModel(with: imageStr ?? ""), petId: petId)
         
         return cell
         
     }
 }
 
-extension CreatDiaryViewController: UICollectionViewDelegate {
+extension CreateDiaryViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == selectedPetsCollectionView {
@@ -249,7 +243,7 @@ extension CreatDiaryViewController: UICollectionViewDelegate {
     
 }
 
-extension CreatDiaryViewController: UICollectionViewDelegateFlowLayout {
+extension CreateDiaryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if collectionView == selectedPetsCollectionView {
@@ -261,7 +255,7 @@ extension CreatDiaryViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
-extension CreatDiaryViewController: UITextViewDelegate {
+extension CreateDiaryViewController: UITextViewDelegate {
 
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
@@ -278,4 +272,3 @@ extension CreatDiaryViewController: UITextViewDelegate {
     }
 
 }
-

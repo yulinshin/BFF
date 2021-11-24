@@ -41,19 +41,18 @@ class CommentTableViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
     }
 
-
     @IBAction func sendMessage(_ sender: Any) {
         guard let message = messageTextField.text,
-        let diary = diary,
-        let selectedPet = selectedPet else {
-            return
-        }
-        FirebaseManager.shared.creatComments(content: message, petId: selectedPet, diaryId: diary.diaryId, diaryOwner: diary.userId)
+              let diary = diary,
+              let selectedPet = selectedPet else {
+                  return
+              }
+        FirebaseManager.shared.createComments(content: message, petId: selectedPet, diaryId: diary.diaryId, diaryOwner: diary.userId)
         getComments()
         messageTextField.text = ""
     }
 
-    func getComments(){
+    func getComments() {
 
         viewModels = [CommentViewModel]()
 
@@ -61,7 +60,7 @@ class CommentTableViewController: UIViewController {
 
         let firstChat = Comment(commentId: "", content: diary.content, createdTime: diary.createdTime, diaryId: diary.diaryId, petId: diary.petId)
 
-        let chatViewModel = CommentViewModel(from: firstChat){
+        let chatViewModel = CommentViewModel(from: firstChat) {
             self.tableView.reloadData()
         }
         self.viewModels.append(chatViewModel)
@@ -79,36 +78,34 @@ class CommentTableViewController: UIViewController {
                 comments.forEach { comment in
                     FirebaseManager.shared.fetchPet(petId: comment.petId) { result in
 
-                        switch result{
+                        switch result {
 
                         case .success(let pet):
-                            guard let blockUsers = FirebaseManager.shared.user?.blockUsers else {
-                                let chatViewModel = CommentViewModel(from: comment){
-                                            self.tableView.reloadData()
-                                        }
-                                        self.viewModels.append(chatViewModel)
+                            guard let blockUsers = FirebaseManager.shared.currentUser?.blockUsers else {
+                                let chatViewModel = CommentViewModel(from: comment) {
+                                    self.tableView.reloadData()
+                                }
+                                self.viewModels.append(chatViewModel)
                                 self.viewModels = self.viewModels.sorted { first, second in
-                                    first.creatTime.value < second.creatTime.value
+                                    first.createTime.value < second.createTime.value
                                 }
                                 print("*** \(self.viewModels.count) in \(chatViewModel.content.value)")
-                                        return
-                                    }
-
+                                return
+                            }
 
                             if !blockUsers.contains(pet.userId) {
-                                    let chatViewModel = CommentViewModel(from: comment){
-                                        self.tableView.reloadData()
-                                    }
-                                    self.viewModels.append(chatViewModel)
+                                let chatViewModel = CommentViewModel(from: comment) {
+                                    self.tableView.reloadData()
+                                }
+                                self.viewModels.append(chatViewModel)
                                 self.viewModels = self.viewModels.sorted { first, second in
-                                    first.creatTime.value < second.creatTime.value
+                                    first.createTime.value < second.createTime.value
                                 }
                                 print("*** \(self.viewModels.count) in \(chatViewModel.content.value)")
                             }
                         case .failure(let error):
 
-                            print (error)
-
+                            print(error)
 
                         }
 
@@ -130,8 +127,6 @@ class CommentTableViewController: UIViewController {
 
 }
 
-
-
 extension CommentTableViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -148,87 +143,77 @@ extension CommentTableViewController: UITableViewDelegate, UITableViewDataSource
     }
 }
 
-
 extension CommentTableViewController: UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-            animateViewMoving(up: true, moveValue: 300)
-        }
+        animateViewMoving(moveUp: true, moveValue: 300)
+    }
 
-        func textFieldDidEndEditing(_ textField: UITextField) {
-            animateViewMoving(up: false, moveValue: 300)
-        }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        animateViewMoving(moveUp: false, moveValue: 300)
+    }
 
-        func animateViewMoving (up:Bool, moveValue :CGFloat){
-            let movementDuration:TimeInterval = 0.3
-            let movement:CGFloat = ( up ? -moveValue : moveValue)
-            UIView.beginAnimations( "animateView", context: nil)
-            UIView.setAnimationBeginsFromCurrentState(true)
-            UIView.setAnimationDuration(movementDuration )
-            self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-            UIView.commitAnimations()
-        }
-
+    func animateViewMoving (moveUp: Bool, moveValue: CGFloat) {
+        let movementDuration: TimeInterval = 0.3
+        let movement:CGFloat = ( moveUp ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+    }
 }
 
 extension CommentTableViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-         return myPets?.count ?? 0
+        return myPets?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        // swiftlint:disable:next line_length
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedPetsCollectionViewCell.identifier, for: indexPath) as? SelectedPetsCollectionViewCell,
-        let myPets = myPets else { return UICollectionViewCell()}
-
+              let myPets = myPets else { return UICollectionViewCell()}
         let imageStr = myPets[indexPath.row].thumbNail?.url
         let petId = myPets[indexPath.row].petId
-        cell.congfigure(with: PhotoCellViewlModel(with: imageStr ?? ""), petId: petId ?? "")
+        cell.configure(with: PhotoCellViewModel(with: imageStr ?? ""), petId: petId ?? "")
         if selectedPet == petId {
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
             cell.isSelected = true
             cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
             cell.selectBackground.layer.borderWidth = 2
         }
-
         return cell
     }
-
-
-
 }
-
-
 
 extension CommentTableViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-            guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
         cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
-            cell.selectBackground.layer.borderWidth = 3
-            guard let myPets = myPets else { return }
-            selectedPet = myPets[indexPath.row].petId
+        cell.selectBackground.layer.borderWidth = 3
+        guard let myPets = myPets else { return }
+        selectedPet = myPets[indexPath.row].petId
 
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
 
-            guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-            cell.selectBackground.layer.borderColor = UIColor.white.cgColor
-            cell.selectBackground.layer.borderWidth = 0
+        guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
+        cell.selectBackground.layer.borderColor = UIColor.white.cgColor
+        cell.selectBackground.layer.borderWidth = 0
 
     }
 
 }
 
-
 extension CommentTableViewController: UICollectionViewDelegateFlowLayout {
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-            return CGSize(width: 40, height: 40)
+        return CGSize(width: 40, height: 40)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -236,15 +221,12 @@ extension CommentTableViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-    
-
 class CommentTableCell: UITableViewCell{
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var photImageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
-
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -283,4 +265,3 @@ class CommentTableCell: UITableViewCell{
         super.prepareForReuse()
     }
 }
-

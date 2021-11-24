@@ -9,19 +9,19 @@ import UIKit
 
 class SupplyReminderCellTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var switchTogle: UISwitch!
+    @IBOutlet weak var switchToggle: UISwitch!
     @IBOutlet weak var reminderTextFIeld: UITextField!
 
     static let identifier = "SupplyReminderCellTableViewCell"
 
-    var callbackTogle: ((_ isNeedToRemind: Bool) -> Void)?
+    var callbackToggle: ((_ isNeedToRemind: Bool) -> Void)?
 
     var callbackRemindPercentage: ((_ percentage: Double) -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         reminderTextFIeld.delegate = self
-        switchTogle.addTarget(self, action: #selector(onSwitchValueChanged), for: .valueChanged)
+        switchToggle.addTarget(self, action: #selector(onSwitchValueChanged), for: .valueChanged)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -32,10 +32,10 @@ class SupplyReminderCellTableViewCell: UITableViewCell {
 
    @objc func onSwitchValueChanged(_ switch: UISwitch) {
 
-       if switchTogle.isOn {
-           callbackTogle?(true)
+       if switchToggle.isOn {
+           callbackToggle?(true)
        } else {
-           callbackTogle?(false)
+           callbackToggle?(false)
        }
     }
 

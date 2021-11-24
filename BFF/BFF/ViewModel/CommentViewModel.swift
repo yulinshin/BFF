@@ -15,16 +15,16 @@ class CommentViewModel {
     let pic = Box(" ")
     let content = Box(" ")
     let date = Box(" ")
-    let creatTime = Box(Date())
+    let createTime = Box(Date())
     var didGetPetInfo: (() -> Void)?
 
-    init(from comment: Comment, updateNotify: @escaping (()->Void)) {
+    init(from comment: Comment, updateNotify: @escaping (() -> Void)) {
         self.didGetPetInfo = updateNotify
         getCommentData(from: comment)
     }
     func getCommentData(from comment: Comment) {
 
-        creatTime.value = comment.createdTime.dateValue()
+        createTime.value = comment.createdTime.dateValue()
 
         FirebaseManager.shared.fetchPet(petId: comment.petId) { result in
 
@@ -41,8 +41,6 @@ class CommentViewModel {
 
 
             }
-
-
         }
 
         self.content.value = comment.content

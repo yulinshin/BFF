@@ -10,11 +10,10 @@ import UIKit
 
 class CoreDataManager {
 
-    static let sharedInstance : CoreDataManager = {
+    static let sharedInstance: CoreDataManager = {
         let instance = CoreDataManager()
         return instance
     }()
-
 
     func fetchMyPets() -> [PetMO]? {
 
@@ -23,7 +22,7 @@ class CoreDataManager {
 
             let context = appDelegate.persistentContainer.viewContext
             do {
-                var requests = try context.fetch(PetMO.fetchRequest())
+                let requests = try context.fetch(PetMO.fetchRequest())
                 myPets = requests
             } catch {
                 fatalError("CodataERROR:\(error)")

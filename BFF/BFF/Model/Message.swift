@@ -18,7 +18,6 @@ struct Message: Codable {
 
 }
 
-
 struct MessageGroup: Codable {
 
     var groupId: String

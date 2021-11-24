@@ -11,7 +11,7 @@ class GoalViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
-    var cellArray = ["GoalCollectionViewCellA","GoalCollectionViewCellB","GoalCollectionViewCellC","GoalCollectionViewCellD"]
+    var cellArray = ["GoalCollectionViewCellA", "GoalCollectionViewCellB", "GoalCollectionViewCellC", "GoalCollectionViewCellD"]
 
     override func viewDidLoad() {
       super.viewDidLoad()
@@ -25,15 +25,10 @@ class GoalViewController: UIViewController {
       super.didReceiveMemoryWarning()
       // Dispose of any resources that can be recreated.
     }
-
-
-
 }
-
 
 // MARK: - UICollectionView Datasource
 extension GoalViewController : UICollectionViewDataSource, UICollectionViewDelegate {
-
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
@@ -75,16 +70,13 @@ extension GoalViewController : UICollectionViewDataSource, UICollectionViewDeleg
 
 }
 
-
 // MARK: - UICollectionViewLayout
 
 extension GoalViewController {
 
-
     func createLayout() -> UICollectionViewLayout {
 
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, _) -> NSCollectionLayoutSection? in
-
 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)

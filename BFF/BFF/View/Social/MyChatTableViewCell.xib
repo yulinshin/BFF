@@ -47,7 +47,7 @@
             <viewLayoutGuide key="safeArea" id="sXS-VA-Zag"/>
             <connections>
                 <outlet property="chatBubbleContent" destination="Uwi-c4-DFf" id="SHI-nx-t8d"/>
-                <outlet property="chectView" destination="4Z3-gp-AnP" id="AGE-ly-SZS"/>
+                <outlet property="chatView" destination="4Z3-gp-AnP" id="AGE-ly-SZS"/>
             </connections>
             <point key="canvasLocation" x="396.37681159420293" y="67.96875"/>
         </tableViewCell>

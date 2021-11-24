@@ -12,8 +12,6 @@ import SwiftUI
 class ChatListViewModel { // For ListTableViewController
 
     var messages = Box([Message]())
-
-
     var didGetData: (() -> Void)?
     var showingUserList = Box([ChatGroupViewModel]())
     var contactList  = [String]()
@@ -33,15 +31,14 @@ class ChatListViewModel { // For ListTableViewController
 
                 self.messages.value = messages
 
-         
                 messages.forEach { message in
 
-                    if let blockUser = FirebaseManager.shared.user?.blockUsers {
+                    if let blockUser = FirebaseManager.shared.currentUser?.blockUsers {
 
                         if !self.contactList .contains(message.sender) && blockUser.contains(message.sender) {
                             self.contactList .append(message.sender) // If is sender is new Contact, Add to List
                         }
-                        if !self.contactList .contains(message.receiver) && blockUser.contains(message.sender){
+                        if !self.contactList .contains(message.receiver) && blockUser.contains(message.sender) {
                             self.contactList .append(message.receiver) // If is receiver is new Contact, Add to List
                         }
 
@@ -49,17 +46,14 @@ class ChatListViewModel { // For ListTableViewController
                         if !self.contactList .contains(message.sender) {
                             self.contactList .append(message.sender) // If is sender is new Contact, Add to List
                         }
-                        if !self.contactList .contains(message.receiver){
+                        if !self.contactList .contains(message.receiver) {
                             self.contactList .append(message.receiver) // If is receiver is new Contact, Add to List
                         }
                     }
 
                 }
 
-
-
-                FirebaseManager.shared.fetchUser { result in
-
+                FirebaseManager.shared.fetchCurrentUserInfo { result in
 
                     switch result {
 
@@ -68,7 +62,7 @@ class ChatListViewModel { // For ListTableViewController
 
                         if let blockIds = user.blockUsers {
                         self.contactList .forEach { contactId in
-                            if contactId != FirebaseManager.shared.userId && !blockIds.contains(contactId){ // Remove Self from list array
+                            if contactId != FirebaseManager.shared.userId && !blockIds.contains(contactId) { // Remove Self from list array
                             let group = messages.filter { $0.receiver == contactId || $0.sender == contactId } // merge same Contact in One group
                             let groupModel = ChatGroupViewModel(messages: group, userId: contactId)
                             self.showingUserList.value.append(groupModel) // Add fetched Contact List
@@ -85,14 +79,13 @@ class ChatListViewModel { // For ListTableViewController
                             }
                         }
 
-
                     case.failure( let error ):
 
-                        print (error)
+                        print(error)
 
                     }
 
-                self.didGetData?() // NotifyView to update List
+                self.didGetData?()
                 }
             case .failure(let error):
                 print("ERROR:::::\(error)")
@@ -129,7 +122,7 @@ class ChatGroupViewModel { // For ListTableViewCell & ChatTableViewController
         getUserInfo(userId: userid)
     }
 
-    func setlisiten() {
+    func setListener() {
 
         FirebaseManager.shared.listenMessages(otherUserId: self.userId.value) { result in
             switch result {
@@ -171,7 +164,7 @@ class ChatViewModel { // For ChatTableViewCell
 
     let content = Box(" ")
     let date = Box(" ")
-    let recevier = Box(" ")
+    let receiver = Box(" ")
     let sender = Box(" ")
     let userName = Box(" ")
     let userPic = Box(" ")
@@ -184,7 +177,7 @@ class ChatViewModel { // For ChatTableViewCell
 
         self.content.value = message.content
         self.date.value = message.createdTime.dateValue().toString()
-        self.recevier.value = message.receiver
+        self.receiver.value = message.receiver
         self.sender.value = message.sender
 
     }
