@@ -75,7 +75,7 @@ class DetailViewModel {
     func deleteDiary() {
         let pic = Pic(url: postImageUrl.value, fileName: postPetFileName.value)
         print("Delete\(pic)")
-        FirebaseManager.shared.delateDiary(diaryId: diaryId.value, diaryPics: [pic]) { result in
+        FirebaseManager.shared.deleteDiary(diaryId: diaryId.value, diaryPics: [pic]) { result in
             switch result {
             case .success(let successMessage):
                 print(successMessage)

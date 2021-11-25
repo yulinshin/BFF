@@ -161,7 +161,7 @@ class PetsProfileViewController: UIViewController {
             return
         }
 
-        if viewModel.ownerUserId.value == FirebaseManager.shared.userId {
+        if viewModel.ownerUserId.value == FirebaseManager.userId {
             actionStackView.isHidden = true
         } else {
             actionStackView.isHidden = false
@@ -237,14 +237,14 @@ class PetsProfileViewController: UIViewController {
 
             if viewModel.isFollowed.value {
 
-                FirebaseManager.shared.removeCurrentUserFromTargetFollow(followPetId: viewModel.petId.value)
+                FirebaseManager.shared.removePetFollower(petId: viewModel.petId.value)
 
                 viewModel.followersCount.value -= 1
                 viewModel.isFollowed.value = false
 
             } else {
 
-                FirebaseManager.shared.updateTargetUserFollow(followPetId: viewModel.petId.value)
+                FirebaseManager.shared.updatePetFollower(petId: viewModel.petId.value)
 
                 viewModel.followersCount.value += 1
                 viewModel.isFollowed.value = true
@@ -311,7 +311,7 @@ class PetsProfileViewController: UIViewController {
 
             } else {
 
-                FirebaseManager.shared.updateCurrentUserBlockUsers(blockUserId: viewModel.ownerUserId.value)
+                FirebaseManager.shared.updateBlockUser(blockUserId: viewModel.ownerUserId.value)
 
                 viewModel.isBlocked.value = true
 
@@ -385,7 +385,7 @@ class ProfileViewModel {
                 self.birthDay.value = pet.healthInfo.birthday
                 if let followers = pet.followers {
                     self.followersCount.value = followers.count
-                    if followers.contains(FirebaseManager.shared.userId) {
+                    if followers.contains(FirebaseManager.userId) {
                         self.isFollowed.value = true
                     } else {
                         self.isFollowed.value = false

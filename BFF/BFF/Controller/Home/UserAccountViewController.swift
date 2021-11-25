@@ -43,8 +43,7 @@ class UserAccountTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        FirebaseManager.shared.fetchCurrentUserInfo { result in
-
+        FirebaseManager.shared.fetchUserInfo { result in
             switch result {
 
             case.success( let user ):
@@ -77,7 +76,7 @@ class UserAccountTableViewController: UITableViewController {
 
         guard let selectedImage = selectedImage else {
 
-            FirebaseManager.shared.updateUserInfo(user: newUser) { result in
+            FirebaseManager.shared.updateUserInfo(user: newUser, newImage: nil) { result in
 
                 ProgressHUD.dismiss()
 

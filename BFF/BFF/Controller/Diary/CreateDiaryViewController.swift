@@ -92,8 +92,9 @@ class CreateDiaryViewController: UIViewController {
 
             case .success(let pic):
 
-                
-                FirebaseManager.shared.createDiary(content: self.diaryTextView.text, pics: [pic], isPublic: true, petTags: self.petTags, petId: petId) { result in
+                let diary = Diary(content: self.diaryTextView.text, diaryId: "", images: [pic], isPublic: true, petTags: self.petTags, userId: FirebaseManager.userId, petId: petId)
+
+                FirebaseManager.shared.createDiary(diary: diary) { result in
 
                     switch result {
 

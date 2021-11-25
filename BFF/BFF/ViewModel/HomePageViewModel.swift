@@ -41,7 +41,7 @@ class HomePageViewModel: NSObject {
 
     func fetchUserData() {
 
-        FirebaseManager.shared.fetchCurrentUserInfo { result in
+        FirebaseManager.shared.fetchUserInfo { result in
 
             switch result {
 
@@ -163,37 +163,6 @@ class HomePageViewModel: NSObject {
         }
     }
 
-    func fetchNotificationData() {
-
-        FirebaseManager.shared.fetchNotifications { result in
-
-            switch result {
-
-            case .success(let notifications):
-
-                var showNotifications = [Notification]()
-                notifications.forEach { notification in
-                    if notification.notifyTime.dateValue() < Date() {
-                        print("Notify:\(notification.notifyTime.dateValue())")
-                        print("now:\(Date())")
-                        showNotifications.append(notification)
-                    }
-                }
-
-                showNotifications = showNotifications.sorted(by: { $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
-                self.notifications.value = showNotifications
-                self.coverToNotificationVM()
-                print("upDated NotificationData at HomeVM")
-
-            case .failure(let error):
-
-                print("Can't Get Notifications Data \(error)")
-
-            }
-
-        }
-
-    }
     func coverToNotificationVM() {
 
         notificationModels.value = [NotificationViewModel]()
@@ -228,29 +197,6 @@ class HomePageViewModel: NSObject {
             case .failure(let error):
 
                 print("Can't Get Notifications Data \(error)")
-
-            }
-
-        }
-
-    }
-
-    func listenUsersPets() {
-
-        print("Perpare to listen UsersPets at HomeVM........")
-
-        FirebaseManager.shared.listenUsersPets { result in
-
-            switch result {
-
-            case .success(let pets):
-
-                self.pets.value = pets
-                self.userDataDidLoad?()
-
-            case .failure(let error):
-
-                print("Can't Get Pets Data \(error)")
 
             }
 

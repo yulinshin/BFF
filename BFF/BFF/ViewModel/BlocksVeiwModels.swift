@@ -14,7 +14,7 @@ class BlocksViewModelList {
 
     init(userId: String) {
 
-        FirebaseManager.shared.fetchCurrentUserInfo { result in
+        FirebaseManager.shared.fetchUserInfo { result in
 
             switch result {
 

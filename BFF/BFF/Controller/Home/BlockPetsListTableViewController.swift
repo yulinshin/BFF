@@ -10,7 +10,7 @@ import UIKit
 class BlockPetsListTableViewController: UITableViewController {
 
 
-    var viewModel = BlocksViewModelList(userId: FirebaseManager.shared.userId)
+    var viewModel = BlocksViewModelList(userId: FirebaseManager.userId)
 
     override func viewDidLoad() {
         super.viewDidLoad()

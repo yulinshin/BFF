@@ -46,7 +46,7 @@ class DiaryDetailViewController: UIViewController {
 
         postPetImageView.layer.cornerRadius = postPetImageView.frame.height / 2
 
-        if viewModel.diary?.userId != FirebaseManager.shared.userId {
+        if viewModel.diary?.userId != FirebaseManager.userId {
             settingButton.isHidden = true
         } else {
             settingButton.isHidden = false

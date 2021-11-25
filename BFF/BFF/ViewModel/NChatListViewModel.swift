@@ -50,7 +50,7 @@ class ChatListVM {
             var otherUserId: String {
                var user = ""
                groupData.users.forEach { userId in
-                if userId != FirebaseManager.shared.userId {
+                if userId != FirebaseManager.userId {
                     user = userId
                 }
             }
@@ -146,7 +146,7 @@ class ChatGroupVM {
 
         guard groupId.value != "" else { return }
 
-        FirebaseManager.shared.listenFromMessageGroup(groupId: groupId.value) { result in
+        FirebaseManager.shared.listenMessageFromGroup(groupId: groupId.value) { result in
 
             switch result {
 

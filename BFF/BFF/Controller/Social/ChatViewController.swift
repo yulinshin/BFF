@@ -68,18 +68,8 @@ class ChatViewController: UIViewController {
 
     func blockUser(userId: String) {
 
-        FirebaseManager.shared.updateCurrentUserBlockUsers(blockUserId: userId) { result in
+        FirebaseManager.shared.updateBlockUser(blockUserId: userId)
 
-            switch result {
-
-            case .success(_):
-                self.navigationController?.popViewController(animated: true)
-            case .failure(let error):
-                print(error)
-
-            }
-
-        }
     }
     
     @IBAction func sendMessage(_ sender: Any) {
@@ -109,7 +99,7 @@ extension ChatViewController: UITableViewDataSource {
 
         var cell = UITableViewCell()
 
-        if viewModel?.chatVMs.value[indexPath.row].userId.value == FirebaseManager.shared.userId {
+        if viewModel?.chatVMs.value[indexPath.row].userId.value == FirebaseManager.userId {
 
             guard let myCell = tableView.dequeueReusableCell(
                 withIdentifier: "MyChatTableViewCell",

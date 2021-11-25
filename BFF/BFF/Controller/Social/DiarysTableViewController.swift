@@ -52,21 +52,7 @@ class DiariesViewController: UIViewController {
     }
 
     func blockUser(userId: String) {
-
-        FirebaseManager.shared.updateCurrentUserBlockUsers(blockUserId: userId)
-        FirebaseManager.shared.updateCurrentUserBlockUsers(blockUserId: userId) { result in
-
-            switch result {
-
-            case .success(_):
-                self.viewModel.filterDiaries()
-                self.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-
-            }
-
-        }
+        self.viewModel.blockUser(userId: userId)
     }
 
 }
@@ -91,7 +77,7 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
 
         cell.likeLabel.text = "\(viewModel.showingDiaries.value[indexPath.row].whoLiked.count)"
 
-        if    viewModel.showingDiaries.value [indexPath.row].whoLiked.contains(FirebaseManager.shared.userId) {
+        if    viewModel.showingDiaries.value [indexPath.row].whoLiked.contains(FirebaseManager.userId) {
             cell.likeIcon.image = UIImage(systemName: "heart.fill")
 
         } else {
@@ -99,13 +85,13 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
 
         }
 
-        if viewModel.showingDiaries.value[indexPath.row].userId == FirebaseManager.shared.userId {
+        if viewModel.showingDiaries.value[indexPath.row].userId == FirebaseManager.userId {
             cell.settingIcon.isHidden = true
         } else {
             cell.settingIcon.isHidden = false
         }
 
-        if viewModel.showingDiaries.value[indexPath.row].userId == FirebaseManager.shared.userId {
+        if viewModel.showingDiaries.value[indexPath.row].userId == FirebaseManager.userId {
             cell.sendMessageButton.isHidden = true
         } else {
             cell.sendMessageButton.isHidden = false
