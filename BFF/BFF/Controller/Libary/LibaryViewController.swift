@@ -18,9 +18,8 @@ class LibraryViewController: UIViewController {
         libraryCollectionView.delegate = self
         libraryCollectionView.dataSource = self
 
-        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
-        navigationController?.navigationBar.barTintColor = UIColor(named: "main")
-
+        self.navigationController?.navigationBar.tintColor = UIColor.mainColor
+        navigationController?.navigationBar.barTintColor = UIColor.mainColor
 
     }
     override func viewWillDisappear(_ animated: Bool) {

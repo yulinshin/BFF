@@ -10,7 +10,6 @@ import Foundation
 
 class ChatListTableViewController: UIViewController {
 
-
     @IBOutlet weak var tableView: UITableView!
 
     var viewModel: ChatListVM?
@@ -33,7 +32,6 @@ class ChatListTableViewController: UIViewController {
     }
 
 }
-
 
 extension ChatListTableViewController: UITableViewDelegate, UITableViewDataSource {
 

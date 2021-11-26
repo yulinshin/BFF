@@ -37,7 +37,7 @@ class DiaryDetailViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
+        self.navigationController?.navigationBar.tintColor = UIColor.mainColor
     }
 
     override func viewDidLoad() {

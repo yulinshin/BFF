@@ -92,10 +92,9 @@ private enum Tab {
     }
 }
 
-
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
-    private let tabs: [Tab] = [  .home,.social, .middle, .message, .library]
+    private let tabs: [Tab] = [ .home, .social, .middle, .message, .library]
 
     var showViewController = [UIViewController]()
     let actionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -103,7 +102,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tabBar.tintColor = UIColor(named: "main")
+        self.tabBar.tintColor = UIColor.mainColor
 
         let appearance = tabBar.standardAppearance
         appearance.shadowImage = nil
@@ -131,9 +130,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         setupMiddleButton()
     }
 
-
     // MARK: - UITabBarControllerDelegate
-
 
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
 
@@ -152,7 +149,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         actionButtonFrame.origin.x = tabBar.bounds.width/2 - actionButtonFrame.size.width/2
         actionButtonFrame.origin.y = -actionButtonFrame.size.height/2
         actionButton.frame = actionButtonFrame
-        actionButton.backgroundColor = UIColor(named: "main")
+        actionButton.backgroundColor = UIColor.mainColor
         actionButton.setImage(UIImage(systemName: "plus"), for: .normal)
         actionButton.tintColor = .white
         actionButton.layer.cornerRadius = actionButtonFrame.height/2
@@ -168,7 +165,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
        guard let controller = storyboard.instantiateViewController(withIdentifier: "CreateDiaryViewController") as? CreateDiaryViewController else { return }
        let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
-        nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor: UIColor(named: "main")]
+        nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor: UIColor.mainColor]
        controller.title = "新增寵物日記"
         self.present(nav, animated: true, completion: nil)
        }

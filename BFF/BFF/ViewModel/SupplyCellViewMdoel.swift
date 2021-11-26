@@ -49,13 +49,6 @@ class SupplyViewModel {
         self.supplyIconImage.value = supply.iconImage
         self.iconColor.value = supply.color
         self.supplyName.value = supply.supplyName
-        let stockInMax = Double(supply.stock) / Double(supply.fullStock)
-        if stockInMax.isNaN || stockInMax.isInfinite {
-            self.inventoryStatusText.value = "\(stockInMax)"
-        } else {
-            self.inventoryStatusText.value = "\(Int(stockInMax * 100))%"
-        }
-        self.inventoryStatusPercentage.value = stockInMax
         self.maxInventory.value = supply.fullStock
         self.remainingInventory.value = supply.stock
         self.cycleDosage.value = supply.perCycleTime
@@ -65,6 +58,7 @@ class SupplyViewModel {
         self.supplyUnit.value = supply.unit
         self.cycleTime.value = supply.cycleTime
         self.supply = supply
+        self.calculateInventoryStatus()
     }
 
     func updateToDataBase() {
@@ -72,6 +66,17 @@ class SupplyViewModel {
         let supply = Supply(color: self.iconColor.value, cycleTime: self.cycleTime.value, forPets: self.supplyUseByPets.value, fullStock: self.maxInventory.value, iconImage: self.supplyIconImage.value, isReminder: self.isNeedToRemind.value, perCycleTime: self.cycleDosage.value, reminderPercent: self.remindPercentage.value, stock: self.remainingInventory.value, supplyId: self.supplyId.value, supplyName: self.supplyName.value, unit: self.supplyUnit.value, lastUpdate: Timestamp.init(date: Date()))
 
         FirebaseManager.shared.updateSupply(supplyId: supply.supplyId, data: supply)
+        calculateInventoryStatus()
+    }
+
+    func calculateInventoryStatus() {
+        let stockInMax = Double(remainingInventory.value) / Double(maxInventory.value)
+        if stockInMax.isNaN || stockInMax.isInfinite {
+           self.inventoryStatusText.value = "\(stockInMax)"
+       } else {
+           self.inventoryStatusText.value = "\(Int(stockInMax * 100))%"
+       }
+       self.inventoryStatusPercentage.value = stockInMax
     }
 
     func deleteSuppliesData() {
@@ -94,6 +99,5 @@ class SupplyViewModel {
         let supply = Supply(color: self.iconColor.value, cycleTime: self.cycleTime.value, forPets: self.supplyUseByPets.value, fullStock: self.maxInventory.value, iconImage: self.supplyIconImage.value, isReminder: self.isNeedToRemind.value, perCycleTime: self.cycleDosage.value, reminderPercent: self.remindPercentage.value, stock: self.remainingInventory.value, supplyId: self.supplyId.value, supplyName: self.supplyName.value, unit: self.supplyUnit.value, lastUpdate: self.updateTime.value)
         return supply
     }
-
 
 }

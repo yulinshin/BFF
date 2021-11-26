@@ -376,7 +376,7 @@
                                         <rect key="frame" x="0.0" y="800.5" width="414" height="113"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QID-DW-vdI" id="BPc-iL-TO8">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="113"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="113"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="庫存不足提醒" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBP-0w-Ti9">
@@ -447,7 +447,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                 <connections>
-                                    <action selector="tapButton:" destination="EaM-aD-sRz" eventType="touchUpInside" id="kM8-9I-Aba"/>
+                                    <action selector="tapButton:" destination="EaM-aD-sRz" eventType="touchUpInside" id="Zqq-gw-vB1"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -464,7 +464,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="creatButton" destination="nVo-pf-bMD" id="TOL-XY-XRn"/>
+                        <outlet property="createButton" destination="nVo-pf-bMD" id="JwL-LW-jSO"/>
                         <outlet property="tableView" destination="Ddj-Pt-sdK" id="wa7-Dx-aXO"/>
                     </connections>
                 </viewController>

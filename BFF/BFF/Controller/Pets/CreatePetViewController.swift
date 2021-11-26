@@ -55,7 +55,7 @@ class CreatePetViewController: UIViewController {
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.handleSelectedPetImage))
         petImage.addGestureRecognizer(tapGR)
         petImage.isUserInteractionEnabled = true
-        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
+        self.navigationController?.navigationBar.tintColor = UIColor.mainColor
 
         petImage.layer.cornerRadius = petImage.frame.height/2
         petImage.clipsToBounds = true
@@ -334,7 +334,6 @@ extension CreatePetViewController: UITableViewDataSource {
                 controller.callBack = { [weak self] text in
                         self?.viewModel.updateData(note: text)
                 }
-
 
                 if self?.presentMode == .read {
                     controller.mode = .read

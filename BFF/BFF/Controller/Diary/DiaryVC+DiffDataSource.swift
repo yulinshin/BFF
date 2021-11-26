@@ -52,7 +52,6 @@ extension DiaryViewController {
         }
     }
 
-
     func makeDiariesDataSource() -> DataSource {
 
         let dataSource = DataSource(collectionView: diariesCollectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in

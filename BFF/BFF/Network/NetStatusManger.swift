@@ -14,15 +14,15 @@ class CustomBannerColors: BannerColorsProtocol {
     internal func color(for style: BannerStyle) -> UIColor {
         switch style {
         case .warning:
-            return UIColor(named: "main") ?? .orange
+            return UIColor.mainColor
         case .danger:
-            return  UIColor(named: "main") ?? .orange
+            return  UIColor.mainColor
         case .info:
-            return  UIColor(named: "main") ?? .orange
+            return  UIColor.mainColor
         case .customView:
-            return  UIColor(named: "main") ?? .orange
+            return  UIColor.mainColor
         case .success:
-            return  UIColor(named: "main") ?? .orange
+            return  UIColor.mainColor
         }
     }
 

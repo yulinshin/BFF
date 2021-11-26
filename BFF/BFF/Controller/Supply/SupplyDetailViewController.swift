@@ -13,7 +13,6 @@ class SupplyDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var createButton: UIButton!
 
-
     enum ControllerMode {
         case create
         case edit
@@ -35,7 +34,7 @@ class SupplyDetailViewController: UIViewController {
     var cellArray: [CellStyle] = [.icon, .name, .inventory, .pets, .cycleDosage, .reminder]
 
     var userPetsData = [Pet]() {
-        didSet{
+        didSet {
             tableView.reloadData()
         }
     }
@@ -96,7 +95,7 @@ class SupplyDetailViewController: UIViewController {
     @objc func updateSupply() {
 
         // swiftlint:disable:next line_length
-        let supply = Supply(color: viewModel.iconColor.value, cycleTime: viewModel.cycleTime.value, forPets: viewModel.supplyUseByPets.value, fullStock: viewModel.maxInventory.value, iconImage: viewModel.supplyIconImage.value, isReminder: viewModel.isNeedToRemind.value, perCycleTime: viewModel.cycleDosage.value, reminderPercent: viewModel.remindPercentage.value, stock: viewModel.remainingInventory.value, supplyId: viewModel.supplyId.value, supplyName: viewModel.supplyName.value, unit: viewModel.supplyUnit.value, lastUpdate: Timestamp.init(date:Date()))
+        let supply = Supply(color: viewModel.iconColor.value, cycleTime: viewModel.cycleTime.value, forPets: viewModel.supplyUseByPets.value, fullStock: viewModel.maxInventory.value, iconImage: viewModel.supplyIconImage.value, isReminder: viewModel.isNeedToRemind.value, perCycleTime: viewModel.cycleDosage.value, reminderPercent: viewModel.remindPercentage.value, stock: viewModel.remainingInventory.value, supplyId: viewModel.supplyId.value, supplyName: viewModel.supplyName.value, unit: viewModel.supplyUnit.value, lastUpdate: Timestamp.init(date: Date()))
 
         FirebaseManager.shared.updateSupply(supplyId: supply.supplyId, data: supply)
     }
@@ -119,7 +118,6 @@ class SupplyDetailViewController: UIViewController {
 
         self.navigationController?.popViewController(animated: true)
     }
-
 
 }
 
@@ -148,14 +146,18 @@ extension SupplyDetailViewController: UITableViewDataSource {
                 cell.stockProgressView.tintColor = UIColor(named: color)
             }
 
-            viewModel.maxInventory.bind { maxStock in
-                self.viewModel.remainingInventory.bind { stock in
+            viewModel.maxInventory.bind { [weak self] maxStock in
+                self?.viewModel.remainingInventory.bind { stock in
                     cell.stockLabel.text = "\(maxStock)/\(stock)"
                 }
             }
 
             viewModel.inventoryStatusPercentage.bind { percentage in
                 cell.stockProgressView.progress = Float(percentage)
+                UIView.animate(withDuration: 1, delay: 0.5, options: [], animations: {
+                    cell.stockProgressView.layoutIfNeeded()
+                })
+
             }
 
             cell.iconNameCallback = { [weak self] name in
@@ -173,7 +175,6 @@ extension SupplyDetailViewController: UITableViewDataSource {
         case .name:
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SupplyNameTableViewCell.identifier, for: indexPath) as? SupplyNameTableViewCell else { return UITableViewCell() }
-
 
             viewModel.supplyName.bind { name in
                 cell.textField.text = name
@@ -193,7 +194,6 @@ extension SupplyDetailViewController: UITableViewDataSource {
 
             viewModel.maxInventory.bind { maxStock in
                 cell.maxStockTextField.text = "\(maxStock)"
-                print("Setting \(maxStock)")
             }
 
             viewModel.remainingInventory.bind { stock in
@@ -206,13 +206,14 @@ extension SupplyDetailViewController: UITableViewDataSource {
 
             cell.callbackMaxStock = { [weak self] maxStock in
                 self?.viewModel.maxInventory.value = maxStock
-                print("over \(maxStock)")
-                tableView.reloadData()
+                self?.viewModel.calculateInventoryStatus()
+
             }
 
             cell.callbackStock = { [weak self] stock in
                 self?.viewModel.remainingInventory.value = stock
-                tableView.reloadData()
+                self?.viewModel.calculateInventoryStatus()
+
             }
 
             cell.callbackUnit = { [weak self] unit in

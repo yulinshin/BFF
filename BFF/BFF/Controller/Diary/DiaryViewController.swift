@@ -66,7 +66,7 @@ class DiaryViewController: UIViewController {
         selectedPetsCollectionView.dataSource = petsDataSource
         diariesCollectionView.collectionViewLayout = createLayout(type: .grid)
         selectedPetsCollectionView.allowsMultipleSelection = true
-        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
+        self.navigationController?.navigationBar.tintColor = UIColor.mainColor
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Filter"), style: .done, target: self, action: #selector(switchShowList))
 
@@ -135,7 +135,7 @@ class DiaryViewController: UIViewController {
             guard let controller = storyboard.instantiateViewController(withIdentifier: "CreateDiaryViewController") as? CreateDiaryViewController else { return }
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
-        nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor: UIColor(named: "main") ?? .orange]
+        nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor: UIColor.mainColor]
             self.present(nav, animated: true, completion: nil)
     }
 
@@ -208,9 +208,10 @@ class DiaryViewController: UIViewController {
     
     // MARK: - diariesCollectionViewCompositionLayout
 
+    // swiftlint:disable:next function_body_length
     func createLayout(type: LayoutType) -> UICollectionViewLayout {
 
-        let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection in
+        let layout = UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection in
 
             switch type {
             case .grid:
@@ -366,7 +367,7 @@ extension DiaryViewController: UICollectionViewDelegate {
 
         guard scrollView.contentOffset.y > 0 else { return }
 
-        if (self.lastContentOffset >= scrollView.contentOffset.y) {
+        if self.lastContentOffset >= scrollView.contentOffset.y {
 
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
 
@@ -375,7 +376,7 @@ extension DiaryViewController: UICollectionViewDelegate {
                 self.view.layoutIfNeeded()
             }
 
-        } else if (self.lastContentOffset < scrollView.contentOffset.y) {
+        } else if self.lastContentOffset < scrollView.contentOffset.y {
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
 
                 self.petsTopConstraint.constant = -70

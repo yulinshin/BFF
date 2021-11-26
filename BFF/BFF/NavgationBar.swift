@@ -21,7 +21,7 @@ enum NavigationBarStyle {
             barAppearance.configureWithTransparentBackground()
 
         case .whiteBgWithMainColorTint:
-            barAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "main") ]
+            barAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainColor]
             barAppearance.backgroundColor = .white
         }
 

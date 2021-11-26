@@ -84,9 +84,7 @@ class ChatListVM {
                 return true
             }
 
-
         })
-
 
         self.didUpdateShowingData?()
     }
@@ -123,7 +121,6 @@ class ChatGroupVM {
 
     func listenMessageFromUserId() {
 
-
         FirebaseManager.shared.listenMessageFromUserID(otherUseId: self.otherUserId.value) { result in
             switch result {
 
@@ -133,14 +130,12 @@ class ChatGroupVM {
                 self.getLastChat()
                 self.coverToVM()
 
-
             case .failure(let error):
                 print(error)
 
             }
         }
     }
-
 
     func listenMessageFromGroup() {
 

@@ -15,7 +15,6 @@ class BookCollectionViewCell: UICollectionViewCell {
 
     var model: BookViewModel?
 
-
     func makeBookCover() {
 
         guard let model = model else { return
@@ -35,7 +34,7 @@ class BookCollectionViewCell: UICollectionViewCell {
 
     }
 
-    func setLayout(){
+    func setLayout() {
 
         bookCoverBackground.layer.cornerRadius = 10
         bookCoverBackground.backgroundColor = .white
@@ -51,6 +50,5 @@ class BookCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
 
     }
-
 
 }

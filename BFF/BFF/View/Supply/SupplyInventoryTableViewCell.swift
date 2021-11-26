@@ -34,7 +34,6 @@ class SupplyInventoryTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-
 }
 
 extension SupplyInventoryTableViewCell: UITextFieldDelegate {

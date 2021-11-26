@@ -54,8 +54,8 @@ class CreateDiaryViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "儲存", style: .done, target: self, action: #selector(saveDiary))
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .done, target: self, action: #selector(cancelEditDiary))
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "main")
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "main")
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.mainColor
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.mainColor
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -229,7 +229,7 @@ extension CreateDiaryViewController: UICollectionViewDelegate {
         if collectionView == selectedPetsCollectionView {
             guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
             selectedPetId = petsData[indexPath.row].petId
-            cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
+            cell.selectBackground.layer.borderColor = UIColor.mainColor.cgColor
             cell.selectBackground.layer.borderWidth = 3
         }
     }
@@ -237,7 +237,7 @@ extension CreateDiaryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView == selectedPetsCollectionView {
             guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-            cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
+            cell.selectBackground.layer.borderColor = UIColor.mainColor.cgColor
             cell.selectBackground.layer.borderWidth = 0
         }
     }

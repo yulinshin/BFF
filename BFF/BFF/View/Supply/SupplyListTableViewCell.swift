@@ -81,6 +81,9 @@ class SupplyListTableViewCell: UITableViewCell {
         viewModel?.inventoryStatusPercentage.bind(listener: { percentage in
 
             self.progressView.progress = Float(percentage)
+            UIView.animate(withDuration: 1, delay: 0.5, options: [], animations: { [unowned self] in
+                progressView.layoutIfNeeded()
+            })
 
         })
 

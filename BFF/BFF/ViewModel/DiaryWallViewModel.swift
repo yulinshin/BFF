@@ -22,7 +22,6 @@ class DiaryWallViewModel {
             case .success(let diaries):
 
                 if diaries.count == 0 {
-                    self.getDataFailure
 
                 } else {
 
@@ -33,8 +32,6 @@ class DiaryWallViewModel {
                 }
 
             case.failure(let error):
-
-                self.getDataFailure
 
                 print(error)
 
@@ -51,8 +48,6 @@ class DiaryWallViewModel {
 
                 if  diaries.count == 0 {
 
-                    self.getDataFailure
-
                 } else {
 
                 self.diaries.value = diaries
@@ -63,7 +58,6 @@ class DiaryWallViewModel {
             case.failure(let error):
 
                 print(error)
-                self.getDataFailure
 
             }
         }
@@ -84,7 +78,6 @@ class DiaryWallViewModel {
                     self.showingDiaries.value = self.diaries.value
                     self.filterDiaries()
 
-
                 case.failure(let error):
 
                         print(error)
@@ -96,7 +89,6 @@ class DiaryWallViewModel {
     }
 
     func filterDiaries() {
-
 
         FirebaseManager.shared.fetchUserInfo { result in
 
@@ -119,7 +111,6 @@ class DiaryWallViewModel {
                 }) } else {
                     self.didUpDateData?()
                 }
-
 
                 print("*** showingDiaries: \(self.showingDiaries.value.count)")
                 self.didUpDateData?()
@@ -163,7 +154,7 @@ class DiaryWallViewModel {
         }
     }
 
-    func blockUser(userId: String){
+    func blockUser(userId: String) {
         FirebaseManager.shared.updateBlockUser(blockUserId: userId)
         self.showingDiaries.value = self.showingDiaries.value.filter { diary in
             if diary.userId == userId {

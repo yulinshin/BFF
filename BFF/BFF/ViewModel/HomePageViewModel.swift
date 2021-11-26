@@ -66,7 +66,6 @@ class HomePageViewModel: NSObject {
 
     }
 
-
     var user: User?
     let userName = Box("")
     let notifications = Box([Notification]())

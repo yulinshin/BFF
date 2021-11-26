@@ -13,7 +13,13 @@ class SupplyIconCellTableViewCell: UITableViewCell {
     @IBOutlet weak var stockLabel: UILabel!
     @IBOutlet weak var colorCollectionView: UICollectionView!
 
-    @IBOutlet weak var stockProgressView: UIProgressView!
+    @IBOutlet weak var stockProgressView: UIProgressView! {
+        didSet {
+            UIView.animate(withDuration: 1, delay: 0, options: [], animations: { [unowned self] in
+              stockProgressView.layoutIfNeeded()
+            })
+        }
+    }
     @IBOutlet weak var itemCollectionView: UICollectionView!
     static let identifier = "SupplyIconCellTableViewCell"
 
@@ -92,7 +98,7 @@ extension SupplyIconCellTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
             guard let cell = collectionView.cellForItem(at: indexPath) as? CubeCollectionViewCell else { return }
-        cell.background.layer.borderColor = UIColor(named: "main")?.cgColor
+        cell.background.layer.borderColor = UIColor.mainColor.cgColor
         cell.background.layer.borderWidth = 2
         cell.background.layer.cornerRadius = 8
 
@@ -115,7 +121,7 @@ extension SupplyIconCellTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
 
         guard let cell = collectionView.cellForItem(at: indexPath) as? CubeCollectionViewCell else { return }
-    cell.background.layer.borderColor = UIColor(named: "main")?.cgColor
+        cell.background.layer.borderColor = UIColor.mainColor.cgColor
     cell.background.layer.borderWidth = 0
 
     }

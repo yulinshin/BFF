@@ -9,7 +9,6 @@ import UIKit
 
 class BlockPetsListTableViewController: UITableViewController {
 
-
     var viewModel = BlocksViewModelList(userId: FirebaseManager.userId)
 
     override func viewDidLoad() {
@@ -21,7 +20,6 @@ class BlockPetsListTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
 
     }
 

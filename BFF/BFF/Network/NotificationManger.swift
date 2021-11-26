@@ -11,7 +11,6 @@ import UserNotifications
 import FirebaseFirestore
 import CoreData
 
-
 class NotificationManger {
 
     static let shared = NotificationManger()
@@ -35,7 +34,6 @@ class NotificationManger {
         unuPool = app.center
         unuPool.setNotificationCategories([category])
     }
-
 
     func createSupplyNotification(supply: Supply) {
 
@@ -108,8 +106,6 @@ class NotificationManger {
             }
         })
     }
-
-
 
     func countNotifyDate (fullStock: Int, stock: Int, reminderPercent: Double, perCycleTime: Int, cycleTime: String, fromDate: Date = Date()) -> Date {
 

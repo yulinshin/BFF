@@ -14,7 +14,6 @@ class SocialViewController: UIViewController {
 
     @IBOutlet weak var petsTopConstraint: NSLayoutConstraint!
 
-
     private var lastContentOffset: CGFloat = 0
 
     var layoutType = LayoutType.single
@@ -67,7 +66,7 @@ class SocialViewController: UIViewController {
 
         self.navigationController?.title = "隨意逛"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Filter"), style: .done, target: self, action: #selector(switchShowList))
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "main")
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.mainColor
         diaryWallViewModel.showingDiaries.bind {  [weak self] diaries in
 
             var diaryItems = [Item]()
@@ -85,7 +84,6 @@ class SocialViewController: UIViewController {
         super.viewWillAppear(true)
 
         self.navigationController?.navigationBar.backgroundColor = .white
-
 
         if showSelectedPetsCollectionView {
             self.selectedPetsCollectionView.isHidden = false
@@ -112,7 +110,7 @@ class SocialViewController: UIViewController {
             guard let controller = storyboard.instantiateViewController(withIdentifier: "CreateDiaryViewController") as? CreateDiaryViewController else { return }
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
-        nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor:UIColor(named: "main") ?? UIColor.orange]
+        nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor: UIColor.mainColor]
             self.present(nav, animated: true, completion: nil)
 
     }
@@ -188,7 +186,7 @@ class SocialViewController: UIViewController {
 
     func createLayout(type: LayoutType) -> UICollectionViewLayout {
 
-        let layout = UICollectionViewCompositionalLayout{ (sectionIndex, layoutEnviroment) -> NSCollectionLayoutSection in
+        let layout = UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection in
 
             switch type {
             case .grid:
@@ -268,21 +266,15 @@ extension SocialViewController: UICollectionViewDelegate {
 
         guard scrollView.contentOffset.y > 0 else { return }
 
-        if (self.lastContentOffset >= scrollView.contentOffset.y) {
+        if self.lastContentOffset >= scrollView.contentOffset.y {
 
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
-
                 self.petsTopConstraint.constant = 0
                 self.selectedPetsCollectionView.alpha = 1
                 self.view.layoutIfNeeded()
-
-
             }
 
-        }
-        else if (self.lastContentOffset < scrollView.contentOffset.y) {
-
-
+        } else if self.lastContentOffset < scrollView.contentOffset.y {
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
 
                 self.petsTopConstraint.constant = -70

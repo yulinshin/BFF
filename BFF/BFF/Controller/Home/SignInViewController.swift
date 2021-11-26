@@ -22,7 +22,6 @@ class SignInViewController: UIViewController {
     let policy = "隱私權政策"
     let eula = "Apple標準許可協議"
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -197,11 +196,11 @@ class SignInViewController: UIViewController {
 
         let title = "BFF PetsDiary"
         let titleAttributes: NSDictionary = [
-            NSAttributedString.Key.font: UIFont(name: "GenJyuuGothic-Bold", size: 36),
+            NSAttributedString.Key.font: UIFont.titleBold36,
             NSAttributedString.Key.kern: CGFloat(2)
         ]
 
-        let titleAttributed = NSAttributedString(string: title, attributes: titleAttributes as? [NSAttributedString.Key :Any])
+        let titleAttributed = NSAttributedString(string: title, attributes: titleAttributes as? [NSAttributedString.Key: Any])
         titleLabel.attributedText = titleAttributed
 
         subTitleLAbel.textColor = .white
@@ -209,11 +208,11 @@ class SignInViewController: UIViewController {
 
         let subTitle = "- 開始紀錄毛小孩們的大小事 -"
         let subTitleAttributes: NSDictionary = [
-            NSAttributedString.Key.font: UIFont(name: "GenJyuuGothic-Medium", size: 16),
+            NSAttributedString.Key.font: UIFont.titleMedium16,
             NSAttributedString.Key.kern: CGFloat(4)
         ]
 
-        let subTitleAttributed = NSAttributedString(string: subTitle, attributes: subTitleAttributes as? [NSAttributedString.Key :Any])
+        let subTitleAttributed = NSAttributedString(string: subTitle, attributes: subTitleAttributes as? [NSAttributedString.Key: Any])
         subTitleLAbel.attributedText = subTitleAttributed
 
         textLabel.textColor = .white
@@ -221,11 +220,11 @@ class SignInViewController: UIViewController {
 
         let text = "Best Friend Forever"
         let attributes: NSDictionary = [
-            NSAttributedString.Key.font: UIFont(name: "GenJyuuGothic-Medium", size: 10),
+            NSAttributedString.Key.font: UIFont.textMedium10,
             NSAttributedString.Key.kern: CGFloat(10)
         ]
 
-        let attributedTitle = NSAttributedString(string: text, attributes:attributes as? [NSAttributedString.Key :Any])
+        let attributedTitle = NSAttributedString(string: text, attributes: attributes as? [NSAttributedString.Key: Any])
         textLabel.attributedText = attributedTitle
 
         view.backgroundColor = .white
@@ -286,7 +285,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
 
             Auth.auth().signIn(with: credential) { (authResult, error) in
 
-                if let user = authResult?.user {
+                if (authResult?.user) != nil {
 
                     if let fullName = appleIDCredential.fullName,
                        let givenName = fullName.givenName,
@@ -305,7 +304,6 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
                                 print(error)
                             }
                         }
-                        print("Success signed in as \(user.uid), email:\(user.email), name:\(displayName)")
                     }
 
                     let viewController = TabBarController()

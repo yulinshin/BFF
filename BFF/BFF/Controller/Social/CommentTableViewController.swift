@@ -28,7 +28,7 @@ class CommentTableViewController: UIViewController {
 
         let petNib = UINib(nibName: "SelectedPetsCollectionViewCell", bundle: nil)
         collectionView.register(petNib, forCellWithReuseIdentifier: SelectedPetsCollectionViewCell.identifier)
-        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
+        self.navigationController?.navigationBar.tintColor = UIColor.mainColor
         getComments()
 
     }
@@ -73,7 +73,6 @@ class CommentTableViewController: UIViewController {
                 comments.sort { first, second in
                     first.createdTime.dateValue() < second.createdTime.dateValue()
                 }
-
 
                 comments.forEach { comment in
                     FirebaseManager.shared.fetchPet(petId: comment.petId) { result in
@@ -155,12 +154,10 @@ extension CommentTableViewController: UITextFieldDelegate {
 
     func animateViewMoving (moveUp: Bool, moveValue: CGFloat) {
         let movementDuration: TimeInterval = 0.3
-        let movement:CGFloat = ( moveUp ? -moveValue : moveValue)
-        UIView.beginAnimations( "animateView", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(movementDuration )
-        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        UIView.commitAnimations()
+        let movement: CGFloat = ( moveUp ? -moveValue : moveValue)
+        UIView.animate(withDuration: movementDuration) {
+            self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        }
     }
 }
 
@@ -180,7 +177,7 @@ extension CommentTableViewController: UICollectionViewDataSource {
         if selectedPet == petId {
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
             cell.isSelected = true
-            cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
+            cell.selectBackground.layer.borderColor = UIColor.mainColor.cgColor
             cell.selectBackground.layer.borderWidth = 2
         }
         return cell
@@ -192,7 +189,7 @@ extension CommentTableViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-        cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
+        cell.selectBackground.layer.borderColor = UIColor.mainColor.cgColor
         cell.selectBackground.layer.borderWidth = 3
         guard let myPets = myPets else { return }
         selectedPet = myPets[indexPath.row].petId
@@ -221,7 +218,7 @@ extension CommentTableViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-class CommentTableCell: UITableViewCell{
+class CommentTableCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!

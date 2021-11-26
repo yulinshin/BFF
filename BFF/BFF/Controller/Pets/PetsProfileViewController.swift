@@ -68,6 +68,7 @@ class PetsProfileViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
     }
 
+    // swiftlint:disable:next function_body_length
     func createLayout() -> UICollectionViewLayout {
 
             let layout = UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection? in
@@ -198,15 +199,15 @@ class PetsProfileViewController: UIViewController {
 
             if isFollowed {
                 self.followButton.backgroundColor = .white
-                self.followButton.layer.borderColor = UIColor(named: "main")?.cgColor
+                self.followButton.layer.borderColor = UIColor.mainColor.cgColor
                 self.followButton.layer.borderWidth = 1
                 self.followButton.setTitle("已追蹤", for: .normal)
-                self.followButton.setTitleColor(UIColor(named: "main"), for: .normal)
+                self.followButton.setTitleColor(UIColor.mainColor, for: .normal)
                 self.followButton.layer.cornerRadius = 8
             } else {
 
-                self.followButton.backgroundColor = UIColor(named: "main")
-                self.followButton.layer.borderColor = UIColor(named: "main")?.cgColor
+                self.followButton.backgroundColor = UIColor.mainColor
+                self.followButton.layer.borderColor = UIColor.mainColor.cgColor
                 self.followButton.layer.borderWidth = 1
                 self.followButton.setTitle("追蹤", for: .normal)
                 self.followButton.setTitleColor(.white, for: .normal)
@@ -216,7 +217,7 @@ class PetsProfileViewController: UIViewController {
         }
 
         self.sendMessageButton.backgroundColor = .white
-        self.sendMessageButton.layer.borderColor = UIColor(named: "main")?.cgColor
+        self.sendMessageButton.layer.borderColor = UIColor.mainColor.cgColor
         self.sendMessageButton.layer.borderWidth = 1
         self.sendMessageButton.layer.cornerRadius = 8
         self.sendMessageButton.setTitle("私訊主人", for: .normal)

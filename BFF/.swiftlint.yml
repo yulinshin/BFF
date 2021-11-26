@@ -18,6 +18,5 @@ force_cast: error
 line_length:
     warning: 250
     ignores_comments: true
-
 cyclomatic_complexity:
   ignores_case_statements: true

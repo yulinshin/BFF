@@ -10,7 +10,6 @@ import UIKit
 
 class MyChatTableViewCell: UITableViewCell {
     
-
     @IBOutlet weak var chatView: UIView!
 
     @IBOutlet weak var chatBubbleContent: UILabel!

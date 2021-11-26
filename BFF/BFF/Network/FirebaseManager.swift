@@ -387,7 +387,7 @@ class FirebaseManager {
 
     func updateSupply(supplyId: String, data: Supply) {
 
-        let supplyRef = dataBase.collection(Collection.users.rawValue).document(FirebaseManager.userId).collection(Collection.notifications.rawValue).document(supplyId)
+        let supplyRef = dataBase.collection(Collection.users.rawValue).document(FirebaseManager.userId).collection(Collection.supplies.rawValue).document(supplyId)
 
         var supply = data
         supply.lastUpdate = Timestamp.init(date: Date())

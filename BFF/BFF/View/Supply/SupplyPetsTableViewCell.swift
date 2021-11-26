@@ -56,10 +56,11 @@ extension SupplyPetsTableViewCell: UICollectionViewDelegate, UICollectionViewDat
         let imageStr = userPetsData[indexPath.row].petThumbnail?.url
         let petId = userPetsData[indexPath.row].petId
         cell.configure(with: PhotoCellViewModel(with: imageStr ?? ""), petId: petId)
-        if selectedPets.contains(petId){
+        
+        if selectedPets.contains(petId) {
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
             cell.isSelected = true
-            cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
+            cell.selectBackground.layer.borderColor = UIColor.mainColor.cgColor
             cell.selectBackground.layer.borderWidth = 2
         }
 
@@ -69,7 +70,7 @@ extension SupplyPetsTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-        cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
+        cell.selectBackground.layer.borderColor = UIColor.mainColor.cgColor
         cell.selectBackground.layer.borderWidth = 2
 
         guard let petId = cell.petId else { return }
@@ -85,7 +86,7 @@ extension SupplyPetsTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
 
             guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-            cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
+            cell.selectBackground.layer.borderColor = UIColor.mainColor.cgColor
             cell.selectBackground.layer.borderWidth = 0
 
             guard let petId = cell.petId else { return }

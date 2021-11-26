@@ -13,7 +13,7 @@ class UserInfoViewModel {
     var name = Box("")
     var email = Box("")
 
-    init(user: User){
+    init(user: User) {
         self.name.value = user.userName
         self.email.value = user.email
     }
@@ -58,11 +58,9 @@ class UserAccountTableViewController: UITableViewController {
         }
     }
 
-
     @objc func saveUserInfo() {
 
         ProgressHUD.show()
-
 
         guard let user = user else {
             return
@@ -206,7 +204,7 @@ class UserPicCell: UITableViewCell {
 
     }
 
-    var didTapChangeUserPicButton: (() -> ())?
+    var didTapChangeUserPicButton: (() -> Void)?
 
     func setup(userPic: String) {
 
@@ -229,10 +227,7 @@ class UserPicCell: UITableViewCell {
         self.didTapChangeUserPicButton?()
 
     }
-
-
 }
-
 
 class UserInfoCell: UITableViewCell {
 

@@ -103,15 +103,13 @@ class CreatePetViewModel {
         }
     }
 
-
     func upDatePetToDB(image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
 
         // swiftlint:disable:next line_length
-        var pet = Pet(petId: self.petId.value, name: self.name.value, userId: "", healthInfo: HealthInfo(birthday: self.birthday.value, chipId: self.chipId.value, gender: self.gender.value, note: self.note.value, type: self.type.value, weight: self.weight.value, weightUnit: self.weightUnit.value), petThumbnail: Pic(url: self.petThumbnail.value, fileName: self.photoFile.value))
+        let pet = Pet(petId: self.petId.value, name: self.name.value, userId: "", healthInfo: HealthInfo(birthday: self.birthday.value, chipId: self.chipId.value, gender: self.gender.value, note: self.note.value, type: self.type.value, weight: self.weight.value, weightUnit: self.weightUnit.value), petThumbnail: Pic(url: self.petThumbnail.value, fileName: self.photoFile.value))
 
         FirebaseManager.shared.updatePet(updatePetId: pet.petId, newImage: image, data: pet) { result in
             switch result {
-
 
             case.success(let message):
 
@@ -126,23 +124,19 @@ class CreatePetViewModel {
 
     }
 
-
     func deletePet() {
 
         FirebaseManager.shared.deletePhoto(fileName: photoFile.value, filePath: .petPhotos)
-
 
         FirebaseManager.shared.removePet(petId: petId.value)
 
         FirebaseManager.shared.removePetFromUser(petId: petId.value)
 
-
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
 
             let context = appDelegate.persistentContainer.viewContext
             do {
-                var requests = try context.fetch(PetMO.fetchRequest())
-                var isContain = false
+                let requests = try context.fetch(PetMO.fetchRequest())
                 for request in requests {
                     if request.petId == petId.value {
                         context.delete(request)

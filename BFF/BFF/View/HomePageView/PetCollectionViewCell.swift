@@ -71,7 +71,6 @@ class PetCollectionViewCell: UICollectionViewCell {
             }
     }
 
-
     func setupBlankDiaryBook() {
         petKindIcon.isHidden = true
         petImageView.isHidden = true
@@ -80,27 +79,23 @@ class PetCollectionViewCell: UICollectionViewCell {
         addPetAnimationView.frame = diaryCardBackground.frame
         birthdayLabel.isHidden = true
 
-
         diaryCardBackground.addSubview(addPetAnimationView)
         diaryCardBackground.addSubview(title)
-
 
         addPetAnimationView.translatesAutoresizingMaskIntoConstraints = false
         addPetAnimationView.topAnchor.constraint(equalTo: diaryCardBackground.topAnchor, constant: 60).isActive = true
         addPetAnimationView.centerXAnchor.constraint(equalTo: diaryCardBackground.centerXAnchor).isActive = true
         addPetAnimationView.heightAnchor.constraint(equalToConstant: 300).isActive = true
 
-
         let keyPath = AnimationKeypath(keys: ["**", "Fill 1", "**", "Color"])
-        if let color = UIColor(named: "main") {
-            let colorProvider = ColorValueProvider(color.lottieColorValue)
-            addPetAnimationView.setValueProvider(colorProvider, keypath: keyPath)
-        }
+
+        let colorProvider = ColorValueProvider(UIColor.mainColor.lottieColorValue)
+        addPetAnimationView.setValueProvider(colorProvider, keypath: keyPath)
+
         addPetAnimationView.center = diaryCardBackground.center
         addPetAnimationView.contentMode = .scaleAspectFit
         addPetAnimationView.loopMode = .loop
         addPetAnimationView.play()
-
 
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.tapCard))
         addPetAnimationView.addGestureRecognizer(tapGR)

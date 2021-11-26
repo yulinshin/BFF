@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let center = UNUserNotificationCenter.current()
 
     // delegate for receiving or delivering notification
-    let notificationDelegate = NotificationDelegate()
+    weak var notificationDelegate: NotificationDelegate?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -34,8 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSPlacesClient.provideAPIKey("AIzaSyCuIEN8YUXa-OS0S5L2nOW_O__u4NfzfdY")
 
         UINavigationBar.appearance().barTintColor = UIColor.white
-        UINavigationBar.appearance().tintColor = UIColor(named: "main")
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "main") ?? UIColor.orange]
+        UINavigationBar.appearance().tintColor = UIColor.mainColor
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainColor]
 
         center.delegate = notificationDelegate
 
@@ -44,8 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         center.getNotificationSettings { ( settings ) in
             switch settings.authorizationStatus {
             case .notDetermined:
-                self.center.requestAuthorization(options: options) {
-                    (granted, _) in
+                self.center.requestAuthorization(options: options) { (granted, _) in
                     if !granted {
                         print("Something went wrong")
                     }
@@ -65,7 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 break
             }
         }
-
 
         let userDefaults = UserDefaults.standard
 

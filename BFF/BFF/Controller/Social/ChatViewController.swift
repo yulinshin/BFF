@@ -41,7 +41,7 @@ class ChatViewController: UIViewController {
             self.title = name
         })
 
-        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
+        self.navigationController?.navigationBar.tintColor = UIColor.mainColor
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "．．．", style: .done, target: self, action: #selector(showSetting))
 

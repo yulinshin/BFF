@@ -39,7 +39,6 @@ class CommentViewModel {
             case .failure(let error):
                 print(error)
 
-
             }
         }
 

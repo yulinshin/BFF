@@ -11,7 +11,6 @@ class NoteViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var noteTextView: UITextView!
 
-    
     @IBOutlet weak var titleLabel: UILabel!
 
     enum PresentMode {

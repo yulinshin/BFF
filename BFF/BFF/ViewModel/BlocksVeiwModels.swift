@@ -37,8 +37,7 @@ class BlocksViewModelList {
         }
     }
 
-
-    func unBlock(indexPath: Int){
+    func unBlock(indexPath: Int) {
 
         FirebaseManager.shared.unblockUser(blockUserId: self.blocks.value[indexPath].id.value)
         blocks.value.remove(at: indexPath)
@@ -54,7 +53,7 @@ class BlocksViewModel {
     var id = Box(" ")
     var didUpdateData: (() -> Void)?
 
-    init(userId: String){
+    init(userId: String) {
 
         self.id.value = userId
 
@@ -77,6 +76,4 @@ class BlocksViewModel {
         }
 
     }
-
-
 }

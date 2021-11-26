@@ -93,7 +93,7 @@ class HomePageViewController: UIViewController {
         window.addSubview(transparentView)
 
         let screenSize = UIScreen.main.bounds.size
-        tableView.tintColor = UIColor(named: "main")
+        tableView.tintColor = UIColor.mainColor
         tableView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: menuHeight)
         window.addSubview(tableView)
         tableView.layer.cornerRadius = 10
@@ -142,7 +142,7 @@ class HomePageViewController: UIViewController {
         guard let controller = storyboard.instantiateViewController(withIdentifier: CreatePetViewController.identifier) as? CreatePetViewController else { return }
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
-        nav.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "main")]
+        nav.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainColor]
         controller.presentMode = .create
         self.present(nav, animated: true, completion: nil)
     }
@@ -330,7 +330,7 @@ extension HomePageViewController: UICollectionViewDelegate {
     }
 }
 
-//MARK: -Setting Menu TableView
+// MARK: - Setting Menu TableView
 extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
