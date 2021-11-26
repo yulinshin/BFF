@@ -234,8 +234,8 @@ extension CreatePetViewController: UITableViewDataSource {
             }
             cell.button.isHidden = true
 
-            cell.callback = { text in
-                self.viewModel.updateData(name: text)
+            cell.callback = { [weak self] text in
+                self?.viewModel.updateData(name: text)
             }
 
         case "品種" :
@@ -247,8 +247,8 @@ extension CreatePetViewController: UITableViewDataSource {
 
             }
             cell.button.isHidden = true
-            cell.callback = { text in
-                self.viewModel.updateData(type: text)
+            cell.callback = { [weak self] text in
+                self?.viewModel.updateData(type: text)
             }
 
         case "生日" :
@@ -260,8 +260,8 @@ extension CreatePetViewController: UITableViewDataSource {
 
             }
             cell.button.isHidden = true
-            cell.callback = { text in
-                self.viewModel.updateData(birthday: text)
+            cell.callback = { [weak self] text in
+                self?.viewModel.updateData(birthday: text)
             }
 
         case "體重" :
@@ -274,8 +274,8 @@ extension CreatePetViewController: UITableViewDataSource {
 
             }
             cell.button.isHidden = true
-            cell.callback = { text in
-                self.viewModel.updateData(weight: text)
+            cell.callback = { [weak self] text in
+                self?.viewModel.updateData(weight: text)
             }
 
         case "體重單位" :
@@ -288,8 +288,8 @@ extension CreatePetViewController: UITableViewDataSource {
 
             }
             cell.button.isHidden = true
-            cell.callback = { text in
-                self.viewModel.updateData(weightUnit: text)
+            cell.callback = { [weak self] text in
+                self?.viewModel.updateData(weightUnit: text)
             }
 
         case "性別" :
@@ -302,8 +302,8 @@ extension CreatePetViewController: UITableViewDataSource {
 
             }
             cell.button.isHidden = true
-            cell.callback = { text in
-                self.viewModel.updateData(gender: text)
+            cell.callback = { [weak self] text in
+                self?.viewModel.updateData(gender: text)
             }
 
         case "晶片" :
@@ -315,8 +315,8 @@ extension CreatePetViewController: UITableViewDataSource {
 
             }
             cell.button.isHidden = true
-            cell.callback = { text in
-                self.viewModel.updateData(chipId: text)
+            cell.callback = { [weak self] text in
+                self?.viewModel.updateData(chipId: text)
             }
 
         case "備註" :
@@ -324,27 +324,27 @@ extension CreatePetViewController: UITableViewDataSource {
             cell.configure(cellStyle: .more, title: fields[indexPath.row] )
             cell.button.isHidden = false
             cell.textField.isHidden = true
-            cell.moreButtonTap = {
+            cell.moreButtonTap = { [weak self] in
 
                 let storyboard = UIStoryboard(name: "Pet", bundle: nil)
                 guard let controller = storyboard.instantiateViewController(withIdentifier: "NoteViewController") as? NoteViewController else { return }
-                self.viewModel.note.bind { text in
-                    controller.note = self.viewModel.name.value
-                    controller.petsName = (self.viewModel.name.value)
-                    controller.callBack = { [weak self] text in
+                guard let viewModel = self?.viewModel else { return }
+                controller.note = viewModel.name.value
+                controller.petsName = viewModel.name.value
+                controller.callBack = { [weak self] text in
                         self?.viewModel.updateData(note: text)
-                    }
                 }
 
-                if self.presentMode == .read {
+
+                if self?.presentMode == .read {
                     controller.mode = .read
-                } else if self.presentMode == .edit {
+                } else if self?.presentMode == .edit {
                     controller.mode = .edit
                 } else {
                     controller.mode = .create
                 }
 
-                self.navigationController?.show(controller, sender: nil)
+                self?.navigationController?.show(controller, sender: nil)
 
             }
 

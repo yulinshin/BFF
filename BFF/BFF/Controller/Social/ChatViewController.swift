@@ -33,8 +33,8 @@ class ChatViewController: UIViewController {
         let otherChatNib = UINib(nibName: "OtherChatTableViewCell", bundle: nil)
         tableView.register(otherChatNib, forCellReuseIdentifier: "OtherChatTableViewCell")
 
-        viewModel?.didChatUpdate = {
-            self.tableView.reloadData()
+        viewModel?.didChatUpdate = { [weak self] in
+            self?.tableView.reloadData()
         }
 
         viewModel?.otherUserName.bind(listener: { name in

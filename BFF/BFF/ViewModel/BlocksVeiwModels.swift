@@ -24,9 +24,9 @@ class BlocksViewModelList {
                 blocks.forEach { userId in
 
                     let block =  BlocksViewModel(userId: userId)
-                    block.didUpdateData = {
-                        self.blocks.value.append(block)
-                        self.didUpdateData?()
+                    block.didUpdateData = { [weak self] in
+                        self?.blocks.value.append(block)
+                        self?.didUpdateData?()
                     }
                 }
 

@@ -80,10 +80,10 @@ class NetStatusManger {
         let queue = DispatchQueue(label: "NetStatus_Monitor") // Monitor in background thread
         monitor?.start(queue: queue)
 
-        monitor?.pathUpdateHandler = { _ in // Network status change
+        monitor?.pathUpdateHandler = {  [weak self] _ in // Network status change
 
-            self.netStatusChangeHandler?()
-            self.checkContentStatus()
+            self?.netStatusChangeHandler?()
+            self?.checkContentStatus()
 
         }
 

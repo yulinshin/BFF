@@ -28,8 +28,8 @@ class ListTableViewController: UITableViewController {
         tableView.register(addCellNib, forCellReuseIdentifier:    AddNewItemTableViewCell.identifier )
         notificationManger.setUp()
 
-        viewModel.suppliesDidChange = {
-            self.tableView.reloadData()
+        viewModel.suppliesDidChange = { [weak self] in
+            self?.tableView.reloadData()
         }
 
     }
@@ -73,12 +73,12 @@ class ListTableViewController: UITableViewController {
                 let cellViewModel = viewModel.suppliesViewModel.value[indexPath.row]
                 cell.viewModel = cellViewModel
                 cell.configure()
-                cell.didTapMoreButton = {
-                    self.showMenu( viewModel: cellViewModel )
+                cell.didTapMoreButton = { [weak self] in
+                    self?.showMenu( viewModel: cellViewModel )
                 }
 
-                cell.didTapReFillButton = {
-                    self.showReFillPopup(viewModel: cellViewModel )
+                cell.didTapReFillButton = { [weak self] in
+                    self?.showReFillPopup(viewModel: cellViewModel )
                 }
             cell.selectedBackgroundView?.backgroundColor = .white
 
@@ -93,7 +93,7 @@ class ListTableViewController: UITableViewController {
         }
     }
 
-    func showReFillPopup(viewModel: SupplyViewModel){
+    func showReFillPopup(viewModel: SupplyViewModel) {
 
         FillSupplyAlertView.shared.showAlert(supplyViewModel: viewModel)
 

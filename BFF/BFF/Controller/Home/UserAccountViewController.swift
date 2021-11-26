@@ -126,8 +126,8 @@ class UserAccountTableViewController: UITableViewController {
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserPicCell", for: indexPath) as? UserPicCell else { return UITableViewCell()}
             cell.selectionStyle = .none
-            cell.didTapChangeUserPicButton = {
-                self.handleSelectedUserImage()
+            cell.didTapChangeUserPicButton = { [weak self] in
+                self?.handleSelectedUserImage()
             }
             cell.selectionStyle = .none
 
@@ -155,16 +155,16 @@ class UserAccountTableViewController: UITableViewController {
                     cell.contentTextField.text = name
                 })
                 cell.contentTextField.delegate = cell
-                cell.callback = { text in
-                    self.viewModel?.name.value = text
+                cell.callback = {  [weak self] text in
+                    self?.viewModel?.name.value = text
                 }
 
             case 1:
                 viewModel?.email.bind(listener: { email in
                     cell.contentTextField.text = email
                 })
-                cell.callback = { text in
-                    self.viewModel?.email.value = text
+                cell.callback = {  [weak self] text in
+                    self?.viewModel?.email.value = text
                 }
                 cell.contentTextField.delegate = cell
 

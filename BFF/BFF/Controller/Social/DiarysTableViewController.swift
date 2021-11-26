@@ -21,8 +21,8 @@ class DiariesViewController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
-        viewModel.didUpDateData = {
-            self.tableView.reloadData()
+        viewModel.didUpDateData = { [weak self] in
+            self?.tableView.reloadData()
         }
 
     }
@@ -100,45 +100,48 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
         cell.petNameLabel.text =    viewModel.showingDiaries.value [indexPath.row].petname
         cell.petImageView.loadImage(   viewModel.showingDiaries.value [indexPath.row].petThumbnail?.url)
 
-        cell.didTapLiked = {
-            self.viewModel.updateWhoLiked(index: indexPath.row)
+        cell.didTapLiked = {  [weak self] in
+            self?.viewModel.updateWhoLiked(index: indexPath.row)
         }
 
-        cell.didTapMoreButton = {
+        cell.didTapMoreButton = {  [weak self] in
             cell.diaryContentLabel.numberOfLines  = 0
-            tableView.reloadData()
+            self?.tableView.reloadData()
         }
 
-        cell.didTapComment = {
+        cell.didTapComment = {  [weak self] in
 
             let storyboard = UIStoryboard(name: "Social", bundle: nil)
 
             guard let controller = storyboard.instantiateViewController(withIdentifier: "CommentTableViewController") as? CommentTableViewController else { return }
-            controller.diary =    self.viewModel.showingDiaries.value[indexPath.row]
-            self.navigationController?.pushViewController(controller, animated: true)
+            guard let viewModel = self?.viewModel else { return }
+            controller.diary =  viewModel.showingDiaries.value[indexPath.row]
+            self?.navigationController?.pushViewController(controller, animated: true)
 
         }
 
-        cell.didTapSendMessageButton = {
+        cell.didTapSendMessageButton = { [weak self] in
             let storyboard = UIStoryboard(name: "Message", bundle: nil)
 
             guard let controller = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
+            guard let viewModel = self?.viewModel else { return }
+            controller.viewModel = ChatGroupVM( otherUserId: viewModel.showingDiaries.value[indexPath.row].userId)
 
-            controller.viewModel = ChatGroupVM( otherUserId: self.viewModel.showingDiaries.value[indexPath.row].userId)
-
-            self.navigationController?.pushViewController(controller, animated: true)
+            self?.navigationController?.pushViewController(controller, animated: true)
         }
 
-        cell.didTapPetButton = {
+        cell.didTapPetButton = { [weak self] in
 
             let storyboard = UIStoryboard(name: "Pet", bundle: nil)
             guard let controller = storyboard.instantiateViewController(withIdentifier: "PetsProfileViewController") as? PetsProfileViewController else { return }
-            controller.viewModel = ProfileViewModel(petId: self.viewModel.showingDiaries.value[indexPath.row].petId)
-            self.navigationController?.pushViewController(controller, animated: true)
+            guard let viewModel = self?.viewModel else { return }
+            controller.viewModel = ProfileViewModel(petId: viewModel.showingDiaries.value[indexPath.row].petId)
+            self?.navigationController?.pushViewController(controller, animated: true)
         }
 
-        cell.didTapSettingButton = {
-            self.showSetting(with: self.viewModel.showingDiaries.value[indexPath.row])
+        cell.didTapSettingButton = { [weak self] in
+            guard let viewModel = self?.viewModel else { return }
+            self?.showSetting(with: viewModel.showingDiaries.value[indexPath.row])
         }
 
         cell.selectionStyle = .none

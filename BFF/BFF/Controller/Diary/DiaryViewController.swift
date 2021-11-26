@@ -101,10 +101,10 @@ class DiaryViewController: UIViewController {
 
         }
 
-        diaryWallViewModel.getDataFailure = {
+        diaryWallViewModel.getDataFailure = {  [weak self] in
 
-                self.statusLabel.text = "無法取得毛小孩日記！ 請確認網路連線狀態"
-                self.statusImage.image = UIImage(named: "NoDiary")
+                self?.statusLabel.text = "無法取得毛小孩日記！ 請確認網路連線狀態"
+                self?.statusImage.image = UIImage(named: "NoDiary")
         }
 
     }

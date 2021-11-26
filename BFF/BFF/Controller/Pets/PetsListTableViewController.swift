@@ -79,13 +79,13 @@ class PetsListTableViewController: UITableViewController {
             cell.birthdayLabel.text = birthday
         }
 
-        cell.didTapDeleteButton = {
+        cell.didTapDeleteButton = { [weak self] in
 
             let alertController = UIAlertController(title: "刪除寵物", message: "此為不可逆的動作，你確定要刪除寵物嗎？", preferredStyle: .alert)
 
             let deleteAction = UIAlertAction(title: "刪除", style: .default) { _ in
-                self.viewModels[indexPath.row].deletePet()
-                self.viewModels.remove(at: indexPath.row)
+                self?.viewModels[indexPath.row].deletePet()
+                self?.viewModels.remove(at: indexPath.row)
                 tableView.reloadData()
             }
 
@@ -93,20 +93,21 @@ class PetsListTableViewController: UITableViewController {
 
             alertController.addAction(UIAlertAction(title: "取消", style: .cancel))
 
-                self.present(alertController, animated: true, completion: nil)
+                self?.present(alertController, animated: true, completion: nil)
 
         }
 
-        cell.didTapMoreInfoButton = {
+        cell.didTapMoreInfoButton = { [weak self] in
 
             let storyboard = UIStoryboard(name: "Pet", bundle: nil)
             guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatePetViewController") as? CreatePetViewController else { return }
             controller.presentMode = .read
-            controller.viewModel = self.viewModels[indexPath.row]
+            guard let viewModels = self?.viewModels[indexPath.row] else { return }
+            controller.viewModel = viewModels
 
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
-            self.present(nav, animated: true, completion: nil)
+            self?.present(nav, animated: true, completion: nil)
 
         }
 

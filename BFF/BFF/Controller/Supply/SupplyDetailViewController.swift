@@ -158,14 +158,14 @@ extension SupplyDetailViewController: UITableViewDataSource {
                 cell.stockProgressView.progress = Float(percentage)
             }
 
-            cell.iconNameCallback = { name in
+            cell.iconNameCallback = { [weak self] name in
 
-                self.viewModel.supplyIconImage.value = name
+                self?.viewModel.supplyIconImage.value = name
 
             }
 
-            cell.iconColorCallback = { color in
-                self.viewModel.iconColor.value = color
+            cell.iconColorCallback = { [weak self] color in
+                self?.viewModel.iconColor.value = color
             }
 
             return cell
@@ -179,9 +179,9 @@ extension SupplyDetailViewController: UITableViewDataSource {
                 cell.textField.text = name
             }
 
-            cell.callback = {name in
+            cell.callback = { [weak self] name in
 
-                self.viewModel.supplyName.value = name
+                self?.viewModel.supplyName.value = name
 
             }
 
@@ -204,19 +204,19 @@ extension SupplyDetailViewController: UITableViewDataSource {
                 cell.unitTextField.text = unit
             }
 
-            cell.callbackMaxStock = { maxStock in
-                self.viewModel.maxInventory.value = maxStock
+            cell.callbackMaxStock = { [weak self] maxStock in
+                self?.viewModel.maxInventory.value = maxStock
                 print("over \(maxStock)")
                 tableView.reloadData()
             }
 
-            cell.callbackStock = { stock in
-                self.viewModel.remainingInventory.value = stock
+            cell.callbackStock = { [weak self] stock in
+                self?.viewModel.remainingInventory.value = stock
                 tableView.reloadData()
             }
 
-            cell.callbackUnit = { unit in
-                self.viewModel.supplyUnit.value = unit
+            cell.callbackUnit = { [weak self] unit in
+                self?.viewModel.supplyUnit.value = unit
             }
 
             return cell
@@ -231,8 +231,8 @@ extension SupplyDetailViewController: UITableViewDataSource {
                 cell.selectedPets = pets
             }
 
-            cell.callback = { pets in
-                self.viewModel.supplyUseByPets.value = pets
+            cell.callback = { [weak self] pets in
+                self?.viewModel.supplyUseByPets.value = pets
             }
 
             return cell
@@ -244,18 +244,17 @@ extension SupplyDetailViewController: UITableViewDataSource {
 
             viewModel.cycleDosage.bind { number in
                 cell.cycleDosageTextfield.text = "\(number)"
+            }
+
+            cell.callbackCycleUnit = { [weak self] unit in
+
+                self?.viewModel.cycleTime.value = unit
 
             }
 
-            cell.callbackCycleUnit = { unit in
+            cell.callbackCycleDosage = { [weak self] dosage in
 
-                self.viewModel.cycleTime.value = unit
-
-            }
-
-            cell.callbackCycleDosage = { dosage in
-
-                self.viewModel.cycleDosage.value = dosage
+                self?.viewModel.cycleDosage.value = dosage
 
             }
 
@@ -274,12 +273,12 @@ extension SupplyDetailViewController: UITableViewDataSource {
                 cell.reminderTextFIeld.text = "\(Int(remindPercentage))"
             }
 
-            cell.callbackToggle = { isNeedToRemind in
-                self.viewModel.isNeedToRemind.value = isNeedToRemind
+            cell.callbackToggle = { [weak self] isNeedToRemind in
+                self?.viewModel.isNeedToRemind.value = isNeedToRemind
             }
 
-            cell.callbackRemindPercentage = { percentage in
-                self.viewModel.remindPercentage.value = percentage
+            cell.callbackRemindPercentage = { [weak self] percentage in
+                self?.viewModel.remindPercentage.value = percentage
             }
 
             return cell

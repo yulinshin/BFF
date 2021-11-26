@@ -14,8 +14,8 @@ class BlockPetsListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.didUpdateData = {
-            self.tableView.reloadData()
+        viewModel.didUpdateData = { [weak self] in
+            self?.tableView.reloadData()
         }
     }
 
@@ -42,8 +42,8 @@ class BlockPetsListTableViewController: UITableViewController {
 
         cell.setup(viewModel: viewModel.blocks.value[indexPath.row])
 
-        cell.didTapBlockButton = {
-            self.viewModel.unBlock(indexPath: indexPath.row)
+        cell.didTapBlockButton = { [weak self] in
+            self?.viewModel.unBlock(indexPath: indexPath.row)
         }
 
         return cell

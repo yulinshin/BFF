@@ -66,11 +66,11 @@ class HomePageViewController: UIViewController {
     }
 
     private func setViewModels() {
-        viewModel.userDataDidLoad = {
-            self.collectionView.reloadData()
+        viewModel.userDataDidLoad = { [weak self] in
+            self?.collectionView.reloadData()
         }
-        viewModel.userNotificationsDidChange = {
-            self.collectionView.reloadData()
+        viewModel.userNotificationsDidChange = { [weak self] in
+            self?.collectionView.reloadData()
         }
     }
 
@@ -192,7 +192,6 @@ extension HomePageViewController: UICollectionViewDataSource {
 
         case .hero:
 
-            // swiftlint:disable:next line_length
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WellcomeCollectionViewCell.identifier, for: indexPath) as? WellcomeCollectionViewCell else { assertionFailure()
                 return UICollectionViewCell() }
             cell.setup(userName: viewModel.userName.value, petsCount: viewModel.usersPetsIds.value.count)
@@ -229,7 +228,6 @@ extension HomePageViewController: UICollectionViewDataSource {
             return cell
 
         case .pets:
-
 
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PetCollectionViewCell.identifier, for: indexPath)as? PetCollectionViewCell else {
                 assertionFailure()
@@ -332,6 +330,73 @@ extension HomePageViewController: UICollectionViewDelegate {
     }
 }
 
+//MARK: -Setting Menu TableView
+extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.settingOptions.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath) as? MenuTableViewCell else { return UITableViewCell() }
+        cell.titleLabel.text = viewModel.settingOptions[indexPath.row].title
+        cell.settingImage.image = UIImage(systemName: viewModel.settingOptions[indexPath.row].icon) ?? UIImage()
+        cell.selectionStyle = .none
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        switch viewModel.settingOptions[indexPath.row] {
+
+        case .account:
+
+            let storyboard = UIStoryboard(name: "User", bundle: nil)
+
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "UserAccountTableViewController") as? UserAccountTableViewController else { return }
+            controller.user = FirebaseManager.shared.currentUser
+            removeSettingMenu()
+            self.navigationController?.show(controller, sender: nil)
+
+        case .blockUser:
+
+            let storyboard = UIStoryboard(name: "User", bundle: nil)
+
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "BlockPetsListTableViewController") as? BlockPetsListTableViewController else { return }
+            removeSettingMenu()
+            self.navigationController?.show(controller, sender: nil)
+
+        case .logout:
+
+            let firebaseAuth = Auth.auth()
+            do {
+                try firebaseAuth.signOut()
+            } catch let signOutError as NSError {
+                print("Error signing out: %@", signOutError)
+            }
+            removeSettingMenu()
+            self.dismiss(animated: true, completion: nil)
+            let viewController = SignInViewController()
+            guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+            window.rootViewController = viewController
+            window.makeKeyAndVisible()
+
+        }
+    }
+
+    func removeSettingMenu() {
+        guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+        // remove menu
+        window.subviews.last?.removeFromSuperview()
+        // remove BlackBackground
+        window.subviews.last?.removeFromSuperview()
+    }
+}
+
 // MARK: - UICollectionViewLayout
 
 extension HomePageViewController {
@@ -411,72 +476,4 @@ extension HomePageViewController {
         return layout
     }
 
-}
-
-extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.settingOptions.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath) as? MenuTableViewCell else { return UITableViewCell() }
-        cell.titleLabel.text = viewModel.settingOptions[indexPath.row].title
-        cell.settingImage.image = UIImage(systemName: viewModel.settingOptions[indexPath.row].icon) ?? UIImage()
-        cell.selectionStyle = .none
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        switch viewModel.settingOptions[indexPath.row] {
-
-        case .account:
-
-            let storyboard = UIStoryboard(name: "User", bundle: nil)
-
-            guard let controller = storyboard.instantiateViewController(withIdentifier: "UserAccountTableViewController") as? UserAccountTableViewController else { return }
-            controller.user = FirebaseManager.shared.currentUser
-
-            guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
-            window.subviews.last?.removeFromSuperview() //remove menu
-            window.subviews.last?.removeFromSuperview() //remove BlackBackground
-
-            self.navigationController?.show(controller, sender: nil)
-
-        case .blockUser:
-
-            let storyboard = UIStoryboard(name: "User", bundle: nil)
-
-            guard let controller = storyboard.instantiateViewController(withIdentifier: "BlockPetsListTableViewController") as? BlockPetsListTableViewController else { return }
-
-            guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
-            window.subviews.last?.removeFromSuperview() //remove menu
-            window.subviews.last?.removeFromSuperview() //remove BlackBackground
-
-            self.navigationController?.show(controller, sender: nil)
-
-        case .logout:
-
-            let firebaseAuth = Auth.auth()
-            do {
-                try firebaseAuth.signOut()
-            } catch let signOutError as NSError {
-                print("Error signing out: %@", signOutError)
-            }
-
-            guard let window =  UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
-            window.subviews.last?.removeFromSuperview() //remove menu
-            window.subviews.last?.removeFromSuperview() //remove BlackBackground
-            self.dismiss(animated: true, completion: nil)
-            let viewController = SignInViewController()
-            window.rootViewController = viewController
-            window.makeKeyAndVisible()
-
-        }
-    }
 }

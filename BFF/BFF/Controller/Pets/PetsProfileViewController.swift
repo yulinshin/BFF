@@ -48,9 +48,9 @@ class PetsProfileViewController: UIViewController {
         let diaryNib = UINib(nibName: "DairyPhotoCell", bundle: nil)
         diariesCollectionView.register(diaryNib, forCellWithReuseIdentifier: DairyPhotoCell.identifier)
         petScrollView.delegate = self
-        viewModel?.gotData = {
-            self.diariesCollectionView.reloadData()
-            self.setUp()
+        viewModel?.gotData = { [weak self] in
+            self?.diariesCollectionView.reloadData()
+            self?.setUp()
         }
 
         navigationController?.navigationBar.barTintColor = .clear
