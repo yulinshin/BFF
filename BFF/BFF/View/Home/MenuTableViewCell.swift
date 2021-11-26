@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 class MenuTableViewCell: UITableViewCell {
 
+    static var identifier = "MenuTableViewCell"
+
     lazy var backView: UIView = {
        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 50))
         return view
@@ -20,7 +22,7 @@ class MenuTableViewCell: UITableViewCell {
         return imageView
     }()
 
-    lazy var lbl: UILabel = {
+    lazy var titleLabel: UILabel = {
        let lbl = UILabel(frame: CGRect(x: 60, y: 10, width: self.frame.width - 80, height: 30))
         return lbl
     }()
@@ -33,6 +35,6 @@ class MenuTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         addSubview(backView)
         backView.addSubview(settingImage)
-        backView.addSubview(lbl)
+        backView.addSubview(titleLabel)
     }
 }

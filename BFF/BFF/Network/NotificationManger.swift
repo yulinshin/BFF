@@ -109,14 +109,16 @@ class NotificationManger {
         })
     }
 
-    func countNotifyDate (fullStock: Int, stock: Int, reminderPercent: Double, perCycleTime: Int, cycleTime: String) -> Date {
+
+
+    func countNotifyDate (fullStock: Int, stock: Int, reminderPercent: Double, perCycleTime: Int, cycleTime: String, fromDate: Date = Date()) -> Date {
 
         let maxStockDo = Double(fullStock)
         let stockDo = Double(stock)
         let cycleConsumeDo = Double(perCycleTime)
 
         guard stockDo > cycleConsumeDo else {
-            return Calendar.current.date(byAdding: .second, value: 10, to: Date()) ?? Date()
+            return Calendar.current.date(byAdding: .second, value: 10, to: fromDate) ?? Date()
         }
 
         var notifyDateFromNow = (stockDo - (maxStockDo * (reminderPercent/100.0))) / cycleConsumeDo
@@ -129,12 +131,12 @@ class NotificationManger {
 
         case "每月":
 
-            guard let notifyDate = Calendar.current.date(byAdding: .month, value: Int(notifyDateFromNow), to: Date()) else { return Date() }
+            guard let notifyDate = Calendar.current.date(byAdding: .month, value: Int(notifyDateFromNow), to: fromDate) else { return Date() }
             return notifyDate
 
         case "每日":
 
-            guard let notifyDate = Calendar.current.date(byAdding: .day, value: Int(notifyDateFromNow), to: Date()) else { return Date() }
+            guard let notifyDate = Calendar.current.date(byAdding: .day, value: Int(notifyDateFromNow), to: fromDate) else { return Date() }
             return notifyDate
 
         default:

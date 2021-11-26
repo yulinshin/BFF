@@ -23,7 +23,6 @@ class UserInfoViewModel {
 class UserAccountTableViewController: UITableViewController {
 
     var userInFo = ["姓名", "Email"]
-
     var user: User?
     var viewModel: UserInfoViewModel?
 

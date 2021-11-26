@@ -15,6 +15,7 @@ class PetNotificationCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var notificationCard: UIView!
 
+    static var identifier = "PetNotificationCollectionViewCell"
     var didTapCancel: (() -> Void)?
     var didTapSupplyNotification: ((String) -> Void)?
     var didTapCommentNotification: ((String) -> Void)?

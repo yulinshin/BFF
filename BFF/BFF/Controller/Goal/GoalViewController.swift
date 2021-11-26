@@ -13,6 +13,8 @@ class GoalViewController: UIViewController {
 
     var cellArray = ["GoalCollectionViewCellA", "GoalCollectionViewCellB", "GoalCollectionViewCellC", "GoalCollectionViewCellD"]
 
+    static var identifier = "GoalViewController"
+
     override func viewDidLoad() {
       super.viewDidLoad()
 

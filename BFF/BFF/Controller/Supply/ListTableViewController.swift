@@ -15,6 +15,7 @@ class ListTableViewController: UITableViewController {
 
     var notificationManger = NotificationManger()
 
+    static var identifier = "ListTableViewController"
 
 
     override func viewDidLoad() {

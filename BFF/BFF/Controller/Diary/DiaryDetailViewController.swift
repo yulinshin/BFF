@@ -27,6 +27,7 @@ class DiaryDetailViewController: UIViewController {
     @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var diaryStateLabel: UILabel!
 
+    static var identifier = "DiaryDetailViewController"
     var viewModel = DetailViewModel()
     var comments = [String]()
     var petTags = [String]()

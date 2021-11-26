@@ -17,6 +17,7 @@ class PetCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var birthdayLabel: UILabel!
     @IBOutlet weak var petKindIcon: UIImageView!
 
+    static var identifier = "PetCollectionViewCell"
     var didTapCard: (() -> Void)?
     let addPetAnimationView = AnimationView(name: "AddPet")
     let title = UILabel()
@@ -42,24 +43,30 @@ class PetCollectionViewCell: UICollectionViewCell {
         diaryCardBackground.layer.shadowOpacity = 0.4
         diaryCardBackground.layer.shadowRadius = 6
         petNameLabel.text = petName
+        birthdayLabel.text = calculateBirthday(petBirthday: petBirthday)
+    }
+
+    func calculateBirthday(petBirthday: String) -> String {
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-yyyy"
-        guard let date = dateFormatter.date(from: petBirthday) else { return }
+        guard let date = dateFormatter.date(from: petBirthday) else { return "" }
         let now = Date()
-
         let ageComponents = Calendar.current.dateComponents([.year, .month], from: date, to: now)
-        if let age = ageComponents.year {
-            if let month = ageComponents.month {
-                birthdayLabel.text = "\(age)歲\(month)個月"
+        if let age = ageComponents.year,
+           age > 0 {
+            if let month = ageComponents.month,
+            month > 0 {
+               return "\(age)歲\(month)個月"
             } else {
-                birthdayLabel.text = "\(age)歲"
+                return "\(age)歲"
             }
         } else {
-            if let month = ageComponents.month {
-                birthdayLabel.text = "\(month)個月"
+            if let month = ageComponents.month,
+            month > 0 {
+               return "\(month)個月"
             } else {
-
-                    birthdayLabel.text = "0個月"
+                  return "0個月"
                 }
             }
     }

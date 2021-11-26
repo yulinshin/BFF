@@ -16,6 +16,8 @@ class CreatePetViewController: UIViewController {
 
     @IBOutlet weak var saveButton: UIButton!
 
+    static var identifier = "CreatePetViewController"
+
     var viewModel = CreatePetViewModel()
 
     var fields  = [

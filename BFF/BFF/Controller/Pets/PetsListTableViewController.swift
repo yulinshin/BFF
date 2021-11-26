@@ -9,6 +9,8 @@ import UIKit
 
 class PetsListTableViewController: UITableViewController {
 
+    static var identifier = "PetsListTableViewController"
+
     var viewModels = [CreatePetViewModel]() {
         didSet {
 

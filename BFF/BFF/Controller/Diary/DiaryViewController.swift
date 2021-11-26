@@ -22,7 +22,7 @@ class DiaryViewController: UIViewController {
     var layoutType = LayoutType.grid
 
     var showSelectedPetsCollectionView = true
-
+    static var identifier = "DiaryViewController"
 
     var diaryWallViewModel = DiaryWallViewModel()
     var diaries = [Item]() {

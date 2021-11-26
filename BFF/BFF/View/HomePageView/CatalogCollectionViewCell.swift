@@ -12,6 +12,8 @@ class CatalogCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var iconBackgroundView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
 
+    static var identifier = "CatalogCollectionViewCell"
+
     func setup(title: String, iconName: String ) {
         iconBackgroundView.layer.shadowColor = UIColor(named: "main")?.cgColor
         iconImageView.layer.shadowOffset = CGSize(width: 1, height: 1)
