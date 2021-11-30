@@ -12,6 +12,48 @@ import AVFoundation
 
 class CreatePetViewModel {
 
+    enum Section: CaseIterable {
+
+        case name
+        case type
+        case birthday
+        case weight
+        case weightUnit
+        case gender
+        case chip
+        case note
+
+        var title: String {
+            switch self {
+
+            case .name:
+                return "名字"
+
+            case .type:
+                return "品種"
+
+            case .birthday:
+                return "生日"
+
+            case .weight:
+                return "體重"
+
+            case .weightUnit:
+                return "體重單位"
+
+            case .gender:
+                return "性別"
+
+            case .chip:
+                return "晶片"
+
+            case .note:
+                return "備註"
+            }
+        }
+    }
+
+    let sections = Section.allCases
     let name = Box("")
     let petThumbnail = Box("")
     let birthday = Box("")

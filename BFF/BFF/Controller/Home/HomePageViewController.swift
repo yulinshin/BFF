@@ -401,6 +401,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension HomePageViewController {
 
+    // swiftlint:disable:next function_body_length
     func createLayout() -> UICollectionViewLayout {
 
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, _) -> NSCollectionLayoutSection? in

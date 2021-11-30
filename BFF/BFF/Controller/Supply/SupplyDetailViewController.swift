@@ -152,6 +152,8 @@ extension SupplyDetailViewController: UITableViewDataSource {
                 }
             }
 
+
+
             viewModel.inventoryStatusPercentage.bind { percentage in
                 cell.stockProgressView.progress = Float(percentage)
                 UIView.animate(withDuration: 1, delay: 0.5, options: [], animations: {
@@ -192,13 +194,10 @@ extension SupplyDetailViewController: UITableViewDataSource {
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SupplyInventoryTableViewCell.identifier, for: indexPath) as? SupplyInventoryTableViewCell else { return UITableViewCell() }
 
-            viewModel.maxInventory.bind { maxStock in
-                cell.maxStockTextField.text = "\(maxStock)"
-            }
 
-            viewModel.remainingInventory.bind { stock in
-                cell.stockTextField.text = "\(stock)"
-            }
+            cell.maxStockTextField.text = "\(viewModel.maxInventory.value)"
+
+            cell.stockTextField.text = "\(viewModel.remainingInventory.value)"
 
             viewModel.supplyUnit.bind { unit in
                 cell.unitTextField.text = unit
@@ -207,13 +206,11 @@ extension SupplyDetailViewController: UITableViewDataSource {
             cell.callbackMaxStock = { [weak self] maxStock in
                 self?.viewModel.maxInventory.value = maxStock
                 self?.viewModel.calculateInventoryStatus()
-
             }
 
             cell.callbackStock = { [weak self] stock in
                 self?.viewModel.remainingInventory.value = stock
                 self?.viewModel.calculateInventoryStatus()
-
             }
 
             cell.callbackUnit = { [weak self] unit in

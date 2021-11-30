@@ -22,7 +22,6 @@ class PetCollectionViewCell: UICollectionViewCell {
     let addPetAnimationView = AnimationView(name: "AddPet")
     let title = UILabel()
 
-
     func setup(petImage: String, petName: String, petBirthday: String) {
         addPetAnimationView.isHidden = true
         title.isHidden = true
