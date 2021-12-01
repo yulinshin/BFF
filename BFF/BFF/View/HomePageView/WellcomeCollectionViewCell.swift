@@ -11,6 +11,8 @@ class WellcomeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
 
+    static var identifier = "WellcomeCollectionViewCell"
+
     func setup(userName: String, petsCount: Int) {
 
         titleLabel.text = "HI \(userName)!"

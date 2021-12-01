@@ -10,7 +10,6 @@ import Foundation
 
 class ChatListTableViewController: UIViewController {
 
-
     @IBOutlet weak var tableView: UITableView!
 
     var viewModel: ChatListVM?
@@ -32,10 +31,7 @@ class ChatListTableViewController: UIViewController {
         NetStatusManger.share.stopMonitoring()
     }
 
-
 }
-
-
 
 extension ChatListTableViewController: UITableViewDelegate, UITableViewDataSource {
 
@@ -64,19 +60,15 @@ extension ChatListTableViewController: UITableViewDelegate, UITableViewDataSourc
         controller.viewModel = self.viewModel?.showingList.value[indexPath.row]
         self.navigationController?.show(controller, sender: nil)
 
-
     }
 }
 
-
-
-class ChatListTableViewCell: UITableViewCell{
+class ChatListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var photImageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
-
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -98,8 +90,8 @@ class ChatListTableViewCell: UITableViewCell{
             self.nameLabel.text = name
         }
 
-        viewModel.otherUsrPic.bind{ url in
-            self.photImageView.loadImage(url, placeHolder:  UIImage(systemName: "person.fill"))
+        viewModel.otherUsrPic.bind { url in
+            self.photImageView.loadImage(url, placeHolder: UIImage(systemName: "person.fill"))
         }
 
     }
@@ -115,4 +107,3 @@ class ChatListTableViewCell: UITableViewCell{
         super.prepareForReuse()
     }
 }
-

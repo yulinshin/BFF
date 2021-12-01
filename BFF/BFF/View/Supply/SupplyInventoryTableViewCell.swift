@@ -34,7 +34,6 @@ class SupplyInventoryTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-
 }
 
 extension SupplyInventoryTableViewCell: UITextFieldDelegate {
@@ -63,29 +62,4 @@ extension SupplyInventoryTableViewCell: UITextFieldDelegate {
 
         }
     }
-
-//    func textFieldDidChangeSelection(_ textField: UITextField) {
-//
-//        let text = textField.text ?? ""
-//
-//        switch textField {
-//
-//        case maxStockTextField:
-//
-//            callbackMaxStock?(Int(text) ?? 0)
-//
-//        case stockTextField:
-//
-//            callbackStock?(Int(text) ?? 0)
-//
-//        case unitTextField:
-//
-//            callbackUnit?(text)
-//
-//        default:
-//
-//            return
-//
-//        }
-//    }
 }

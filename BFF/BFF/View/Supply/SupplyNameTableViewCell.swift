@@ -14,7 +14,7 @@ class SupplyNameTableViewCell: UITableViewCell {
 
     static let identifier = "SupplyNameTableViewCell"
 
-    var callback: ((_ supllyName: String) -> Void)?
+    var callback: ((_ supplyName: String) -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -35,7 +35,7 @@ class OtherChatTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setup(with otherUserPic: String){
+    func setup(with otherUserPic: String) {
         guard let viewModel = viewModel else {
             return
         }

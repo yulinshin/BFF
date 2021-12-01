@@ -13,16 +13,16 @@ class CustomBannerColors: BannerColorsProtocol {
 
     internal func color(for style: BannerStyle) -> UIColor {
         switch style {
-            case .warning:
-            return UIColor(named: "main") ?? .orange
+        case .warning:
+            return UIColor.mainColor
         case .danger:
-            return  UIColor(named: "main") ?? .orange
+            return  UIColor.mainColor
         case .info:
-            return  UIColor(named: "main") ?? .orange
+            return  UIColor.mainColor
         case .customView:
-            return  UIColor(named: "main") ?? .orange
+            return  UIColor.mainColor
         case .success:
-            return  UIColor(named: "main") ?? .orange
+            return  UIColor.mainColor
         }
     }
 
@@ -62,7 +62,7 @@ class NetStatusManger {
         return monitor?.currentPath.isExpensive ?? false
     }
 
-//    var netWorkBanner = NotificationBanner(title: "無網路連線", subtitle: "請確認您的網路連線" , style: .warning)
+    //    var netWorkBanner = NotificationBanner(title: "無網路連線", subtitle: "請確認您的網路連線" , style: .warning)
     var netWorkBanner = StatusBarNotificationBanner(title: "無網路連線", style: .warning, colors: CustomBannerColors() )
 
     private init() {
@@ -73,24 +73,19 @@ class NetStatusManger {
         stopMonitoring() // Make sure Monitor cancel when NetStatusManger DIE
     }
 
-
     func startMonitoring() {
 
         guard !isMonitoring else { return }
-
-
         monitor = NWPathMonitor()
         let queue = DispatchQueue(label: "NetStatus_Monitor") // Monitor in background thread
         monitor?.start(queue: queue)
 
+        monitor?.pathUpdateHandler = {  [weak self] _ in // Network status change
 
-        monitor?.pathUpdateHandler = { _ in // Network status change
-
-            self.netStatusChangeHandler?()
-            self.checkContentStatus()
+            self?.netStatusChangeHandler?()
+            self?.checkContentStatus()
 
         }
-
 
         isMonitoring = true
         didStartMonitoringHandler?()
@@ -109,9 +104,7 @@ class NetStatusManger {
 
     }
 
-
-    func checkContentStatus(){
-
+    func checkContentStatus() {
         DispatchQueue.main.async {
             if !self.isConnected {
                 self.netWorkBanner.haptic = .heavy
@@ -121,7 +114,5 @@ class NetStatusManger {
                 self.netWorkBanner.dismiss()
             }
         }
-
-
     }
 }

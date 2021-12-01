@@ -19,16 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="114" id="gRo-9S-LIl">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="114"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gRo-9S-LIl" id="ZeS-hw-0Pe">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="S0I-lg-ZEX" id="ONJ-JA-u5a"/>
                             <outlet property="delegate" destination="S0I-lg-ZEX" id="SoV-rg-YXg"/>
@@ -94,7 +84,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="VjF-4x-cp8">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="VjF-4x-cp8">
                                                             <rect key="frame" x="0.0" y="5.5" width="50" height="39"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="20z-ue-peq">
@@ -118,7 +108,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vGJ-od-Uly">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="vGJ-od-Uly">
                                                             <rect key="frame" x="0.0" y="14.5" width="50" height="39"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Bji-rn-Or0">
@@ -152,11 +142,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="colorCollectionVew" destination="lWd-vj-1x0" id="0WJ-ni-pUS"/>
+                                            <outlet property="colorCollectionView" destination="lWd-vj-1x0" id="0WJ-ni-pUS"/>
                                             <outlet property="iconImage" destination="5bf-vQ-bjA" id="j04-IU-nSm"/>
-                                            <outlet property="itemCollecitonView" destination="SyI-3R-9Ea" id="06e-dw-te1"/>
+                                            <outlet property="itemCollectionView" destination="SyI-3R-9Ea" id="06e-dw-te1"/>
                                             <outlet property="stockLabel" destination="FJl-QS-k7C" id="QGj-FI-sBu"/>
-                                            <outlet property="stockPrgressView" destination="RMr-3P-F82" id="sAs-80-rGq"/>
+                                            <outlet property="stockProgressView" destination="RMr-3P-F82" id="sAs-80-rGq"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SupplyNameTableViewCell" rowHeight="122" id="WZw-0e-mxm" userLabel="SupplyName" customClass="SupplyNameTableViewCell" customModule="BFF" customModuleProvider="target">
@@ -296,7 +286,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="q2O-rd-RQz">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="q2O-rd-RQz">
                                                             <rect key="frame" x="0.0" y="10.5" width="50" height="39"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hMP-rN-66Q">
@@ -432,7 +422,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="reminderTextFIeld" destination="081-02-FzN" id="UdQ-Zl-aen"/>
-                                            <outlet property="switchTogle" destination="IKO-4X-fQn" id="Nhb-XQ-cfA"/>
+                                            <outlet property="switchToggle" destination="IKO-4X-fQn" id="Nhb-XQ-cfA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -444,10 +434,10 @@
                                     <constraint firstAttribute="height" constant="46" id="5tx-d6-TNB"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                 <connections>
-                                    <action selector="tapButton:" destination="EaM-aD-sRz" eventType="touchUpInside" id="kM8-9I-Aba"/>
+                                    <action selector="tapButton:" destination="EaM-aD-sRz" eventType="touchUpInside" id="Zqq-gw-vB1"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -464,7 +454,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="creatButton" destination="nVo-pf-bMD" id="TOL-XY-XRn"/>
+                        <outlet property="createButton" destination="nVo-pf-bMD" id="JwL-LW-jSO"/>
                         <outlet property="tableView" destination="Ddj-Pt-sdK" id="wa7-Dx-aXO"/>
                     </connections>
                 </viewController>
@@ -475,7 +465,7 @@
     </scenes>
     <resources>
         <namedColor name="main">
-            <color red="1" green="0.6119999885559082" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.35699999332427979" green="0.61000001430511475" blue="0.60699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

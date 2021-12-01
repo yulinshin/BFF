@@ -14,14 +14,12 @@ class BookViewModel {
     var title = Box(" ")
     var subtitle = Box(" ")
 
-
-    init(icon: String, title: String, subtitle: String){
+    init(icon: String, title: String, subtitle: String) {
 
         self.icon.value = icon
         self.title.value = title
         self.subtitle.value = subtitle
 
     }
-
 
 }

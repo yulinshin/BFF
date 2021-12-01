@@ -12,8 +12,10 @@ class CatalogCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var iconBackgroundView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
 
+    static var identifier = "CatalogCollectionViewCell"
+
     func setup(title: String, iconName: String ) {
-        iconBackgroundView.layer.shadowColor = UIColor(named: "main")?.cgColor
+        iconBackgroundView.layer.shadowColor = UIColor.mainColor.cgColor
         iconImageView.layer.shadowOffset = CGSize(width: 1, height: 1)
         iconImageView.layer.cornerRadius = 10
         titleLabel.text = title
@@ -24,7 +26,7 @@ class CatalogCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         iconBackgroundView.backgroundColor = .white
         iconBackgroundView.layer.cornerRadius = 10
-        iconBackgroundView.layer.shadowColor = UIColor(named: "main")?.cgColor
+        iconBackgroundView.layer.shadowColor = UIColor.mainColor.cgColor
         iconBackgroundView.layer.shadowOffset = CGSize(width: 1, height: 1)
         iconBackgroundView.layer.shadowOpacity = 0.5
         iconBackgroundView.layer.shadowRadius = 2

@@ -13,6 +13,59 @@ import AVFoundation
 
 class HomePageViewModel: NSObject {
 
+    enum Section: CaseIterable {
+        case hero
+        case catalog
+        case petNotification
+        case pets
+    }
+
+    enum SettingOption: CaseIterable {
+        case account
+        case blockUser
+        case logout
+
+        var title: String {
+            switch self {
+            case .account:
+                return "帳戶設定"
+            case .blockUser:
+                return "黑名單管理"
+            case .logout:
+                return "登出"
+            }
+        }
+        var icon: String {
+            switch self {
+            case .account:
+                return "person.circle"
+            case .blockUser:
+                return "x.square.fill"
+            case .logout:
+                return "rectangle.portrait.and.arrow.right.fill"
+            }
+        }
+    }
+
+    enum CatalogSection: CaseIterable {
+
+        case diary
+        case supply
+        case health
+
+        var titleAndIcon: (title: String, icon: String) {
+            switch self {
+            case .diary:
+                return ("相簿集", "diary")
+            case .supply:
+                return ("用品", "supply")
+            case .health:
+                return ("健康", "heart")
+            }
+        }
+
+    }
+
     var user: User?
     let userName = Box("")
     let notifications = Box([Notification]())
@@ -21,7 +74,9 @@ class HomePageViewModel: NSObject {
     let usersPetsIds = Box([String]())
     var userDataDidLoad: (() -> Void)?
     var userNotificationsDidChange: (() -> Void)?
-
+    var sections = Section.allCases
+    var settingOptions = SettingOption.allCases
+    var catalogSection = CatalogSection.allCases
 
     override init() {
         super.init()
@@ -33,7 +88,7 @@ class HomePageViewModel: NSObject {
         print("HomePageViewModel DIE")
     }
 
-    func removeNotification(indexPath:Int) {
+    func removeNotification(indexPath: Int) {
 
         let id = notifications.value[indexPath].id
         FirebaseManager.shared.removeNotification(notifyId: id)
@@ -42,7 +97,7 @@ class HomePageViewModel: NSObject {
 
     func fetchUserData() {
 
-        FirebaseManager.shared.fetchUser { result in
+        FirebaseManager.shared.fetchUserInfo { result in
 
             switch result {
 
@@ -56,15 +111,12 @@ class HomePageViewModel: NSObject {
 
                 print("upDate UserData at HomeVM")
 
-
-                // Update data to Local
-
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-
 
                     let context = appDelegate.persistentContainer.viewContext
                     do {
-                        var requests = try context.fetch(UserMO.fetchRequest())
+
+                        let requests = try context.fetch(UserMO.fetchRequest())
 
                         if requests.isEmpty {
                             let userMo = UserMO(context:
@@ -107,7 +159,6 @@ class HomePageViewModel: NSObject {
         }
     }
 
-
     func fetchUserPetsData() {
 
         FirebaseManager.shared.fetchUserPets { result in
@@ -128,7 +179,7 @@ class HomePageViewModel: NSObject {
                     pets.forEach { pet in
                         let context = appDelegate.persistentContainer.viewContext
                         do {
-                            var requests = try context.fetch(PetMO.fetchRequest())
+                            let requests = try context.fetch(PetMO.fetchRequest())
                             var isContain = false
 
                             for request in requests {
@@ -159,8 +210,6 @@ class HomePageViewModel: NSObject {
 
                 }
 
-                //
-
             case .failure(let error):
 
                 print("Can't Get Pets Data \(error)")
@@ -170,38 +219,7 @@ class HomePageViewModel: NSObject {
         }
     }
 
-    func fetchNotificationData() {
-
-        FirebaseManager.shared.fetchNotifications { result in
-
-            switch result {
-
-            case .success(let notifications):
-
-                var showNotifications = [Notification]()
-                notifications.forEach { notification in
-                    if notification.notifyTime.dateValue() < Date(){
-                        print("Notify:\(notification.notifyTime.dateValue())")
-                        print("now:\(Date())")
-                        showNotifications.append(notification)
-                    }
-                }
-
-                showNotifications = showNotifications.sorted(by:{ $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
-                self.notifications.value = showNotifications
-                self.coverToNotificationVM()
-                print("upDated NotificationData at HomeVM")
-
-            case .failure(let error):
-
-                print("Can't Get Notifications Data \(error)")
-
-            }
-
-        }
-
-    }
-    func coverToNotificationVM(){
+    func coverToNotificationVM() {
 
         notificationModels.value = [NotificationViewModel]()
         self.notifications.value.forEach { notification in
@@ -222,11 +240,11 @@ class HomePageViewModel: NSObject {
 
                 var showNotifications = [Notification]()
                 notifications.forEach { notification in
-                    if notification.notifyTime.dateValue() < Date(){
+                    if notification.notifyTime.dateValue() < Date() {
                         showNotifications.append(notification)
                 }
                 }
-                showNotifications = showNotifications.sorted(by:{ $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
+                showNotifications = showNotifications.sorted(by: { $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
                 self.notifications.value = showNotifications
 
                 self.coverToNotificationVM()
@@ -235,29 +253,6 @@ class HomePageViewModel: NSObject {
             case .failure(let error):
 
                 print("Can't Get Notifications Data \(error)")
-
-            }
-
-        }
-
-    }
-
-    func listenUsersPets() {
-
-        print("Perpare to listen UsersPets at HomeVM........")
-
-        FirebaseManager.shared.listenUsersPets { result in
-
-            switch result {
-
-            case .success(let pets):
-
-                self.pets.value = pets
-                self.userDataDidLoad?()
-
-            case .failure(let error):
-
-                print("Can't Get Pets Data \(error)")
 
             }
 
@@ -294,12 +289,6 @@ class HomePageViewModel: NSObject {
     }
 }
 
-
-extension HomePageViewModel: NSFetchedResultsControllerDelegate {
-
-}
-
-
 class NotificationViewModel {
 
     var content = Box("")
@@ -310,7 +299,7 @@ class NotificationViewModel {
     var diaryId = Box("")
     var supplyId = Box("")
 
-    init(notification: Notification){
+    init(notification: Notification) {
 
         self.content.value = notification.content
         self.petId.value = notification.fromPets.first ?? ""
@@ -322,7 +311,7 @@ class NotificationViewModel {
                 self.petPicUrl.value = pet.petThumbnail?.url ?? ""
                 self.petName.value = pet.name
             case .failure(let error):
-                print (error)
+                print(error)
 
             }
         }

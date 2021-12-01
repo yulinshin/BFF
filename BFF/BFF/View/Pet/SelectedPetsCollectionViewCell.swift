@@ -20,7 +20,7 @@ class SelectedPetsCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
 
-    func congfigure(with viewModel: PhotoCellViewlModel, petId: String) {
+    func configure(with viewModel: PhotoCellViewModel, petId: String) {
 
         self.image.loadImage(viewModel.imageUrl)
         self.petId = petId

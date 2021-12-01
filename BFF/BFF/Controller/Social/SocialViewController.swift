@@ -14,13 +14,11 @@ class SocialViewController: UIViewController {
 
     @IBOutlet weak var petsTopConstraint: NSLayoutConstraint!
 
-
     private var lastContentOffset: CGFloat = 0
 
-    var lauoutType = LayoutType.single
+    var layoutType = LayoutType.single
 
     var showSelectedPetsCollectionView = true
-
 
     var diaryWallViewModel = DiaryWallViewModel()
 
@@ -42,7 +40,7 @@ class SocialViewController: UIViewController {
 
     var showPets = [String]() {
         didSet {
-            diaryWallViewModel.fielter(petIds: showPets)
+            diaryWallViewModel.filter(petIds: showPets)
         }
     }
 
@@ -63,12 +61,12 @@ class SocialViewController: UIViewController {
         selectedPetsCollectionView.register(petNib, forCellWithReuseIdentifier: SelectedPetsCollectionViewCell.identifier)
         diariesCollectionView.dataSource = diariesDataSource
         selectedPetsCollectionView.dataSource = petsDataSource
-        diariesCollectionView.collectionViewLayout = creatLayout(type: .single)
+        diariesCollectionView.collectionViewLayout = createLayout(type: .single)
         selectedPetsCollectionView.allowsMultipleSelection = true
 
         self.navigationController?.title = "隨意逛"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Filter"), style: .done, target: self, action: #selector(switchShowList))
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "main")
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.mainColor
         diaryWallViewModel.showingDiaries.bind {  [weak self] diaries in
 
             var diaryItems = [Item]()
@@ -86,7 +84,6 @@ class SocialViewController: UIViewController {
         super.viewWillAppear(true)
 
         self.navigationController?.navigationBar.backgroundColor = .white
-
 
         if showSelectedPetsCollectionView {
             self.selectedPetsCollectionView.isHidden = false
@@ -107,30 +104,30 @@ class SocialViewController: UIViewController {
         NetStatusManger.share.stopMonitoring()
     }
 
-    @objc func creatDiary(){
+    @objc func creatDiary() {
 
             let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-            guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatDiaryViewController") as? CreatDiaryViewController else { return }
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "CreateDiaryViewController") as? CreateDiaryViewController else { return }
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
-            nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor:UIColor(named: "main")]
+        nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor: UIColor.mainColor]
             self.present(nav, animated: true, completion: nil)
 
     }
 
-    @objc func switchShowList(){
-        switch lauoutType {
+    @objc func switchShowList() {
+        switch layoutType {
 
         case .grid:
 
-            lauoutType = .single
-            diariesCollectionView.collectionViewLayout = creatLayout(type: .single)
+            layoutType = .single
+            diariesCollectionView.collectionViewLayout = createLayout(type: .single)
             diariesCollectionView.reloadData()
 
         case .single:
 
-            lauoutType = .grid
-            diariesCollectionView.collectionViewLayout = creatLayout(type: .grid)
+            layoutType = .grid
+            diariesCollectionView.collectionViewLayout = createLayout(type: .grid)
             diariesCollectionView.reloadData()
         }
     }
@@ -143,15 +140,15 @@ class SocialViewController: UIViewController {
 
             case .success(let pets):
 
-                var defultShowingPetsId = [String]()
+                var defaultShowingPetsId = [String]()
                 var petsDataItem = [Item]()
                 pets.forEach { pet in
-                    defultShowingPetsId.append(pet.petId)
+                    defaultShowingPetsId.append(pet.petId)
                     petsDataItem.append(Item.pet(pet))
                     print("Pet = \(pet)")
                 }
                 self.userPetsData = petsDataItem
-                self.showPets = defultShowingPetsId
+                self.showPets = defaultShowingPetsId
 
             case .failure(let error):
                 print("fetchData.failure\(error)")
@@ -185,11 +182,11 @@ class SocialViewController: UIViewController {
         }
     }
 
-    // MARK: - diariesCollectionViewCompostionLayout
+    // MARK: - diariesCollectionViewCompositionLayout
 
-    func creatLayout(type: LayoutType) -> UICollectionViewLayout {
+    func createLayout(type: LayoutType) -> UICollectionViewLayout {
 
-        let layout = UICollectionViewCompositionalLayout{ (sectionIndex, layoutEnviroment) -> NSCollectionLayoutSection in
+        let layout = UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection in
 
             switch type {
             case .grid:
@@ -244,7 +241,7 @@ extension SocialViewController: UICollectionViewDelegate {
 
             let storyboard = UIStoryboard(name: "Diary", bundle: nil)
             guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
-            controller.viewModel = DetialViewModel(from: diaries[indexPath.row].diary!)
+            controller.viewModel = DetailViewModel(from: diaries[indexPath.row].diary!)
             self.navigationController?.show(controller, sender: nil)
 
         }
@@ -269,21 +266,15 @@ extension SocialViewController: UICollectionViewDelegate {
 
         guard scrollView.contentOffset.y > 0 else { return }
 
-        if (self.lastContentOffset >= scrollView.contentOffset.y) {
+        if self.lastContentOffset >= scrollView.contentOffset.y {
 
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
-
                 self.petsTopConstraint.constant = 0
                 self.selectedPetsCollectionView.alpha = 1
                 self.view.layoutIfNeeded()
-
-
             }
 
-        }
-        else if (self.lastContentOffset < scrollView.contentOffset.y) {
-
-
+        } else if self.lastContentOffset < scrollView.contentOffset.y {
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
 
                 self.petsTopConstraint.constant = -70
@@ -296,11 +287,6 @@ extension SocialViewController: UICollectionViewDelegate {
         // update the new position acquired
         self.lastContentOffset = scrollView.contentOffset.y
     }
-
-
-
-
-
 }
 
 extension SocialViewController: UICollectionViewDelegateFlowLayout {

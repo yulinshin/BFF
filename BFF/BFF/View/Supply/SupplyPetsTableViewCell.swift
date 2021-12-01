@@ -13,7 +13,7 @@ class SupplyPetsTableViewCell: UITableViewCell {
 
     static let identifier = "SupplyPetsTableViewCell"
 
-    var selcetedPets = [String]()
+    var selectedPets = [String]()
 
     var userPetsData = [Pet]() {
         didSet {
@@ -44,7 +44,6 @@ class SupplyPetsTableViewCell: UITableViewCell {
 
 extension SupplyPetsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
 
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         userPetsData.count
     }
@@ -56,11 +55,12 @@ extension SupplyPetsTableViewCell: UICollectionViewDelegate, UICollectionViewDat
 
         let imageStr = userPetsData[indexPath.row].petThumbnail?.url
         let petId = userPetsData[indexPath.row].petId
-        cell.congfigure(with: PhotoCellViewlModel(with: imageStr ?? ""), petId: petId)
-        if selcetedPets.contains(petId){
+        cell.configure(with: PhotoCellViewModel(with: imageStr ?? ""), petId: petId)
+        
+        if selectedPets.contains(petId) {
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
             cell.isSelected = true
-            cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
+            cell.selectBackground.layer.borderColor = UIColor.mainColor.cgColor
             cell.selectBackground.layer.borderWidth = 2
         }
 
@@ -70,15 +70,15 @@ extension SupplyPetsTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-        cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
+        cell.selectBackground.layer.borderColor = UIColor.mainColor.cgColor
         cell.selectBackground.layer.borderWidth = 2
 
         guard let petId = cell.petId else { return }
-        if selcetedPets.contains(petId) {
+        if selectedPets.contains(petId) {
             return
         } else {
-            selcetedPets.append(petId)
-            callback?(selcetedPets)
+            selectedPets.append(petId)
+            callback?(selectedPets)
         }
 
     }
@@ -86,14 +86,14 @@ extension SupplyPetsTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
 
             guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-            cell.selectBackground.layer.borderColor = UIColor(named: "main")?.cgColor
+            cell.selectBackground.layer.borderColor = UIColor.mainColor.cgColor
             cell.selectBackground.layer.borderWidth = 0
 
             guard let petId = cell.petId else { return }
 
-            if let index = selcetedPets.firstIndex(of: petId) {
-                selcetedPets.remove(at: index)
-                callback?(selcetedPets)
+            if let index = selectedPets.firstIndex(of: petId) {
+                selectedPets.remove(at: index)
+                callback?(selectedPets)
             }
 
     }

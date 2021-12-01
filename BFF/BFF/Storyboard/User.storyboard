@@ -8,11 +8,16 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="GenJyuuGothic-Regular.ttf">
+            <string>GenJyuuGothic-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--黑名單管理-->
         <scene sceneID="Rny-eB-MzB">
             <objects>
-                <tableViewController storyboardIdentifier="BlockPetsListTableViewController" id="7yQ-6M-5dU" customClass="BlockPetsListTableViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="BlockPetsListTableViewController" title="黑名單管理" id="7yQ-6M-5dU" customClass="BlockPetsListTableViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="UI4-kU-12v">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -44,11 +49,11 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="80" id="Hci-kK-Z5K"/>
                                             </constraints>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title="解除封鎖">
-                                                <fontDescription key="titleFontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="14"/>
-                                                <color key="baseForegroundColor" name="main"/>
-                                            </buttonConfiguration>
+                                            <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="14"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="解除封鎖">
+                                                <color key="titleColor" name="main"/>
+                                            </state>
                                             <connections>
                                                 <action selector="tapUnBlockButton:" destination="Wls-f2-2EF" eventType="touchUpInside" id="pm6-Pg-VbL"/>
                                             </connections>
@@ -86,7 +91,7 @@
         <!--帳戶設定-->
         <scene sceneID="HLB-zQ-UeN">
             <objects>
-                <tableViewController storyboardIdentifier="UserAccountTableViewController" id="Amg-Fc-7Kx" customClass="UserAccountTableViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="UserAccountTableViewController" title="帳戶設定" id="Amg-Fc-7Kx" customClass="UserAccountTableViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="uOy-d8-5PG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -125,7 +130,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="addIcon" destination="qez-Mq-Veb" id="UPP-eL-TlZ"/>
-                                    <outlet property="userPicImageVIew" destination="Dcf-oO-rVe" id="ahS-TN-dn2"/>
+                                    <outlet property="userPicImageView" destination="Dcf-oO-rVe" id="ahS-TN-dn2"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserInfoCell" rowHeight="86" id="8dW-94-H9v" customClass="UserInfoCell" customModule="BFF" customModuleProvider="target">
@@ -186,42 +191,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LU2-AX-Ihv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="810.14492753623199" y="-74.330357142857139"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Vl7-yK-XMO">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mvj-H0-xLI" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Br0-kX-w5u">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="7yQ-6M-5dU" kind="relationship" relationship="rootViewController" id="4g4-Oy-4lZ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nIa-te-hTZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1562.3188405797102" y="-74.330357142857139"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Ssy-bn-ig2">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BpE-Eq-EL6" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ULX-jO-4V7">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Amg-Fc-7Kx" kind="relationship" relationship="rootViewController" id="kTM-FD-bod"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1Fp-Kq-UO1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-100.00000000000001" y="-74.330357142857139"/>
         </scene>
     </scenes>
     <resources>

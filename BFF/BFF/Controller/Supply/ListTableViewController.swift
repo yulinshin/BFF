@@ -10,27 +10,26 @@ import UserNotifications
 
 class ListTableViewController: UITableViewController {
 
-
-    var viewModel = SuppliesViewMdoel()
+    var viewModel = SuppliesViewModel()
 
     var notificationManger = NotificationManger()
 
-
+    static var identifier = "ListTableViewController"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let supplyNib = UINib(nibName: "SupplyListTableViewCell", bundle: nil)
-        tableView.register(supplyNib, forCellReuseIdentifier: SupplyListTableViewCell.identifier )
+        let supplyNib = UINib(nibName: SupplyListTableViewCell.identifier, bundle: nil)
+        tableView.register(supplyNib, forCellReuseIdentifier: SupplyListTableViewCell.identifier)
 
-        let addCellNib = UINib(nibName: "AddNewItemTableViewCell", bundle: nil)
-        tableView.register(addCellNib, forCellReuseIdentifier:    AddNewItemTableViewCell.identifier )
+        let addCellNib = UINib(nibName: AddNewItemTableViewCell.identifier, bundle: nil)
+        tableView.register(addCellNib, forCellReuseIdentifier: AddNewItemTableViewCell.identifier)
+
         notificationManger.setUp()
 
-        viewModel.suppiesDidChange = {
-            self.tableView.reloadData()
+        viewModel.suppliesDidChange = { [weak self] in
+            self?.tableView.reloadData()
         }
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -48,10 +47,12 @@ class ListTableViewController: UITableViewController {
 
         case 0:
 
-            return viewModel.suppiesViewModel.value.count
+            return viewModel.suppliesViewModel.value.count // Showing Supply Cell
 
-        case 1:
+        case 1: // For add Supply Cell
+
             return  1
+
         default:
             return  0
 
@@ -59,31 +60,31 @@ class ListTableViewController: UITableViewController {
 
     }
 
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         switch indexPath.section {
 
-        case 0:
+        case 0: // Showing Supply Cell
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SupplyListTableViewCell.identifier, for: indexPath) as? SupplyListTableViewCell else { return UITableViewCell() }
 
+            cell.viewModel = viewModel.suppliesViewModel.value[indexPath.row]
+            cell.configure()
+            cell.didTapMoreButton = { [weak self] in
+                guard let cellViewModel = self?.viewModel.suppliesViewModel.value[indexPath.row] else { return }
+                self?.showMenu(viewModel: cellViewModel)
+            }
 
-                let cellViewModel = viewModel.suppiesViewModel.value[indexPath.row]
-                cell.viewModel = cellViewModel
-                cell.configur()
-                cell.didTapMoreButtom = {
-                    self.showMenu( viewModel: cellViewModel )
-                }
+            cell.didTapReFillButton = { [weak self] in
+                guard let cellViewModel = self?.viewModel.suppliesViewModel.value[indexPath.row] else { return }
+                self?.showReFillPopup(viewModel: cellViewModel)
+            }
 
-                cell.didTapReFillButton = {
-                    self.showReFillPopup(viewModel: cellViewModel )
-                }
             cell.selectedBackgroundView?.backgroundColor = .white
 
             return cell
 
-        default:
+        default:  // For add Supply Cell
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddNewItemTableViewCell.identifier, for: indexPath) as? AddNewItemTableViewCell else { return UITableViewCell() }
             cell.selectedBackgroundView?.backgroundColor = .white
@@ -92,11 +93,10 @@ class ListTableViewController: UITableViewController {
         }
     }
 
-    func showReFillPopup(viewModel: SupplyViewModel){
+    func showReFillPopup(viewModel: SupplyViewModel) {
 
         FillSupplyAlertView.shared.showAlert(supplyViewModel: viewModel)
 
-        
     }
 
     func showMenu(viewModel: SupplyViewModel) {
@@ -130,8 +130,8 @@ class ListTableViewController: UITableViewController {
 
             alert.addAction(UIAlertAction(title: "開啟提醒", style: .default, handler: {  _ in
 
-                guard let supply = viewModel.suppply else { return }
-                NotificationManger.shared.creatSupplyNotification(supply: supply )
+                guard let supply = viewModel.supply else { return }
+                NotificationManger.shared.createSupplyNotification(supply: supply )
                 viewModel.isNeedToRemind.value = true
                 viewModel.updateToDataBase()
             }))
@@ -142,21 +142,19 @@ class ListTableViewController: UITableViewController {
 
         }))
 
-
         self.present(alert, animated: true, completion: nil)
 
     }
 
-
-    func showNextPage(style:SupplyDetailViewController.ConstrolleMode , supplyModel: SupplyViewModel = SupplyViewModel()) {
+    func showNextPage(style: SupplyDetailViewController.ControllerMode, supplyModel: SupplyViewModel = SupplyViewModel()) {
         let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "SupplyDetailViewController") as? SupplyDetailViewController else { return }
 
         controller.viewModel = supplyModel
         controller.mode = .edit
 
-            controller.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(controller, animated: true)
+        controller.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

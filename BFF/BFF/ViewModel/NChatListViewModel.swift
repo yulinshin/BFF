@@ -50,7 +50,7 @@ class ChatListVM {
             var otherUserId: String {
                var user = ""
                groupData.users.forEach { userId in
-                if userId != FirebaseManager.shared.userId {
+                if userId != FirebaseManager.userId {
                     user = userId
                 }
             }
@@ -69,7 +69,7 @@ class ChatListVM {
 
         self.showingList.value = self.chatGroupList.value.filter({ chatGroupVM in
 
-            if let blockUsers = FirebaseManager.shared.user?.blockUsers {
+            if let blockUsers = FirebaseManager.shared.currentUser?.blockUsers {
                 return !blockUsers.contains(chatGroupVM.otherUserId.value)
             } else {
                 return true
@@ -84,9 +84,7 @@ class ChatListVM {
                 return true
             }
 
-
         })
-
 
         self.didUpdateShowingData?()
     }
@@ -123,7 +121,6 @@ class ChatGroupVM {
 
     func listenMessageFromUserId() {
 
-
         FirebaseManager.shared.listenMessageFromUserID(otherUseId: self.otherUserId.value) { result in
             switch result {
 
@@ -133,7 +130,6 @@ class ChatGroupVM {
                 self.getLastChat()
                 self.coverToVM()
 
-
             case .failure(let error):
                 print(error)
 
@@ -141,12 +137,11 @@ class ChatGroupVM {
         }
     }
 
-
     func listenMessageFromGroup() {
 
         guard groupId.value != "" else { return }
 
-        FirebaseManager.shared.listenFromMessageGroup(groupId: groupId.value) { result in
+        FirebaseManager.shared.listenMessageFromGroup(groupId: groupId.value) { result in
 
             switch result {
 

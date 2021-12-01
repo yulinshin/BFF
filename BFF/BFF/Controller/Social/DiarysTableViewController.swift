@@ -21,8 +21,8 @@ class DiariesViewController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
-        viewModel.didUpDateData = {
-            self.tableView.reloadData()
+        viewModel.didUpDateData = { [weak self] in
+            self?.tableView.reloadData()
         }
 
     }
@@ -38,37 +38,21 @@ class DiariesViewController: UIViewController {
 
         var action = UIAlertAction()
 
-        action = UIAlertAction(title: "封鎖並檢舉此寵物的主人", style: .default, handler: { action in
+        action = UIAlertAction(title: "封鎖並檢舉此寵物的主人", style: .default, handler: { _ in
             self.blockUser(userId: diary.userId)
         })
-
 
         // Block PetsId -> Only show on other's Diary
         alertController.addAction(action)
 
         alertController.addAction(UIAlertAction(title: "取消", style: .cancel))
 
-            self.present(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
 
     }
 
-
     func blockUser(userId: String) {
-
-            FirebaseManager.shared.updateCurrentUserBlockUsers(blockUserId: userId)
-        FirebaseManager.shared.updateCurrentUserBlockUsers(blockUserId: userId) { result in
-
-            switch result {
-
-            case .success(let message):
-                self.viewModel.filterDiaris()
-                self.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-
-            }
-
-        }
+        self.viewModel.blockUser(userId: userId)
     }
 
 }
@@ -83,90 +67,95 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
 
         cell.setup()
 
+        cell.diaryImageView.loadImage(viewModel.showingDiaries.value[indexPath.row].images.first?.url)
 
-            cell.diaryImageView.loadImage( viewModel.showingDiaries.value [indexPath.row].images.first?.url)
-            cell.diaryCommentLabel.text = "\(    viewModel.showingDiaries.value [indexPath.row].comments.count)"
-            cell.dateLabel.text = "\(   viewModel.showingDiaries.value [indexPath.row].createdTime.dateValue().toString())"
-            cell.diaryContentLabel.text = "\(   viewModel.showingDiaries.value [indexPath.row].content)"
+        cell.diaryCommentLabel.text = "\(viewModel.showingDiaries.value[indexPath.row].comments.count)"
 
-            cell.likeLabel.text = "\(   viewModel.showingDiaries.value [indexPath.row].whoLiked.count)"
+        cell.dateLabel.text = "\(viewModel.showingDiaries.value[indexPath.row].createdTime.dateValue().toString())"
 
-            if    viewModel.showingDiaries.value [indexPath.row].whoLiked.contains(FirebaseManager.shared.userId) {
-                cell.likeIcon.image = UIImage(systemName: "heart.fill")
+        cell.diaryContentLabel.text = "\(viewModel.showingDiaries.value[indexPath.row].content)"
 
-            } else {
-                cell.likeIcon.image = UIImage(systemName: "heart")
+        cell.likeLabel.text = "\(viewModel.showingDiaries.value[indexPath.row].whoLiked.count)"
 
-            }
+        if viewModel.showingDiaries.value [indexPath.row].whoLiked.contains(FirebaseManager.userId) {
+            cell.likeIcon.image = UIImage(systemName: "heart.fill")
 
-        if viewModel.showingDiaries.value[indexPath.row].userId == FirebaseManager.shared.userId {
-            cell.settingIcon.isHidden = true
-        }else {
-            cell.settingIcon.isHidden = false
+        } else {
+            cell.likeIcon.image = UIImage(systemName: "heart")
+
         }
 
-        if viewModel.showingDiaries.value[indexPath.row].userId == FirebaseManager.shared.userId {
+        if viewModel.showingDiaries.value[indexPath.row].userId == FirebaseManager.userId {
+            cell.settingIcon.isHidden = true
             cell.sendMessageButton.isHidden = true
-        }else {
+        } else {
+            cell.settingIcon.isHidden = false
             cell.sendMessageButton.isHidden = false
         }
 
-            cell.petNameLabel.text =    viewModel.showingDiaries.value [indexPath.row].petname
-            cell.petImageView.loadImage(   viewModel.showingDiaries.value [indexPath.row].petThumbnail?.url)
+        cell.petNameLabel.text = viewModel.showingDiaries.value [indexPath.row].petname
+        cell.petImageView.loadImage( viewModel.showingDiaries.value [indexPath.row].petThumbnail?.url)
 
-            cell.didTapLiked = {
-                self.viewModel.updateWhoLiked(index: indexPath.row)
-            }
+        cell.didTapLiked = { [weak self] in
+            self?.viewModel.updateWhoLiked(index: indexPath.row)
+        }
 
-            cell.didTapMoreButton = {
-                cell.diaryContentLabel.numberOfLines  = 0
-                tableView.reloadData()
-            }
+        cell.didTapMoreButton = { [weak self] in
+            cell.diaryContentLabel.numberOfLines  = 0
+            self?.tableView.reloadData()
+        }
 
-            cell.didTapComment = {
+        cell.didTapComment = {  [weak self] in
+            guard let diary = self?.viewModel.showingDiaries.value[indexPath.row] else { return }
+            self?.showComment(diary: diary)
+        }
 
-                let storyboard = UIStoryboard(name: "Social", bundle: nil)
+        cell.didTapSendMessageButton = { [weak self] in
 
-                guard let controller = storyboard.instantiateViewController(withIdentifier: "CommentTableViewController") as? CommentTableViewController else { return }
-                controller.diary =    self.viewModel.showingDiaries.value [indexPath.row]
-                self.navigationController?.pushViewController(controller, animated: true)
+            guard let otherUserId = self?.viewModel.showingDiaries.value[indexPath.row].userId else { return }
+            self?.showChatVC(userId: otherUserId)
 
-            }
+        }
 
-            cell.didTapSendMessageButton = {
-                let storyboard = UIStoryboard(name: "Message", bundle: nil)
+        cell.didTapPetButton = { [weak self] in
 
-                guard let controller = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
+            guard let petId = self?.viewModel.showingDiaries.value[indexPath.row].petId else { return }
+            self?.showPetProfile(petId: petId)
 
-                controller.viewModel = ChatGroupVM( otherUserId: self.viewModel.showingDiaries.value[indexPath.row].userId)
+        }
 
-                self.navigationController?.pushViewController(controller, animated: true)
+        cell.didTapSettingButton = { [weak self] in
+            guard let viewModel = self?.viewModel else { return }
+            self?.showSetting(with: viewModel.showingDiaries.value[indexPath.row])
+        }
 
-
-            }
-
-
-
-            cell.didTapPetButton = {
-
-                let storyboard = UIStoryboard(name: "Pet", bundle: nil)
-                guard let controller = storyboard.instantiateViewController(withIdentifier: "PetsProfileViewController") as? PetsProfileViewController else { return }
-                controller.viewModel = ProfileViewModel(petId:    self.viewModel.showingDiaries.value [indexPath.row].petId)
-
-                self.navigationController?.pushViewController(controller, animated: true)
-
-
-            }
-
-            cell.didTapSettingButton = {
-                self.showSetting(with:    self.viewModel.showingDiaries.value [indexPath.row])
-            }
-
-
-            cell.selectionStyle = .none
-
+        cell.selectionStyle = .none
 
         return cell
+    }
+
+    func showPetProfile(petId: String) {
+        let storyboard = UIStoryboard(name: "Pet", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "PetsProfileViewController") as? PetsProfileViewController else { return }
+        controller.viewModel = ProfileViewModel(petId: petId)
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+
+    func showChatVC(userId: String) {
+
+        let storyboard = UIStoryboard(name: "Message", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
+        controller.viewModel = ChatGroupVM( otherUserId: userId)
+        self.navigationController?.pushViewController(controller, animated: true)
+
+    }
+
+    func showComment(diary: Diary) {
+
+        let storyboard = UIStoryboard(name: "Social", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "CommentTableViewController") as? CommentTableViewController else { return }
+        controller.diary = diary
+        self.navigationController?.pushViewController(controller, animated: true)
 
     }
 
@@ -181,17 +170,7 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
         return viewModel.showingDiaries.value.count
     }
 
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-//        let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-//        guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
-//        controller.viewModel = DetialViewModel(from: viewModel.diaries.value[indexPath.row])
-//        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
-//        self.navigationController?.show(controller, sender: nil)
-
-
-
     }
 
 }
@@ -199,12 +178,10 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
 class DiaryViewCell: UITableViewCell {
 
     @IBOutlet weak var diaryImageView: UIImageView!
-
     @IBOutlet weak var photoBackgroundView: UIView!
     @IBOutlet weak var diaryCommentLabel: UILabel!
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var commentIcon: UIImageView!
-
     @IBOutlet weak var settingIcon: UIImageView!
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var likeIcon: UIImageView!
@@ -227,7 +204,6 @@ class DiaryViewCell: UITableViewCell {
 
     var didTapSettingButton: (() -> Void)?
 
-
     var isNeedToOpen = false
 
     override func awakeFromNib() {
@@ -235,7 +211,6 @@ class DiaryViewCell: UITableViewCell {
         // Initialization code
 
     }
-
 
     func setup() {
 
@@ -267,36 +242,30 @@ class DiaryViewCell: UITableViewCell {
 
     }
 
-    @objc func tapsendMessageButton(){
+    @objc func tapsendMessageButton() {
 
         didTapSendMessageButton?()
 
     }
-    @objc func tapPetButton(){
+
+    @objc func tapPetButton() {
 
         didTapPetButton?()
 
     }
 
-
-
-    @objc func tapLikedButton(){
+    @objc func tapLikedButton() {
 
         didTapLiked?()
-
     }
 
-    @objc func tapCommentButton(){
-
+    @objc func tapCommentButton() {
         didTapComment?()
-
     }
 
-
-    @objc func tapSettingButton(){
+    @objc func tapSettingButton() {
 
         didTapSettingButton?()
-
     }
 
     @IBAction func showMore(_ sender: UIButton) {
@@ -310,7 +279,7 @@ class DiaryViewCell: UITableViewCell {
 
         if diaryContentLabel.isTruncated() {
             moreButton.isHidden = false
-        } else { 
+        } else {
             moreButton.isHidden = true
         }
 

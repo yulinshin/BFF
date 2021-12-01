@@ -9,8 +9,7 @@
 import Foundation
 import CoreData
 
-
-extension PicMO {
+extension PicMO: Identifiable {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<PicMO> {
         return NSFetchRequest<PicMO>(entityName: "Pic")
@@ -18,9 +17,5 @@ extension PicMO {
 
     @NSManaged public var url: String?
     @NSManaged public var fileName: String?
-
-}
-
-extension PicMO : Identifiable {
 
 }

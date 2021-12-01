@@ -15,9 +15,10 @@ class PetNotificationCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var notificationCard: UIView!
 
-    var didTapCancle: (() -> Void)?
-    var didTapSupplyNotification: ((String) -> ())?
-    var didTapCommentNotification: ((String) -> ())?
+    static var identifier = "PetNotificationCollectionViewCell"
+    var didTapCancel: (() -> Void)?
+    var didTapSupplyNotification: ((String) -> Void)?
+    var didTapCommentNotification: ((String) -> Void)?
     var viewModel: NotificationViewModel?
     func setup(viewModel: NotificationViewModel) {
 
@@ -41,23 +42,20 @@ class PetNotificationCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         petThumbnailImageView.layer.cornerRadius = petThumbnailImageView.frame.height/2
         petThumbnailImageView.clipsToBounds = true
-
-
         notificationCard.layer.cornerRadius = 10
-        notificationCard.layer.shadowColor = UIColor(named: "main")?.cgColor
+        notificationCard.layer.shadowColor = UIColor.mainColor.cgColor
         notificationCard.layer.shadowOffset = CGSize(width: 2, height: 2)
         notificationCard.layer.shadowOpacity = 0.5
         notificationCard.layer.shadowRadius = 6
       }
 
-    
     @IBAction func tapCancelButton(_ sender: UIButton) {
-        
-        self.didTapCancle?()
+
+        self.didTapCancel?()
 
     }
 
-    @objc func didTapNotification(){
+    @objc func didTapNotification() {
 
         if viewModel?.type.value == "comment" {
             guard let diaryId = viewModel?.diaryId.value else { return }

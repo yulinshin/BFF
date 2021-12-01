@@ -9,8 +9,7 @@
 import Foundation
 import CoreData
 
-
-extension UserMO {
+extension UserMO: Identifiable {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<UserMO> {
         return NSFetchRequest<UserMO>(entityName: "User")
@@ -19,9 +18,5 @@ extension UserMO {
     @NSManaged public var name: String?
     @NSManaged public var petsIds: [String]?
     @NSManaged public var userId: String?
-
-}
-
-extension UserMO : Identifiable {
 
 }

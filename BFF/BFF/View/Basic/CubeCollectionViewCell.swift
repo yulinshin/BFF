@@ -9,7 +9,6 @@ import UIKit
 
 class CubeCollectionViewCell: UICollectionViewCell {
 
-
     static let identifier = "CubeCollectionViewCell"
 
     @IBOutlet weak var background: UIView!

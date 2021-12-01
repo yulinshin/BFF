@@ -9,7 +9,6 @@ import UIKit
 
 class GoalCollectionViewCellC: UICollectionViewCell {
 
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

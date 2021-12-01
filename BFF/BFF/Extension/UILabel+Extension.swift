@@ -1,15 +1,13 @@
-
-
 import UIKit
 
-extension UILabel{
+extension UILabel {
     func countLabelLines() -> Int {
         // Call self.layoutIfNeeded() if your view is uses auto layout
         let myText = self.text! as NSString
-        let attributes = [NSAttributedString.Key.font : self.font]
+        let attributes = [NSAttributedString.Key.font: self.font]
 
         // swiftlint:disable:next line_length
-        let labelSize = myText.boundingRect(with: CGSize(width: self.bounds.width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes as [NSAttributedString.Key : Any], context: nil)
+        let labelSize = myText.boundingRect(with: CGSize(width: self.bounds.width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes as [NSAttributedString.Key: Any], context: nil)
             return Int(ceil(CGFloat(labelSize.height) / self.font.lineHeight))
     }
 
@@ -17,7 +15,6 @@ extension UILabel{
         guard numberOfLines > 0 else { return false }
         return countLabelLines() > numberOfLines
     }
-
 
         func indexOfAttributedTextCharacterAtPoint(point: CGPoint) -> Int {
             assert(self.attributedText != nil, "This method is developed for attributed string")
@@ -37,11 +34,11 @@ extension UILabel{
 
 extension String {
     static func format(strings: [String],
-                    boldFont: UIFont = UIFont.boldSystemFont(ofSize: 14),
-                    boldColor: UIColor = UIColor.blue,
-                    inString string: String,
-                    font: UIFont = UIFont.systemFont(ofSize: 14),
-                    color: UIColor = UIColor.black) -> NSAttributedString {
+                       boldFont: UIFont = UIFont.boldSystemFont(ofSize: 14),
+                       boldColor: UIColor = UIColor.blue,
+                       inString string: String,
+                       font: UIFont = UIFont.systemFont(ofSize: 14),
+                       color: UIColor = UIColor.black) -> NSAttributedString {
         let attributedString =
             NSMutableAttributedString(string: string,
                                     attributes: [

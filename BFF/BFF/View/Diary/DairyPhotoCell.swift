@@ -17,9 +17,8 @@ class DairyPhotoCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
-    // MVVM
-    func configure(with viewModel: PhotoCellViewlModel) {
+    
+    func configure(with viewModel: PhotoCellViewModel) {
         image.loadImage(viewModel.imageUrl)
     }
 
