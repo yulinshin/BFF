@@ -147,27 +147,28 @@ class SignInViewController: UIViewController {
         return index > range.location && index < range.location + range.length
     }
 
+    // swiftlint:disable:next function_body_length
     func setupAppleSignInButton() {
 
         let titleLabel = UILabel()
         let subTitleLAbel = UILabel()
         let textLabel = UILabel()
         let button = ASAuthorizationAppleIDButton.init(type: .signIn, style: .white)
-        button.cornerRadius = 20
-
-        button.addTarget(self, action: #selector(handleSignInWithAppleTapped), for: .touchUpInside)
-
-        button.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        subTitleLAbel.translatesAutoresizingMaskIntoConstraints = false
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
-        termLabel.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(button)
         view.addSubview(titleLabel)
         view.addSubview(subTitleLAbel)
         view.addSubview(textLabel)
         view.addSubview(termLabel)
+
+        button.cornerRadius = 20
+        button.addTarget(self, action: #selector(handleSignInWithAppleTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subTitleLAbel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        termLabel.translatesAutoresizingMaskIntoConstraints = false
 
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100).isActive = true

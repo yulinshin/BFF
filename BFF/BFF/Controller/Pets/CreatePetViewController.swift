@@ -321,7 +321,7 @@ extension CreatePetViewController: UITableViewDataSource {
             }
 
         }
-        
+
         setupPetImage()
 
         if presentMode == .read {

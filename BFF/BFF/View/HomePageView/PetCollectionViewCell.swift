@@ -9,7 +9,6 @@ import UIKit
 import Kingfisher
 import Lottie
 
-
 class PetCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var diaryCardBackground: UIView!

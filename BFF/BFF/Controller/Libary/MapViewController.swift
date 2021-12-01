@@ -242,7 +242,7 @@ extension MapViewController: GMSMapViewDelegate, MapMarkerDelegate {
         infoWindow.alpha = 0.9
         infoWindow.layer.cornerRadius = 12
         infoWindow.layer.borderWidth = 2
-        infoWindow.layer.borderColor = UIColor.orange.cgColor
+        infoWindow.layer.borderColor = UIColor.mainColor.cgColor
         infoWindow.linkButton.layer.cornerRadius = infoWindow.linkButton.frame.height / 2
 
         infoWindow.addressLabel.text = markerData?.adders

@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="GenJyuuGothic-Regular.ttf">
+            <string>GenJyuuGothic-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--黑名單管理-->
         <scene sceneID="Rny-eB-MzB">
             <objects>
-                <tableViewController storyboardIdentifier="BlockPetsListTableViewController" id="7yQ-6M-5dU" customClass="BlockPetsListTableViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="BlockPetsListTableViewController" title="黑名單管理" id="7yQ-6M-5dU" customClass="BlockPetsListTableViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="UI4-kU-12v">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationLevel="16" indentationWidth="16" reuseIdentifier="BlockTableViewCell" rowHeight="78" id="Wls-f2-2EF" customClass="BlockTableViewCell" customModule="BFF" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="600" height="78"/>
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="78"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wls-f2-2EF" id="3kO-X9-CZ4">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="78"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="78"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fhn-QC-v5l">
@@ -32,21 +39,21 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHy-aO-KuY">
-                                            <rect key="frame" x="72" y="28.5" width="416" height="21"/>
+                                            <rect key="frame" x="72" y="28.5" width="230" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22V-dt-OJV">
-                                            <rect key="frame" x="504" y="16" width="80" height="46"/>
+                                            <rect key="frame" x="318" y="16" width="80" height="46"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="80" id="Hci-kK-Z5K"/>
                                             </constraints>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title="解除封鎖">
-                                                <fontDescription key="titleFontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="14"/>
-                                                <color key="baseForegroundColor" name="main"/>
-                                            </buttonConfiguration>
+                                            <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="14"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="解除封鎖">
+                                                <color key="titleColor" name="main"/>
+                                            </state>
                                             <connections>
                                                 <action selector="tapUnBlockButton:" destination="Wls-f2-2EF" eventType="touchUpInside" id="pm6-Pg-VbL"/>
                                             </connections>
@@ -84,28 +91,28 @@
         <!--帳戶設定-->
         <scene sceneID="HLB-zQ-UeN">
             <objects>
-                <tableViewController storyboardIdentifier="UserAccountTableViewController" id="Amg-Fc-7Kx" customClass="UserAccountTableViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="UserAccountTableViewController" title="帳戶設定" id="Amg-Fc-7Kx" customClass="UserAccountTableViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="uOy-d8-5PG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserPicCell" rowHeight="170" id="M4B-Cu-tlU" customClass="UserPicCell" customModule="BFF" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="600" height="170"/>
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="170"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M4B-Cu-tlU" id="w58-ED-vfu">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="170"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dcf-oO-rVe" userLabel="Pic">
-                                            <rect key="frame" x="240" y="31" width="120" height="108"/>
+                                            <rect key="frame" x="147" y="31" width="120" height="108"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Dcf-oO-rVe" secondAttribute="height" id="gmh-LZ-I0R"/>
                                                 <constraint firstAttribute="width" constant="120" id="vpZ-Ma-be4"/>
                                             </constraints>
                                         </imageView>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="repeat.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qez-Mq-Veb">
-                                            <rect key="frame" x="326" y="105.5" width="34" height="33"/>
+                                            <rect key="frame" x="233" y="105.5" width="34" height="33"/>
                                             <color key="tintColor" name="main"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="34" id="s0e-m4-0b2"/>
@@ -127,14 +134,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserInfoCell" rowHeight="86" id="8dW-94-H9v" customClass="UserInfoCell" customModule="BFF" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="214.5" width="600" height="86"/>
+                                <rect key="frame" x="0.0" y="214.5" width="414" height="86"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8dW-94-H9v" id="ywd-CM-gwa">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="86"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="86"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2yC-ff-VV6">
-                                            <rect key="frame" x="175" y="16" width="250" height="54"/>
+                                            <rect key="frame" x="82" y="16" width="250" height="54"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOl-WY-uKx">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="54"/>
@@ -184,42 +191,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LU2-AX-Ihv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="810.14492753623199" y="-74.330357142857139"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Vl7-yK-XMO">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mvj-H0-xLI" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Br0-kX-w5u">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="7yQ-6M-5dU" kind="relationship" relationship="rootViewController" id="4g4-Oy-4lZ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nIa-te-hTZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1562.3188405797102" y="-74.330357142857139"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Ssy-bn-ig2">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BpE-Eq-EL6" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ULX-jO-4V7">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Amg-Fc-7Kx" kind="relationship" relationship="rootViewController" id="kTM-FD-bod"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1Fp-Kq-UO1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-100.00000000000001" y="-74.330357142857139"/>
         </scene>
     </scenes>
     <resources>

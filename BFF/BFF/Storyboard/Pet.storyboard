@@ -8,12 +8,14 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="GenJyuuGothic-Bold.ttf">
             <string>GenJyuuGothic-Bold</string>
+        </array>
+        <array key="GenJyuuGothic-Normal.ttf">
+            <string>GenJyuuGothic-Normal</string>
         </array>
         <array key="GenJyuuGothic-Regular.ttf">
             <string>GenJyuuGothic-Regular</string>
@@ -244,27 +246,7 @@
                                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         </collectionViewFlowLayout>
-                                                        <cells>
-                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="uXS-dZ-JAT">
-                                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="w2R-BM-ENE">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <subviews>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0An-OV-FYP">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                                        </imageView>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="trailing" secondItem="0An-OV-FYP" secondAttribute="trailing" id="7C1-Q4-gTU"/>
-                                                                        <constraint firstItem="0An-OV-FYP" firstAttribute="leading" secondItem="w2R-BM-ENE" secondAttribute="leading" id="ArL-Y6-zpS"/>
-                                                                        <constraint firstItem="0An-OV-FYP" firstAttribute="top" secondItem="w2R-BM-ENE" secondAttribute="top" id="IkB-x9-Mev"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="0An-OV-FYP" secondAttribute="bottom" id="e4C-JB-wJK"/>
-                                                                    </constraints>
-                                                                </collectionViewCellContentView>
-                                                            </collectionViewCell>
-                                                        </cells>
+                                                        <cells/>
                                                     </collectionView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -381,8 +363,8 @@
                                                         <constraint firstAttribute="width" constant="30" id="uBq-r2-bSB"/>
                                                     </constraints>
                                                     <color key="tintColor" name="main"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system" title=""/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" title="" image="xmark" catalog="system"/>
                                                     <connections>
                                                         <action selector="deleteButton:" destination="224-eI-A8d" eventType="touchUpInside" id="sly-S5-a43"/>
                                                     </connections>
@@ -394,8 +376,8 @@
                                                         <constraint firstAttribute="height" constant="30" id="6bl-6b-ox1"/>
                                                     </constraints>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="健康資訊"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" title="健康資訊"/>
                                                     <connections>
                                                         <action selector="moreInfo:" destination="224-eI-A8d" eventType="touchUpInside" id="EIj-RB-wae"/>
                                                     </connections>
@@ -452,13 +434,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Collar" translatesAutoresizingMaskIntoConstraints="NO" id="JVh-HB-L3T">
-                                <rect key="frame" x="107" y="168" width="200" height="200"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Collar" translatesAutoresizingMaskIntoConstraints="NO" id="JVh-HB-L3T">
+                                <rect key="frame" x="138" y="168" width="138" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="NQ5-43-OgX"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="毛小孩的姓名？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFR-ly-O5g">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="毛小孩的姓名？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFR-ly-O5g">
                                 <rect key="frame" x="137" y="398" width="140" height="28"/>
                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -473,13 +455,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z55-gU-Kjr">
-                                <rect key="frame" x="165" y="556" width="84" height="42"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="下一步">
-                                    <fontDescription key="titleFontDescription" name="GenJyuuGothic-Normal" family="Gen Jyuu Gothic" pointSize="20"/>
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z55-gU-Kjr">
+                                <rect key="frame" x="177" y="556" width="60" height="40"/>
+                                <fontDescription key="fontDescription" name="GenJyuuGothic-Normal" family="Gen Jyuu Gothic" pointSize="20"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="下一步">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <segue destination="Z9n-fh-pDd" kind="show" id="VoL-V0-A4n"/>
                                 </connections>
@@ -488,11 +470,14 @@
                         <viewLayoutGuide key="safeArea" id="HWO-kb-AXW"/>
                         <color key="backgroundColor" name="main"/>
                         <constraints>
+                            <constraint firstItem="QFR-ly-O5g" firstAttribute="centerX" secondItem="FP3-Ij-YM0" secondAttribute="centerX" id="1St-ZJ-qlb"/>
                             <constraint firstItem="QFR-ly-O5g" firstAttribute="top" secondItem="JVh-HB-L3T" secondAttribute="bottom" constant="30" id="Mvn-6I-bj1"/>
                             <constraint firstItem="1ot-wh-RI3" firstAttribute="top" secondItem="QFR-ly-O5g" secondAttribute="bottom" constant="16" id="UpS-pg-NLK"/>
                             <constraint firstItem="JVh-HB-L3T" firstAttribute="top" secondItem="HWO-kb-AXW" secondAttribute="top" constant="80" id="cZC-w5-9KB"/>
                             <constraint firstItem="z55-gU-Kjr" firstAttribute="top" secondItem="1ot-wh-RI3" secondAttribute="bottom" constant="80" id="dkJ-Pz-1KS"/>
                             <constraint firstItem="1ot-wh-RI3" firstAttribute="centerX" secondItem="FP3-Ij-YM0" secondAttribute="centerX" id="fgO-TX-1hC"/>
+                            <constraint firstItem="z55-gU-Kjr" firstAttribute="centerX" secondItem="FP3-Ij-YM0" secondAttribute="centerX" id="klO-iK-VaB"/>
+                            <constraint firstItem="JVh-HB-L3T" firstAttribute="centerX" secondItem="FP3-Ij-YM0" secondAttribute="centerX" id="u2b-FY-PhY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="建立毛小孩資料" id="41k-NB-6IR"/>
@@ -550,7 +535,7 @@
         <!--Navigation Controller-->
         <scene sceneID="vWQ-tm-2NC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Dje-Kq-Zek" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="CreatPetNavigate" automaticallyAdjustsScrollViewInsets="NO" id="Dje-Kq-Zek" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vLu-Xe-F3r">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -588,7 +573,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xet-NI-mqv">
                                 <rect key="frame" x="107" y="168" width="200" height="200"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="幫毛小孩選張可愛的照片吧！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0b-0l-ijD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="幫毛小孩選張可愛的照片吧！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0b-0l-ijD">
                                 <rect key="frame" x="77" y="428" width="260" height="28"/>
                                 <fontDescription key="fontDescription" name="GenJyuuGothic-Regular" family="Gen Jyuu Gothic" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -597,11 +582,11 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4O6-dF-UUN">
                                 <rect key="frame" x="165" y="556" width="84" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="下一步">
-                                    <fontDescription key="titleFontDescription" name="GenJyuuGothic-Normal" family="Gen Jyuu Gothic" pointSize="20"/>
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
+                                <fontDescription key="fontDescription" name="GenJyuuGothic-Normal" family="Gen Jyuu Gothic" pointSize="20"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="下一步">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uuq-Ck-hep"/>
@@ -611,6 +596,7 @@
                             <constraint firstItem="p0b-0l-ijD" firstAttribute="top" secondItem="pwq-sZ-uIW" secondAttribute="bottom" constant="60" id="RAS-HA-Z8z"/>
                             <constraint firstItem="xet-NI-mqv" firstAttribute="trailing" secondItem="pwq-sZ-uIW" secondAttribute="trailing" id="b8V-QX-qoQ"/>
                             <constraint firstItem="xet-NI-mqv" firstAttribute="leading" secondItem="pwq-sZ-uIW" secondAttribute="leading" id="gxI-QK-xYM"/>
+                            <constraint firstItem="p0b-0l-ijD" firstAttribute="centerX" secondItem="XGQ-8g-uhe" secondAttribute="centerX" id="lpN-cq-LZi"/>
                             <constraint firstItem="xet-NI-mqv" firstAttribute="bottom" secondItem="pwq-sZ-uIW" secondAttribute="bottom" id="mBF-79-5kv"/>
                             <constraint firstItem="pwq-sZ-uIW" firstAttribute="top" secondItem="uuq-Ck-hep" secondAttribute="top" constant="80" id="pbl-bE-en3"/>
                             <constraint firstItem="xet-NI-mqv" firstAttribute="top" secondItem="pwq-sZ-uIW" secondAttribute="top" id="pck-Cx-EDT"/>
@@ -645,24 +631,6 @@
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="543"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="EyN-q5-rAY">
-                                                <rect key="frame" x="0.0" y="44.5" width="350" height="43.5"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EyN-q5-rAY" id="sm8-0b-Yte">
-                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="PXX-mT-c2X">
-                                                <rect key="frame" x="0.0" y="88" width="350" height="43.5"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PXX-mT-c2X" id="WEc-e9-K3U">
-                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </prototypes>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qb2-uC-dBs">
                                         <rect key="frame" x="0.0" y="563" width="350" height="43"/>

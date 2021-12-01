@@ -39,14 +39,19 @@ class SupplyListTableViewCell: UITableViewCell {
 
     }
 
-    func configure() {
-
+    private func setupCellCardBackGroundView() {
         cellCardBackGroundView.layer.shadowColor = UIColor.gray.cgColor
         cellCardBackGroundView.layer.shadowOpacity = 0.2
         cellCardBackGroundView.layer.cornerRadius = 16
         cellCardBackGroundView.layer.shadowRadius = 4
         cellCardBackGroundView.backgroundColor = UIColor.white
         cellCardBackGroundView.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+    }
+
+    // swiftlint:disable:next function_body_length
+    func configure() {
+
+        setupCellCardBackGroundView()
         reFillStockButton.layer.cornerRadius = 4
 
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {

@@ -22,7 +22,6 @@ class PetHealthCardListTableViewCell: UITableViewCell {
     var didTapDeleteButton: (() -> Void)?
     var didTapMoreInfoButton: (() -> Void)?
 
-
     static var identifier = "PetHealthCardListTableViewCell"
 
     func configure() {

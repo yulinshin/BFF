@@ -129,6 +129,7 @@ extension SupplyDetailViewController: UITableViewDataSource {
         cellArray.count
     }
 
+    // swiftlint:disable:next function_body_length
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         switch cellArray[indexPath.row] {
@@ -152,14 +153,11 @@ extension SupplyDetailViewController: UITableViewDataSource {
                 }
             }
 
-
-
             viewModel.inventoryStatusPercentage.bind { percentage in
                 cell.stockProgressView.progress = Float(percentage)
                 UIView.animate(withDuration: 1, delay: 0.5, options: [], animations: {
                     cell.stockProgressView.layoutIfNeeded()
                 })
-
             }
 
             cell.iconNameCallback = { [weak self] name in
@@ -193,7 +191,6 @@ extension SupplyDetailViewController: UITableViewDataSource {
         case .inventory:
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SupplyInventoryTableViewCell.identifier, for: indexPath) as? SupplyInventoryTableViewCell else { return UITableViewCell() }
-
 
             cell.maxStockTextField.text = "\(viewModel.maxInventory.value)"
 

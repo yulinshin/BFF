@@ -9,7 +9,6 @@ import UIKit
 
 class LibraryViewController: UIViewController {
 
-
     var bookViewModels = [BookViewModel(icon: "Hospital", title: "全台動物醫院地圖", subtitle: "24小時動物醫院、特殊寵物動物醫院")]
 
     @IBOutlet weak var libraryCollectionView: UICollectionView!

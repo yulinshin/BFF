@@ -156,6 +156,20 @@ class PetsProfileViewController: UIViewController {
 
     }
 
+    private func setupMessageButton() {
+        self.sendMessageButton.backgroundColor = .white
+        self.sendMessageButton.layer.borderColor = UIColor.mainColor.cgColor
+        self.sendMessageButton.layer.borderWidth = 1
+        self.sendMessageButton.layer.cornerRadius = 8
+        self.sendMessageButton.setTitle("私訊主人", for: .normal)
+    }
+
+    fileprivate func setupPetThumbnail() {
+        self.petThumbnailImageView.layer.cornerRadius = self.petThumbnailImageView.frame.height/2
+        self.petThumbnailImageView.layer.borderColor = UIColor.white.cgColor
+        self.petThumbnailImageView.layer.borderWidth = 4
+    }
+
     func setUp() {
 
         guard let viewModel = viewModel else {
@@ -216,16 +230,8 @@ class PetsProfileViewController: UIViewController {
 
         }
 
-        self.sendMessageButton.backgroundColor = .white
-        self.sendMessageButton.layer.borderColor = UIColor.mainColor.cgColor
-        self.sendMessageButton.layer.borderWidth = 1
-        self.sendMessageButton.layer.cornerRadius = 8
-        self.sendMessageButton.setTitle("私訊主人", for: .normal)
-
-        self.petThumbnailImageView.layer.cornerRadius = self.petThumbnailImageView.frame.height/2
-        self.petThumbnailImageView.layer.borderColor = UIColor.white.cgColor
-        self.petThumbnailImageView.layer.borderWidth = 4
-
+        setupMessageButton()
+        setupPetThumbnail()
         self.topColorBackground.layer.cornerRadius = self.topColorBackground.frame.width / 2
 
     }

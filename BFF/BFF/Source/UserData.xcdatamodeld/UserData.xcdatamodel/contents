@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Pet" representedClassName="PetMO" syncable="YES">
         <attribute name="name" attributeType="String"/>
         <attribute name="petId" optional="YES" attributeType="String"/>
-        <relationship name="thumbNail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pic"/>
+        <relationship name="thumbNail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pic" inverseName="relationship" inverseEntity="Pic"/>
     </entity>
     <entity name="Pic" representedClassName="PicMO" syncable="YES">
         <attribute name="fileName" attributeType="String"/>
         <attribute name="url" attributeType="String"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pet" inverseName="thumbNail" inverseEntity="Pet"/>
     </entity>
     <entity name="User" representedClassName="UserMO" syncable="YES">
         <attribute name="name" attributeType="String"/>
@@ -15,8 +16,8 @@
         <attribute name="userId" attributeType="String"/>
     </entity>
     <elements>
+        <element name="Pet" positionX="210.0756225585938" positionY="8.84820556640625" width="128" height="74"/>
+        <element name="Pic" positionX="29.09820556640625" positionY="128.3197631835938" width="128" height="74"/>
         <element name="User" positionX="-36" positionY="9" width="128" height="88"/>
-        <element name="Pet" positionX="210.0756225585938" positionY="8.84820556640625" width="128" height="73"/>
-        <element name="Pic" positionX="29.09820556640625" positionY="128.3197631835938" width="128" height="73"/>
     </elements>
 </model>

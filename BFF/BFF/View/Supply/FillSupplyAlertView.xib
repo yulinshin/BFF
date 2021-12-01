@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -76,8 +78,8 @@
                                         <constraint firstAttribute="height" constant="30" id="kMa-Jf-SR2"/>
                                     </constraints>
                                     <color key="tintColor" name="main"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system" title=" "/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title=" " image="xmark" catalog="system"/>
                                     <connections>
                                         <action selector="onCliclExit:" destination="-1" eventType="touchUpInside" id="VZr-Me-Jf1"/>
                                     </connections>
@@ -132,7 +134,7 @@
         <image name="Success" width="120" height="120"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="main">
-            <color red="1" green="0.6119999885559082" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.35699999332427979" green="0.61000001430511475" blue="0.60699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
