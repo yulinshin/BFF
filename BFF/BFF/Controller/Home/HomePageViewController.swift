@@ -49,6 +49,7 @@ class HomePageViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel.fetchUserData()
         let barAppearance =  UINavigationBarAppearance()
         barAppearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = barAppearance
