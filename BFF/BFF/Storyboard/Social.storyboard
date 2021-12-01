@@ -106,7 +106,7 @@
                                             <color key="titleColor" name="main"/>
                                         </state>
                                         <connections>
-                                            <action selector="sendMessage:" destination="Kwf-CJ-CKM" eventType="touchUpInside" id="WM2-pT-BPv"/>
+                                            <action selector="sendComment:" destination="Kwf-CJ-CKM" eventType="touchUpInside" id="n09-rF-EhK"/>
                                         </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="O43-iX-QdN">

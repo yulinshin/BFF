@@ -74,7 +74,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
     }
 
-    func getGCPKey() {
+    private func getGCPKey() {
 
         guard let path = Bundle.main.path(forResource: "Keys", ofType: "plist") else { return }
 
@@ -84,7 +84,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     }
 
-    func getLocation() {
+    private func getLocation() {
 
         var components = URLComponents(string: "https://sheets.googleapis.com/v4/spreadsheets/1ZfgSLKt-SW73SnaTXZAsslwmdJPEW3JlZMS7NxXJ-kQ/values/Hospital?")!
         let key = URLQueryItem(name: "key", value: gcpKey)
@@ -121,7 +121,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
     }
 
-    func getSpecialLocation() {
+    private func getSpecialLocation() {
 
         var components = URLComponents(string: "https://sheets.googleapis.com/v4/spreadsheets/1ZfgSLKt-SW73SnaTXZAsslwmdJPEW3JlZMS7NxXJ-kQ/values/Hospital_special?")!
         let key = URLQueryItem(name: "key", value: gcpKey)
@@ -158,7 +158,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     }
 
-    func loadNiB() -> MapMarkerWindow {
+    private func loadNiB() -> MapMarkerWindow {
         guard let infoWindow = MapMarkerWindow.instanceFromNib() as? MapMarkerWindow else { return MapMarkerWindow() }
         return infoWindow
     }

@@ -107,7 +107,7 @@ class SignInViewController: UIViewController {
         }
     }
 
-    func setupPrivacyLabel() {
+    private func setupPrivacyLabel() {
 
         let formattedText = String.format(strings: [policy, eula],
                                           boldFont: UIFont.boldSystemFont(ofSize: 12),
@@ -143,12 +143,12 @@ class SignInViewController: UIViewController {
         }
     }
 
-    func checkRange(_ range: NSRange, contain index: Int) -> Bool {
+    private func checkRange(_ range: NSRange, contain index: Int) -> Bool {
         return index > range.location && index < range.location + range.length
     }
 
     // swiftlint:disable:next function_body_length
-    func setupAppleSignInButton() {
+    private func setupAppleSignInButton() {
 
         let titleLabel = UILabel()
         let subTitleLAbel = UILabel()
@@ -236,7 +236,7 @@ class SignInViewController: UIViewController {
         performAppleSignin()
     }
 
-    func performAppleSignin() {
+    private func performAppleSignin() {
 
         let request = createAppleIDRequest()
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
@@ -247,7 +247,7 @@ class SignInViewController: UIViewController {
 
     }
 
-    func createAppleIDRequest() -> ASAuthorizationAppleIDRequest {
+    private func createAppleIDRequest() -> ASAuthorizationAppleIDRequest {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
@@ -321,7 +321,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
         }
     }
 
-    func updateDisplayName(displayName: String, completion: @escaping (Result<String, Error>) -> Void) {
+    private  func updateDisplayName(displayName: String, completion: @escaping (Result<String, Error>) -> Void) {
         if let user = Auth.auth().currentUser {
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = displayName
@@ -402,7 +402,7 @@ private func sha256(_ input: String) -> String {
 
 extension SignInViewController: SFSafariViewControllerDelegate {
 
-    func  handleViewPrivacy() {
+    private func  handleViewPrivacy() {
 
         guard let url = URL(string: "https://www.privacypolicies.com/live/401e5c9d-df2d-42b9-b5e2-33f1f04f6dea") else { return }
         let safariVC = SFSafariViewController(url: url)
@@ -414,7 +414,7 @@ extension SignInViewController: SFSafariViewControllerDelegate {
 
     }
 
-    func  handleViewEula() {
+    private func  handleViewEula() {
 
         guard let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") else { return }
         let safariVC = SFSafariViewController(url: url)

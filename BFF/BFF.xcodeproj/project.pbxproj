@@ -398,6 +398,7 @@
 				62F483EB27280B0C00D5A649 /* Extension */,
 				629FF5BB271D59E700C7C94A /* Third Party Wrapper */,
 				6285C795271DD059006E13EC /* Controller */,
+				62DB93EA2741ED1800D884E3 /* Goal */,
 				621FCEAB271E5B7E0049F42C /* ViewModel */,
 				627648A6271D6B680026C3C3 /* Network */,
 				629FF5BF271D5DDD00C7C94A /* Model */,
@@ -430,12 +431,11 @@
 		6285C795271DD059006E13EC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				62DB93EA2741ED1800D884E3 /* Goal */,
+				62DB93E52741EC4C00D884E3 /* Home */,
 				62DB93E92741ECCA00D884E3 /* Supply */,
 				62DB93E82741ECAF00D884E3 /* Pets */,
 				62DB93E72741EC8900D884E3 /* Social */,
 				62DB93E62741EC6D00D884E3 /* Diary */,
-				62DB93E52741EC4C00D884E3 /* Home */,
 				62DB93EB2741ED3D00D884E3 /* Libary */,
 			);
 			path = Controller;
@@ -524,11 +524,11 @@
 		62DB93E52741EC4C00D884E3 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				623340D7271C3B19002B2429 /* HomePageViewController.swift */,
 				62617494273DF552006F3635 /* BlockPetsListTableViewController.swift */,
 				62892FE32732376D001A7B32 /* SignInViewController.swift */,
 				62B609EA273A52E5007FB169 /* UserAccountViewController.swift */,
 				62FC6193272588F200292710 /* TabBarViewController.swift */,
-				623340D7271C3B19002B2429 /* HomePageViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";

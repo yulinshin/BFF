@@ -66,10 +66,23 @@ class SupplyDetailViewController: UIViewController {
         // swiftlint:disable:next line_length
         let supply = Supply(color: viewModel.iconColor.value, cycleTime: viewModel.cycleTime.value, forPets: viewModel.supplyUseByPets.value, fullStock: viewModel.maxInventory.value, iconImage: viewModel.supplyIconImage.value, isReminder: viewModel.isNeedToRemind.value, perCycleTime: viewModel.cycleDosage.value, reminderPercent: viewModel.remindPercentage.value, stock: viewModel.remainingInventory.value, supplyId: "supplyID", supplyName: viewModel.supplyName.value, unit: viewModel.supplyUnit.value, lastUpdate: viewModel.updateTime.value)
 
-        FirebaseManager.shared.createSupply(supply: supply)
+        FirebaseManager.shared.createSupply(supply: supply) { result in
+
+            switch result {
+
+            case .success:
+
+                print("Create Supply Success")
+
+            case .failure(let error):
+
+                print("Create Supply Failure: \(error)")
+
+            }
+        }
     }
 
-    func fetchData() {
+    private func fetchData() {
 
         FirebaseManager.shared.fetchPets { result in
 

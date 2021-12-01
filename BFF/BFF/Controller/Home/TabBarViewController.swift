@@ -143,7 +143,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
       return true
     }
 
-    func setupMiddleButton() {
+    private func setupMiddleButton() {
 
         var actionButtonFrame = actionButton.frame
         actionButtonFrame.origin.x = tabBar.bounds.width/2 - actionButtonFrame.size.width/2

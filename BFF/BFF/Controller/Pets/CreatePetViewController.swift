@@ -333,7 +333,7 @@ extension CreatePetViewController: UITableViewDataSource {
         return cell
     }
 
-    func setupPetImage() {
+    private func setupPetImage() {
 
         switch presentMode {
 
@@ -357,7 +357,7 @@ extension CreatePetViewController: UITableViewDataSource {
         }
     }
 
-    func showPetNote() {
+    private func showPetNote() {
 
         let storyboard = UIStoryboard(name: "Pet", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "NoteViewController") as? NoteViewController else { return }
