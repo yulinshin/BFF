@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uQN-nY-0xI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yKW-xe-9rr">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -23,37 +22,37 @@
         <!--寵物醫院地圖-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="MapViewController" id="Y6W-OH-hqX" customClass="MapViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" title="寵物醫院地圖" id="Y6W-OH-hqX" customClass="MapViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="aTJ-nr-xHP">
-                                <rect key="frame" x="16" y="96" width="382" height="31"/>
+                                <rect key="frame" x="16" y="96" width="382" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sg0-Lb-CZN">
-                                        <rect key="frame" x="0.0" y="0.0" width="120" height="31"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="30"/>
                                         <color key="tintColor" name="main"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="全部"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="全部"/>
                                         <connections>
                                             <action selector="showAllHostipal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="6iz-If-A1t"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1e-pL-09U">
-                                        <rect key="frame" x="131" y="0.0" width="120" height="31"/>
+                                        <rect key="frame" x="131" y="0.0" width="120" height="30"/>
                                         <color key="tintColor" name="main"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="一般寵物"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="一般寵物"/>
                                         <connections>
                                             <action selector="showNormailHostipal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="n9s-86-ctp"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKw-vs-8Iq">
-                                        <rect key="frame" x="262" y="0.0" width="120" height="31"/>
+                                        <rect key="frame" x="262" y="0.0" width="120" height="30"/>
                                         <color key="tintColor" name="main"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="特殊寵物"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="特殊寵物"/>
                                         <connections>
                                             <action selector="showSpecialHostipal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="f8o-Kt-C7U"/>
                                         </connections>
@@ -65,7 +64,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51M-rH-7FR" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="143" width="414" height="719"/>
+                                <rect key="frame" x="0.0" y="142" width="414" height="720"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
@@ -85,24 +84,24 @@
                     <connections>
                         <outlet property="allButton" destination="Sg0-Lb-CZN" id="RbH-Ek-uQK"/>
                         <outlet property="mapView" destination="51M-rH-7FR" id="9zO-zZ-Z4g"/>
-                        <outlet property="normailButton" destination="S1e-pL-09U" id="UaE-cv-tjI"/>
-                        <outlet property="sepcialButton" destination="QKw-vs-8Iq" id="zFo-Tx-KeE"/>
+                        <outlet property="normalButton" destination="S1e-pL-09U" id="UaE-cv-tjI"/>
+                        <outlet property="specialButton" destination="QKw-vs-8Iq" id="zFo-Tx-KeE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1286.9565217391305" y="845.75892857142856"/>
+            <point key="canvasLocation" x="2197.1014492753625" y="845.75892857142856"/>
         </scene>
         <!--寵物圖書館-->
         <scene sceneID="BC6-Or-bXT">
             <objects>
-                <viewController title="寵物圖書館" id="brY-lv-8dQ" customClass="LibraryViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LibraryViewController" title="寵物圖書館" id="brY-lv-8dQ" customClass="LibraryViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Plz-GE-JdE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8cy-dT-8iF">
-                                <rect key="frame" x="16" y="103" width="382" height="743"/>
+                                <rect key="frame" x="16" y="59" width="382" height="787"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CDw-Bl-WbY">
                                     <size key="itemSize" width="182" height="267"/>
@@ -127,16 +126,18 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="3en-OT-sHX" secondAttribute="height" multiplier="1:1" id="aN8-p0-6Bp"/>
                                                             </constraints>
-                                                            <imageReference key="image" image="book.closed" catalog="system" symbolScale="default"/>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="全台寵物醫院地圖" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKJ-Ta-2Ah">
-                                                            <rect key="frame" x="16" y="134" width="102" height="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="全台寵物醫院地圖" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKJ-Ta-2Ah">
+                                                            <rect key="frame" x="16" y="132" width="102" height="17"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="17" id="nzX-wu-3go"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" name="GenJyuuGothic-Bold" family="Gen Jyuu Gothic" pointSize="16"/>
                                                             <color key="textColor" name="main"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="24小時寵物醫院、特殊寵物醫院" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymJ-9T-vcC">
-                                                            <rect key="frame" x="16" y="159" width="102" height="52"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24小時寵物醫院、特殊寵物醫院" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymJ-9T-vcC">
+                                                            <rect key="frame" x="16" y="159" width="102" height="44"/>
                                                             <fontDescription key="fontDescription" name="GenJyuuGothic-Normal" family="Gen Jyuu Gothic" pointSize="14"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -193,50 +194,25 @@
             <point key="canvasLocation" x="131.8840579710145" y="85.714285714285708"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="f4Y-zl-phZ">
+        <scene sceneID="JDj-ey-MhH">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H5Y-SY-SOz" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yKW-xe-9rr" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uyn-eM-y4Z">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="D3D-Ko-u0u">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" name="main"/>
-                        <color key="barTintColor" name="main"/>
-                        <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" name="main"/>
-                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="brY-lv-8dQ" kind="relationship" relationship="rootViewController" id="fCJ-tP-mEM"/>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="tRZ-5W-WJF"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="n1f-lJ-EAF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TjO-sn-50Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-778.26086956521749" y="85.714285714285708"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="nu6-Qi-QS5">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uQN-nY-0xI" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cz9-1g-TVC">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" name="main"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="oWr-YL-55M"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YYf-bd-QyH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="376.81159420289856" y="845.75892857142856"/>
+            <point key="canvasLocation" x="1286.9565217391305" y="845.75892857142856"/>
         </scene>
     </scenes>
     <resources>
-        <image name="book.closed" catalog="system" width="115" height="128"/>
         <namedColor name="main">
             <color red="0.35699999332427979" green="0.61000001430511475" blue="0.60699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

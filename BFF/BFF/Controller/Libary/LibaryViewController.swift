@@ -9,9 +9,7 @@ import UIKit
 
 class LibraryViewController: UIViewController {
 
-
     var bookViewModels = [BookViewModel(icon: "Hospital", title: "全台動物醫院地圖", subtitle: "24小時動物醫院、特殊寵物動物醫院")]
-
 
     @IBOutlet weak var libraryCollectionView: UICollectionView!
     override func viewDidLoad() {
@@ -19,9 +17,8 @@ class LibraryViewController: UIViewController {
         libraryCollectionView.delegate = self
         libraryCollectionView.dataSource = self
 
-        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
-        navigationController?.navigationBar.barTintColor = UIColor(named: "main")
-
+        self.navigationController?.navigationBar.tintColor = UIColor.mainColor
+        navigationController?.navigationBar.barTintColor = UIColor.mainColor
 
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -36,7 +33,7 @@ class LibraryViewController: UIViewController {
 
 }
 
-extension LibraryViewController:UICollectionViewDataSource, UICollectionViewDelegate {
+extension LibraryViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
         bookViewModels.count
@@ -51,7 +48,6 @@ extension LibraryViewController:UICollectionViewDataSource, UICollectionViewDele
         cell.makeBookCover()
         cell.setLayout()
 
-        
         return cell
     }
 
@@ -69,7 +65,6 @@ extension LibraryViewController:UICollectionViewDataSource, UICollectionViewDele
             break
 
         }
-
 
     }
 

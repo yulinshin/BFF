@@ -9,19 +9,17 @@ import UIKit
 
 class BlockPetsListTableViewController: UITableViewController {
 
-
-    var viewModel = BlocksViewModelList(userId: FirebaseManager.shared.userId)
+    var viewModel = BlocksViewModelList(userId: FirebaseManager.userId)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.didUpdateData = {
-            self.tableView.reloadData()
+        viewModel.didUpdateData = { [weak self] in
+            self?.tableView.reloadData()
         }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
 
     }
 
@@ -42,15 +40,13 @@ class BlockPetsListTableViewController: UITableViewController {
 
         cell.setup(viewModel: viewModel.blocks.value[indexPath.row])
 
-        cell.didTapBlockButton = {
-            self.viewModel.ubBlock(indexPath: indexPath.row)
+        cell.didTapBlockButton = { [weak self] in
+            self?.viewModel.unBlock(indexPath: indexPath.row)
         }
-
 
         return cell
     }
 }
-
 
 class BlockTableViewCell: UITableViewCell {
 
@@ -74,6 +70,4 @@ class BlockTableViewCell: UITableViewCell {
         self.didTapBlockButton?()
 
     }
-
-
 }

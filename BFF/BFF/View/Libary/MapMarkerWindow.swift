@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol MapMarkerDelegate: class {
+protocol MapMarkerDelegate: AnyObject {
     func didTapInfoButton(data: Location)
 }
 

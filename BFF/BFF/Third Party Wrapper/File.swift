@@ -5,7 +5,6 @@
 //  Created by yulin on 2021/10/23.
 //
 
-
 import JGProgressHUD
 
 extension UIViewController {
@@ -19,7 +18,6 @@ static func getLastPresentedViewController() -> UIViewController? {
         return presentedViewController
     }
 }
-
 
 enum HUDType {
 

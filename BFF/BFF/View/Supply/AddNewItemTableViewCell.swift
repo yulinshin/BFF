@@ -15,8 +15,6 @@ class AddNewItemTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        // Layout
-
         cellCardBackGroundView.layer.shadowColor = UIColor.gray.cgColor
         cellCardBackGroundView.layer.shadowOpacity = 0.2
         cellCardBackGroundView.layer.cornerRadius = 16
@@ -28,8 +26,6 @@ class AddNewItemTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
 }

@@ -15,32 +15,16 @@ class HomePageViewController: UIViewController {
 
     @IBOutlet weak var backGroundCardConstraint: NSLayoutConstraint!
 
-    enum Section: CaseIterable {
-        case hero
-        case catalog
-        case petNotification
-        case pets
-    }
-
-    // MARK: - Can consider moving to VM -
-    var sections = Section.allCases
-//    var catalogIcon = ["diary", "supply", "heart", "goal"]
-//    var catalogLabel =  ["相簿集", "用品", "健康", "成就"]
-    var catalogIcon = ["diary", "supply", "heart"]
-    var catalogLabel =  ["相簿集", "用品", "健康"]
+    // MARK: - Can consider moving to VM
     var viewModel = HomePageViewModel()
     var tempScrollYPosition: CGFloat?
     var transparentView = UIView()
     var tableView = UITableView()
-    var settingArray = ["帳戶設定", "黑名單管理", "登出"]
-    var settingPicArray = ["person.circle", "x.square.fill", "rectangle.portrait.and.arrow.right.fill"] // Change Icon if time allows
     let menuHeight: CGFloat = 250
 
-
-// MARK: - VC LifeCycle
+    // MARK: - VC LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setViewModels()
         setMenu()
         setCollectionView()
@@ -50,20 +34,13 @@ class HomePageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.fetchUserData()
-        let barAppearance =  UINavigationBarAppearance()
-        barAppearance.configureWithTransparentBackground()
-        navigationController?.navigationBar.standardAppearance = barAppearance
+        navigationController?.navigationBar.standardAppearance = NavigationBarStyle.transparentBackground.barAppearance
 
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
-        let barAppearance =  UINavigationBarAppearance()
-        barAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "main") ]
-        barAppearance.backgroundColor = .white
-        navigationController?.navigationBar.standardAppearance = barAppearance
-
+        navigationController?.navigationBar.standardAppearance = NavigationBarStyle.whiteBgWithMainColorTint.barAppearance
     }
 
     override func viewDidLayoutSubviews() {
@@ -72,30 +49,28 @@ class HomePageViewController: UIViewController {
 
     }
 
-// MARK: - Default setting
+    // MARK: - Default setting
 
-    fileprivate func setTableView() {
+    private func setTableView() {
         tableView.isScrollEnabled = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
     }
 
-    fileprivate func setCollectionView() {
+    private func setCollectionView() {
         collectionView.collectionViewLayout = createLayout()
         collectionView.delegate = self
         collectionView.dataSource = self
     }
 
-    fileprivate func setViewModels() {
-        // After obtaining user data, perform reloadCollectionView
-        viewModel.userDataDidLoad = {
-            self.collectionView.reloadData()
+    private func setViewModels() {
+        viewModel.userDataDidLoad = { [weak self] in
+            self?.collectionView.reloadData()
         }
-        // When the monitored Notification data is updated, perform reloadCollectionView
-        viewModel.userNotificationsDidChange = {
-            self.collectionView.reloadData()
+        viewModel.userNotificationsDidChange = { [weak self] in
+            self?.collectionView.reloadData()
         }
     }
 
@@ -104,7 +79,7 @@ class HomePageViewController: UIViewController {
         self.navigationItem.rightBarButtonItem?.tintColor = .white
     }
 
-// MARK: - User settings menu
+    // MARK: - User settings menu
 
     @objc func showSideMenu() {
 
@@ -118,7 +93,7 @@ class HomePageViewController: UIViewController {
         window.addSubview(transparentView)
 
         let screenSize = UIScreen.main.bounds.size
-        tableView.tintColor = UIColor(named: "main")
+        tableView.tintColor = UIColor.mainColor
         tableView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: menuHeight)
         window.addSubview(tableView)
         tableView.layer.cornerRadius = 10
@@ -141,8 +116,47 @@ class HomePageViewController: UIViewController {
         }, completion: nil)
     }
 
-}
+    // MARK: - User interaction respond
+    private func showSupplyListPage() {
+        let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: ListTableViewController.identifier) as? ListTableViewController else { return }
+        self.navigationController?.show(controller, sender: nil)
+    }
 
+    private func showDiaryDetailPage(diaryId: String) {
+        FirebaseManager.shared.fetchDiary(diaryId: diaryId) { result in
+            switch result {
+            case .success(let diary):
+                let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+                guard let controller = storyboard.instantiateViewController(withIdentifier: DiaryDetailViewController.identifier) as? DiaryDetailViewController else { return }
+                controller.viewModel = DetailViewModel(from: diary)
+                self.navigationController?.show(controller, sender: nil)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    private func showCreatePetPage() {
+        let storyboard = UIStoryboard(name: "Pet", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: CreatePetViewController.identifier) as? CreatePetViewController else { return }
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        nav.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainColor]
+        controller.presentMode = .create
+        self.present(nav, animated: true, completion: nil)
+    }
+
+    private func showPetDiaries(pet: Pet) {
+        let storyboard = UIStoryboard(name: "Diary", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: DiaryViewController.identifier) as? DiaryViewController else { return }
+        controller.userPetIds = [pet.petId]
+        controller.title = "\(pet.name)的寵物日記"
+        controller.showSelectedPetsCollectionView = false
+        self.navigationController?.show(controller, sender: nil)
+    }
+
+}
 // MARK: - UICollectionViewDataSource
 extension HomePageViewController: UICollectionViewDataSource {
 
@@ -152,133 +166,91 @@ extension HomePageViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        switch section {
-        case 0:
+        switch viewModel.sections[section] {
+        case .hero:
 
-            return 1    // Welcome title
+            return 1
 
-        case 1:
+        case .catalog:
 
-            return catalogIcon.count    // Action Catalog Section
+            return viewModel.catalogSection.count
 
-        case 2:
+        case .petNotification:
 
-            return viewModel.notificationModels.value.count // Notifications Section
+            return viewModel.notificationModels.value.count
 
-        case 3:
+        case .pets:
 
-            return viewModel.pets.value.count + 1 // User pets section, last one for add new pet
-
-        default:
-
-            fatalError("SecionIndexOutOfRange")
+            return viewModel.pets.value.count + 1
 
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        switch indexPath.section {
+        switch viewModel.sections[indexPath.section] {
 
-        case 0: // Welcome title
+        case .hero:
 
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WellcomeCollectionViewCell", for: indexPath)as? WellcomeCollectionViewCell else { return UICollectionViewCell() }
-
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WellcomeCollectionViewCell.identifier, for: indexPath) as? WellcomeCollectionViewCell else { assertionFailure()
+                return UICollectionViewCell() }
             cell.setup(userName: viewModel.userName.value, petsCount: viewModel.usersPetsIds.value.count)
 
             return cell
 
-        case 1: // Action Catalog Section
-
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatalogCollectionViewCell", for: indexPath)as? CatalogCollectionViewCell else { fatalError() }
-
-            cell.setup(title: catalogLabel[indexPath.row], iconName: catalogIcon[indexPath.row])
+        case .catalog:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CatalogCollectionViewCell.identifier, for: indexPath) as? CatalogCollectionViewCell else {
+                assertionFailure()
+                return UICollectionViewCell() }
+            let section = viewModel.catalogSection[indexPath.row]
+            cell.setup(title: section.titleAndIcon.title, iconName: section.titleAndIcon.icon)
 
             return cell
 
-        case 2: // Notifications Section
+        case .petNotification:
 
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PetNotificationCollectionViewCell", for: indexPath)as? PetNotificationCollectionViewCell else { fatalError() }
-
-            cell.setup(viewModel:     viewModel.notificationModels.value[indexPath.row])
-            cell.didTapCancle = {
-                self.viewModel.removeNotification(indexPath: indexPath.row)
-            }
-            cell.didTapSupplyNotification = { supplyId in
-
-                let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
-                guard let controller = storyboard.instantiateViewController(withIdentifier: "ListTableViewController") as? ListTableViewController else { return }
-
-                self.navigationController?.show(controller, sender: nil)
-
+            // swiftlint:disable:next line_length
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PetNotificationCollectionViewCell.identifier, for: indexPath) as? PetNotificationCollectionViewCell else { assertionFailure()
+                return UICollectionViewCell() }
+            cell.setup(viewModel: viewModel.notificationModels.value[indexPath.row])
+            cell.didTapCancel = { [weak self] in
+                self?.viewModel.removeNotification(indexPath: indexPath.row)
             }
 
-            cell.didTapCommentNotification = { diaryId in
+            cell.didTapSupplyNotification = { [weak self] _ in
+                self?.showSupplyListPage()
+            }
 
-
-                FirebaseManager.shared.fetchDiary(diaryId: diaryId){
-                    result in
-
-                    switch result {
-
-                    case .success(let diary):
-
-                        let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-                        guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
-                        controller.viewModel = DetialViewModel(from: diary)
-                        self.navigationController?.show(controller, sender: nil)
-
-
-                    case .failure(let error):
-                        print(error)
-
-                    }
-                }
-
+            cell.didTapCommentNotification = { [weak self] diaryId in
+                self?.showDiaryDetailPage(diaryId: diaryId)
             }
 
             return cell
 
-        case 3: // User pets section, last one for add new pet
+        case .pets:
 
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PetCollectionViewCell", for: indexPath)as? PetCollectionViewCell else { fatalError() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PetCollectionViewCell.identifier, for: indexPath)as? PetCollectionViewCell else {
+                assertionFailure()
+                return UICollectionViewCell() }
 
+            // Check is last card, if is, create new pet
             if indexPath.row == viewModel.pets.value.count {
 
                 cell.setupBlankDiaryBook()
-                cell.didTapCard = {
-
-                    let storyboard = UIStoryboard(name: "Pet", bundle: nil)
-                    guard let controller = storyboard.instantiateViewController(withIdentifier: "CreatPetViewController") as? CreatPetViewController else { return }
-                    let nav = UINavigationController(rootViewController: controller)
-                    nav.modalPresentationStyle = .fullScreen
-                    nav.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor:UIColor(named: "main")]
-                    controller.presentMode = .creat
-                    self.present(nav, animated: true, completion: nil)
-
+                cell.didTapCard = { [weak self] in
+                    self?.showCreatePetPage()
                 }
 
             } else {
 
-                let pet =  viewModel.pets.value[indexPath.row]
-
+                let pet = viewModel.pets.value[indexPath.row]
                 cell.setup(petImage: pet.petThumbnail?.url ?? "", petName: pet.name, petBirthday: pet.healthInfo.birthday)
-                cell.didTapCard = {
-                    let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-                    guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryViewController") as? DiaryViewController else { return }
-                    controller.userPetIds = [pet.petId]
-                    controller.title = "\(pet.name)的寵物日記"
-                    controller.showSelectedPetsCollectionView = false
-                    self.navigationController?.show(controller, sender: nil)
-
+                cell.didTapCard = { [weak self] in
+                    self?.showPetDiaries(pet: pet)
                 }
             }
 
             return cell
-
-        default:
-            fatalError("SecionIndexOutOfRange")
-
         }
     }
 }
@@ -289,51 +261,56 @@ extension HomePageViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        if indexPath.section == 1 {
+        switch viewModel.sections[indexPath.section] {
+        case .hero:
+            return
+
+        case .catalog:
+
             switch indexPath.row {
 
-            case 0: // Diary
+            case 0:
 
                 let storyboard = UIStoryboard(name: "Diary", bundle: nil)
 
-                guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryViewController") as? DiaryViewController else { return }
+                guard let controller = storyboard.instantiateViewController(withIdentifier: DiaryViewController.identifier) as? DiaryViewController else { return }
                 controller.userPetIds = viewModel.usersPetsIds.value
                 controller.showSelectedPetsCollectionView = false
 
                 self.navigationController?.show(controller, sender: nil)
 
-            case 1: // Supply
+            case 1:
 
                 let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
-                guard let controller = storyboard.instantiateViewController(withIdentifier: "ListTableViewController") as? ListTableViewController else { return }
+                guard let controller = storyboard.instantiateViewController(withIdentifier: ListTableViewController.identifier) as? ListTableViewController else { return }
 
                 self.navigationController?.show(controller, sender: nil)
 
-
-            case 2: // Health
+            case 2:
 
                 let storyboard = UIStoryboard(name: "Pet", bundle: nil)
-                guard let controller = storyboard.instantiateViewController(withIdentifier: "PetsListTableViewController") as? PetsListTableViewController else { return }
+                guard let controller = storyboard.instantiateViewController(withIdentifier: PetsListTableViewController.identifier) as? PetsListTableViewController else { return }
 
                 self.navigationController?.show(controller, sender: nil)
 
-            case 3: // Goal
+            case 3:
 
                 let storyboard = UIStoryboard(name: "Goal", bundle: nil)
-                guard let controller = storyboard.instantiateViewController(withIdentifier: "GoalViewController") as? GoalViewController else { return }
+                guard let controller = storyboard.instantiateViewController(withIdentifier: GoalViewController.identifier) as? GoalViewController else { return }
 
                 self.navigationController?.pushViewController(controller, animated: true)
-
-
 
             default:
                 return
             }
+        case .petNotification:
+            return
+        case .pets:
+            return
         }
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
 
         guard let tempScrollYPosition = tempScrollYPosition else {
 
@@ -353,16 +330,83 @@ extension HomePageViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - Setting Menu TableView
+extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.settingOptions.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath) as? MenuTableViewCell else { return UITableViewCell() }
+        cell.titleLabel.text = viewModel.settingOptions[indexPath.row].title
+        cell.settingImage.image = UIImage(systemName: viewModel.settingOptions[indexPath.row].icon) ?? UIImage()
+        cell.selectionStyle = .none
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        switch viewModel.settingOptions[indexPath.row] {
+
+        case .account:
+
+            let storyboard = UIStoryboard(name: "User", bundle: nil)
+
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "UserAccountTableViewController") as? UserAccountTableViewController else { return }
+            controller.user = FirebaseManager.shared.currentUser
+            removeSettingMenu()
+            self.navigationController?.show(controller, sender: nil)
+
+        case .blockUser:
+
+            let storyboard = UIStoryboard(name: "User", bundle: nil)
+
+            guard let controller = storyboard.instantiateViewController(withIdentifier: "BlockPetsListTableViewController") as? BlockPetsListTableViewController else { return }
+            removeSettingMenu()
+            self.navigationController?.show(controller, sender: nil)
+
+        case .logout:
+
+            let firebaseAuth = Auth.auth()
+            do {
+                try firebaseAuth.signOut()
+            } catch let signOutError as NSError {
+                print("Error signing out: %@", signOutError)
+            }
+            removeSettingMenu()
+            self.dismiss(animated: true, completion: nil)
+            let viewController = SignInViewController()
+            guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+            window.rootViewController = viewController
+            window.makeKeyAndVisible()
+
+        }
+    }
+
+    func removeSettingMenu() {
+        guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+        // remove menu
+        window.subviews.last?.removeFromSuperview()
+        // remove BlackBackground
+        window.subviews.last?.removeFromSuperview()
+    }
+}
+
 // MARK: - UICollectionViewLayout
 
 extension HomePageViewController {
 
+    // swiftlint:disable:next function_body_length
     func createLayout() -> UICollectionViewLayout {
 
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, _) -> NSCollectionLayoutSection? in
 
-            let section = self.sections[sectionIndex]
-            switch section {
+            switch self.viewModel.sections[sectionIndex] {
 
             case .hero:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -422,13 +466,10 @@ extension HomePageViewController {
                 group.contentInsets.leading = 0
                 group.contentInsets.trailing = 20
 
-
                 let layoutSection = NSCollectionLayoutSection(group: group)
                 layoutSection.orthogonalScrollingBehavior = .groupPaging
                 layoutSection.interGroupSpacing = -40
                 layoutSection.contentInsets.leading = 8
-
-
 
                 return layoutSection
             }
@@ -436,84 +477,4 @@ extension HomePageViewController {
         return layout
     }
 
-}
-
-extension HomePageViewController: UITableViewDataSource, UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingArray.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? MenuTableViewCell else {fatalError("Unable to deque cell")}
-        cell.lbl.text = settingArray[indexPath.row]
-        cell.settingImage.image = UIImage(systemName: settingPicArray[indexPath.row]) ?? UIImage()
-        cell.selectionStyle = .none
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        switch settingArray[indexPath.row] {
-
-        case "帳戶設定":
-
-            let storyboard = UIStoryboard(name: "User", bundle: nil)
-
-            guard let controller = storyboard.instantiateViewController(withIdentifier: "UserAccountTableViewController") as? UserAccountTableViewController else { return }
-            controller.user = FirebaseManager.shared.user
-
-            guard let window =  UIApplication.shared.windows.filter { $0.isKeyWindow}.first else { return }
-            transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
-            transparentView.frame = self.view.frame
-            window.subviews.last?.removeFromSuperview()
-            window.subviews.last?.removeFromSuperview()
-
-            self.navigationController?.show(controller, sender: nil)
-
-        case "黑名單管理":
-
-            let storyboard = UIStoryboard(name: "User", bundle: nil)
-
-            guard let controller = storyboard.instantiateViewController(withIdentifier: "BlockPetsListTableViewController") as?    BlockPetsListTableViewController else { return }
-
-            guard let window =  UIApplication.shared.windows.filter { $0.isKeyWindow }.first else { return }
-            transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
-            transparentView.frame = self.view.frame
-            window.subviews.last?.removeFromSuperview()
-            window.subviews.last?.removeFromSuperview()
-
-            self.navigationController?.show(controller, sender: nil)
-
-
-        case "登出":
-
-            let firebaseAuth = Auth.auth()
-            do {
-                try firebaseAuth.signOut()
-            } catch let signOutError as NSError {
-                print("Error signing out: %@", signOutError)
-            }
-
-
-
-            guard let window =  UIApplication.shared.windows.filter { $0.isKeyWindow }.first else { return }
-            transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
-            transparentView.frame = self.view.frame
-            window.subviews.last?.removeFromSuperview()
-            window.subviews.last?.removeFromSuperview()
-            self.dismiss(animated: true, completion: nil)
-            let viewController = SignInViewController()
-            window.rootViewController = viewController
-            window.makeKeyAndVisible()
-
-        default:
-            print("outOFrange")
-        }
-
-    }
 }

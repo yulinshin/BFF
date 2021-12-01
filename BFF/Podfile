@@ -23,4 +23,9 @@ target 'BFF' do
  pod 'Firebase/Crashlytics'
  pod 'NotificationBannerSwift', '~> 3.0.0'
 
+    target 'BFFTests' do
+        inherit! :search_paths
+        pod 'Firebase'
+    end
+
 end

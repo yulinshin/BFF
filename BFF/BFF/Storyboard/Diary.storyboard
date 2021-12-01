@@ -7,7 +7,6 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -59,17 +58,7 @@
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="u50-Vq-RTa">
-                                                <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vw2-PD-j6Y">
-                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </collectionViewCellContentView>
-                                                <size key="customSize" width="70" height="70"/>
-                                            </collectionViewCell>
-                                        </cells>
+                                        <cells/>
                                     </collectionView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gLt-m0-B3d">
                                         <rect key="frame" x="0.0" y="70" width="414" height="748"/>
@@ -80,17 +69,7 @@
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nwW-Fl-5tB">
-                                                <rect key="frame" x="0.0" y="0.0" width="195" height="196"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="r8V-Ex-og1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="195" height="196"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </collectionViewCellContentView>
-                                                <size key="customSize" width="195" height="196"/>
-                                            </collectionViewCell>
-                                        </cells>
+                                        <cells/>
                                     </collectionView>
                                 </subviews>
                                 <constraints>
@@ -123,16 +102,16 @@
             </objects>
             <point key="canvasLocation" x="2793" y="70"/>
         </scene>
-        <!--Creat Diary View Controller-->
+        <!--Create Diary View Controller-->
         <scene sceneID="h2F-Vs-ngi">
             <objects>
-                <viewController storyboardIdentifier="CreatDiaryViewController" id="2Yt-Iq-d73" customClass="CreatDiaryViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateDiaryViewController" id="2Yt-Iq-d73" customClass="CreateDiaryViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="52a-l7-tsw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AddDiary" translatesAutoresizingMaskIntoConstraints="NO" id="Akc-4r-dCJ" userLabel="plus">
-                                <rect key="frame" x="100" y="144" width="214" height="230"/>
+                                <rect key="frame" x="100" y="144" width="214" height="214"/>
                                 <color key="tintColor" name="main"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ccg-iP-7oX">
@@ -172,17 +151,7 @@
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="jcb-62-xWM">
-                                                <rect key="frame" x="0.0" y="1" width="68" height="68"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="G5i-U4-DVi">
-                                                    <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </collectionViewCellContentView>
-                                                <size key="customSize" width="68" height="68"/>
-                                            </collectionViewCell>
-                                        </cells>
+                                        <cells/>
                                     </collectionView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mN8-LA-h4r">
                                         <rect key="frame" x="0.0" y="71" width="366" height="1"/>
@@ -200,13 +169,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="57D-cx-4OY">
-                                <rect key="frame" x="16" y="430" width="81" height="20"/>
+                                <rect key="frame" x="16" y="430" width="61" height="20"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAF-A7-raR">
-                                        <rect key="frame" x="0.0" y="0.0" width="81" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="61" height="20"/>
                                         <color key="tintColor" red="1" green="0.65076244120000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="  tagPets"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="  tagPets"/>
                                         <connections>
                                             <action selector="tagPets:" destination="2Yt-Iq-d73" eventType="touchUpInside" id="iYN-b2-ppX"/>
                                         </connections>
@@ -232,7 +201,6 @@
                             <constraint firstItem="ccg-iP-7oX" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" id="Kbx-34-jlX"/>
                             <constraint firstItem="exO-Ai-IAD" firstAttribute="top" secondItem="ccg-iP-7oX" secondAttribute="bottom" constant="16" id="N4f-Ub-gkM"/>
                             <constraint firstItem="Akc-4r-dCJ" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="100" id="NOc-b0-UAh"/>
-                            <constraint firstItem="exO-Ai-IAD" firstAttribute="top" secondItem="Akc-4r-dCJ" secondAttribute="bottom" constant="100" id="QLe-bN-YK3"/>
                             <constraint firstItem="i1r-F3-bFx" firstAttribute="top" secondItem="1ki-En-Kgb" secondAttribute="bottom" constant="16" id="RNl-i2-wul"/>
                             <constraint firstItem="exO-Ai-IAD" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="24" id="Upg-9P-dlI"/>
                             <constraint firstItem="1ki-En-Kgb" firstAttribute="leading" secondItem="ZTR-OX-FlQ" secondAttribute="leading" constant="24" id="WeI-V0-v3R"/>
@@ -351,11 +319,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wrl-nC-FS7">
-                                <rect key="frame" x="352" y="466" width="46" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wrl-nC-FS7">
+                                <rect key="frame" x="375.5" y="466" width="22.5" height="13"/>
                                 <color key="tintColor" name="main"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="ellipsis" catalog="system">
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button" image="ellipsis" catalog="system">
                                     <attributedString key="attributedTitle">
                                         <fragment content=" ">
                                             <attributes>
@@ -364,7 +332,7 @@
                                             </attributes>
                                         </fragment>
                                     </attributedString>
-                                </buttonConfiguration>
+                                </state>
                                 <connections>
                                     <action selector="showMenu:" destination="540-Ds-hWY" eventType="touchUpInside" id="FeC-Wi-RPb"/>
                                 </connections>
@@ -404,7 +372,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="ccommentImage" destination="Uvk-xe-q7v" id="Zks-H6-kd5"/>
+                        <outlet property="commentImage" destination="Uvk-xe-q7v" id="Zks-H6-kd5"/>
                         <outlet property="commentLabel" destination="cUZ-I2-SH7" id="6kJ-lY-Fko"/>
                         <outlet property="contentTextView" destination="Cad-zW-cYW" id="Yyt-lk-hfX"/>
                         <outlet property="createdTimeLabel" destination="Aao-ZA-naO" id="Tpl-BN-Mjg"/>

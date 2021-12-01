@@ -124,8 +124,8 @@
                                                         <constraint firstAttribute="width" secondItem="8F4-6i-tv9" secondAttribute="height" multiplier="1:1" id="gn4-yF-hRx"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1aT-eD-Ujl">
-                                                    <rect key="frame" x="16" y="16.5" width="37" height="36"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1aT-eD-Ujl">
+                                                    <rect key="frame" x="16" y="16" width="37" height="37"/>
                                                     <color key="tintColor" name="main"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="1aT-eD-Ujl" secondAttribute="height" multiplier="1:1" id="FAc-3J-i22"/>
@@ -177,7 +177,7 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="753" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ade-mm-6uZ">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="753" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ade-mm-6uZ">
                                                             <rect key="frame" x="84" y="48" width="219" height="22"/>
                                                             <fontDescription key="fontDescription" name="GenJyuuGothic-Medium" family="Gen Jyuu Gothic" pointSize="12"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -191,8 +191,8 @@
                                                                 <constraint firstAttribute="width" secondItem="PhG-Hp-KgI" secondAttribute="height" multiplier="1:1" id="iQQ-d9-b2X"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4j-Rn-ExJ">
-                                                            <rect key="frame" x="279" y="10" width="30" height="22"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4j-Rn-ExJ">
+                                                            <rect key="frame" x="279" y="10" width="30" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="lao-nh-RQh"/>
                                                             </constraints>
@@ -341,7 +341,6 @@
     <resources>
         <image name="MyPetsTab" width="31" height="28"/>
         <image name="Social" width="31" height="28"/>
-        <image name="square.and.arrow.up.circle" catalog="system" width="128" height="121"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="Text">
             <color red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

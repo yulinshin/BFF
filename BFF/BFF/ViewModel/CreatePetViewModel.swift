@@ -10,8 +10,50 @@ import UIKit
 import Kingfisher
 import AVFoundation
 
-class CreatPetViewModel {
+class CreatePetViewModel {
 
+    enum Section: CaseIterable {
+
+        case name
+        case type
+        case birthday
+        case weight
+        case weightUnit
+        case gender
+        case chip
+        case note
+
+        var title: String {
+            switch self {
+
+            case .name:
+                return "名字"
+
+            case .type:
+                return "品種"
+
+            case .birthday:
+                return "生日"
+
+            case .weight:
+                return "體重"
+
+            case .weightUnit:
+                return "體重單位"
+
+            case .gender:
+                return "性別"
+
+            case .chip:
+                return "晶片"
+
+            case .note:
+                return "備註"
+            }
+        }
+    }
+
+    let sections = Section.allCases
     let name = Box("")
     let petThumbnail = Box("")
     let birthday = Box("")
@@ -23,7 +65,6 @@ class CreatPetViewModel {
     let weightUnit = Box("")
     let photoFile = Box("")
     let petId = Box("")
-
 
     init(from pet: Pet) {
         name.value = pet.name
@@ -41,7 +82,6 @@ class CreatPetViewModel {
 
     init() {
     }
-
 
     func updateData(name: String) {
         self.name.value = name
@@ -105,15 +145,13 @@ class CreatPetViewModel {
         }
     }
 
-
     func upDatePetToDB(image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
 
         // swiftlint:disable:next line_length
-        var pet = Pet(petId: self.petId.value, name: self.name.value, userId: "", healthInfo: HealthInfo(birthday: self.birthday.value, chipId: self.chipId.value, gender: self.gender.value, note: self.note.value, type: self.type.value, weight: self.weight.value, weightUnit: self.weightUnit.value), petThumbnail: Pic(url: self.petThumbnail.value, fileName: self.photoFile.value))
+        let pet = Pet(petId: self.petId.value, name: self.name.value, userId: "", healthInfo: HealthInfo(birthday: self.birthday.value, chipId: self.chipId.value, gender: self.gender.value, note: self.note.value, type: self.type.value, weight: self.weight.value, weightUnit: self.weightUnit.value), petThumbnail: Pic(url: self.petThumbnail.value, fileName: self.photoFile.value))
 
-        FirebaseManager.shared.updatePet(upDatepetId: pet.petId, newimage: image, data: pet) { result in
+        FirebaseManager.shared.updatePet(updatePetId: pet.petId, newImage: image, data: pet) { result in
             switch result {
-
 
             case.success(let message):
 
@@ -128,23 +166,19 @@ class CreatPetViewModel {
 
     }
 
-
-    func deleatePet() {
+    func deletePet() {
 
         FirebaseManager.shared.deletePhoto(fileName: photoFile.value, filePath: .petPhotos)
-
 
         FirebaseManager.shared.removePet(petId: petId.value)
 
         FirebaseManager.shared.removePetFromUser(petId: petId.value)
 
-
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
 
             let context = appDelegate.persistentContainer.viewContext
             do {
-                var requests = try context.fetch(PetMO.fetchRequest())
-                var isContain = false
+                let requests = try context.fetch(PetMO.fetchRequest())
                 for request in requests {
                     if request.petId == petId.value {
                         context.delete(request)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
@@ -15,10 +15,10 @@
                 <outlet property="alertView" destination="715-6n-JpH" id="tsZ-Od-sGy"/>
                 <outlet property="doneBtn" destination="hTG-r8-od5" id="qTv-fb-Zpe"/>
                 <outlet property="img" destination="tvQ-Tg-ECi" id="Fcu-6D-u4g"/>
-                <outlet property="messageLbl" destination="HSF-1V-CHJ" id="COb-Er-ff0"/>
+                <outlet property="messageLabel" destination="HSF-1V-CHJ" id="COb-Er-ff0"/>
                 <outlet property="parentView" destination="iN0-l3-epB" id="fem-3O-VIy"/>
                 <outlet property="reFillStockTextField" destination="qIV-0j-4gk" id="dbv-sc-pwR"/>
-                <outlet property="titleLbl" destination="qQn-ZA-pHb" id="fnW-sV-AYj"/>
+                <outlet property="titleLabel" destination="qQn-ZA-pHb" id="fnW-sV-AYj"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -78,8 +78,8 @@
                                         <constraint firstAttribute="height" constant="30" id="kMa-Jf-SR2"/>
                                     </constraints>
                                     <color key="tintColor" name="main"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system" title=" "/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title=" " image="xmark" catalog="system"/>
                                     <connections>
                                         <action selector="onCliclExit:" destination="-1" eventType="touchUpInside" id="VZr-Me-Jf1"/>
                                     </connections>
@@ -134,7 +134,7 @@
         <image name="Success" width="120" height="120"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="main">
-            <color red="1" green="0.6119999885559082" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.35699999332427979" green="0.61000001430511475" blue="0.60699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

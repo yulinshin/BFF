@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PhotoCellViewlModel {
+struct PhotoCellViewModel {
 
     let imageUrl: String
 

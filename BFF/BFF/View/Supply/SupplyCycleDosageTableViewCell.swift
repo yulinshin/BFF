@@ -24,7 +24,6 @@ class SupplyCycleDosageTableViewCell: UITableViewCell {
         segment.addTarget(self, action: #selector(onChange), for: .valueChanged)
         cycleDosageTextfield.delegate = self
 
-
     }
 
     @objc func onChange(sender: UISegmentedControl) {

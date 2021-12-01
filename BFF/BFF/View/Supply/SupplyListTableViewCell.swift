@@ -8,7 +8,6 @@
 import UIKit
 import CoreData
 
-
 class SupplyListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var supplyIconImageView: UIImageView!
@@ -31,44 +30,42 @@ class SupplyListTableViewCell: UITableViewCell {
     var unit: String?
     var userPetsData: [PetMO]?
 
-    var didTapMoreButtom: (()->Void)?
-    var didTapReFillButton: (()->Void)?
+    var didTapMoreButton: (() -> Void)?
+    var didTapReFillButton: (() -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.selectionStyle = .none
 
     }
 
-    func configur(){
-
-        // Layout
-
+    private func setupCellCardBackGroundView() {
         cellCardBackGroundView.layer.shadowColor = UIColor.gray.cgColor
         cellCardBackGroundView.layer.shadowOpacity = 0.2
         cellCardBackGroundView.layer.cornerRadius = 16
         cellCardBackGroundView.layer.shadowRadius = 4
         cellCardBackGroundView.backgroundColor = UIColor.white
         cellCardBackGroundView.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
-        reFillStockButton.layer.cornerRadius = 4
+    }
 
+    // swiftlint:disable:next function_body_length
+    func configure() {
+
+        setupCellCardBackGroundView()
+        reFillStockButton.layer.cornerRadius = 4
 
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
 
-
             let context = appDelegate.persistentContainer.viewContext
             do {
-                var requests = try context.fetch(PetMO.fetchRequest())
+                let requests = try context.fetch(PetMO.fetchRequest())
                 userPetsData = requests
             } catch {
-                fatalError("CodataERROR:\(error)")
+                fatalError("ERROR:\(error)")
             }
 
         }
 
-
-        // Data Binding
         viewModel?.supplyIconImage.bind(listener: { imageName in
             self.supplyIconImageView.image = UIImage(named: imageName)
             self.supplyIconImageView.layer.cornerRadius = 16
@@ -77,7 +74,6 @@ class SupplyListTableViewCell: UITableViewCell {
         viewModel?.iconColor.bind(listener: { iconColor in
             self.supplyIconImageView.backgroundColor = UIColor(named: iconColor)
         })
-
 
         viewModel?.supplyName.bind(listener: { supplyName in
             self.supplyNameLabel.text = supplyName
@@ -90,6 +86,9 @@ class SupplyListTableViewCell: UITableViewCell {
         viewModel?.inventoryStatusPercentage.bind(listener: { percentage in
 
             self.progressView.progress = Float(percentage)
+            UIView.animate(withDuration: 1, delay: 0.5, options: [], animations: { [unowned self] in
+                progressView.layoutIfNeeded()
+            })
 
         })
 
@@ -103,7 +102,7 @@ class SupplyListTableViewCell: UITableViewCell {
 
         })
 
-        viewModel?.reminingInventory.bind(listener: { number in
+        viewModel?.remainingInventory.bind(listener: { number in
 
             self.viewModel?.supplyUnit.bind(listener: { unit in
 
@@ -130,9 +129,7 @@ class SupplyListTableViewCell: UITableViewCell {
                 view.removeFromSuperview()
             }
 
-
             petIds.forEach { petId in
-
                 self.userPetsData?.forEach({ petData in
                     if petData.petId == petId {
                         let petImageView = UIImageView()
@@ -156,7 +153,6 @@ class SupplyListTableViewCell: UITableViewCell {
 
         viewModel?.isNeedToRemind.bind(listener: { isNeedToRemind in
 
-
             self.viewModel?.remindPercentage.bind(listener: { percentage in
 
                 if isNeedToRemind {
@@ -175,9 +171,6 @@ class SupplyListTableViewCell: UITableViewCell {
 
         })
 
-
-
-
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -186,13 +179,12 @@ class SupplyListTableViewCell: UITableViewCell {
     }
     @IBAction func tapMoreButton(_ sender: UIButton) {
 
-        didTapMoreButtom?()
+        didTapMoreButton?()
 
     }
     @IBAction func tapReFillStock(_ sender: Any) {
 
         didTapReFillButton?()
-
 
     }
 

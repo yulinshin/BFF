@@ -33,72 +33,60 @@ class ChatViewController: UIViewController {
         let otherChatNib = UINib(nibName: "OtherChatTableViewCell", bundle: nil)
         tableView.register(otherChatNib, forCellReuseIdentifier: "OtherChatTableViewCell")
 
-        viewModel?.didChatUpdate = {
-            self.tableView.reloadData()
+        viewModel?.didChatUpdate = { [weak self] in
+            self?.tableView.reloadData()
         }
 
         viewModel?.otherUserName.bind(listener: { name in
             self.title = name
         })
 
-        self.navigationController?.navigationBar.tintColor = UIColor(named: "main")
+        self.navigationController?.navigationBar.tintColor = UIColor.mainColor
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "．．．", style: .done, target: self, action: #selector(showSetting))
 
     }
 
-   @objc func showSetting() {
+    @objc func showSetting() {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         var action = UIAlertAction()
 
-        action = UIAlertAction(title: "封鎖並檢舉此寵物的主人", style: .default, handler: { action in
+        action = UIAlertAction(title: "封鎖並檢舉此寵物的主人", style: .default, handler: { _ in
             self.blockUser(userId: self.viewModel?.otherUserId.value ?? "")
         })
-
 
         // Block PetsId -> Only show on other's Diary
         alertController.addAction(action)
 
         alertController.addAction(UIAlertAction(title: "取消", style: .cancel))
 
-            self.present(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
 
     }
 
     func blockUser(userId: String) {
 
-        FirebaseManager.shared.updateCurrentUserBlockUsers(blockUserId: userId) { result in
+        FirebaseManager.shared.updateBlockUser(blockUserId: userId)
 
-            switch result {
-
-            case .success(let message):
-                self.navigationController?.popViewController(animated: true)
-            case .failure(let error):
-                print(error)
-
-            }
-
-        }
     }
     
     @IBAction func sendMessage(_ sender: Any) {
         
         guard let message = messageTextField.text,
               let groupId = self.viewModel?.groupId.value,
-        let otherUserId = self.viewModel?.otherUserId.value else {
-            return
+              let otherUserId = self.viewModel?.otherUserId.value else {
+                  return
 
-        }
+              }
 
-        FirebaseManager.shared.sendMessage(reciverId: otherUserId, groupId: groupId, content: message)
+        FirebaseManager.shared.sendMessage(receiverId: otherUserId, groupId: groupId, content: message)
 
         messageTextField.text = ""
 
     }
 }
-
 
 // MARK: - UITableViewDataSource
 
@@ -111,32 +99,28 @@ extension ChatViewController: UITableViewDataSource {
 
         var cell = UITableViewCell()
 
+        if viewModel?.chatVMs.value[indexPath.row].userId.value == FirebaseManager.userId {
 
-
-        if viewModel?.chatVMs.value[indexPath.row].userId.value == FirebaseManager.shared.userId {
-
-                guard let myCell = tableView.dequeueReusableCell(
-                    withIdentifier: "MyChatTableViewCell",
-                    for: indexPath) as? MyChatTableViewCell else { return cell}
+            guard let myCell = tableView.dequeueReusableCell(
+                withIdentifier: "MyChatTableViewCell",
+                for: indexPath) as? MyChatTableViewCell else { return cell}
             myCell.viewModel = viewModel?.chatVMs.value[indexPath.row]
-                myCell.setup()
-                cell = myCell
+            myCell.setup()
+            cell = myCell
 
-            } else {
+        } else {
 
-                guard let otherCell = tableView.dequeueReusableCell(
-                    withIdentifier: "OtherChatTableViewCell",
-                    for: indexPath) as? OtherChatTableViewCell else { return  cell}
-                otherCell.viewModel = viewModel?.chatVMs.value[indexPath.row]
-                otherCell.setup(with: viewModel?.otherUserId.value ?? "")
-                cell = otherCell
+            guard let otherCell = tableView.dequeueReusableCell(
+                withIdentifier: "OtherChatTableViewCell",
+                for: indexPath) as? OtherChatTableViewCell else { return  cell}
+            otherCell.viewModel = viewModel?.chatVMs.value[indexPath.row]
+            otherCell.setup(with: viewModel?.otherUserId.value ?? "")
+            cell = otherCell
 
-            }
-
-
+        }
 
         return cell
-       
+
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -148,20 +132,18 @@ extension ChatViewController: UITableViewDataSource {
     }
 }
 
-
 extension ChatViewController: UITableViewDelegate {
     
 }
-
 
 extension ChatViewController: UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
 
-        }
+    }
 
-        func textFieldDidEndEditing(_ textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
 
-        }
+    }
 
 }

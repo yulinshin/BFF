@@ -13,15 +13,14 @@ class PetHealthCellViewModel {
 
     var name = Box(" ")
     var petImage = Box(" ")
-    var birthady = Box(" ")
+    var birthday = Box(" ")
     var petId = Box(" ")
     var photoFile = Box(" ")
 
     init(from pet: Pet) {
         name.value = pet.name
         petImage.value = pet.petThumbnail?.url ?? " "
-        birthady.value = pet.healthInfo.birthday
+        birthday.value = pet.healthInfo.birthday
     }
-
 
 }

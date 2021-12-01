@@ -10,10 +10,7 @@ import UIKit
 
 class MyChatTableViewCell: UITableViewCell {
     
- 
-
-    
-    @IBOutlet weak var chectView: UIView!
+    @IBOutlet weak var chatView: UIView!
 
     @IBOutlet weak var chatBubbleContent: UILabel!
     
@@ -24,8 +21,8 @@ class MyChatTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        chectView.layer.cornerRadius = 10
-        chectView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMinYCorner, .layerMinXMaxYCorner]
+        chatView.layer.cornerRadius = 10
+        chatView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMinYCorner, .layerMinXMaxYCorner]
         self.selectionStyle = .none
 
     }
@@ -36,7 +33,7 @@ class MyChatTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setup(){
+    func setup() {
         guard let viewModel = viewModel else {
             return
         }

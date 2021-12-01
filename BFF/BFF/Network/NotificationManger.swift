@@ -11,7 +11,6 @@ import UserNotifications
 import FirebaseFirestore
 import CoreData
 
-
 class NotificationManger {
 
     static let shared = NotificationManger()
@@ -27,31 +26,29 @@ class NotificationManger {
     let app = UIApplication.shared.delegate as! AppDelegate
     // swiftlint:enable force_cast
 
-    func setUp(){
+    func setUp() {
 
         let category = UNNotificationCategory(identifier: "NotificationCategory",
-            actions: [snoozeAction,deleteAction],
+            actions: [snoozeAction, deleteAction],
             intentIdentifiers: [], options: [])
         unuPool = app.center
         unuPool.setNotificationCategories([category])
     }
 
-
-    func creatSupplyNotification(supply:Supply){
-
+    func createSupplyNotification(supply: Supply) {
 
         let identifier = "Supply_\(supply.supplyId)"
         var title = ""
         if supply.forPets == [String]() {
             title = "來自毛小孩的通知"
-        }else{
+        } else {
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
 
                 let fetchRequests = NSFetchRequest<PetMO>(entityName: "Pet")
                 fetchRequests.predicate = NSPredicate(format: "petId = %@", supply.forPets[0])
                 let context = appDelegate.persistentContainer.viewContext
                 do {
-                    var pet = try context.fetch(fetchRequests)
+                    let pet = try context.fetch(fetchRequests)
                     title = "來自\(pet[0].name!)的通知"
                 } catch {
                     fatalError("CodataERROR:\(error)")
@@ -60,19 +57,17 @@ class NotificationManger {
             }
 
         }
-        // swiftlint:disable:next line_length
-        let notifycation = Notification(content: "\(supply.supplyName)要沒囉～要記得幫我買~~~", notifyTime: Timestamp.init(date: Date()), fromPets: supply.forPets, title: title, type: "Supply", id: identifier)
-        print("SetNotification: \(notifycation.notifyTime.dateValue())")
 
-        setUNUserNotification(notifycation, supply, identifier)
+        let notification = Notification(content: "\(supply.supplyName)要沒囉～要記得幫我買~~~", notifyTime: Timestamp.init(date: Date()), fromPets: supply.forPets, title: title, type: "Supply", id: identifier)
+        print("SetNotification: \(notification.notifyTime.dateValue())")
+
+        setUNUserNotification(notification, supply, identifier)
 
     }
 
+    func setUNUserNotification(_ notification: Notification, _ supply: Supply, _ identifier: String) {
 
-
-    func setUNUserNotification(_ notifycation: Notification, _ supply: Supply, _ identifier: String) {
-
-        var setNotification = notifycation
+        var setNotification = notification
 
         let content = UNMutableNotificationContent()
         content.title = setNotification.title
@@ -104,26 +99,25 @@ class NotificationManger {
 
                 print("addNotificationError: \(error)")
 
-            }else {
+            } else {
 
-                print("addNotificationSurceed: \(setNotification.notifyTime)")
-                FirebaseManager.shared.creatNotification(newNotify: setNotification)
+                print("addNotificationSuccess: \(setNotification.notifyTime)")
+                FirebaseManager.shared.createNotification(newNotify: setNotification)
             }
         })
     }
 
-
-    func countNotifyDate (fullStock:Int, stock:Int, reminderPercent:Double, perCycleTime:Int,  cycleTime:String) -> Date {
+    func countNotifyDate (fullStock: Int, stock: Int, reminderPercent: Double, perCycleTime: Int, cycleTime: String, fromDate: Date = Date()) -> Date {
 
         let maxStockDo = Double(fullStock)
         let stockDo = Double(stock)
-        let cycleComuseDo = Double(perCycleTime)
+        let cycleConsumeDo = Double(perCycleTime)
 
-        guard stockDo > cycleComuseDo else {
-            return Calendar.current.date(byAdding: .second, value: 10, to: Date()) ?? Date()
+        guard stockDo > cycleConsumeDo else {
+            return Calendar.current.date(byAdding: .second, value: 10, to: fromDate) ?? Date()
         }
 
-        var notifyDateFromNow = (stockDo - (maxStockDo * (reminderPercent/100.0))) / cycleComuseDo
+        var notifyDateFromNow = (stockDo - (maxStockDo * (reminderPercent/100.0))) / cycleConsumeDo
 
         if notifyDateFromNow < 0 {
             notifyDateFromNow = 0
@@ -133,12 +127,12 @@ class NotificationManger {
 
         case "每月":
 
-            guard let notifyDate = Calendar.current.date(byAdding: .month, value: Int(notifyDateFromNow), to: Date()) else { return Date() }
+            guard let notifyDate = Calendar.current.date(byAdding: .month, value: Int(notifyDateFromNow), to: fromDate) else { return Date() }
             return notifyDate
 
         case "每日":
 
-            guard let notifyDate = Calendar.current.date(byAdding: .day, value: Int(notifyDateFromNow), to: Date()) else { return Date() }
+            guard let notifyDate = Calendar.current.date(byAdding: .day, value: Int(notifyDateFromNow), to: fromDate) else { return Date() }
             return notifyDate
 
         default:
@@ -147,18 +141,12 @@ class NotificationManger {
 
     }
 
-
-    func deleteNotification(notifyId:String){
+    func deleteNotification(notifyId: String) {
         unuPool.removePendingNotificationRequests(withIdentifiers: ["Supply_\(notifyId)"])
-
         FirebaseManager.shared.removeNotification(notifyId: "Supply_\(notifyId)")
 
-
-
     }
-
 }
-
 
 class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
 
@@ -174,13 +162,14 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         // Determine the user action
         switch response.actionIdentifier {
+
         case UNNotificationDismissActionIdentifier:
             print("Dismiss Action")
+
         case UNNotificationDefaultActionIdentifier:
             print("Default")
-            //Seting RefrashNotification
 
-        case "SnoozeAction":
+        case "SnoozeAction" :
             print("Snooze")
             let identifier = "SnoozeNotification"
             let content = response.notification.request.content
@@ -189,8 +178,8 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
             center.add(request, withCompletionHandler: {(error) in
                 if let error = error {
                     print("\(error)")
-                }else {
-                    print("successed snooze")
+                } else {
+                    print("successes snooze")
                 }
             })
 
@@ -204,4 +193,3 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
     }
 
 }
-

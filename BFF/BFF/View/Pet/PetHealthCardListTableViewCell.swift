@@ -12,20 +12,19 @@ class PetHealthCardListTableViewCell: UITableViewCell {
     @IBOutlet weak var petImage: UIImageView!
 
     @IBOutlet weak var backGroundView: UIView!
-    @IBOutlet weak var healthButtom: UIButton!
-    @IBOutlet weak var bitrhdayLabel: UILabel!
+    @IBOutlet weak var healthButton: UIButton!
+    @IBOutlet weak var birthdayLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    var didTapdeleteButton: (()->())?
-    var didTapMoreInfoButton: (()->())?
+    var didTapDeleteButton: (() -> Void)?
+    var didTapMoreInfoButton: (() -> Void)?
 
+    static var identifier = "PetHealthCardListTableViewCell"
 
-    static var indentfier = "PetHealthCardListTableViewCell"
-
-    func configur(){
+    func configure() {
         backGroundView.layer.shadowColor = UIColor.gray.cgColor
         backGroundView.layer.shadowOpacity = 0.2
         backGroundView.layer.cornerRadius = 16
@@ -33,7 +32,7 @@ class PetHealthCardListTableViewCell: UITableViewCell {
         backGroundView.backgroundColor = UIColor.white
         backGroundView.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
         petImage.layer.cornerRadius = 16
-        healthButtom.layer.cornerRadius = 10
+        healthButton.layer.cornerRadius = 10
 
     }
 
@@ -46,7 +45,7 @@ class PetHealthCardListTableViewCell: UITableViewCell {
         didTapMoreInfoButton?()
     }
     @IBAction func deleteButton(_ sender: Any) {
-        didTapdeleteButton?()
+        didTapDeleteButton?()
 
     }
 

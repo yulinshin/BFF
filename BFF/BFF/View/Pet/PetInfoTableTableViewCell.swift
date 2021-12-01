@@ -41,7 +41,7 @@ class PetInfoTableTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    func configur(cellStyle: CellStyle, title: String, button: String = "") {
+    func configure(cellStyle: CellStyle, title: String, button: String = "") {
 
         titleLabel.text = title
 
@@ -64,7 +64,7 @@ class PetInfoTableTableViewCell: UITableViewCell {
         moreButtonTap?()
     }
 
-    func creatDatePicker () {
+    func createDatePicker () {
 
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -105,7 +105,7 @@ class PetInfoTableTableViewCell: UITableViewCell {
 
       }
 
-    func creatPicker(pickerData: [String]) {
+    func createPicker(pickerData: [String]) {
 
         let toolbar = UIToolbar()
         toolbar.sizeToFit()

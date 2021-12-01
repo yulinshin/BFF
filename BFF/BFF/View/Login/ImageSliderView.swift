@@ -20,7 +20,7 @@ class ImageSliderView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setImage(_ newImage:UIImage, animated: Bool) {
+    func setImage(_ newImage: UIImage, animated: Bool) {
         if animated {
             let animation = CABasicAnimation(keyPath: "contents")
             animation.fromValue = image?.cgImage
