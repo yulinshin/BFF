@@ -81,7 +81,15 @@ class ChatViewController: UIViewController {
 
               }
 
-        FirebaseManager.shared.sendMessage(receiverId: otherUserId, groupId: groupId, content: message)
+        FirebaseManager.shared.sendMessage(receiverId: otherUserId, groupId: groupId, content: message) { result in
+            switch result {
+
+            case .success:
+                print("Send Message Success")
+            case .failure(let error):
+                print("Send Message Failure: \(error)")
+            }
+        }
 
         messageTextField.text = ""
 

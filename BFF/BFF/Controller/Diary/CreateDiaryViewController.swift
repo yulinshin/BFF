@@ -149,7 +149,7 @@ class CreateDiaryViewController: UIViewController {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    func fetchData() {
+    private func fetchData() {
         
         FirebaseManager.shared.fetchPets { result in
             
@@ -172,7 +172,7 @@ class CreateDiaryViewController: UIViewController {
         
     }
 
-    func showNoPetAlert() {
+    private func showNoPetAlert() {
 
         let alertController = UIAlertController(title: "您尚無毛小孩唷", message: "請至少新增一隻毛小孩才能進行填寫日記唷", preferredStyle: .alert)
 
@@ -193,7 +193,7 @@ class CreateDiaryViewController: UIViewController {
 
     }
 
-    func showDiaryNotComplictedAlert() {
+    private func showDiaryNotComplictedAlert() {
 
         let alertController = UIAlertController(title: "日記不完整", message: "請確認日記資訊是否完整（至少上傳一張照片與選擇一隻毛小孩唷！）", preferredStyle: .alert)
 

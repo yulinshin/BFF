@@ -28,7 +28,7 @@ class PetsListTableViewController: UITableViewController {
         getPetData()
     }
 
-    func getPetData() {
+    private func getPetData() {
         FirebaseManager.shared.fetchUserPets { result in
 
             switch result {

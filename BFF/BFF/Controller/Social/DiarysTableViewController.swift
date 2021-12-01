@@ -32,7 +32,7 @@ class DiariesViewController: UIViewController {
         tabBarController?.tabBar.backgroundColor = .white
     }
 
-    func showSetting(with diary: Diary) {
+    private func showSetting(with diary: Diary) {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
@@ -51,7 +51,7 @@ class DiariesViewController: UIViewController {
 
     }
 
-    func blockUser(userId: String) {
+    private func blockUser(userId: String) {
         self.viewModel.blockUser(userId: userId)
     }
 
@@ -134,14 +134,14 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
-    func showPetProfile(petId: String) {
+    private func showPetProfile(petId: String) {
         let storyboard = UIStoryboard(name: "Pet", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "PetsProfileViewController") as? PetsProfileViewController else { return }
         controller.viewModel = ProfileViewModel(petId: petId)
         self.navigationController?.pushViewController(controller, animated: true)
     }
 
-    func showChatVC(userId: String) {
+    private func showChatVC(userId: String) {
 
         let storyboard = UIStoryboard(name: "Message", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
@@ -150,7 +150,7 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
 
-    func showComment(diary: Diary) {
+    private func showComment(diary: Diary) {
 
         let storyboard = UIStoryboard(name: "Social", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "CommentTableViewController") as? CommentTableViewController else { return }

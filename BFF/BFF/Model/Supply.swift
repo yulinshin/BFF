@@ -23,5 +23,19 @@ struct Supply: Codable {
     var supplyName: String
     var unit: String
     var lastUpdate: Timestamp
+
+    mutating func calculateSupplyInventory() {
+
+        let daysBetweenDate = self.lastUpdate.dateValue().daysBetweenDate(toDate: Date())
+        if daysBetweenDate > 0 {
+            let consume = self.perCycleTime * daysBetweenDate
+            let newStock = self.stock - consume
+            self.stock = newStock
+            FirebaseManager.shared.updateSupply(supplyId: self.supplyId, data: self)
+            if self.isReminder == true {
+                NotificationManger.shared.createSupplyNotification(supply: self)
+            }
+        }
+    }
     
 }

@@ -93,13 +93,13 @@ class ListTableViewController: UITableViewController {
         }
     }
 
-    func showReFillPopup(viewModel: SupplyViewModel) {
+    private func showReFillPopup(viewModel: SupplyViewModel) {
 
         FillSupplyAlertView.shared.showAlert(supplyViewModel: viewModel)
 
     }
 
-    func showMenu(viewModel: SupplyViewModel) {
+    private func showMenu(viewModel: SupplyViewModel) {
 
         let alert = UIAlertController(title: viewModel.supplyName.value, message: "要做什麼呢？", preferredStyle: .actionSheet)
 
@@ -146,7 +146,7 @@ class ListTableViewController: UITableViewController {
 
     }
 
-    func showNextPage(style: SupplyDetailViewController.ControllerMode, supplyModel: SupplyViewModel = SupplyViewModel()) {
+    private func showNextPage(style: SupplyDetailViewController.ControllerMode, supplyModel: SupplyViewModel = SupplyViewModel()) {
         let storyboard = UIStoryboard(name: "Supplies", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "SupplyDetailViewController") as? SupplyDetailViewController else { return }
 

@@ -25,7 +25,7 @@ class PetNotificationCollectionViewCell: UICollectionViewCell {
         self.viewModel = viewModel
 
         viewModel.petPicUrl.bind { url in
-            self.petThumbnailImageView.loadImage(url, placeHolder: UIImage(systemName: "person.fill"))
+            self.petThumbnailImageView.loadImage(url)
         }
 
         viewModel.content.bind { content in
