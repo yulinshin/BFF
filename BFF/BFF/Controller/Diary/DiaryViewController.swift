@@ -56,6 +56,7 @@ class DiaryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         selectedPetsCollectionView.delegate = self
         diariesCollectionView.delegate = self
         let diaryNib = UINib(nibName: "DairyPhotoCell", bundle: nil)
@@ -156,7 +157,7 @@ class DiaryViewController: UIViewController {
         }
     }
 
-    func fetchData() {
+    private func fetchData() {
 
         FirebaseManager.shared.fetchPets(petIds: userPetIds) { result in
 
@@ -180,7 +181,7 @@ class DiaryViewController: UIViewController {
         }
     }
 
-    func applySnapshot(animatingDifferences: Bool = true) {
+    private func applySnapshot(animatingDifferences: Bool = true) {
         var diariesSnapshot = Snapshot()
         diariesSnapshot.appendSections([.all])
         diariesSnapshot.appendItems(diaries, toSection: .all)

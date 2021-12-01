@@ -41,18 +41,28 @@ class CommentTableViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
     }
 
-    @IBAction func sendMessage(_ sender: Any) {
+    @IBAction func sendComment(_ sender: Any) {
         guard let message = messageTextField.text,
               let diary = diary,
               let selectedPet = selectedPet else {
                   return
               }
-        FirebaseManager.shared.createComments(content: message, petId: selectedPet, diaryId: diary.diaryId, diaryOwner: diary.userId)
+        FirebaseManager.shared.createComment(content: message, petId: selectedPet, diaryId: diary.diaryId, diaryOwner: diary.userId) { result in
+
+            switch result {
+            case .success:
+                print("Send Comments Success")
+
+            case.failure(let error):
+                print("Send Comments Failure: \(error)")
+            }
+
+        }
         getComments()
         messageTextField.text = ""
     }
 
-    func getComments() {
+    private func getComments() {
 
         viewModels = [CommentViewModel]()
 

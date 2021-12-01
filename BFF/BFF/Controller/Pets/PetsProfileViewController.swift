@@ -69,7 +69,7 @@ class PetsProfileViewController: UIViewController {
     }
 
     // swiftlint:disable:next function_body_length
-    func createLayout() -> UICollectionViewLayout {
+    private func createLayout() -> UICollectionViewLayout {
 
             let layout = UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection? in
 
@@ -164,7 +164,7 @@ class PetsProfileViewController: UIViewController {
         self.sendMessageButton.setTitle("私訊主人", for: .normal)
     }
 
-    fileprivate func setupPetThumbnail() {
+    private func setupPetThumbnail() {
         self.petThumbnailImageView.layer.cornerRadius = self.petThumbnailImageView.frame.height/2
         self.petThumbnailImageView.layer.borderColor = UIColor.white.cgColor
         self.petThumbnailImageView.layer.borderWidth = 4
@@ -304,7 +304,7 @@ class PetsProfileViewController: UIViewController {
 
     }
 
-    func blockUser(_ action: UIAlertAction) {
+    private func blockUser(_ action: UIAlertAction) {
 
         guard let viewModel = viewModel else {
             return

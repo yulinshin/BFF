@@ -149,26 +149,26 @@ class DiaryDetailViewController: UIViewController {
 // MARK: - Diary Menu Function
 
         // Setting privacy Action
-        func editPrivacyToPublic(_ action: UIAlertAction) {
+    private func editPrivacyToPublic(_ action: UIAlertAction) {
             print("tapped \(action.title!)")
             viewModel.changePrivacy(isPublic: true)
             self.diaryStateLabel.text = "Public"
 
         }
 
-        func editPrivacyToPrivate(_ action: UIAlertAction) {
+    private func editPrivacyToPrivate(_ action: UIAlertAction) {
         print("tapped \(action.title!)")
             viewModel.changePrivacy(isPublic: false)
             self.diaryStateLabel.text = "Private"
 
         }
 
-        func editDiary(_ action: UIAlertAction) {
+    private func editDiary(_ action: UIAlertAction) {
             enterToEditMode()
             print("tapped \(action.title!)")
         }
 
-    func enterToEditMode() {
+    private func enterToEditMode() {
         self.navigationController?.navigationItem.hidesBackButton = true
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationItem.title = "Edit Diary"
@@ -179,7 +179,7 @@ class DiaryDetailViewController: UIViewController {
         contentTextView.becomeFirstResponder()
     }
 
-    func leaveEditMode() {
+    private func leaveEditMode() {
         self.navigationController?.navigationItem.hidesBackButton = false
         self.navigationItem.title = ""
         self.navigationItem.rightBarButtonItem = nil

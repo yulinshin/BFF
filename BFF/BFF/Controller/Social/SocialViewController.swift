@@ -132,7 +132,7 @@ class SocialViewController: UIViewController {
         }
     }
 
-    func fetchData() {
+    private func fetchData() {
 
         FirebaseManager.shared.fetchPets(petIds: userPetIds) { result in
 

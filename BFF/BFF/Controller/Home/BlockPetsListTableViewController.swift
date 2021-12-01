@@ -60,7 +60,7 @@ class BlockTableViewCell: UITableViewCell {
 
     }
 
-    func setup (viewModel: BlocksViewModel) {
+   func setup (viewModel: BlocksViewModel) {
         petImage.loadImage(viewModel.image.value)
         petName.text = viewModel.name.value
     }
