@@ -1327,10 +1327,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BFF/BFF.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 94F23Z62YB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BFF/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "BFF Diary";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your current location to fetch nearby pet facilities";
 				INFOPLIST_KEY_NSLocationUsageDescription = "We need your current location to fetch nearby pet facilities";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your current location to fetch nearby pet facilities";
@@ -1362,10 +1363,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BFF/BFF.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 94F23Z62YB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BFF/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "BFF Diary";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your current location to fetch nearby pet facilities";
 				INFOPLIST_KEY_NSLocationUsageDescription = "We need your current location to fetch nearby pet facilities";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your current location to fetch nearby pet facilities";
