@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import MJRefresh
 
 class DiariesViewController: UIViewController {
 
@@ -15,6 +16,8 @@ class DiariesViewController: UIViewController {
     @IBOutlet weak var backGroundView: UIView!
 
     var viewModel = DiaryWallViewModel()
+    let header = MJRefreshNormalHeader()
+    let footer = MJRefreshAutoNormalFooter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +26,21 @@ class DiariesViewController: UIViewController {
         tableView.dataSource = self
         viewModel.didUpDateData = { [weak self] in
             self?.tableView.reloadData()
+            self?.tableView!.mj_header?.endRefreshing()
+            self?.tableView!.mj_footer?.endRefreshing()
         }
+        viewModel.noMoreData = { [weak self] in
+            self?.tableView.mj_footer?.endRefreshingWithNoMoreData()
+        }
+        header.setRefreshingTarget(self, refreshingAction: #selector(DiariesViewController.headerRefresh))
+        self.tableView!.mj_header = header
+        footer.setRefreshingTarget(self, refreshingAction: #selector(DiariesViewController.footerRefresh))
+        self.tableView!.mj_footer = footer
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.fetchAllDiary()
+        viewModel.fetchPublicDiaries()
         tabBarController?.tabBar.backgroundColor = .white
     }
 
@@ -173,6 +185,15 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
 
+}
+
+extension DiariesViewController {
+    @objc func headerRefresh() {
+        viewModel.fetchPublicDiaries()
+    }
+    @objc func footerRefresh() {
+        viewModel.fetchPublicDiaries(isFetchMore: true)
+    }
 }
 
 class DiaryViewCell: UITableViewCell {

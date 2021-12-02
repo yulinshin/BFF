@@ -1,10 +1,3 @@
-//
-//  CustomerServiceViewController.swift
-//  STYLiSH
-//
-//  Created by Allie T on 2021/10/3.
-//  Copyright © 2021 WU CHIH WEI. All rights reserved.
-//
 
 import UIKit
 import FirebaseAuth

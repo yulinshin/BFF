@@ -68,21 +68,4 @@ extension DiaryViewController {
 
     }
 
-    func makePetsDataSource() -> DataSource {
-
-        let dataSource = DataSource(collectionView: selectedPetsCollectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
-
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedPetsCollectionViewCell.identifier, for: indexPath) as? SelectedPetsCollectionViewCell
-
-            guard let imageStr = item.pet?.petThumbnail?.url,
-                  let petId = item.pet?.petId else { return cell }
-            cell?.configure(with: PhotoCellViewModel(with: imageStr), petId: petId)
-            return cell
-
-        }
-
-        return dataSource
-
-    }
-
 }

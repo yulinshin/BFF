@@ -9,11 +9,7 @@ import UIKit
 
 class DiaryViewController: UIViewController {
 
-    @IBOutlet weak var selectedPetsCollectionView: UICollectionView!
     @IBOutlet weak var diariesCollectionView: UICollectionView!
-
-    @IBOutlet weak var petsTopConstraint: NSLayoutConstraint!
-
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var statusImage: UIImageView!
 
@@ -32,23 +28,9 @@ class DiaryViewController: UIViewController {
         }
     }
 
-    var userPetIds = [String]()
-
-    var userPetsData = [Item]() {
-        didSet {
-            applySnapshot()
-            selectedPetsCollectionView.reloadData()
-        }
-    }
-
-    var showPets = [String]() {
-        didSet {
-            diaryWallViewModel.filter(petIds: showPets)
-        }
-    }
+    var showPets = [String]()
 
     private lazy var diariesDataSource = makeDiariesDataSource()
-    private lazy var petsDataSource = makePetsDataSource()
 
     deinit {
         print("DiaryViewController DIE")
@@ -56,17 +38,12 @@ class DiaryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        selectedPetsCollectionView.delegate = self
+        diaryWallViewModel.fetchUserDiaries()
         diariesCollectionView.delegate = self
         let diaryNib = UINib(nibName: "DairyPhotoCell", bundle: nil)
         diariesCollectionView.register(diaryNib, forCellWithReuseIdentifier: DairyPhotoCell.identifier)
-        let petNib = UINib(nibName: "SelectedPetsCollectionViewCell", bundle: nil)
-        selectedPetsCollectionView.register(petNib, forCellWithReuseIdentifier: SelectedPetsCollectionViewCell.identifier)
         diariesCollectionView.dataSource = diariesDataSource
-        selectedPetsCollectionView.dataSource = petsDataSource
         diariesCollectionView.collectionViewLayout = createLayout(type: .grid)
-        selectedPetsCollectionView.allowsMultipleSelection = true
         self.navigationController?.navigationBar.tintColor = UIColor.mainColor
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Filter"), style: .done, target: self, action: #selector(switchShowList))
@@ -79,13 +56,9 @@ class DiaryViewController: UIViewController {
         diaryWallViewModel.showingDiaries.bind {  [weak self] diaries in
 
             var diaryItems = [Item]()
-
-            let showUserPet = self?.userPetIds ?? [String]()
-
+            
             diaries.forEach { diary in
-                if showUserPet.contains(diary.petId) {
                     diaryItems.append(Item.diary(diary))
-                }
             }
             self?.diaries = diaryItems
 
@@ -114,16 +87,6 @@ class DiaryViewController: UIViewController {
         super.viewWillAppear(true)
 
         self.navigationController?.navigationBar.backgroundColor = .white
-
-        if showSelectedPetsCollectionView {
-            self.selectedPetsCollectionView.isHidden = false
-
-        } else {
-            self.selectedPetsCollectionView.isHidden = true
-            
-        }
-        diaryWallViewModel.fetchDiary()
-        fetchData()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -157,56 +120,13 @@ class DiaryViewController: UIViewController {
         }
     }
 
-    private func fetchData() {
-
-        FirebaseManager.shared.fetchPets(petIds: userPetIds) { result in
-
-            switch result {
-
-            case .success(let pets):
-
-                var defaultShowingPetsId = [String]()
-                var petsDataItem = [Item]()
-                pets.forEach { pet in
-                    defaultShowingPetsId.append(pet.petId)
-                    petsDataItem.append(Item.pet(pet))
-                    print("Pet = \(pet)")
-                }
-                self.userPetsData = petsDataItem
-                self.showPets = defaultShowingPetsId
-
-            case .failure(let error):
-                print("fetchData.failure\(error)")
-            }
-        }
-    }
-
     private func applySnapshot(animatingDifferences: Bool = true) {
         var diariesSnapshot = Snapshot()
         diariesSnapshot.appendSections([.all])
         diariesSnapshot.appendItems(diaries, toSection: .all)
         diariesDataSource.apply(diariesSnapshot, animatingDifferences: false)
-
-        var myPetsSnapshot = Snapshot()
-        myPetsSnapshot.appendSections([.all])
-        myPetsSnapshot.appendItems(userPetsData, toSection: .all)
-        petsDataSource.apply(myPetsSnapshot, animatingDifferences: false)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-
-        for (index, item) in userPetsData.enumerated() {
-            guard let petId = item.pet?.petId,
-                  let cell = selectedPetsCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SelectedPetsCollectionViewCell else { return }
-            if showPets.contains(petId) {
-                selectedPetsCollectionView.selectItem(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: [])
-                cell.selectBackground.layer.borderColor = UIColor.white.cgColor
-                cell.selectBackground.layer.borderWidth = 3
-            }
-        }
-    }
-    
     // MARK: - diariesCollectionViewCompositionLayout
 
     // swiftlint:disable:next function_body_length
@@ -327,83 +247,11 @@ class DiaryViewController: UIViewController {
 extension DiaryViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == selectedPetsCollectionView {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-            cell.selectBackground.layer.borderColor = UIColor.white.cgColor
-            cell.selectBackground.layer.borderWidth = 3
-
-            guard let petId = cell.petId else { return }
-            if showPets.contains(petId) {
-                return
-            } else {
-                showPets.append(petId)
-            }
-
-        } else {
 
             let storyboard = UIStoryboard(name: "Diary", bundle: nil)
             guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
             controller.viewModel = DetailViewModel(from: diaries[indexPath.row].diary!)
             self.navigationController?.show(controller, sender: nil)
 
-        }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if collectionView == selectedPetsCollectionView {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? SelectedPetsCollectionViewCell else { return }
-            cell.selectBackground.layer.borderColor = UIColor.white.cgColor
-            cell.selectBackground.layer.borderWidth = 0
-
-            guard let petId = cell.petId else { return }
-
-            if let index = showPets.firstIndex(of: petId) {
-                showPets.remove(at: index)
-            }
-
-        }
-    }
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
-        guard scrollView.contentOffset.y > 0 else { return }
-
-        if self.lastContentOffset >= scrollView.contentOffset.y {
-
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
-
-                self.petsTopConstraint.constant = 0
-                self.selectedPetsCollectionView.alpha = 1
-                self.view.layoutIfNeeded()
-            }
-
-        } else if self.lastContentOffset < scrollView.contentOffset.y {
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
-
-                self.petsTopConstraint.constant = -70
-                self.selectedPetsCollectionView.alpha = 0
-                self.view.layoutIfNeeded()
-
-            }
-        }
-
-        // update the new position acquired
-        self.lastContentOffset = scrollView.contentOffset.y
-    }
-
-}
-
-extension DiaryViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        if collectionView == selectedPetsCollectionView {
-            return CGSize(width: 70, height: 70)
-        } else {
-            return CGSize(width: 0, height: 0)
-        }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        0
     }
 }

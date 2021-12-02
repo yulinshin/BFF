@@ -48,6 +48,9 @@ class FirebaseManager {
     static let shared = FirebaseManager()
     lazy var dataBase = Firestore.firestore()
     lazy var storage = Storage.storage()
+    var publicDiaryPagingLastDoc: QueryDocumentSnapshot?
+    var petDiaryPagingLastDoc: QueryDocumentSnapshot?
+    var userDiaryPagingLastDoc: QueryDocumentSnapshot?
 
     static var userId: String {
         Auth.auth().currentUser?.uid ?? ""

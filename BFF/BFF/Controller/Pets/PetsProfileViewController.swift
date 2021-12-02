@@ -405,8 +405,8 @@ class ProfileViewModel {
 
                 FirebaseManager.shared.fetchPetAllDiaries(petId: pet.petId) { result in
 
+                    FirebaseManager.shared.petDiaryPagingLastDoc = nil
                     switch result {
-
                     case .success(let diaries):
                         self.likedCount.value = 0
                         self.diaries.value = diaries

@@ -40,7 +40,7 @@ class SocialViewController: UIViewController {
 
     var showPets = [String]() {
         didSet {
-            diaryWallViewModel.filter(petIds: showPets)
+//            diaryWallViewModel.filter(petIds: showPets)
         }
     }
 
@@ -93,7 +93,7 @@ class SocialViewController: UIViewController {
 
         }
 
-        diaryWallViewModel.fetchDiary()
+        diaryWallViewModel.fetchUserDiaries()
         fetchData()
 
         NetStatusManger.share.startMonitoring()

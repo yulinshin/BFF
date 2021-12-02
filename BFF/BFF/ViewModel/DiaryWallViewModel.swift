@@ -9,26 +9,45 @@ import Foundation
 
 class DiaryWallViewModel {
 
+    var petIds: [String]?
     var diaries = Box([Diary]())
     var showingDiaries = Box([Diary]())
     var didUpDateData: (() -> Void)?
+    var noMoreData: (() -> Void)?
     var getDataFailure: (() -> Void)?
 
-    func fetchDiary() {
+    func fetchUserDiaries(isFetchMore: Bool = false) {
+
+        if !isFetchMore {
+            FirebaseManager.shared.userDiaryPagingLastDoc = nil
+        }
+
         FirebaseManager.shared.fetchDiaries { result in
 
             switch result {
 
             case .success(let diaries):
 
-                if diaries.count == 0 {
-
+                if  diaries.count == 0 {
+                    self.noMoreData?() 
                 } else {
+                    if isFetchMore {
+                        self.diaries.value += diaries
+                    } else {
+                        self.diaries.value = diaries
+                    }
 
-                self.diaries.value = diaries
-                self.showingDiaries.value = diaries
-                self.updatePetData()
+                    if let petIds = self.petIds {
 
+                        self.diaries.value = self.diaries.value.filter({ diary in
+                            if petIds.contains(diary.petId) {
+                                return true
+                            } else { return false }
+                        })
+
+                    }
+
+                    self.updatePetData()
                 }
 
             case.failure(let error):
@@ -39,7 +58,12 @@ class DiaryWallViewModel {
         }
     }
 
-    func fetchAllDiary() {
+    func fetchPublicDiaries(isFetchMore: Bool = false) {
+
+        if !isFetchMore {
+            FirebaseManager.shared.publicDiaryPagingLastDoc = nil
+        }
+
         FirebaseManager.shared.fetchPublicDiaries { result in
 
             switch result {
@@ -47,12 +71,14 @@ class DiaryWallViewModel {
             case .success(let diaries):
 
                 if  diaries.count == 0 {
-
+                    self.noMoreData?()
                 } else {
-
-                self.diaries.value = diaries
-                self.updatePetData()
-
+                    if isFetchMore {
+                        self.diaries.value += diaries
+                    } else {
+                        self.diaries.value = diaries
+                    }
+                    self.updatePetData()
                 }
 
             case.failure(let error):
@@ -64,9 +90,10 @@ class DiaryWallViewModel {
     }
 
     func updatePetData() {
-
+        let group: DispatchGroup = DispatchGroup()
         for (index, diary) in diaries.value.enumerated() {
-
+            group.enter()
+            print("group: enter")
             FirebaseManager.shared.fetchPet(petId: diary.petId) { result in
 
                 switch result {
@@ -75,16 +102,23 @@ class DiaryWallViewModel {
 
                     self.diaries.value[index].petname = pet.name
                     self.diaries.value[index].petThumbnail = pet.petThumbnail ?? Pic(url: "", fileName: "")
-                    self.showingDiaries.value = self.diaries.value
-                    self.filterDiaries()
+                    group.leave()
+                    print("group: leave")
 
                 case.failure(let error):
-
+                    group.leave()
+                    print("group:leave")
                         print(error)
                 }
 
             }
 
+        }
+
+        group.notify(queue: DispatchQueue.main) {
+            print("group: Notify")
+            self.showingDiaries.value = self.diaries.value
+            self.filterDiaries()
         }
     }
 
@@ -112,7 +146,6 @@ class DiaryWallViewModel {
                     self.didUpDateData?()
                 }
 
-                print("*** showingDiaries: \(self.showingDiaries.value.count)")
                 self.didUpDateData?()
             case.failure( let error ):
 
@@ -122,15 +155,6 @@ class DiaryWallViewModel {
 
         }
 
-    }
-
-    func filter(petIds: [String]) {
-
-        showingDiaries.value = diaries.value.filter({ diary in
-            if petIds.contains(diary.petId) {
-                return true
-            } else { return false }
-        })
     }
 
     func updateWhoLiked(index: Int) {
