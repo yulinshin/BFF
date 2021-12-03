@@ -102,6 +102,6 @@ Add photos to create a pet diary, set reminders for pet supplies and share them 
 </p>
 
 <p align="center">
- Version Latest <img width="1200" src="https://i.imgur.com/9JhIlpp.png" alt="">
+ Version Latest <img width="1200" src="https://img.shields.io/badge/AppStoreVersion-1.0.2-689A98" alt="">
 </p>
 
