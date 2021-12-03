@@ -8,7 +8,7 @@
 </p>
 <h2 align="center"> Start recording everything of your pets! </h2>
 <p align="center"> An all-in-one application helps pet owners with pet management. <br>
-Add photos to create a pet diary, set reminders for pet supplies and share them with owners in the community and chat with them!
+Usesr can set reminders for pet supplies, add photos to create a pet diary, share them with owners in the community, and chat with them!.
 </p>
 <br>
 
@@ -17,7 +17,7 @@ Add photos to create a pet diary, set reminders for pet supplies and share them 
 
 # Features
 
-### Recode Pets' life by writing a diary with photos.
+### Recode Pets' life by writing a diary with photos:
 
 * Create pet information and start to write a pet's life diary.
 
@@ -32,7 +32,7 @@ Add photos to create a pet diary, set reminders for pet supplies and share them 
   
 
  
-### Mange  Pets’ supplies and set reminders.
+### Mange  Pets’ supplies and set reminders:
 
 * By entering the inventory and daily consumption to create supply. The app will calculate the inventory daily and push the notification to the user’s phone when the supplies are lower than the set inventory.
 
@@ -46,7 +46,7 @@ Add photos to create a pet diary, set reminders for pet supplies and share them 
 
 
 
-### Share Pets’ diaries on Pet Community.
+### Share Pets’ diaries on Pet Community:
 
 * The interaction in the pet community is pet-to-pet, can leave comments or like other's diaries.
 
@@ -60,7 +60,7 @@ Add photos to create a pet diary, set reminders for pet supplies and share them 
 
   
 
-### Quickly find the nearby animal hospital.
+### Quickly find the nearby animal hospital:
 
 * When a pet has an emergency health condition, the user can quickly find nearby pet hospitals, including hospitals with special pets.
 * Click the navigation button of the hospital to jump to GoogleMap and navigate to the destination.
@@ -75,7 +75,9 @@ Add photos to create a pet diary, set reminders for pet supplies and share them 
 
   
 
-# Techniques:
+# Techniques
+
+This application is built with the following techniques:
 
 * Use MVVM architectural pattern to enhance the maintainability, improve testability, and slim down code.
 
@@ -93,7 +95,7 @@ Add photos to create a pet diary, set reminders for pet supplies and share them 
 
 * Monitor and react to network changes by using Network Framework.
 
-# Release Link & Version:
+# Release Link & Version
 <p>
 <img height="20" src="https://img.shields.io/badge/AppStoreVersion-1.0.2-689A98" alt="">
 <img height="20" src="https://img.shields.io/badge/Xcode-13-51A9E8" alt="">
