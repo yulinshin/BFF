@@ -15,7 +15,7 @@ Add photos to create a pet diary, set reminders for pet supplies and share them 
 
 
 
-# Fetures
+# Features
 
 ### Recode Pets' life by writing a diary with photos.
 
