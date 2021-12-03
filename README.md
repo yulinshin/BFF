@@ -36,7 +36,7 @@ Add photos to create a pet diary, set reminders for pet supplies and share them 
 
 * By entering the inventory and daily consumption to create supply. The app will calculate the inventory daily and push the notification to the user’s phone when the supplies are lower than the set inventory.
 
-* The user only needs to enter the added number, and the system will automatically adjust the inventory // gif
+* The user only needs to enter the added number, and the system will automatically adjust the inventory.
 
 <p align="center">
 <img width="200" src="https://i.imgur.com/iDuBM87.png" alt="">
@@ -50,7 +50,7 @@ Add photos to create a pet diary, set reminders for pet supplies and share them 
 
 * The interaction in the pet community is pet-to-pet, can leave comments or like other's diaries.
 
-* If the user wants to contact the owner of the pet, can also make a private message
+* If the user wants to contact the owner of the pet, can also make a private message.
 
 <p align="center">
 <img width="200" src="https://i.imgur.com/FGWsi4v.png" alt="">
@@ -63,7 +63,7 @@ Add photos to create a pet diary, set reminders for pet supplies and share them 
 ### Quickly find the nearby animal hospital.
 
 * When a pet has an emergency health condition, the user can quickly find nearby pet hospitals, including hospitals with special pets.
-* Click the navigation button of the hospital to jump to GoogleMap and navigate to the destination.1
+* Click the navigation button of the hospital to jump to GoogleMap and navigate to the destination.
 <p align="center">
 <img width="200" src="https://i.imgur.com/pSM3SjO.png" alt="">
 <img width="200" src="https://i.imgur.com/bIQ7FOq.png" alt="">
