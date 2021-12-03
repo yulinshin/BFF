@@ -93,15 +93,29 @@ Add photos to create a pet diary, set reminders for pet supplies and share them 
 
 * Monitor and react to network changes by using Network Framework.
 
-<p align="center">
-<img width="150" src="https://user-images.githubusercontent.com/73418990/144551157-50812a92-c750-4ea9-b939-90c6c0d3112e.png" alt="">
+# Release Link & Version:
+<p>
+<img height="20" src="https://img.shields.io/badge/AppStoreVersion-1.0.2-689A98" alt="">
+<img height="20" src="https://img.shields.io/badge/Xcode-13-51A9E8" alt="">
+<img height="20" src="https://img.shields.io/badge/Swift-5-FF8E4E" alt="">
 </p>
+ <table>
+  <tr>
+    <td>Version</td>
+    <td>Update content</td>
+  </tr>
+  <tr>
+    <td>1.0.2</td>
+    <td>Fix minor bugs & change App Icon</td>
+  </tr>
+  <tr>
+    <td>1.0.1</td>
+    <td>Fixed pet following and comment notification function</td>
+  </tr>
+  <tr>
+    <td>1.0.0</td>
+    <td>First release on AppStore</td>
+  </tr>
+</table>
 
-<p align="center">
- <img width="1200" src="https://i.imgur.com/9JhIlpp.png" alt="">
-</p>
-
-<p align="center">
- Version Latest <img width="1200" src="https://img.shields.io/badge/AppStoreVersion-1.0.2-689A98" alt="">
-</p>
-
+<a href="https://apps.apple.com/tw/app/id1591733079"><img src="https://user-images.githubusercontent.com/73418990/144551157-50812a92-c750-4ea9-b939-90c6c0d3112e.png" width="150" hight="30"></a>
