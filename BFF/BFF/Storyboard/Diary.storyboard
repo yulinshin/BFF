@@ -13,7 +13,7 @@
         <!--DiaryPage-->
         <scene sceneID="Mrn-ZE-NHY">
             <objects>
-                <viewController storyboardIdentifier="DiaryViewController" title="毛小孩的寵物日誌" id="cjR-2p-Qry" userLabel="DiaryPage" customClass="DiaryViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserDiariesViewController" title="毛小孩的寵物日誌" id="cjR-2p-Qry" userLabel="DiaryPage" customClass="UserDiariesViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tiJ-yY-c4o">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -46,22 +46,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EgM-nk-hBv">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ixt-sb-OKN">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
-                                        <color key="backgroundColor" name="main"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="70" id="jWM-tB-sCO"/>
-                                        </constraints>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="NVF-zQ-Xdz">
-                                            <size key="itemSize" width="83" height="41"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                        <cells/>
-                                    </collectionView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gLt-m0-B3d">
-                                        <rect key="frame" x="0.0" y="70" width="414" height="748"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="42V-cL-Hw9">
                                             <size key="itemSize" width="195" height="196"/>
@@ -72,11 +58,6 @@
                                         <cells/>
                                     </collectionView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="ixt-sb-OKN" secondAttribute="trailing" id="6DK-SK-pTR"/>
-                                    <constraint firstItem="ixt-sb-OKN" firstAttribute="top" secondItem="EgM-nk-hBv" secondAttribute="top" id="hte-Vv-mZB"/>
-                                    <constraint firstItem="ixt-sb-OKN" firstAttribute="leading" secondItem="EgM-nk-hBv" secondAttribute="leading" id="o3g-FW-qIa"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="A43-V5-3wc"/>
@@ -92,8 +73,6 @@
                     </view>
                     <connections>
                         <outlet property="diariesCollectionView" destination="gLt-m0-B3d" id="EQU-aG-WH2"/>
-                        <outlet property="petsTopConstraint" destination="hte-Vv-mZB" id="kPj-H0-ACp"/>
-                        <outlet property="selectedPetsCollectionView" destination="ixt-sb-OKN" id="leP-kt-3bG"/>
                         <outlet property="statusImage" destination="rdu-qg-M1m" id="fbz-kP-xli"/>
                         <outlet property="statusLabel" destination="Xbn-qE-bRo" id="Eax-yC-q8q"/>
                     </connections>
@@ -396,7 +375,7 @@
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="message" catalog="system" width="128" height="113"/>
         <namedColor name="main">
-            <color red="0.35699999332427979" green="0.61000001430511475" blue="0.60699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803921568627" green="0.61176470588235299" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

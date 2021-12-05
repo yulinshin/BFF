@@ -1,5 +1,5 @@
 //
-//  DiaryVC+DiffDataSource.swift
+//  UserDiaries+DiffDataSource.swift
 //  BFF
 //
 //  Created by yulin on 2021/10/22.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension DiaryViewController {
+extension UserDiariesViewController {
 
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
@@ -62,23 +62,6 @@ extension DiaryViewController {
             cell?.configure(with: PhotoCellViewModel(with: imageStr))
 
             return cell
-        }
-
-        return dataSource
-
-    }
-
-    func makePetsDataSource() -> DataSource {
-
-        let dataSource = DataSource(collectionView: selectedPetsCollectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
-
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedPetsCollectionViewCell.identifier, for: indexPath) as? SelectedPetsCollectionViewCell
-
-            guard let imageStr = item.pet?.petThumbnail?.url,
-                  let petId = item.pet?.petId else { return cell }
-            cell?.configure(with: PhotoCellViewModel(with: imageStr), petId: petId)
-            return cell
-
         }
 
         return dataSource

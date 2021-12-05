@@ -3,7 +3,6 @@
 //  BFF
 //
 //  Created by yulin on 2021/10/18.
-//  Refactor by yulin on 2021/12/02.
 //
 
 import Foundation
@@ -48,6 +47,9 @@ class FirebaseManager {
     static let shared = FirebaseManager()
     lazy var dataBase = Firestore.firestore()
     lazy var storage = Storage.storage()
+    var publicDiaryPagingLastDoc: QueryDocumentSnapshot?
+    var petDiaryPagingLastDoc: QueryDocumentSnapshot?
+    var userDiaryPagingLastDoc: QueryDocumentSnapshot?
 
     static var userId: String {
         Auth.auth().currentUser?.uid ?? ""

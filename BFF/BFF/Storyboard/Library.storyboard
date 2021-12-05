@@ -36,7 +36,7 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="全部"/>
                                         <connections>
-                                            <action selector="showAllHostipal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="6iz-If-A1t"/>
+                                            <action selector="showAllHospital:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="dPD-7A-yIR"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1e-pL-09U">
@@ -45,7 +45,7 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="一般寵物"/>
                                         <connections>
-                                            <action selector="showNormailHostipal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="n9s-86-ctp"/>
+                                            <action selector="showNormalHospital:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="nAN-Y4-sAv"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKw-vs-8Iq">
@@ -54,7 +54,7 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="特殊寵物"/>
                                         <connections>
-                                            <action selector="showSpecialHostipal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="f8o-Kt-C7U"/>
+                                            <action selector="showSpecialHostipal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Ave-yw-SAB"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -214,7 +214,7 @@
     </scenes>
     <resources>
         <namedColor name="main">
-            <color red="0.35699999332427979" green="0.61000001430511475" blue="0.60699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803921568627" green="0.61176470588235299" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

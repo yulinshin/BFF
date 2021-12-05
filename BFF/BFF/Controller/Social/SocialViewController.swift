@@ -1,5 +1,5 @@
 //
-//  DiaryViewController.swift
+//  SocialViewController.swift
 //  BFF
 //
 //  Created by yulin on 2021/10/18.
@@ -20,7 +20,7 @@ class SocialViewController: UIViewController {
 
     var showSelectedPetsCollectionView = true
 
-    var diaryWallViewModel = DiaryWallViewModel()
+    var socialDiaryWallViewModel = SocialDiaryWallViewModel()
 
     var diaries = [Item]() {
         didSet {
@@ -40,7 +40,7 @@ class SocialViewController: UIViewController {
 
     var showPets = [String]() {
         didSet {
-            diaryWallViewModel.filter(petIds: showPets)
+//            SocialDiaryWallViewModel.filter(petIds: showPets)
         }
     }
 
@@ -67,7 +67,7 @@ class SocialViewController: UIViewController {
         self.navigationController?.title = "隨意逛"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Filter"), style: .done, target: self, action: #selector(switchShowList))
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.mainColor
-        diaryWallViewModel.showingDiaries.bind {  [weak self] diaries in
+        socialDiaryWallViewModel.showingDiaries.bind {  [weak self] diaries in
 
             var diaryItems = [Item]()
 
@@ -93,7 +93,7 @@ class SocialViewController: UIViewController {
 
         }
 
-        diaryWallViewModel.fetchDiary()
+        socialDiaryWallViewModel.fetchUserDiaries()
         fetchData()
 
         NetStatusManger.share.startMonitoring()
