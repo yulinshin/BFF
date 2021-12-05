@@ -149,10 +149,9 @@ class HomePageViewController: UIViewController {
 
     private func showPetDiaries(pet: Pet) {
         let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: DiaryViewController.identifier) as? DiaryViewController else { return }
+        guard let controller = storyboard.instantiateViewController(withIdentifier: UserDiariesViewController.identifier) as? UserDiariesViewController else { return }
         controller.title = "\(pet.name)的寵物日記"
-        controller.diaryWallViewModel.petIds = [pet.petId]
-        controller.showSelectedPetsCollectionView = false
+        controller.userDiaryWallViewModel.petIds = [pet.petId]
         self.navigationController?.show(controller, sender: nil)
     }
 
@@ -273,8 +272,7 @@ extension HomePageViewController: UICollectionViewDelegate {
 
                 let storyboard = UIStoryboard(name: "Diary", bundle: nil)
 
-                guard let controller = storyboard.instantiateViewController(withIdentifier: DiaryViewController.identifier) as? DiaryViewController else { return }
-                controller.showSelectedPetsCollectionView = false
+                guard let controller = storyboard.instantiateViewController(withIdentifier: UserDiariesViewController.identifier) as? UserDiariesViewController else { return }
 
                 self.navigationController?.show(controller, sender: nil)
 

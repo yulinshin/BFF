@@ -1,5 +1,5 @@
 //
-//  DiaryVC+DiffDataSource.swift
+//  UserDiaries+DiffDataSource.swift
 //  BFF
 //
 //  Created by yulin on 2021/10/22.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension DiaryViewController {
+extension UserDiariesViewController {
 
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>

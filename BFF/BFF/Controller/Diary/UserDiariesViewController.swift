@@ -1,5 +1,5 @@
 //
-//  DiaryViewController.swift
+//  UserDiariesViewController.swift
 //  BFF
 //
 //  Created by yulin on 2021/10/18.
@@ -7,30 +7,17 @@
 
 import UIKit
 
-class DiaryViewController: UIViewController {
+class UserDiariesViewController: UIViewController {
 
     @IBOutlet weak var diariesCollectionView: UICollectionView!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var statusImage: UIImageView!
 
-    private var lastContentOffset: CGFloat = 0
+    static var identifier = "UserDiariesViewController"
 
     var layoutType = LayoutType.grid
-
-    var showSelectedPetsCollectionView = true
-    static var identifier = "DiaryViewController"
-
-    var diaryWallViewModel = DiaryWallViewModel()
-    var diaries = [Item]() {
-        didSet {
-            applySnapshot()
-            diariesCollectionView.reloadData()
-        }
-    }
-
+    var userDiaryWallViewModel = UserDiaryWallViewModel()
     var showPets = [String]()
-
-    private lazy var diariesDataSource = makeDiariesDataSource()
 
     deinit {
         print("DiaryViewController DIE")
@@ -38,12 +25,18 @@ class DiaryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        diaryWallViewModel.fetchUserDiaries()
+        userDiaryWallViewModel.collectionView = diariesCollectionView
         diariesCollectionView.delegate = self
+        diariesCollectionView.dataSource = userDiaryWallViewModel.diariesDataSource
+        userDiaryWallViewModel.fetchUserDiaries()
+        userDiaryWallViewModel.didUpDateData = {
+            self.statusImage.isHidden = true
+            self.statusLabel.isHidden = true
+        }
         let diaryNib = UINib(nibName: "DairyPhotoCell", bundle: nil)
         diariesCollectionView.register(diaryNib, forCellWithReuseIdentifier: DairyPhotoCell.identifier)
-        diariesCollectionView.dataSource = diariesDataSource
         diariesCollectionView.collectionViewLayout = createLayout(type: .grid)
+
         self.navigationController?.navigationBar.tintColor = UIColor.mainColor
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Filter"), style: .done, target: self, action: #selector(switchShowList))
@@ -52,31 +45,7 @@ class DiaryViewController: UIViewController {
         statusLabel.text = "翻閱日記中..."
         statusImage.isHidden = false
         statusImage.image = UIImage(named: "LoadDiary")
-
-        diaryWallViewModel.showingDiaries.bind {  [weak self] diaries in
-
-            var diaryItems = [Item]()
-            
-            diaries.forEach { diary in
-                    diaryItems.append(Item.diary(diary))
-            }
-            self?.diaries = diaryItems
-
-            if diaryItems.count != 0 {
-                self?.statusLabel.isHidden = true
-                self?.statusImage.isHidden = true
-
-            } else {
-                self?.statusLabel.isHidden = false
-                self?.statusLabel.text = "尚未新增毛小孩日記唷！"
-                self?.statusImage.image = UIImage(named: "NoDiary")
-                self?.statusImage.isHidden = false
-            }
-
-        }
-
-        diaryWallViewModel.getDataFailure = {  [weak self] in
-
+        userDiaryWallViewModel.getDataFailure = {  [weak self] in
                 self?.statusLabel.text = "無法取得毛小孩日記！ 請確認網路連線狀態"
                 self?.statusImage.image = UIImage(named: "NoDiary")
         }
@@ -119,13 +88,7 @@ class DiaryViewController: UIViewController {
             diariesCollectionView.reloadData()
         }
     }
-
-    private func applySnapshot(animatingDifferences: Bool = true) {
-        var diariesSnapshot = Snapshot()
-        diariesSnapshot.appendSections([.all])
-        diariesSnapshot.appendItems(diaries, toSection: .all)
-        diariesDataSource.apply(diariesSnapshot, animatingDifferences: false)
-    }
+    
 
     // MARK: - diariesCollectionViewCompositionLayout
 
@@ -244,13 +207,13 @@ class DiaryViewController: UIViewController {
 
 }
 
-extension DiaryViewController: UICollectionViewDelegate {
+extension UserDiariesViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
             let storyboard = UIStoryboard(name: "Diary", bundle: nil)
             guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
-            controller.viewModel = DetailViewModel(from: diaries[indexPath.row].diary!)
+        controller.viewModel = DetailViewModel(from: userDiaryWallViewModel.showingDiaries.value[indexPath.row])
             self.navigationController?.show(controller, sender: nil)
 
     }

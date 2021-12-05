@@ -3,7 +3,6 @@
 //  BFF
 //
 //  Created by yulin on 2021/10/18.
-//  Refactor by yulin on 2021/12/02.
 //
 
 import Foundation

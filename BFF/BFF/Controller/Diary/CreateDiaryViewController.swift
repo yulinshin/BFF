@@ -1,5 +1,5 @@
 //
-//  CreatDiaryViewController.swift
+//  CreateDiaryViewController.swift
 //  BFF
 //
 //  Created by yulin on 2021/10/19.

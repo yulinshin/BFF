@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		45558D494B32B41E1D9584E8 /* Pods_BFFTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894DB1F4DE51572883F27B0D /* Pods_BFFTests.framework */; };
-		6200C5FB272296970074DB64 /* DiaryVC+DiffDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6200C5FA272296970074DB64 /* DiaryVC+DiffDataSource.swift */; };
+		6200C5FB272296970074DB64 /* UserDiariesVC+DiffDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6200C5FA272296970074DB64 /* UserDiariesVC+DiffDataSource.swift */; };
 		6202522F2750B0EB00E8CABD /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6202522E2750B0EB00E8CABD /* UIColorExtension.swift */; };
 		62119A09274F4188006A3D4E /* FirebaseManger+Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62119A08274F4188006A3D4E /* FirebaseManger+Diary.swift */; };
 		62119A0B274F47A8006A3D4E /* FirebaseManger+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62119A0A274F47A8006A3D4E /* FirebaseManger+User.swift */; };
@@ -31,7 +31,7 @@
 		624D5C4B2731321700602125 /* MapMarkerWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 624D5C4A2731321700602125 /* MapMarkerWindowView.xib */; };
 		624D5C4D273132D900602125 /* MapMarkerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624D5C4C273132D900602125 /* MapMarkerWindow.swift */; };
 		62540417271F187D004F49DC /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62540416271F187D004F49DC /* DetailViewModel.swift */; };
-		6254041B271F219B004F49DC /* DiaryWallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6254041A271F219B004F49DC /* DiaryWallViewModel.swift */; };
+		6254041B271F219B004F49DC /* SocialDiaryWallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6254041A271F219B004F49DC /* SocialDiaryWallViewModel.swift */; };
 		6254041D271F23DD004F49DC /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6254041C271F23DD004F49DC /* Box.swift */; };
 		62548773272F80C90007B080 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62548772272F80C90007B080 /* Date+Extension.swift */; };
 		62603AD227278BDC00467E2D /* SupplyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62603AD127278BDC00467E2D /* SupplyDetailViewController.swift */; };
@@ -48,11 +48,11 @@
 		62617495273DF552006F3635 /* BlockPetsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62617494273DF552006F3635 /* BlockPetsListTableViewController.swift */; };
 		62617497273DF5FD006F3635 /* BlocksVeiwModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62617496273DF5FD006F3635 /* BlocksVeiwModels.swift */; };
 		6264A85A2736BA6200FACF97 /* ChatListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6264A8592736BA6200FACF97 /* ChatListTableViewController.swift */; };
-		6267CDED2733BBD600CFA28D /* DiarysTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6267CDEC2733BBD600CFA28D /* DiarysTableViewController.swift */; };
+		6267CDED2733BBD600CFA28D /* ExploreDiariesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6267CDEC2733BBD600CFA28D /* ExploreDiariesViewController.swift */; };
 		627648A8271D6B840026C3C3 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627648A7271D6B840026C3C3 /* FirebaseManager.swift */; };
 		627ADBCB272A7876000D0457 /* FillSupplyAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627ADBC2272A3370000D0457 /* FillSupplyAlertView.swift */; };
 		627FC66B27478B9000E4453B /* NChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627FC66A27478B8F00E4453B /* NChatListViewModel.swift */; };
-		6285C797271DD08D006E13EC /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6285C796271DD08D006E13EC /* DiaryViewController.swift */; };
+		6285C797271DD08D006E13EC /* UserDiariesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6285C796271DD08D006E13EC /* UserDiariesViewController.swift */; };
 		6285C79A271DD519006E13EC /* DairyPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6285C798271DD519006E13EC /* DairyPhotoCell.swift */; };
 		6285C79B271DD519006E13EC /* DairyPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6285C799271DD519006E13EC /* DairyPhotoCell.xib */; };
 		6285C79E271DE49A006E13EC /* SelectedPetsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6285C79C271DE49A006E13EC /* SelectedPetsCollectionViewCell.swift */; };
@@ -132,6 +132,7 @@
 		62D454BE27267D82009DF0FF /* SupplyListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62D454BC27267D82009DF0FF /* SupplyListTableViewCell.xib */; };
 		62D454C027268522009DF0FF /* SupplyCellViewMdoel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D454BF27268522009DF0FF /* SupplyCellViewMdoel.swift */; };
 		62D454C227268CB6009DF0FF /* SuppliesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D454C127268CB6009DF0FF /* SuppliesViewModel.swift */; };
+		62D72CA32759FB7F00DAC577 /* UserDiaryWallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D72CA22759FB7F00DAC577 /* UserDiaryWallViewModel.swift */; };
 		62DC920E27473AFE001BB69F /* NetStatusManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC920D27473AFE001BB69F /* NetStatusManger.swift */; };
 		62EF088E2723BCAF006C7D62 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EF088D2723BCAF006C7D62 /* File.swift */; };
 		62FC6192272586FD00292710 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FC6191272586FD00292710 /* Home.storyboard */; };
@@ -157,7 +158,7 @@
 /* Begin PBXFileReference section */
 		4DF47BE281594C125C9DF5FB /* Pods_BFF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BFF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		560E57137BD3932E8DA0D583 /* Pods-BFF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BFF.release.xcconfig"; path = "Target Support Files/Pods-BFF/Pods-BFF.release.xcconfig"; sourceTree = "<group>"; };
-		6200C5FA272296970074DB64 /* DiaryVC+DiffDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiaryVC+DiffDataSource.swift"; sourceTree = "<group>"; };
+		6200C5FA272296970074DB64 /* UserDiariesVC+DiffDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDiariesVC+DiffDataSource.swift"; sourceTree = "<group>"; };
 		6202522E2750B0EB00E8CABD /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		62119A08274F4188006A3D4E /* FirebaseManger+Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManger+Diary.swift"; sourceTree = "<group>"; };
 		62119A0A274F47A8006A3D4E /* FirebaseManger+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManger+User.swift"; sourceTree = "<group>"; };
@@ -183,7 +184,7 @@
 		624D5C4A2731321700602125 /* MapMarkerWindowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapMarkerWindowView.xib; sourceTree = "<group>"; };
 		624D5C4C273132D900602125 /* MapMarkerWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerWindow.swift; sourceTree = "<group>"; };
 		62540416271F187D004F49DC /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
-		6254041A271F219B004F49DC /* DiaryWallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryWallViewModel.swift; sourceTree = "<group>"; };
+		6254041A271F219B004F49DC /* SocialDiaryWallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDiaryWallViewModel.swift; sourceTree = "<group>"; };
 		6254041C271F23DD004F49DC /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		62548772272F80C90007B080 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		62603AD127278BDC00467E2D /* SupplyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplyDetailViewController.swift; sourceTree = "<group>"; };
@@ -201,11 +202,11 @@
 		62617494273DF552006F3635 /* BlockPetsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPetsListTableViewController.swift; sourceTree = "<group>"; };
 		62617496273DF5FD006F3635 /* BlocksVeiwModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksVeiwModels.swift; sourceTree = "<group>"; };
 		6264A8592736BA6200FACF97 /* ChatListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListTableViewController.swift; sourceTree = "<group>"; };
-		6267CDEC2733BBD600CFA28D /* DiarysTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiarysTableViewController.swift; sourceTree = "<group>"; };
+		6267CDEC2733BBD600CFA28D /* ExploreDiariesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDiariesViewController.swift; sourceTree = "<group>"; };
 		627648A7271D6B840026C3C3 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		627ADBC2272A3370000D0457 /* FillSupplyAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillSupplyAlertView.swift; sourceTree = "<group>"; };
 		627FC66A27478B8F00E4453B /* NChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NChatListViewModel.swift; sourceTree = "<group>"; };
-		6285C796271DD08D006E13EC /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
+		6285C796271DD08D006E13EC /* UserDiariesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDiariesViewController.swift; sourceTree = "<group>"; };
 		6285C798271DD519006E13EC /* DairyPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyPhotoCell.swift; sourceTree = "<group>"; };
 		6285C799271DD519006E13EC /* DairyPhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DairyPhotoCell.xib; sourceTree = "<group>"; };
 		6285C79C271DE49A006E13EC /* SelectedPetsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPetsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -285,6 +286,7 @@
 		62D454BC27267D82009DF0FF /* SupplyListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SupplyListTableViewCell.xib; sourceTree = "<group>"; };
 		62D454BF27268522009DF0FF /* SupplyCellViewMdoel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplyCellViewMdoel.swift; sourceTree = "<group>"; };
 		62D454C127268CB6009DF0FF /* SuppliesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuppliesViewModel.swift; sourceTree = "<group>"; };
+		62D72CA22759FB7F00DAC577 /* UserDiaryWallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDiaryWallViewModel.swift; sourceTree = "<group>"; };
 		62DC920D27473AFE001BB69F /* NetStatusManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetStatusManger.swift; sourceTree = "<group>"; };
 		62EF088D2723BCAF006C7D62 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		62FC6191272586FD00292710 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -353,7 +355,8 @@
 				62B617D427365EA50062BBE5 /* CommentViewModel.swift */,
 				621FCEAC271E5B990049F42C /* PhotoCellViewModel.swift */,
 				62540416271F187D004F49DC /* DetailViewModel.swift */,
-				6254041A271F219B004F49DC /* DiaryWallViewModel.swift */,
+				6254041A271F219B004F49DC /* SocialDiaryWallViewModel.swift */,
+				62D72CA22759FB7F00DAC577 /* UserDiaryWallViewModel.swift */,
 				624C8E072720473F00646C71 /* CreatePetViewModel.swift */,
 				6249617C2720F16E0079B244 /* HomePageViewModel.swift */,
 				62D454BF27268522009DF0FF /* SupplyCellViewMdoel.swift */,
@@ -537,8 +540,8 @@
 			isa = PBXGroup;
 			children = (
 				62CF7A97271EEF68003A25C4 /* DiaryDetailViewController.swift */,
-				6200C5FA272296970074DB64 /* DiaryVC+DiffDataSource.swift */,
-				6285C796271DD08D006E13EC /* DiaryViewController.swift */,
+				6200C5FA272296970074DB64 /* UserDiariesVC+DiffDataSource.swift */,
+				6285C796271DD08D006E13EC /* UserDiariesViewController.swift */,
 				6297925B271E947C00B68E86 /* CreateDiaryViewController.swift */,
 				6297925D271EAD8900B68E86 /* CreatDiaryVC+UpLoadImage.swift */,
 			);
@@ -550,7 +553,7 @@
 			children = (
 				62B617D227365DF20062BBE5 /* CommentTableViewController.swift */,
 				6264A8592736BA6200FACF97 /* ChatListTableViewController.swift */,
-				6267CDEC2733BBD600CFA28D /* DiarysTableViewController.swift */,
+				6267CDEC2733BBD600CFA28D /* ExploreDiariesViewController.swift */,
 				62B617E02736B1C20062BBE5 /* ChatViewController.swift */,
 				62C6E5E9272F94110097AEE1 /* SocialVC-Extention.swift */,
 				62C6E5E7272F93750097AEE1 /* SocialViewController.swift */,
@@ -1043,7 +1046,7 @@
 				62548773272F80C90007B080 /* Date+Extension.swift in Sources */,
 				62930C2C272D24F700BC1908 /* UserMO+CoreDataProperties.swift in Sources */,
 				62C6E5E8272F93750097AEE1 /* SocialViewController.swift in Sources */,
-				6285C797271DD08D006E13EC /* DiaryViewController.swift in Sources */,
+				6285C797271DD08D006E13EC /* UserDiariesViewController.swift in Sources */,
 				62930C18272D0C6800BC1908 /* PicMO+CoreDataProperties.swift in Sources */,
 				62603AD827278D9F00467E2D /* SupplyInventoryTableViewCell.swift in Sources */,
 				62930C1C272D0E2B00BC1908 /* PetMO+CoreDataProperties.swift in Sources */,
@@ -1060,12 +1063,12 @@
 				62892FED2732D092001A7B32 /* ImageSliderView.swift in Sources */,
 				62BA0101272E7DF400A19478 /* PetHealthCardListTableViewCell.swift in Sources */,
 				62892FE42732376D001A7B32 /* SignInViewController.swift in Sources */,
-				6267CDED2733BBD600CFA28D /* DiarysTableViewController.swift in Sources */,
+				6267CDED2733BBD600CFA28D /* ExploreDiariesViewController.swift in Sources */,
 				62979258271E64D800B68E86 /* Diary.swift in Sources */,
 				6249617D2720F16E0079B244 /* HomePageViewModel.swift in Sources */,
 				624D5C492730CD7D00602125 /* MapViewController.swift in Sources */,
 				62892FE2273210F3001A7B32 /* bookViewModel.swift in Sources */,
-				6254041B271F219B004F49DC /* DiaryWallViewModel.swift in Sources */,
+				6254041B271F219B004F49DC /* SocialDiaryWallViewModel.swift in Sources */,
 				62EF088E2723BCAF006C7D62 /* File.swift in Sources */,
 				62119A0D274F4865006A3D4E /* FirebaseManger+Pet.swift in Sources */,
 				62B617DB2736A5D60062BBE5 /* Message.swift in Sources */,
@@ -1104,7 +1107,7 @@
 				6285C79E271DE49A006E13EC /* SelectedPetsCollectionViewCell.swift in Sources */,
 				629FF5C5271D5FCF00C7C94A /* Goal.swift in Sources */,
 				62930C1B272D0E2B00BC1908 /* PetMO+CoreDataClass.swift in Sources */,
-				6200C5FB272296970074DB64 /* DiaryVC+DiffDataSource.swift in Sources */,
+				6200C5FB272296970074DB64 /* UserDiariesVC+DiffDataSource.swift in Sources */,
 				627FC66B27478B9000E4453B /* NChatListViewModel.swift in Sources */,
 				62FC6194272588F200292710 /* TabBarViewController.swift in Sources */,
 				629FF5B8271D413C00C7C94A /* PetNotificationCollectionViewCell.swift in Sources */,
@@ -1115,6 +1118,7 @@
 				6297925E271EAD8900B68E86 /* CreatDiaryVC+UpLoadImage.swift in Sources */,
 				62603AE52727B64F00467E2D /* AddNewItemTableViewCell.swift in Sources */,
 				62119A12274F7139006A3D4E /* NavgationBar.swift in Sources */,
+				62D72CA32759FB7F00DAC577 /* UserDiaryWallViewModel.swift in Sources */,
 				62C80D182720115B00EE2FB1 /* CreatePetViewController.swift in Sources */,
 				62C80D1C2720117800EE2FB1 /* PetInfoTableTableViewCell.swift in Sources */,
 				62B617D1273534D70062BBE5 /* UILabel+Extension.swift in Sources */,

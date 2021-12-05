@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DiaryWallViewModel {
+class SocialDiaryWallViewModel {
 
     var petIds: [String]?
     var diaries = Box([Diary]())

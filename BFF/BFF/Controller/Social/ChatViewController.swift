@@ -1,4 +1,9 @@
-
+//
+//  ChatViewController.swift
+//  BFF
+//
+//  Created by yulin on 2021/10/18.
+//
 import UIKit
 import FirebaseAuth
 
