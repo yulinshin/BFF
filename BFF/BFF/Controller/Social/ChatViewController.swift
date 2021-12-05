@@ -1,11 +1,9 @@
 //
-//  CustomerServiceViewController.swift
-//  STYLiSH
+//  ChatViewController.swift
+//  BFF
 //
-//  Created by Allie T on 2021/10/3.
-//  Copyright © 2021 WU CHIH WEI. All rights reserved.
+//  Created by yulin on 2021/10/18.
 //
-
 import UIKit
 import FirebaseAuth
 

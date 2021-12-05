@@ -29,112 +29,111 @@ extension FirebaseManager {
 
         do {
             try document.setData(from: diary)
-            completion(.success("Success upload Diary-\(diary.diaryId)"))
+            completion(.success(diary.diaryId))
         } catch {
             completion(.failure(FireBaseError.gotFirebaseError(error)))
         }
     }
 
-    func fetchPublicDiaries(completion: @escaping (Result<[Diary], Error>) -> Void) {
+    func fetchPublicDiaries(completion: @escaping (Result<[Diary], FireBaseError>) -> Void) {
 
-        dataBase.collection(Collection.diaries.rawValue).whereField("isPublic", isEqualTo: true).getDocuments { (querySnapshot, error) in
+        var documentsRef = dataBase.collection(Collection.diaries.rawValue)
+            .whereField("isPublic", isEqualTo: true)
+            .order(by: "createdTime", descending: true)
+            .limit(to: 10)
 
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                var diaries = [Diary]()
-                for document in querySnapshot!.documents {
+        if let publicDiaryPagingLastDoc = publicDiaryPagingLastDoc {
+            documentsRef = documentsRef.start(afterDocument: publicDiaryPagingLastDoc)
+        }
 
-                    do {
-                        if let diary = try document.data(as: Diary.self, decoder: Firestore.Decoder()) {
-                            diaries.append(diary)
-                        }
+        documentsRef.getDocuments { (querySnapshot, error) in
 
-                    } catch {
-
-                        completion(.failure(error))
-                    }
-                }
-
-                let sortDiary = diaries.sorted { firstDiary, secondDiary in
-                    return firstDiary.createdTime.dateValue() > secondDiary.createdTime.dateValue()
-                }
-                completion(.success(sortDiary))
+            guard let querySnapshot = querySnapshot else {
+                print("Error fetching document: \(error!)")
+                completion(.failure(FireBaseError.gotFirebaseError(error!)))
+                return
             }
+
+            self.publicDiaryPagingLastDoc = querySnapshot.documents.last
+            let diaries = querySnapshot.documents.compactMap({
+                try? $0.data(as: Diary.self)
+            })
+            completion(.success(diaries))
+
         }
     }
 
-    func fetchDiary(diaryId: String, completion: @escaping (Result<Diary, Error>) -> Void) {
+    func fetchDiary(diaryId: String, completion: @escaping (Result<Diary, FireBaseError>) -> Void) {
 
         dataBase.collection(Collection.diaries.rawValue).document(diaryId).getDocument { (document, error) in
 
-            if let document = document, document.exists {
-                do {
-                    if let diary = try document.data(as: Diary.self, decoder: Firestore.Decoder()) {
-                        completion(.success(diary))
-                    }
-                } catch {
-                    completion(.failure(error))
+            guard let document = document, document.exists else {
+                print("Error fetching document: \(error!)")
+                completion(.failure(FireBaseError.gotFirebaseError(error!)))
+                return
+            }
+
+            do {
+                if let diary = try document.data(as: Diary.self, decoder: Firestore.Decoder()) {
+                    completion(.success(diary))
                 }
+            } catch {
+                completion(.failure(FireBaseError.gotFirebaseError(error)))
             }
         }
     }
 
-    func fetchPetAllDiaries(petId: String, completion: @escaping (Result<[Diary], Error>) -> Void) {
+    func fetchPetAllDiaries(petId: String, completion: @escaping (Result<[Diary], FireBaseError>) -> Void) {
 
-        dataBase.collection(Collection.diaries.rawValue).whereField("petId", isEqualTo: petId).getDocuments { (querySnapshot, error) in
+        var documentsRef = dataBase.collection(Collection.diaries.rawValue)
+            .whereField("petId", isEqualTo: petId)
+            .order(by: "createdTime", descending: true)
+            .limit(to: 10)
 
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                var diaries = [Diary]()
-                for document in querySnapshot!.documents {
+        if let petDiaryPagingLastDoc = petDiaryPagingLastDoc {
+            documentsRef = documentsRef.start(afterDocument: petDiaryPagingLastDoc)
+        }
 
-                    do {
-                        if let diary = try document.data(as: Diary.self, decoder: Firestore.Decoder()) {
-                            diaries.append(diary)
-                        }
+        documentsRef.getDocuments { (querySnapshot, error) in
 
-                    } catch {
-
-                        completion(.failure(error))
-                    }
-                }
-
-                let sortDiary = diaries.sorted { firstDiary, secondDiary in
-                    return firstDiary.createdTime.dateValue() > secondDiary.createdTime.dateValue()
-                }
-                completion(.success(sortDiary))
+            guard let querySnapshot = querySnapshot else {
+                print("Error fetching document: \(error!)")
+                completion(.failure(FireBaseError.gotFirebaseError(error!)))
+                return
             }
+
+            self.petDiaryPagingLastDoc = querySnapshot.documents.last
+            let diaries = querySnapshot.documents.compactMap({
+                try? $0.data(as: Diary.self)
+            })
+            completion(.success(diaries))
         }
     }
 
-    func fetchDiaries(completion: @escaping (Result<[Diary], Error>) -> Void) {
+    func fetchDiaries(completion: @escaping (Result<[Diary], FireBaseError>) -> Void) {
 
-        dataBase.collection(Collection.diaries.rawValue).whereField("userId", isEqualTo: FirebaseManager.userId).getDocuments { (querySnapshot, error) in
+        var documentsRef = dataBase.collection(Collection.diaries.rawValue)
+            .whereField("userId", isEqualTo: FirebaseManager.userId)
+            .order(by: "createdTime", descending: true)
+            .limit(to: 10)
 
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                var diaries = [Diary]()
-                for document in querySnapshot!.documents {
+        if let userDiaryPagingLastDoc = userDiaryPagingLastDoc {
+            documentsRef = documentsRef.start(afterDocument: userDiaryPagingLastDoc)
+        }
 
-                    do {
-                        if let diary = try document.data(as: Diary.self, decoder: Firestore.Decoder()) {
-                            diaries.append(diary)
-                        }
+        documentsRef.getDocuments { (querySnapshot, error) in
 
-                    } catch {
-
-                        completion(.failure(error))
-                    }
-                }
-
-                let sortDiary = diaries.sorted { firstDiary, secondDiary in
-                    return firstDiary.createdTime.dateValue() > secondDiary.createdTime.dateValue()
-                }
-                completion(.success(sortDiary))
+            guard let querySnapshot = querySnapshot else {
+                print("Error fetching document: \(error!)")
+                completion(.failure(FireBaseError.gotFirebaseError(error!)))
+                return
             }
+
+            self.userDiaryPagingLastDoc = querySnapshot.documents.last
+            let diaries = querySnapshot.documents.compactMap({
+                try? $0.data(as: Diary.self)
+            })
+            completion(.success(diaries))
         }
     }
 

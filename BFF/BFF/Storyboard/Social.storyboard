@@ -198,7 +198,7 @@
         <!--隨意逛-->
         <scene sceneID="nbR-cB-p7r">
             <objects>
-                <viewController storyboardIdentifier="diariesViewController" id="LU6-ZP-551" customClass="DiariesViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExploreDiariesViewController" id="LU6-ZP-551" customClass="ExploreDiariesViewController" customModule="BFF" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oLi-Je-bL9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -432,7 +432,7 @@
         <image name="message" catalog="system" width="128" height="113"/>
         <image name="paperplane.fill" catalog="system" width="128" height="118"/>
         <namedColor name="main">
-            <color red="0.35699999332427979" green="0.61000001430511475" blue="0.60699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803921568627" green="0.61176470588235299" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

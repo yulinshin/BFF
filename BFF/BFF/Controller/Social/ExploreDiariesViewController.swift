@@ -1,5 +1,5 @@
 //
-//  diariesTableViewController.swift
+//  ExploreDiariesViewController.swift
 //  BFF
 //
 //  Created by yulin on 2021/11/4.
@@ -7,14 +7,17 @@
 
 import UIKit
 import FirebaseAuth
+import MJRefresh
 
-class DiariesViewController: UIViewController {
+class ExploreDiariesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var backGroundView: UIView!
 
-    var viewModel = DiaryWallViewModel()
+    var viewModel = SocialDiaryWallViewModel()
+    let header = MJRefreshNormalHeader()
+    let footer = MJRefreshAutoNormalFooter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +26,21 @@ class DiariesViewController: UIViewController {
         tableView.dataSource = self
         viewModel.didUpDateData = { [weak self] in
             self?.tableView.reloadData()
+            self?.tableView!.mj_header?.endRefreshing()
+            self?.tableView!.mj_footer?.endRefreshing()
         }
+        viewModel.noMoreData = { [weak self] in
+            self?.tableView.mj_footer?.endRefreshingWithNoMoreData()
+        }
+        header.setRefreshingTarget(self, refreshingAction: #selector(ExploreDiariesViewController.headerRefresh))
+        self.tableView!.mj_header = header
+        footer.setRefreshingTarget(self, refreshingAction: #selector(ExploreDiariesViewController.footerRefresh))
+        self.tableView!.mj_footer = footer
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.fetchAllDiary()
+        viewModel.fetchPublicDiaries()
         tabBarController?.tabBar.backgroundColor = .white
     }
 
@@ -59,7 +71,7 @@ class DiariesViewController: UIViewController {
 
 // MARK: - Table view data source
 
-extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
+extension ExploreDiariesViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
@@ -173,6 +185,15 @@ extension DiariesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
 
+}
+
+extension ExploreDiariesViewController {
+    @objc func headerRefresh() {
+        viewModel.fetchPublicDiaries()
+    }
+    @objc func footerRefresh() {
+        viewModel.fetchPublicDiaries(isFetchMore: true)
+    }
 }
 
 class DiaryViewCell: UITableViewCell {

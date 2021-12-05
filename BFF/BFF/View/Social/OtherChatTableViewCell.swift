@@ -1,9 +1,8 @@
 //
-//  CustomerServiceTableViewCell.swift
-//  STYLiSH
+//  OtherChatTableViewCell.swift
+//  BFF
 //
-//  Created by Allie T on 2021/10/3.
-//  Copyright © 2021 WU CHIH WEI. All rights reserved.
+//  Created by yulin on 2021/10/18.
 //
 
 import UIKit
@@ -14,7 +13,7 @@ class OtherChatTableViewCell: UITableViewCell {
     
     @IBOutlet weak var chatBubbleContent: UILabel!
     
-    @IBOutlet weak var chectView: UIView!
+    @IBOutlet weak var chatView: UIView!
 
     var identifier = "OtherChatTableViewCell"
 
@@ -23,8 +22,8 @@ class OtherChatTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        chectView.layer.cornerRadius = 10
-        chectView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner]
+        chatView.layer.cornerRadius = 10
+        chatView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner]
         profileImg.layer.cornerRadius = profileImg.frame.height/2
         self.selectionStyle = .none
     }
