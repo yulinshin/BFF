@@ -7,6 +7,21 @@
 
 import Foundation
 
+extension DateFormatter {
+
+    static let dateWithTimeForMatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy hh:mm"
+        return dateFormatter
+    }()
+
+    static let dateForMatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy"
+        return dateFormatter
+    }()
+
+}
 
 extension Date {
 
@@ -19,18 +34,13 @@ extension Date {
 
     func toString() -> String {
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd-yyyy hh:mm"
-        return dateFormatter.string(from: self)
+        return DateFormatter.dateWithTimeForMatter.string(from: self)
 
     }
 
-
     func getAge(from strData: String) -> String {
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd-yyyy"
-        guard let date = dateFormatter.date(from: strData) else { return ""}
+        guard let date = DateFormatter.dateForMatter.date(from: strData) else { return ""}
         let now = Date()
 
         let ageComponents = Calendar.current.dateComponents([.year, .month], from: date, to: now)
