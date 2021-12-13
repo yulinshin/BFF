@@ -127,10 +127,11 @@ class HomePageViewController: UIViewController {
         FirebaseManager.shared.fetchDiary(diaryId: diaryId) { result in
             switch result {
             case .success(let diary):
-                let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-                guard let controller = storyboard.instantiateViewController(withIdentifier: DiaryDetailViewController.identifier) as? DiaryDetailViewController else { return }
-                controller.viewModel = DetailViewModel(from: diary)
-                self.navigationController?.show(controller, sender: nil)
+                if let detailController = self.storyboard?.instantiateViewController(identifier: "DiaryDetailViewController", creator: { coder in
+                   DiaryDetailViewController(coder: coder, diary: diary)
+                }) {
+                    self.navigationController?.show(detailController, sender: nil)
+                }
             case .failure(let error):
                 print(error)
             }

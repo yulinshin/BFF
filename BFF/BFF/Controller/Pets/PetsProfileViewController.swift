@@ -351,10 +351,12 @@ extension PetsProfileViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         guard let diary = viewModel?.diaries.value[indexPath.row] else { return }
-        let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
-        controller.viewModel = DetailViewModel(from: diary)
-        self.navigationController?.show(controller, sender: nil)
+
+        if let detailController = storyboard?.instantiateViewController(identifier: "Diary", creator: { coder in
+           DiaryDetailViewController(coder: coder, diary: diary)
+        }) {
+            self.navigationController?.show(detailController, sender: nil)
+        }
 
     }
 }

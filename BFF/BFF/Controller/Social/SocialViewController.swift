@@ -239,10 +239,11 @@ extension SocialViewController: UICollectionViewDelegate {
 
         } else {
 
-            let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-            guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
-            controller.viewModel = DetailViewModel(from: diaries[indexPath.row].diary!)
-            self.navigationController?.show(controller, sender: nil)
+            if let detailController = storyboard?.instantiateViewController(identifier: "Diary", creator: { coder in
+                DiaryDetailViewController(coder: coder, diary: self.diaries[indexPath.row].diary!)
+            }) {
+                self.navigationController?.show(detailController, sender: nil)
+            }
 
         }
     }

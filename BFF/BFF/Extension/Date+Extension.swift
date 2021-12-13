@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 extension Date {
 
     func daysBetweenDate(toDate: Date) -> Int {
@@ -23,6 +24,7 @@ extension Date {
         return dateFormatter.string(from: self)
 
     }
+
 
     func getAge(from strData: String) -> String {
 
