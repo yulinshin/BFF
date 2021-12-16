@@ -6,12 +6,21 @@
 //
 
 import Foundation
+import Kingfisher
+
+class SocialDiaryCellViewModel {
+    var diary = Box(Diary())
+    init(diary: Diary){
+        self.diary.value = diary
+    }
+}
+
 
 class SocialDiaryWallViewModel {
 
     var petIds: [String]?
     var diaries = Box([Diary]())
-    var showingDiaries = Box([Diary]())
+    var showingDiaries = Box([SocialDiaryCellViewModel]())
     var didUpDateData: (() -> Void)?
     var noMoreData: (() -> Void)?
     var getDataFailure: (() -> Void)?
@@ -117,7 +126,7 @@ class SocialDiaryWallViewModel {
 
         group.notify(queue: DispatchQueue.main) {
             print("group: Notify")
-            self.showingDiaries.value = self.diaries.value
+            self.showingDiaries.value = self.diaries.value.map({SocialDiaryCellViewModel(diary: $0)})
             self.filterDiaries()
         }
     }
@@ -133,12 +142,10 @@ class SocialDiaryWallViewModel {
                 if let blockUsers = user.blockUsers {
                 blockUsers.forEach({ userId in
 
-                            self.showingDiaries.value = self.showingDiaries.value.filter { diary in
-                                if diary.userId == userId {
-                                    print(self.showingDiaries.value.count)
+                            self.showingDiaries.value = self.showingDiaries.value.filter { cellViewModel in
+                                if cellViewModel.diary.value.userId == userId {
                                     return false
                                 } else {
-                                    print(self.showingDiaries.value.count)
                                     return true
                                 }
                             }
@@ -159,29 +166,26 @@ class SocialDiaryWallViewModel {
 
     func updateWhoLiked(index: Int) {
 
-        if diaries.value[index].whoLiked.contains(FirebaseManager.userId) {
+        var diary = self.showingDiaries.value[index].diary.value
 
-            diaries.value[index].whoLiked.removeAll { $0 == FirebaseManager.userId }
-              self.showingDiaries.value = self.diaries.value
+        if diary.whoLiked.contains(FirebaseManager.userId) {
+            diary.whoLiked.removeAll { $0 == FirebaseManager.userId }
 
             FirebaseManager.shared.upDateDiaryLiked(diaryId: diaries.value[index].diaryId, isLiked: false)
 
-            self.didUpDateData?()
-
         } else {
 
-            diaries.value[index].whoLiked.append(FirebaseManager.userId)
-              self.showingDiaries.value = self.diaries.value
+            diary.whoLiked.append(FirebaseManager.userId)
             FirebaseManager.shared.upDateDiaryLiked(diaryId: diaries.value[index].diaryId, isLiked: true)
 
-            self.didUpDateData?()
         }
+        self.showingDiaries.value[index].diary.value = diary
     }
 
     func blockUser(userId: String) {
         FirebaseManager.shared.updateBlockUser(blockUserId: userId)
-        self.showingDiaries.value = self.showingDiaries.value.filter { diary in
-            if diary.userId == userId {
+        self.showingDiaries.value = self.showingDiaries.value.filter { viewModel in
+            if viewModel.diary.value.userId == userId {
                 return false
             } else {
                 return true

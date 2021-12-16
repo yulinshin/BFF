@@ -36,11 +36,11 @@ class ExploreDiariesViewController: UIViewController {
         self.tableView!.mj_header = header
         footer.setRefreshingTarget(self, refreshingAction: #selector(ExploreDiariesViewController.footerRefresh))
         self.tableView!.mj_footer = footer
+        viewModel.fetchPublicDiaries()
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.fetchPublicDiaries()
         tabBarController?.tabBar.backgroundColor = .white
     }
 
@@ -79,34 +79,9 @@ extension ExploreDiariesViewController: UITableViewDelegate, UITableViewDataSour
 
         cell.setup()
 
-        cell.diaryImageView.loadImage(viewModel.showingDiaries.value[indexPath.row].images.first?.url)
-
-        cell.diaryCommentLabel.text = "\(viewModel.showingDiaries.value[indexPath.row].comments.count)"
-
-        cell.dateLabel.text = "\(viewModel.showingDiaries.value[indexPath.row].createdTime.dateValue().toString())"
-
-        cell.diaryContentLabel.text = "\(viewModel.showingDiaries.value[indexPath.row].content)"
-
-        cell.likeLabel.text = "\(viewModel.showingDiaries.value[indexPath.row].whoLiked.count)"
-
-        if viewModel.showingDiaries.value [indexPath.row].whoLiked.contains(FirebaseManager.userId) {
-            cell.likeIcon.image = UIImage(systemName: "heart.fill")
-
-        } else {
-            cell.likeIcon.image = UIImage(systemName: "heart")
-
-        }
-
-        if viewModel.showingDiaries.value[indexPath.row].userId == FirebaseManager.userId {
-            cell.settingIcon.isHidden = true
-            cell.sendMessageButton.isHidden = true
-        } else {
-            cell.settingIcon.isHidden = false
-            cell.sendMessageButton.isHidden = false
-        }
-
-        cell.petNameLabel.text = viewModel.showingDiaries.value [indexPath.row].petname
-        cell.petImageView.loadImage( viewModel.showingDiaries.value [indexPath.row].petThumbnail?.url)
+        viewModel.showingDiaries.bind { cellViewModels in
+            let viewModels =  cellViewModels[indexPath.row]
+            cell.filledData(viewModel: viewModels)
 
         cell.didTapLiked = { [weak self] in
             self?.viewModel.updateWhoLiked(index: indexPath.row)
@@ -118,27 +93,25 @@ extension ExploreDiariesViewController: UITableViewDelegate, UITableViewDataSour
         }
 
         cell.didTapComment = {  [weak self] in
-            guard let diary = self?.viewModel.showingDiaries.value[indexPath.row] else { return }
-            self?.showComment(diary: diary)
+
+            self?.showComment(diary: viewModels.diary.value, indexPath: indexPath.row)
         }
 
-        cell.didTapSendMessageButton = { [weak self] in
+        cell.didTapSendMessageButton = { [weak self]  in
 
-            guard let otherUserId = self?.viewModel.showingDiaries.value[indexPath.row].userId else { return }
-            self?.showChatVC(userId: otherUserId)
-
-        }
-
-        cell.didTapPetButton = { [weak self] in
-
-            guard let petId = self?.viewModel.showingDiaries.value[indexPath.row].petId else { return }
-            self?.showPetProfile(petId: petId)
+            self?.showChatVC(userId: viewModels.diary.value.userId)
 
         }
 
-        cell.didTapSettingButton = { [weak self] in
-            guard let viewModel = self?.viewModel else { return }
-            self?.showSetting(with: viewModel.showingDiaries.value[indexPath.row])
+        cell.didTapPetButton = { [weak self]  in
+
+            self?.showPetProfile(petId: viewModels.diary.value.petId)
+
+        }
+
+        cell.didTapSettingButton = { [weak self]  in
+            self?.showSetting(with: viewModels.diary.value)
+        }
         }
 
         cell.selectionStyle = .none
@@ -162,14 +135,16 @@ extension ExploreDiariesViewController: UITableViewDelegate, UITableViewDataSour
 
     }
 
-    private func showComment(diary: Diary) {
+    private func showComment(diary: Diary, indexPath: Int) {
 
         if let detailController = self.storyboard?.instantiateViewController(identifier: "CommentTableViewController", creator: { coder in
             CommentTableViewController(coder: coder, diary: diary)
         }) {
+            detailController.callBack = { [weak self] comments in
+                self?.viewModel.showingDiaries.value[indexPath].diary.value.comments = comments.map({$0.petId})
+            }
             self.navigationController?.show(detailController, sender: nil)
-        }
-        
+        } 
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -179,7 +154,7 @@ extension ExploreDiariesViewController: UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        print("*** count: \(viewModel.showingDiaries.value.count)")
+           print("*** count: \(viewModel.showingDiaries.value.count)")
         return viewModel.showingDiaries.value.count
     }
 
@@ -261,6 +236,40 @@ class DiaryViewCell: UITableViewCell {
 
         settingIcon.isUserInteractionEnabled = true
         settingIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapSettingButton)))
+    }
+
+    func filledData(viewModel: SocialDiaryCellViewModel){
+
+        viewModel.diary.bind { diary in
+            self.diaryCommentLabel.text = "\(diary.comments.count)"
+            self.diaryImageView.loadImage( diary.images.first?.url)
+
+            self.dateLabel.text = "\(diary.createdTime.dateValue().toString())"
+
+            self.diaryContentLabel.text = "\(diary.content)"
+
+            self.likeLabel.text = "\(diary.whoLiked.count)"
+
+            if diary.whoLiked.contains(FirebaseManager.userId) {
+                self.likeIcon.image = UIImage(systemName: "heart.fill")
+
+            } else {
+                self.likeIcon.image = UIImage(systemName: "heart")
+
+            }
+
+            if  diary.userId == FirebaseManager.userId {
+                self.settingIcon.isHidden = true
+                self.sendMessageButton.isHidden = true
+            } else {
+                self.settingIcon.isHidden = false
+                self.sendMessageButton.isHidden = false
+            }
+
+            self.petNameLabel.text = diary.petname
+            self.petImageView.loadImage( diary.petThumbnail?.url)
+
+        }
 
     }
 

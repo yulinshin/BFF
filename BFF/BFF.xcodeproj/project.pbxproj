@@ -119,8 +119,6 @@
 		62C38D93272EEA96008DEE8B /* GoalCollectionViewCellB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C38D92272EEA96008DEE8B /* GoalCollectionViewCellB.swift */; };
 		62C38D95272EEAA6008DEE8B /* GoalCollectionViewCellC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C38D94272EEAA6008DEE8B /* GoalCollectionViewCellC.swift */; };
 		62C38D97272EEAB4008DEE8B /* GoalCollectionViewCellD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C38D96272EEAB4008DEE8B /* GoalCollectionViewCellD.swift */; };
-		62C6E5E8272F93750097AEE1 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C6E5E7272F93750097AEE1 /* SocialViewController.swift */; };
-		62C6E5EA272F94110097AEE1 /* SocialVC-Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C6E5E9272F94110097AEE1 /* SocialVC-Extention.swift */; };
 		62C80D172720115B00EE2FB1 /* CreatPetsVC+UploadImge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C80D152720115B00EE2FB1 /* CreatPetsVC+UploadImge.swift */; };
 		62C80D182720115B00EE2FB1 /* CreatePetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C80D162720115B00EE2FB1 /* CreatePetViewController.swift */; };
 		62C80D1B2720117800EE2FB1 /* PetInfoTableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62C80D192720117800EE2FB1 /* PetInfoTableTableViewCell.xib */; };
@@ -273,8 +271,6 @@
 		62C38D92272EEA96008DEE8B /* GoalCollectionViewCellB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCollectionViewCellB.swift; sourceTree = "<group>"; };
 		62C38D94272EEAA6008DEE8B /* GoalCollectionViewCellC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCollectionViewCellC.swift; sourceTree = "<group>"; };
 		62C38D96272EEAB4008DEE8B /* GoalCollectionViewCellD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCollectionViewCellD.swift; sourceTree = "<group>"; };
-		62C6E5E7272F93750097AEE1 /* SocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
-		62C6E5E9272F94110097AEE1 /* SocialVC-Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SocialVC-Extention.swift"; sourceTree = "<group>"; };
 		62C80D152720115B00EE2FB1 /* CreatPetsVC+UploadImge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CreatPetsVC+UploadImge.swift"; sourceTree = "<group>"; };
 		62C80D162720115B00EE2FB1 /* CreatePetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePetViewController.swift; sourceTree = "<group>"; };
 		62C80D192720117800EE2FB1 /* PetInfoTableTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PetInfoTableTableViewCell.xib; sourceTree = "<group>"; };
@@ -554,8 +550,6 @@
 				6264A8592736BA6200FACF97 /* ChatListTableViewController.swift */,
 				6267CDEC2733BBD600CFA28D /* ExploreDiariesViewController.swift */,
 				62B617E02736B1C20062BBE5 /* ChatViewController.swift */,
-				62C6E5E9272F94110097AEE1 /* SocialVC-Extention.swift */,
-				62C6E5E7272F93750097AEE1 /* SocialViewController.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -1034,7 +1028,6 @@
 			files = (
 				629FF5B4271D3F8300C7C94A /* WellcomeCollectionViewCell.swift in Sources */,
 				62CF7A98271EEF68003A25C4 /* DiaryDetailViewController.swift in Sources */,
-				62C6E5EA272F94110097AEE1 /* SocialVC-Extention.swift in Sources */,
 				62D454BD27267D82009DF0FF /* SupplyListTableViewCell.swift in Sources */,
 				62BA0103272E7EBE00A19478 /* PetHealthCellViewModel.swift in Sources */,
 				62C38D97272EEAB4008DEE8B /* GoalCollectionViewCellD.swift in Sources */,
@@ -1045,7 +1038,6 @@
 				62B617E52736B3890062BBE5 /* OtherChatTableViewCell.swift in Sources */,
 				62548773272F80C90007B080 /* Date+Extension.swift in Sources */,
 				62930C2C272D24F700BC1908 /* UserMO+CoreDataProperties.swift in Sources */,
-				62C6E5E8272F93750097AEE1 /* SocialViewController.swift in Sources */,
 				6285C797271DD08D006E13EC /* UserDiariesViewController.swift in Sources */,
 				62930C18272D0C6800BC1908 /* PicMO+CoreDataProperties.swift in Sources */,
 				62603AD827278D9F00467E2D /* SupplyInventoryTableViewCell.swift in Sources */,

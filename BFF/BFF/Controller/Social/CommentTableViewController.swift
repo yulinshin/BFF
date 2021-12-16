@@ -17,6 +17,7 @@ class CommentTableViewController: UIViewController {
     var viewModels: CommentModels
     var myPets = CoreDataManager.sharedInstance.fetchMyPets()
     var selectedPet: String?
+    var callBack: ((_ comments: [Comment]) -> Void)?
 
     init?(coder: NSCoder, diary: Diary) {
         self.viewModels = CommentModels(diary: diary)
@@ -49,6 +50,7 @@ class CommentTableViewController: UIViewController {
     }
 
     override func viewDidDisappear(_ animated: Bool) {
+        callBack?(viewModels.data)
     }
 
     @IBAction func sendComment(_ sender: Any) {

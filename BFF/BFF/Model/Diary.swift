@@ -43,5 +43,16 @@ struct Diary: Codable {
         self.userId = userId
         self.petId = petId
     }
+    init(){
+        self.comments = [String]()
+        self.content = ""
+        self.createdTime = Timestamp.init(date: Date())
+        self.diaryId = ""
+        self.images = [Pic]()
+        self.isPublic = true
+        self.petTags =  [String]()
+        self.userId = ""
+        self.petId = ""
+    }
 
 }
