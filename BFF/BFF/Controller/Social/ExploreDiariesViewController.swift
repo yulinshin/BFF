@@ -238,7 +238,7 @@ class DiaryViewCell: UITableViewCell {
         settingIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapSettingButton)))
     }
 
-    func filledData(viewModel: SocialDiaryCellViewModel){
+    func filledData(viewModel: SocialDiaryCellViewModel) {
 
         viewModel.diary.bind { diary in
             self.diaryCommentLabel.text = "\(diary.comments.count)"
@@ -266,7 +266,7 @@ class DiaryViewCell: UITableViewCell {
                 self.sendMessageButton.isHidden = false
             }
 
-            self.petNameLabel.text = diary.petname
+            self.petNameLabel.text = diary.petName
             self.petImageView.loadImage( diary.petThumbnail?.url)
 
         }

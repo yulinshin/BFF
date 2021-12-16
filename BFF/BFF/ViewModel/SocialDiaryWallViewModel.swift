@@ -10,11 +10,10 @@ import Kingfisher
 
 class SocialDiaryCellViewModel {
     var diary = Box(Diary())
-    init(diary: Diary){
+    init(diary: Diary) {
         self.diary.value = diary
     }
 }
-
 
 class SocialDiaryWallViewModel {
 
@@ -109,7 +108,7 @@ class SocialDiaryWallViewModel {
 
                 case.success(let pet):
 
-                    self.diaries.value[index].petname = pet.name
+                    self.diaries.value[index].petName = pet.name
                     self.diaries.value[index].petThumbnail = pet.petThumbnail ?? Pic(url: "", fileName: "")
                     group.leave()
                     print("group: leave")

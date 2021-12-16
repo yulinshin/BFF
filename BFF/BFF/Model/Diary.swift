@@ -22,7 +22,7 @@ struct Diary: Codable {
     var userId: String
     var petId: String
     var petThumbnail: Pic?
-    var petname: String?
+    var petName: String?
 
     init(
     content: String,
@@ -43,7 +43,7 @@ struct Diary: Codable {
         self.userId = userId
         self.petId = petId
     }
-    init(){
+    init() {
         self.comments = [String]()
         self.content = ""
         self.createdTime = Timestamp.init(date: Date())
