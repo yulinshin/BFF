@@ -105,7 +105,7 @@ extension ChatViewController: UITableViewDataSource {
 
         var cell = UITableViewCell()
 
-        if viewModel?.chatVMs.value[indexPath.row].userId.value == FirebaseManager.userId {
+        if viewModel?.chatVMs.value[indexPath.row].userId.value == FirebaseManager.shared.userId {
 
             guard let myCell = tableView.dequeueReusableCell(
                 withIdentifier: "MyChatTableViewCell",

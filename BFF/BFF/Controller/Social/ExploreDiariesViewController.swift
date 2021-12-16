@@ -250,7 +250,7 @@ class DiaryViewCell: UITableViewCell {
 
             self.likeLabel.text = "\(diary.whoLiked.count)"
 
-            if diary.whoLiked.contains(FirebaseManager.userId) {
+            if diary.whoLiked.contains(FirebaseManager.shared.userId) {
                 self.likeIcon.image = UIImage(systemName: "heart.fill")
 
             } else {
@@ -258,7 +258,7 @@ class DiaryViewCell: UITableViewCell {
 
             }
 
-            if  diary.userId == FirebaseManager.userId {
+            if  diary.userId == FirebaseManager.shared.userId {
                 self.settingIcon.isHidden = true
                 self.sendMessageButton.isHidden = true
             } else {

@@ -167,14 +167,14 @@ class SocialDiaryWallViewModel {
 
         var diary = self.showingDiaries.value[index].diary.value
 
-        if diary.whoLiked.contains(FirebaseManager.userId) {
-            diary.whoLiked.removeAll { $0 == FirebaseManager.userId }
+        if diary.whoLiked.contains(FirebaseManager.shared.userId) {
+            diary.whoLiked.removeAll { $0 == FirebaseManager.shared.userId }
 
             FirebaseManager.shared.upDateDiaryLiked(diaryId: diaries.value[index].diaryId, isLiked: false)
 
         } else {
 
-            diary.whoLiked.append(FirebaseManager.userId)
+            diary.whoLiked.append(FirebaseManager.shared.userId)
             FirebaseManager.shared.upDateDiaryLiked(diaryId: diaries.value[index].diaryId, isLiked: true)
 
         }

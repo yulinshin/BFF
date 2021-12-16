@@ -176,7 +176,7 @@ class PetsProfileViewController: UIViewController {
             return
         }
 
-        if viewModel.ownerUserId.value == FirebaseManager.userId {
+        if viewModel.ownerUserId.value == FirebaseManager.shared.userId {
             actionStackView.isHidden = true
         } else {
             actionStackView.isHidden = false
@@ -394,7 +394,7 @@ class ProfileViewModel {
                 self.birthDay.value = pet.healthInfo.birthday
                 if let followers = pet.followers {
                     self.followersCount.value = followers.count
-                    if followers.contains(FirebaseManager.userId) {
+                    if followers.contains(FirebaseManager.shared.userId) {
                         self.isFollowed.value = true
                     } else {
                         self.isFollowed.value = false

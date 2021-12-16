@@ -72,7 +72,7 @@ class DiaryDetailViewController: UIViewController {
     }
 
     private func checkDiaryOwner() {
-        if viewModel.diary.userId != FirebaseManager.userId {
+        if viewModel.diary.userId != FirebaseManager.shared.userId {
             settingButton.isHidden = true
         } else {
             settingButton.isHidden = false

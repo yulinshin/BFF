@@ -18,17 +18,17 @@ extension FirebaseManager {
     func updatePetFollower(petId: String) {
 
         let targetPetsDBRef = dataBase.collection(Collection.pets.rawValue).document(petId)
-        targetPetsDBRef.updateData(["followers": FieldValue.arrayUnion([FirebaseManager.userId])])
+        targetPetsDBRef.updateData(["followers": FieldValue.arrayUnion([FirebaseManager.shared.userId])])
     }
 
     func removePetFollower(petId: String) {
 
         let targetPetsDBRef = dataBase.collection(Collection.pets.rawValue).document(petId)
-        targetPetsDBRef.updateData(["followers": FieldValue.arrayRemove([FirebaseManager.userId])])
+        targetPetsDBRef.updateData(["followers": FieldValue.arrayRemove([FirebaseManager.shared.userId])])
     }
 
     func addPetToUser(petId: String) {
-        dataBase.collection(Collection.users.rawValue).document(FirebaseManager.userId).updateData(["petsIds": FieldValue.arrayUnion([petId])])
+        dataBase.collection(Collection.users.rawValue).document(FirebaseManager.shared.userId).updateData(["petsIds": FieldValue.arrayUnion([petId])])
     }
 
     func removePet(petId: String) {
@@ -46,7 +46,7 @@ extension FirebaseManager {
 
     func removePetFromUser(petId: String) {
 
-        let userDocumentRef = dataBase.collection(Collection.users.rawValue).document(FirebaseManager.userId)
+        let userDocumentRef = dataBase.collection(Collection.users.rawValue).document(FirebaseManager.shared.userId)
         let userNotificationDocRef = userDocumentRef.collection(Collection.notifications.rawValue)
         let userSuppliesDocRef = userDocumentRef.collection(Collection.supplies.rawValue)
         userDocumentRef.updateData(["petsIds": FieldValue.arrayRemove([petId])])
@@ -133,7 +133,7 @@ extension FirebaseManager {
 
     func fetchUserPets(completion: @escaping (Result<[Pet], Error>) -> Void) {
 
-        dataBase.collection(Collection.pets.rawValue).whereField("userId", isEqualTo: FirebaseManager.userId).getDocuments { (querySnapshot, error) in
+        dataBase.collection(Collection.pets.rawValue).whereField("userId", isEqualTo: FirebaseManager.shared.userId).getDocuments { (querySnapshot, error) in
 
             if let error = error {
                 completion(.failure(error))
@@ -158,7 +158,7 @@ extension FirebaseManager {
 
     func fetchPets(completion: @escaping (Result<[Pet], Error>) -> Void) {
 
-        dataBase.collection(Collection.pets.rawValue).whereField("userId", isEqualTo: FirebaseManager.userId).getDocuments { (querySnapshot, error) in
+        dataBase.collection(Collection.pets.rawValue).whereField("userId", isEqualTo: FirebaseManager.shared.userId).getDocuments { (querySnapshot, error) in
 
             if let error = error {
                 completion(.failure(error))
@@ -187,7 +187,7 @@ extension FirebaseManager {
 
         var pet = newPet
         pet.petId = document.documentID
-        pet.userId = FirebaseManager.userId
+        pet.userId = FirebaseManager.shared.userId
         do {
             try document.setData(from: pet)
             self.addPetToUser(petId: pet.petId)
@@ -207,7 +207,7 @@ extension FirebaseManager {
             case .success(let pic):
                 var pet = data
                 pet.petThumbnail = pic
-                pet.userId = FirebaseManager.userId
+                pet.userId = FirebaseManager.shared.userId
                 let petDocumentRef = self.dataBase.collection(Collection.pets.rawValue).document(updatePetId)
                 do {
                     try petDocumentRef.setData(from: pet)
