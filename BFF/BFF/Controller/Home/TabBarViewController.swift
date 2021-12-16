@@ -99,6 +99,10 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var showViewController = [UIViewController]()
     let actionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
 
+    deinit {
+        print("Deinit TabBarController")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

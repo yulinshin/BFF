@@ -56,22 +56,23 @@ class DiaryDetailViewController: UIViewController {
         postPetImageView.layer.cornerRadius = postPetImageView.frame.height / 2
     }
 
-    private func setupCommentInteraction(){
+    private func setupCommentInteraction() {
         commentImage.isUserInteractionEnabled = true
         commentImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapComment)))
     }
 
     @objc func didTapComment() {
 
-        let storyboard = UIStoryboard(name: "Social", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: "CommentTableViewController") as? CommentTableViewController else { return }
-        controller.diary = viewModel.diary!
-        self.navigationController?.pushViewController(controller, animated: true)
+        if let detailController = self.storyboard?.instantiateViewController(identifier: "CommentTableViewController", creator: { coder in
+            CommentTableViewController(coder: coder, diary: self.viewModel.diary)
+        }) {
+            self.navigationController?.show(detailController, sender: nil)
+        }
 
     }
 
     private func checkDiaryOwner() {
-        if viewModel.diary?.userId != FirebaseManager.userId {
+        if viewModel.diary.userId != FirebaseManager.userId {
             settingButton.isHidden = true
         } else {
             settingButton.isHidden = false
@@ -115,10 +116,8 @@ class DiaryDetailViewController: UIViewController {
                 self?.diaryStateLabel.text = "Private"
             }
         }
+        likeCountLabel.text = "\(viewModel.diary.whoLiked.count)"
 
-        if let count = viewModel.diary?.whoLiked.count {
-            likeCountLabel.text = "\(count)"
-        }
     }
 
     @IBAction func showMenu(_ sender: Any) {

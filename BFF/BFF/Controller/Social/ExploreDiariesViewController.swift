@@ -164,11 +164,12 @@ extension ExploreDiariesViewController: UITableViewDelegate, UITableViewDataSour
 
     private func showComment(diary: Diary) {
 
-        let storyboard = UIStoryboard(name: "Social", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: "CommentTableViewController") as? CommentTableViewController else { return }
-        controller.diary = diary
-        self.navigationController?.pushViewController(controller, animated: true)
-
+        if let detailController = self.storyboard?.instantiateViewController(identifier: "CommentTableViewController", creator: { coder in
+            CommentTableViewController(coder: coder, diary: diary)
+        }) {
+            self.navigationController?.show(detailController, sender: nil)
+        }
+        
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

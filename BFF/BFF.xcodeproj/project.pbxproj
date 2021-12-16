@@ -396,7 +396,6 @@
 				62892FF52732F499001A7B32 /* Font */,
 				62930BDC272D005C00BC1908 /* CoreData */,
 				62603AE72727E73D00467E2D /* BFF.entitlements */,
-				62119A11274F7139006A3D4E /* NavgationBar.swift */,
 				62F483EC27280B2900D5A649 /* Unit */,
 				62F483EB27280B0C00D5A649 /* Extension */,
 				629FF5BB271D59E700C7C94A /* Third Party Wrapper */,
@@ -738,6 +737,7 @@
 		62F483EC27280B2900D5A649 /* Unit */ = {
 			isa = PBXGroup;
 			children = (
+				62119A11274F7139006A3D4E /* NavgationBar.swift */,
 				6254041C271F23DD004F49DC /* Box.swift */,
 			);
 			path = Unit;
