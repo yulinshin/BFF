@@ -42,7 +42,7 @@ enum FilePathName: String {
 
 }
 
-class FirebaseManager {
+final class FirebaseManager {
 
     static let shared = FirebaseManager()
     lazy var dataBase = Firestore.firestore()
@@ -51,7 +51,7 @@ class FirebaseManager {
     var petDiaryPagingLastDoc: QueryDocumentSnapshot?
     var userDiaryPagingLastDoc: QueryDocumentSnapshot?
 
-    static var userId: String {
+    var userId: String {
         Auth.auth().currentUser?.uid ?? ""
     }
     var userEmail: String {
@@ -66,7 +66,7 @@ class FirebaseManager {
 
     func listenNotifications(completion: @escaping (Result<[Notification], Error>) -> Void) {
 
-        dataBase.collection(Collection.users.rawValue).document(FirebaseManager.userId).collection(Collection.notifications.rawValue).addSnapshotListener { querySnapshot, error in
+        dataBase.collection(Collection.users.rawValue).document(self.userId).collection(Collection.notifications.rawValue).addSnapshotListener { querySnapshot, error in
 
             guard let querySnapshot = querySnapshot else {
                 print("Error fetching document: \(error!)")
@@ -82,20 +82,19 @@ class FirebaseManager {
 
     }
 
-    func createNotification(usrId: String = userId, newNotify: Notification) {
-
-        let document =   dataBase.collection(Collection.users.rawValue).document(usrId).collection(Collection.notifications.rawValue).document(newNotify.id)
+    func createNotification(userId: String? = nil, newNotify: Notification) {
+        let userId = userId ?? self.userId
+        let document =   dataBase.collection(Collection.users.rawValue).document(userId).collection(Collection.notifications.rawValue).document(newNotify.id)
         do {
             try document.setData(from: newNotify)
         } catch {
             print("Error creating Notification: \(error)")
         }
-
     }
 
-    func removeNotification(usrId: String = userId, notifyId: String) {
-
-        let document =   dataBase.collection(Collection.users.rawValue).document(usrId).collection(Collection.notifications.rawValue).document(notifyId)
+    func removeNotification(userId: String? = nil, notifyId: String) {
+        let userId = userId ?? self.userId
+        let document =   dataBase.collection(Collection.users.rawValue).document(userId).collection(Collection.notifications.rawValue).document(notifyId)
         document.delete { error in
             guard let error = error else { return }
             print("Error removing document: \(error)")
@@ -107,7 +106,7 @@ class FirebaseManager {
 
     func listenMessageGroup(completion: @escaping (Result<[MessageGroup], FireBaseError>) -> Void) {
 
-        dataBase.collection(Collection.messageGroups.rawValue).whereField("users", arrayContains: FirebaseManager.userId)
+        dataBase.collection(Collection.messageGroups.rawValue).whereField("users", arrayContains: self.userId)
             .addSnapshotListener { querySnapshot, error in
 
                 guard let querySnapshot = querySnapshot else {
@@ -145,9 +144,7 @@ class FirebaseManager {
 
     func listenMessageFromUserID(otherUseId: String, completion: @escaping(Result<(messages: [Message], groupId: String), FireBaseError>) -> Void) {
 
-        let currentUserId = FirebaseManager.userId
-
-        dataBase.collection(Collection.messageGroups.rawValue).whereField("users", in: [[currentUserId, otherUseId], [otherUseId, currentUserId]]).getDocuments { querySnapshot, error in
+        dataBase.collection(Collection.messageGroups.rawValue).whereField("users", in: [[userId, otherUseId], [otherUseId, userId]]).getDocuments { querySnapshot, error in
 
             guard let querySnapshot = querySnapshot else {
                 print("Error fetching document: \(error!)")
@@ -200,7 +197,7 @@ class FirebaseManager {
     func createMessageGroup(receiverId: String, completion: @escaping (Result<String, FireBaseError>) -> Void) {
 
         let document = dataBase.collection(Collection.messageGroups.rawValue).document()
-        let newGroup = MessageGroup(groupId: document.documentID, users: [FirebaseManager.userId, receiverId])
+        let newGroup = MessageGroup(groupId: document.documentID, users: [userId, receiverId])
         do {
             try document.setData(from: newGroup)
             completion(.success(document.documentID))
@@ -215,7 +212,7 @@ class FirebaseManager {
 
         let document = dataBase.collection(Collection.messageGroups.rawValue).document(groupId).collection(Collection.messages.rawValue).document()
 
-        let message = Message(content: content, createdTime: Timestamp.init(date: Date()), receiver: receiverId, sender: FirebaseManager.userId, messageId: document.documentID)
+        let message = Message(content: content, createdTime: Timestamp.init(date: Date()), receiver: receiverId, sender: userId, messageId: document.documentID)
 
         do {
             try document.setData(from: message)
@@ -251,20 +248,20 @@ class FirebaseManager {
 
         let comment = Comment(commentId: commentDocument.documentID, content: content, createdTime: Timestamp(date: Date()), diaryId: diaryId, petId: petId)
 
-            do {
-                try commentDocument.setData(from: comment)
-                diaryDocument.updateData(["comments": FieldValue.arrayUnion([commentDocument.documentID])])
+        do {
+            try commentDocument.setData(from: comment)
+            diaryDocument.updateData(["comments": FieldValue.arrayUnion([commentDocument.documentID])])
 
-                if diaryId != FirebaseManager.userId {
-                    let notifyContent = "回覆了你的日記貼文"
-                    let notifyID = "Comment\(commentDocument.documentID)"
-                    let notification = Notification(content: notifyContent, notifyTime: Timestamp(date: Date()), fromPets: [petId], title: "", type: "comment", id: notifyID, diaryId: diaryId)
-                    self.createNotification(usrId: diaryOwner, newNotify: notification)
-                }
-                completion(.success(()))
+            if diaryId != userId {
+                let notifyContent = "回覆了你的日記貼文"
+                let notifyID = "Comment\(commentDocument.documentID)"
+                let notification = Notification(content: notifyContent, notifyTime: Timestamp(date: Date()), fromPets: [petId], title: "", type: "comment", id: notifyID, diaryId: diaryId)
+                self.createNotification(userId: diaryOwner, newNotify: notification)
+            }
+            completion(.success(()))
 
-            } catch {
-                completion(.failure(FireBaseError.gotFirebaseError(error)))
+        } catch {
+            completion(.failure(FireBaseError.gotFirebaseError(error)))
         }
 
     }
@@ -272,7 +269,7 @@ class FirebaseManager {
     // MARK: - Supply
     func fetchSupplies(completion: @escaping (Result<[Supply], FireBaseError>) -> Void) {
 
-        dataBase.collection(Collection.users.rawValue).document(FirebaseManager.userId).collection(Collection.supplies.rawValue).getDocuments { (querySnapshot, error) in
+        dataBase.collection(Collection.users.rawValue).document(userId).collection(Collection.supplies.rawValue).getDocuments { (querySnapshot, error) in
 
             guard let querySnapshot = querySnapshot else {
                 print("Error fetching document: \(error!)")
@@ -293,7 +290,7 @@ class FirebaseManager {
 
     func createSupply(supply: Supply, completion: @escaping (Result<Void, FireBaseError>) -> Void) {
 
-        let suppliesRef = dataBase.collection(Collection.users.rawValue).document(FirebaseManager.userId).collection(Collection.supplies.rawValue)
+        let suppliesRef = dataBase.collection(Collection.users.rawValue).document(userId).collection(Collection.supplies.rawValue)
         let document = suppliesRef.document()
 
         var newSupply = supply
@@ -311,7 +308,7 @@ class FirebaseManager {
 
     func updateSupply(supplyId: String, data: Supply, completion: @escaping (Result<Void, FireBaseError>) -> Void = {_ in }) {
 
-        let supplyRef = dataBase.collection(Collection.users.rawValue).document(FirebaseManager.userId).collection(Collection.supplies.rawValue).document(supplyId)
+        let supplyRef = dataBase.collection(Collection.users.rawValue).document(userId).collection(Collection.supplies.rawValue).document(supplyId)
 
         var supply = data
         supply.lastUpdate = Timestamp.init(date: Date())
@@ -326,7 +323,7 @@ class FirebaseManager {
     }
 
     func delateSupply(supplyId: String, completion: @escaping (Result<Void, FireBaseError>) -> Void = {_ in }) {
-        dataBase.collection(Collection.users.rawValue).document(FirebaseManager.userId).collection(Collection.supplies.rawValue).document(supplyId).delete { error in
+        dataBase.collection(Collection.users.rawValue).document(userId).collection(Collection.supplies.rawValue).document(supplyId).delete { error in
             if let error = error {
                 print("Error setData document: \(error)")
                 completion(.failure(FireBaseError.gotFirebaseError(error)))

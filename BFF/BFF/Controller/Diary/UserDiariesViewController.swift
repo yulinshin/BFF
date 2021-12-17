@@ -89,7 +89,6 @@ class UserDiariesViewController: UIViewController {
         }
     }
     
-
     // MARK: - diariesCollectionViewCompositionLayout
 
     // swiftlint:disable:next function_body_length
@@ -211,10 +210,11 @@ extension UserDiariesViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-            let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-            guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
-        controller.viewModel = DetailViewModel(from: userDiaryWallViewModel.showingDiaries.value[indexPath.row])
-            self.navigationController?.show(controller, sender: nil)
+        if let detailController = self.storyboard?.instantiateViewController(identifier: "DiaryDetailViewController", creator: { coder in
+            DiaryDetailViewController(coder: coder, diary: self.userDiaryWallViewModel.showingDiaries.value[indexPath.row])
+        }) {
+            self.navigationController?.show(detailController, sender: nil)
+        }
 
     }
 }

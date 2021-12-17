@@ -113,7 +113,7 @@ extension FirebaseManager {
     func fetchDiaries(completion: @escaping (Result<[Diary], FireBaseError>) -> Void) {
 
         var documentsRef = dataBase.collection(Collection.diaries.rawValue)
-            .whereField("userId", isEqualTo: FirebaseManager.userId)
+            .whereField("userId", isEqualTo: FirebaseManager.shared.userId)
             .order(by: "createdTime", descending: true)
             .limit(to: 10)
 
@@ -153,12 +153,12 @@ extension FirebaseManager {
 
         if isLiked {
 
-            dataBase.collection(Collection.diaries.rawValue).document(diaryId).updateData(["whoLiked": FieldValue.arrayUnion([FirebaseManager.userId])])
+            dataBase.collection(Collection.diaries.rawValue).document(diaryId).updateData(["whoLiked": FieldValue.arrayUnion([FirebaseManager.shared.userId])])
             ProgressHUD.showSuccess(text: "Liked")
 
         } else {
 
-            dataBase.collection(Collection.diaries.rawValue).document(diaryId).updateData(["whoLiked": FieldValue.arrayRemove([FirebaseManager.userId])])
+            dataBase.collection(Collection.diaries.rawValue).document(diaryId).updateData(["whoLiked": FieldValue.arrayRemove([FirebaseManager.shared.userId])])
             ProgressHUD.showSuccess(text: "UnLiked")
 
         }

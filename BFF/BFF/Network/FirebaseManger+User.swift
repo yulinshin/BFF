@@ -15,7 +15,8 @@ import Network
 
 extension FirebaseManager {
 
-    func fetchUserInfo(userId: String = userId, completion: @escaping (Result<User, Error>) -> Void) {
+    func fetchUserInfo(userId: String? = nil, completion: @escaping (Result<User, Error>) -> Void) {
+        let userId = userId ?? self.userId
         dataBase.collection(Collection.users.rawValue).document(userId).getDocument { document, error in
 
             if let document = document, document.exists {
@@ -25,7 +26,7 @@ extension FirebaseManager {
                         completion(.success(user))
                         self.currentUser = user
                     }
-                } catch {
+                } catch { 
                     completion(.failure(error))
                 }
 
@@ -37,16 +38,16 @@ extension FirebaseManager {
     }
 
     func createUser() {
-        let documentRef = dataBase.collection(Collection.users.rawValue).document(FirebaseManager.userId)
+        let documentRef = dataBase.collection(Collection.users.rawValue).document(FirebaseManager.shared.userId)
         documentRef.getDocument { (document, error) in
-            let newUserData = User(userId: FirebaseManager.userId, email: self.userEmail, userName: self.userName)
+            let newUserData = User(userId: FirebaseManager.shared.userId, email: self.userEmail, userName: self.userName)
             if let document = document, document.exists {
                 do {
                     try  documentRef.setData(from: newUserData)
                 } catch {
                 }
             } else {
-                let newDocumentRef = self.dataBase.collection(Collection.users.rawValue).document(FirebaseManager.userId)
+                let newDocumentRef = self.dataBase.collection(Collection.users.rawValue).document(FirebaseManager.shared.userId)
                 do {
                     try newDocumentRef.setData(from: newUserData)
                 } catch {
@@ -58,14 +59,14 @@ extension FirebaseManager {
 
     func updateBlockUser(blockUserId: String) {
 
-        let currentUserDBRef = dataBase.collection(Collection.users.rawValue).document(FirebaseManager.userId)
+        let currentUserDBRef = dataBase.collection(Collection.users.rawValue).document(FirebaseManager.shared.userId)
         currentUserDBRef.updateData(["blockUsers": FieldValue.arrayUnion([blockUserId])])
 
     }
 
     func unblockUser(blockUserId: String ) {
 
-        let currentUserDB = dataBase.collection(Collection.users.rawValue).document(FirebaseManager.userId)
+        let currentUserDB = dataBase.collection(Collection.users.rawValue).document(FirebaseManager.shared.userId)
         currentUserDB.updateData(["blockUsers": FieldValue.arrayRemove([blockUserId])])
 
     }
@@ -103,7 +104,7 @@ extension FirebaseManager {
 
     func listenUser(completion: @escaping (Result<User, Error>) -> Void) {
 
-        dataBase.collection(Collection.users.rawValue).document(FirebaseManager.userId).addSnapshotListener { documentSnapshot, error in
+        dataBase.collection(Collection.users.rawValue).document(FirebaseManager.shared.userId).addSnapshotListener { documentSnapshot, error in
             if let error = error {
                 print(error.localizedDescription)
             } else {

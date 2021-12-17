@@ -23,6 +23,8 @@
 		623340DD271C3B1B002B2429 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623340DC271C3B1B002B2429 /* Assets.xcassets */; };
 		623340E0271C3B1B002B2429 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 623340DE271C3B1B002B2429 /* LaunchScreen.storyboard */; };
 		623340E9271C3F82002B2429 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 623340E8271C3F82002B2429 /* GoogleService-Info.plist */; };
+		62345509276C3D33000253CF /* DiaryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62345508276C3D33000253CF /* DiaryViewCell.swift */; };
+		6234550B276C3D96000253CF /* UITableViewDelegate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6234550A276C3D96000253CF /* UITableViewDelegate+Extension.swift */; };
 		6249617D2720F16E0079B244 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6249617C2720F16E0079B244 /* HomePageViewModel.swift */; };
 		624C8E082720473F00646C71 /* CreatePetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C8E072720473F00646C71 /* CreatePetViewModel.swift */; };
 		624CFD742729389B00D77CCA /* NotificationManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624CFD732729389B00D77CCA /* NotificationManger.swift */; };
@@ -119,8 +121,6 @@
 		62C38D93272EEA96008DEE8B /* GoalCollectionViewCellB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C38D92272EEA96008DEE8B /* GoalCollectionViewCellB.swift */; };
 		62C38D95272EEAA6008DEE8B /* GoalCollectionViewCellC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C38D94272EEAA6008DEE8B /* GoalCollectionViewCellC.swift */; };
 		62C38D97272EEAB4008DEE8B /* GoalCollectionViewCellD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C38D96272EEAB4008DEE8B /* GoalCollectionViewCellD.swift */; };
-		62C6E5E8272F93750097AEE1 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C6E5E7272F93750097AEE1 /* SocialViewController.swift */; };
-		62C6E5EA272F94110097AEE1 /* SocialVC-Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C6E5E9272F94110097AEE1 /* SocialVC-Extention.swift */; };
 		62C80D172720115B00EE2FB1 /* CreatPetsVC+UploadImge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C80D152720115B00EE2FB1 /* CreatPetsVC+UploadImge.swift */; };
 		62C80D182720115B00EE2FB1 /* CreatePetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C80D162720115B00EE2FB1 /* CreatePetViewController.swift */; };
 		62C80D1B2720117800EE2FB1 /* PetInfoTableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62C80D192720117800EE2FB1 /* PetInfoTableTableViewCell.xib */; };
@@ -176,6 +176,8 @@
 		623340DF271C3B1B002B2429 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		623340E1271C3B1B002B2429 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		623340E8271C3F82002B2429 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		62345508276C3D33000253CF /* DiaryViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewCell.swift; sourceTree = "<group>"; };
+		6234550A276C3D96000253CF /* UITableViewDelegate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewDelegate+Extension.swift"; sourceTree = "<group>"; };
 		6249617C2720F16E0079B244 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		624C8E072720473F00646C71 /* CreatePetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePetViewModel.swift; sourceTree = "<group>"; };
 		624CFD732729389B00D77CCA /* NotificationManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManger.swift; sourceTree = "<group>"; };
@@ -273,8 +275,6 @@
 		62C38D92272EEA96008DEE8B /* GoalCollectionViewCellB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCollectionViewCellB.swift; sourceTree = "<group>"; };
 		62C38D94272EEAA6008DEE8B /* GoalCollectionViewCellC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCollectionViewCellC.swift; sourceTree = "<group>"; };
 		62C38D96272EEAB4008DEE8B /* GoalCollectionViewCellD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCollectionViewCellD.swift; sourceTree = "<group>"; };
-		62C6E5E7272F93750097AEE1 /* SocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
-		62C6E5E9272F94110097AEE1 /* SocialVC-Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SocialVC-Extention.swift"; sourceTree = "<group>"; };
 		62C80D152720115B00EE2FB1 /* CreatPetsVC+UploadImge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CreatPetsVC+UploadImge.swift"; sourceTree = "<group>"; };
 		62C80D162720115B00EE2FB1 /* CreatePetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePetViewController.swift; sourceTree = "<group>"; };
 		62C80D192720117800EE2FB1 /* PetInfoTableTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PetInfoTableTableViewCell.xib; sourceTree = "<group>"; };
@@ -396,7 +396,6 @@
 				62892FF52732F499001A7B32 /* Font */,
 				62930BDC272D005C00BC1908 /* CoreData */,
 				62603AE72727E73D00467E2D /* BFF.entitlements */,
-				62119A11274F7139006A3D4E /* NavgationBar.swift */,
 				62F483EC27280B2900D5A649 /* Unit */,
 				62F483EB27280B0C00D5A649 /* Extension */,
 				629FF5BB271D59E700C7C94A /* Third Party Wrapper */,
@@ -555,8 +554,6 @@
 				6264A8592736BA6200FACF97 /* ChatListTableViewController.swift */,
 				6267CDEC2733BBD600CFA28D /* ExploreDiariesViewController.swift */,
 				62B617E02736B1C20062BBE5 /* ChatViewController.swift */,
-				62C6E5E9272F94110097AEE1 /* SocialVC-Extention.swift */,
-				62C6E5E7272F93750097AEE1 /* SocialViewController.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -602,6 +599,7 @@
 		62DB93EC2741EEB200D884E3 /* Social */ = {
 			isa = PBXGroup;
 			children = (
+				62345508276C3D33000253CF /* DiaryViewCell.swift */,
 				62B617E32736B3890062BBE5 /* OtherChatTableViewCell.swift */,
 				62B617E22736B3890062BBE5 /* OtherChatTableViewCell.xib */,
 				62B617DC2736B0FF0062BBE5 /* MyChatTableViewCell.swift */,
@@ -728,6 +726,7 @@
 			isa = PBXGroup;
 			children = (
 				62FC619527258B2300292710 /* UIStoryboard+Extension.swift */,
+				6234550A276C3D96000253CF /* UITableViewDelegate+Extension.swift */,
 				62FC619727258C3B00292710 /* UIImage+Extension.swift */,
 				62548772272F80C90007B080 /* Date+Extension.swift */,
 				62B617D0273534D70062BBE5 /* UILabel+Extension.swift */,
@@ -738,6 +737,7 @@
 		62F483EC27280B2900D5A649 /* Unit */ = {
 			isa = PBXGroup;
 			children = (
+				62119A11274F7139006A3D4E /* NavgationBar.swift */,
 				6254041C271F23DD004F49DC /* Box.swift */,
 			);
 			path = Unit;
@@ -1034,7 +1034,6 @@
 			files = (
 				629FF5B4271D3F8300C7C94A /* WellcomeCollectionViewCell.swift in Sources */,
 				62CF7A98271EEF68003A25C4 /* DiaryDetailViewController.swift in Sources */,
-				62C6E5EA272F94110097AEE1 /* SocialVC-Extention.swift in Sources */,
 				62D454BD27267D82009DF0FF /* SupplyListTableViewCell.swift in Sources */,
 				62BA0103272E7EBE00A19478 /* PetHealthCellViewModel.swift in Sources */,
 				62C38D97272EEAB4008DEE8B /* GoalCollectionViewCellD.swift in Sources */,
@@ -1045,7 +1044,6 @@
 				62B617E52736B3890062BBE5 /* OtherChatTableViewCell.swift in Sources */,
 				62548773272F80C90007B080 /* Date+Extension.swift in Sources */,
 				62930C2C272D24F700BC1908 /* UserMO+CoreDataProperties.swift in Sources */,
-				62C6E5E8272F93750097AEE1 /* SocialViewController.swift in Sources */,
 				6285C797271DD08D006E13EC /* UserDiariesViewController.swift in Sources */,
 				62930C18272D0C6800BC1908 /* PicMO+CoreDataProperties.swift in Sources */,
 				62603AD827278D9F00467E2D /* SupplyInventoryTableViewCell.swift in Sources */,
@@ -1112,6 +1110,7 @@
 				62FC6194272588F200292710 /* TabBarViewController.swift in Sources */,
 				629FF5B8271D413C00C7C94A /* PetNotificationCollectionViewCell.swift in Sources */,
 				62C38D95272EEAA6008DEE8B /* GoalCollectionViewCellC.swift in Sources */,
+				62345509276C3D33000253CF /* DiaryViewCell.swift in Sources */,
 				622A47262750DF0A00D006C1 /* UIFontExtension.swift in Sources */,
 				62603AD427278D6100467E2D /* SupplyIconCellTableViewCell.swift in Sources */,
 				621FCEAD271E5B990049F42C /* PhotoCellViewModel.swift in Sources */,
@@ -1125,6 +1124,7 @@
 				62AB33F827205D5000C8E582 /* NoteViewController.swift in Sources */,
 				62119A09274F4188006A3D4E /* FirebaseManger+Diary.swift in Sources */,
 				62617497273DF5FD006F3635 /* BlocksVeiwModels.swift in Sources */,
+				6234550B276C3D96000253CF /* UITableViewDelegate+Extension.swift in Sources */,
 				62C80D172720115B00EE2FB1 /* CreatPetsVC+UploadImge.swift in Sources */,
 				62C38D91272EE89D008DEE8B /* GoalCollectionViewCellA.swift in Sources */,
 				62930C2B272D24F700BC1908 /* UserMO+CoreDataClass.swift in Sources */,

@@ -14,10 +14,19 @@ class CommentTableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var messageTextField: UITextField!
-    var viewModels = [CommentViewModel]()
-    var diary: Diary?
+    var viewModels: CommentModels
     var myPets = CoreDataManager.sharedInstance.fetchMyPets()
     var selectedPet: String?
+    var callBack: ((_ comments: [Comment]) -> Void)?
+
+    init?(coder: NSCoder, diary: Diary) {
+        self.viewModels = CommentModels(diary: diary)
+        super.init(coder: coder)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +34,13 @@ class CommentTableViewController: UIViewController {
         tableView.dataSource = self
         collectionView.delegate = self
         collectionView.dataSource = self
+        viewModels.didUpdateData = { [weak self] in
+            self?.tableView.reloadData()
+        }
 
         let petNib = UINib(nibName: "SelectedPetsCollectionViewCell", bundle: nil)
         collectionView.register(petNib, forCellWithReuseIdentifier: SelectedPetsCollectionViewCell.identifier)
         self.navigationController?.navigationBar.tintColor = UIColor.mainColor
-        getComments()
 
     }
 
@@ -39,115 +50,32 @@ class CommentTableViewController: UIViewController {
     }
 
     override func viewDidDisappear(_ animated: Bool) {
+        callBack?(viewModels.data)
     }
 
     @IBAction func sendComment(_ sender: Any) {
         guard let message = messageTextField.text,
-              let diary = diary,
               let selectedPet = selectedPet else {
                   return
               }
-        FirebaseManager.shared.createComment(content: message, petId: selectedPet, diaryId: diary.diaryId, diaryOwner: diary.userId) { result in
-
-            switch result {
-            case .success:
-                print("Send Comments Success")
-
-            case.failure(let error):
-                print("Send Comments Failure: \(error)")
-            }
-
-        }
-        getComments()
+        viewModels.createComment(message: message, petId: selectedPet)
         messageTextField.text = ""
-    }
-
-    private func getComments() {
-
-        viewModels = [CommentViewModel]()
-
-        guard let diary = diary else { return }
-
-        let firstChat = Comment(commentId: "", content: diary.content, createdTime: diary.createdTime, diaryId: diary.diaryId, petId: diary.petId)
-
-        let chatViewModel = CommentViewModel(from: firstChat) {
-            self.tableView.reloadData()
         }
-        self.viewModels.append(chatViewModel)
-
-        FirebaseManager.shared.fetchComments(diaryId: diary.diaryId) { result in
-            switch result {
-
-            case .success(var comments):
-
-                comments.sort { first, second in
-                    first.createdTime.dateValue() < second.createdTime.dateValue()
-                }
-
-                comments.forEach { comment in
-                    FirebaseManager.shared.fetchPet(petId: comment.petId) { result in
-
-                        switch result {
-
-                        case .success(let pet):
-                            guard let blockUsers = FirebaseManager.shared.currentUser?.blockUsers else {
-                                let chatViewModel = CommentViewModel(from: comment) {
-                                    self.tableView.reloadData()
-                                }
-                                self.viewModels.append(chatViewModel)
-                                self.viewModels = self.viewModels.sorted { first, second in
-                                    first.createTime.value < second.createTime.value
-                                }
-                                print("*** \(self.viewModels.count) in \(chatViewModel.content.value)")
-                                return
-                            }
-
-                            if !blockUsers.contains(pet.userId) {
-                                let chatViewModel = CommentViewModel(from: comment) {
-                                    self.tableView.reloadData()
-                                }
-                                self.viewModels.append(chatViewModel)
-                                self.viewModels = self.viewModels.sorted { first, second in
-                                    first.createTime.value < second.createTime.value
-                                }
-                                print("*** \(self.viewModels.count) in \(chatViewModel.content.value)")
-                            }
-                        case .failure(let error):
-
-                            print(error)
-
-                        }
-
-                    }
-
-                }
-
-                self.tableView.reloadData()
-
-            case .failure(let error):
-
-                print("HERE\(error)")
-
-            }
-
-        }
-
-    }
-
 }
 
 extension CommentTableViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModels.count
+        return viewModels.viewModels.value.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableCell", for: indexPath) as? CommentTableCell else {
             return UITableViewCell() }
-        cell.setup(viewModel: viewModels[indexPath.row])
-        cell.selectionStyle =  .none
+            let viewModel = viewModels.viewModels.value[indexPath.row]
+            cell.setup(viewModel: viewModel)
+            cell.selectionStyle =  .none
         return cell
     }
 }

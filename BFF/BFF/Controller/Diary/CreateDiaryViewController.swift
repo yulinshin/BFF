@@ -92,7 +92,7 @@ class CreateDiaryViewController: UIViewController {
 
             case .success(let pic):
 
-                let diary = Diary(content: self.diaryTextView.text, diaryId: "", images: [pic], isPublic: true, petTags: self.petTags, userId: FirebaseManager.userId, petId: petId)
+                let diary = Diary(content: self.diaryTextView.text, diaryId: "", images: [pic], isPublic: true, petTags: self.petTags, userId: FirebaseManager.shared.userId, petId: petId)
 
                 FirebaseManager.shared.createDiary(diary: diary) { result in
 
