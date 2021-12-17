@@ -176,7 +176,7 @@ class PetsProfileViewController: UIViewController {
             return
         }
 
-        if viewModel.ownerUserId.value == FirebaseManager.userId {
+        if viewModel.ownerUserId.value == FirebaseManager.shared.userId {
             actionStackView.isHidden = true
         } else {
             actionStackView.isHidden = false
@@ -351,10 +351,12 @@ extension PetsProfileViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         guard let diary = viewModel?.diaries.value[indexPath.row] else { return }
-        let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
-        controller.viewModel = DetailViewModel(from: diary)
-        self.navigationController?.show(controller, sender: nil)
+
+        if let detailController = storyboard?.instantiateViewController(identifier: "Diary", creator: { coder in
+           DiaryDetailViewController(coder: coder, diary: diary)
+        }) {
+            self.navigationController?.show(detailController, sender: nil)
+        }
 
     }
 }
@@ -392,7 +394,7 @@ class ProfileViewModel {
                 self.birthDay.value = pet.healthInfo.birthday
                 if let followers = pet.followers {
                     self.followersCount.value = followers.count
-                    if followers.contains(FirebaseManager.userId) {
+                    if followers.contains(FirebaseManager.shared.userId) {
                         self.isFollowed.value = true
                     } else {
                         self.isFollowed.value = false

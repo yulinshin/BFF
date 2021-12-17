@@ -12,7 +12,6 @@ import FirebaseFirestoreSwift
 
 class DetailViewModel {
 
-    private static let defaultDiary = Diary(content: " ", diaryId: " ", images: [Pic](), isPublic: true, petTags: [String](), userId: " ", petId: " ")
     let postImageUrl = Box(" ")
     let postPetsName = Box(" ")
     let postPetImageUrl = Box(" ")
@@ -24,15 +23,11 @@ class DetailViewModel {
     let comments = Box([String]())
     let isPublic = Box(false)
     let diaryId = Box(" ")
-    var diary: Diary?
-
-    init() {
-        getDiaryData(from: Self.defaultDiary)
-    }
+    var diary: Diary
 
     init(from diary: Diary) {
-        getDiaryData(from: diary)
         self.diary = diary
+        getDiaryData(from: diary)
     }
 
     private func getDiaryData(from diary: Diary) {

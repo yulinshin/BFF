@@ -76,7 +76,7 @@ class UserDiaryWallViewModel {
 
                 case.success(let pet):
 
-                    self.diaries.value[index].petname = pet.name
+                    self.diaries.value[index].petName = pet.name
                     self.diaries.value[index].petThumbnail = pet.petThumbnail ?? Pic(url: "", fileName: "")
                     group.leave()
                     print("group: leave")

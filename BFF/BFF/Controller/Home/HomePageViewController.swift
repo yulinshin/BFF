@@ -128,9 +128,10 @@ class HomePageViewController: UIViewController {
             switch result {
             case .success(let diary):
                 let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-                guard let controller = storyboard.instantiateViewController(withIdentifier: DiaryDetailViewController.identifier) as? DiaryDetailViewController else { return }
-                controller.viewModel = DetailViewModel(from: diary)
-                self.navigationController?.show(controller, sender: nil)
+                let detailController = storyboard.instantiateViewController(identifier: "DiaryDetailViewController", creator: { coder in
+                   DiaryDetailViewController(coder: coder, diary: diary)
+                })
+                self.navigationController?.show(detailController, sender: nil)
             case .failure(let error):
                 print(error)
             }
@@ -218,10 +219,12 @@ extension HomePageViewController: UICollectionViewDataSource {
 
             cell.didTapSupplyNotification = { [weak self] _ in
                 self?.showSupplyListPage()
+                self?.viewModel.removeNotification(indexPath: indexPath.row)
             }
 
             cell.didTapCommentNotification = { [weak self] diaryId in
                 self?.showDiaryDetailPage(diaryId: diaryId)
+                self?.viewModel.removeNotification(indexPath: indexPath.row)
             }
 
             return cell
