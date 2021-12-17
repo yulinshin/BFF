@@ -17,22 +17,12 @@ class NotificationManger {
 
     var unuPool = UNUserNotificationCenter.current()
 
-    let snoozeAction = UNNotificationAction(identifier: "SnoozeAction",
-        title: "Snooze", options: [.authenticationRequired])
-    let deleteAction = UNNotificationAction(identifier: "DeleteAction",
-        title: "Delete", options: [.destructive])
-
     // swiftlint:disable force_cast
     let app = UIApplication.shared.delegate as! AppDelegate
     // swiftlint:enable force_cast
 
     func setUp() {
-
-        let category = UNNotificationCategory(identifier: "NotificationCategory",
-            actions: [snoozeAction, deleteAction],
-            intentIdentifiers: [], options: [])
         unuPool = app.center
-        unuPool.setNotificationCategories([category])
     }
 
     func createSupplyNotification(supply: Supply) {
@@ -73,23 +63,15 @@ class NotificationManger {
         content.title = setNotification.title
         content.body = setNotification.content
         content.sound = UNNotificationSound.default
-
-        let date = countNotifyDate(fullStock: supply.fullStock, stock: supply.stock, reminderPercent: supply.reminderPercent, perCycleTime: supply.perCycleTime, cycleTime: supply.cycleTime)
-        var triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
-
-        print("countDate: \(triggerDate)")
-
-        triggerDate.hour = 6
-        triggerDate.minute = 30
-        triggerDate.second = 0
-
-        print("TriggerDate: \(triggerDate)")
+        content.badge = (UIApplication.shared.applicationIconBadgeNumber + 1) as NSNumber
+        let triggerDate = countNotifyDate(fullStock: supply.fullStock, stock: supply.stock, reminderPercent: supply.reminderPercent, perCycleTime: supply.perCycleTime, cycleTime: supply.cycleTime)
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
 
         guard let notifyTime = Calendar.current.date(from: triggerDate) else { return }
 
         setNotification.notifyTime = Timestamp(date: notifyTime)
+
         print("SetedNotification: \(setNotification.notifyTime.dateValue())")
 
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
@@ -107,44 +89,49 @@ class NotificationManger {
         })
     }
 
-    func countNotifyDate (fullStock: Int, stock: Int, reminderPercent: Double, perCycleTime: Int, cycleTime: String, fromDate: Date = Date()) -> Date {
+    func countNotifyDate(fullStock: Int, stock: Int, reminderPercent: Double, perCycleTime: Int, cycleTime: String, fromDate: Date = Date()) -> DateComponents {
 
         let maxStockDo = Double(fullStock)
         let stockDo = Double(stock)
         let cycleConsumeDo = Double(perCycleTime)
+        var triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date(timeInterval: TimeInterval(4), since: Date()))
 
         guard stockDo > cycleConsumeDo else {
-            return Calendar.current.date(byAdding: .second, value: 10, to: fromDate) ?? Date()
+            return triggerDate
         }
 
         var notifyDateFromNow = (stockDo - (maxStockDo * (reminderPercent/100.0))) / cycleConsumeDo
 
         if notifyDateFromNow < 0 {
             notifyDateFromNow = 0
+        } else {
+
         }
 
         switch cycleTime {
 
         case "每月":
 
-            guard let notifyDate = Calendar.current.date(byAdding: .month, value: Int(notifyDateFromNow), to: fromDate) else { return Date() }
-            return notifyDate
+            guard let notifyDate = Calendar.current.date(byAdding: .month, value: Int(notifyDateFromNow), to: fromDate) else { return triggerDate }
+            triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: notifyDate)
 
         case "每日":
 
-            guard let notifyDate = Calendar.current.date(byAdding: .day, value: Int(notifyDateFromNow), to: fromDate) else { return Date() }
-            return notifyDate
+            guard let notifyDate = Calendar.current.date(byAdding: .day, value: Int(notifyDateFromNow), to: fromDate) else { return triggerDate }
+            triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: notifyDate)
 
         default:
-            return Date()
+           break
         }
-
+        triggerDate.hour = 18
+        triggerDate.minute = 30
+        return triggerDate
     }
 
     func deleteNotification(notifyId: String) {
         unuPool.removePendingNotificationRequests(withIdentifiers: ["Supply_\(notifyId)"])
         FirebaseManager.shared.removeNotification(notifyId: "Supply_\(notifyId)")
-
+        UIApplication.shared.applicationIconBadgeNumber -= 1
     }
 }
 

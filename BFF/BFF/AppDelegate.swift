@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let center = UNUserNotificationCenter.current()
 
     // delegate for receiving or delivering notification
-    weak var notificationDelegate: NotificationDelegate?
+//    weak var notificationDelegate: NotificationDelegate?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.mainColor
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainColor]
 
-        center.delegate = notificationDelegate
+        center.delegate = NotificationManger.shared.app
 
         // MARK: set authorization
         let options: UNAuthorizationOptions = [.badge, .sound, .alert]
@@ -154,16 +154,20 @@ extension AppDelegate: MessagingDelegate {
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
+
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         print(#function)
         let content = response.notification.request.content
-        print(content.userInfo)
+        print("\(content.userInfo) #########")
+        UIApplication.shared.applicationIconBadgeNumber -= 1
         completionHandler()
     }
+
+
     // swiftlint:disable:next line_length
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         if #available(iOS 14.0, *) {
-            completionHandler([.banner])
+            completionHandler([.banner, .badge])
         } else {
             // Fallback on earlier versions
         }

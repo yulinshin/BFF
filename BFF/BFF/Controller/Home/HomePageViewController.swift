@@ -219,10 +219,12 @@ extension HomePageViewController: UICollectionViewDataSource {
 
             cell.didTapSupplyNotification = { [weak self] _ in
                 self?.showSupplyListPage()
+                self?.viewModel.removeNotification(indexPath: indexPath.row)
             }
 
             cell.didTapCommentNotification = { [weak self] diaryId in
                 self?.showDiaryDetailPage(diaryId: diaryId)
+                self?.viewModel.removeNotification(indexPath: indexPath.row)
             }
 
             return cell
