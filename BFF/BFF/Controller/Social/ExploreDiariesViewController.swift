@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import MJRefresh
+import SwiftUI
 
 class ExploreDiariesViewController: UIViewController {
 
@@ -82,38 +83,10 @@ extension ExploreDiariesViewController: UITableViewDelegate, UITableViewDataSour
         viewModel.showingDiaries.bind { cellViewModels in
             let viewModels =  cellViewModels[indexPath.row]
             cell.filledData(viewModel: viewModels)
-
-        cell.didTapLiked = { [weak self] in
-            self?.viewModel.updateWhoLiked(index: indexPath.row)
         }
 
-        cell.didTapMoreButton = { [weak self] in
-            cell.diaryContentLabel.numberOfLines  = 0
-            self?.tableView.reloadData()
-        }
-
-        cell.didTapComment = {  [weak self] in
-
-            self?.showComment(diary: viewModels.diary.value, indexPath: indexPath.row)
-        }
-
-        cell.didTapSendMessageButton = { [weak self]  in
-
-            self?.showChatVC(userId: viewModels.diary.value.userId)
-
-        }
-
-        cell.didTapPetButton = { [weak self]  in
-
-            self?.showPetProfile(petId: viewModels.diary.value.petId)
-
-        }
-
-        cell.didTapSettingButton = { [weak self]  in
-            self?.showSetting(with: viewModels.diary.value)
-        }
-        }
-
+        cell.delegate = self
+        cell.indexPath = indexPath.row
         cell.selectionStyle = .none
 
         return cell
@@ -172,6 +145,51 @@ extension ExploreDiariesViewController {
     }
 }
 
+extension ExploreDiariesViewController: SocialDiaryCellDelegate {
+
+    func didTapLiked(cell: DiaryViewCell, indexPath: Int) {
+        self.viewModel.updateWhoLiked(index: indexPath)
+    }
+
+    func didTapMoreButton(cell: DiaryViewCell, indexPath: Int) {
+        cell.diaryContentLabel.numberOfLines  = 0
+        self.tableView.reloadData()
+    }
+
+    func didTapComment(cell: DiaryViewCell, indexPath: Int) {
+        self.showComment(diary: viewModel.showingDiaries.value[indexPath].diary.value, indexPath: indexPath)
+    }
+
+    func didTapSendMessageButton(cell: DiaryViewCell, indexPath: Int) {
+        self.showChatVC(userId: viewModel.showingDiaries.value[indexPath].diary.value.userId)
+    }
+
+    func didTapPetButton(cell: DiaryViewCell, indexPath: Int) {
+        self.showPetProfile(petId: viewModel.showingDiaries.value[indexPath].diary.value.petId)
+    }
+
+    func didTapSettingButton(cell: DiaryViewCell, indexPath: Int) {
+        self.showSetting(with: viewModel.showingDiaries.value[indexPath].diary.value)
+    }
+
+}
+
+protocol SocialDiaryCellDelegate: AnyObject {
+
+    func didTapLiked(cell: DiaryViewCell, indexPath: Int)
+
+    func didTapMoreButton(cell: DiaryViewCell, indexPath: Int)
+
+    func didTapComment(cell: DiaryViewCell, indexPath: Int)
+
+    func didTapSendMessageButton(cell: DiaryViewCell, indexPath: Int)
+
+    func didTapPetButton(cell: DiaryViewCell, indexPath: Int)
+
+    func didTapSettingButton(cell: DiaryViewCell, indexPath: Int)
+
+}
+
 class DiaryViewCell: UITableViewCell {
 
     @IBOutlet weak var diaryImageView: UIImageView!
@@ -189,18 +207,8 @@ class DiaryViewCell: UITableViewCell {
     @IBOutlet weak var moreButton: UIButton!
     static let identifier = "diariesViewCell"
 
-    var didTapLiked: (() -> Void)?
-
-    var didTapComment: (() -> Void)?
-
-    var didTapMoreButton: (() -> Void)?
-
-    var didTapSendMessageButton: (() -> Void)?
-
-    var didTapPetButton: (() -> Void)?
-
-    var didTapSettingButton: (() -> Void)?
-
+    weak var delegate: SocialDiaryCellDelegate?
+    var indexPath = 0
     var isNeedToOpen = false
 
     override func awakeFromNib() {
@@ -275,33 +283,33 @@ class DiaryViewCell: UITableViewCell {
 
     @objc func tapsendMessageButton() {
 
-        didTapSendMessageButton?()
+        delegate?.didTapSendMessageButton(cell: self, indexPath: indexPath)
 
     }
 
     @objc func tapPetButton() {
 
-        didTapPetButton?()
+        delegate?.didTapPetButton(cell: self, indexPath: indexPath)
 
     }
 
     @objc func tapLikedButton() {
 
-        didTapLiked?()
+        delegate?.didTapLiked(cell: self, indexPath: indexPath)
     }
 
     @objc func tapCommentButton() {
-        didTapComment?()
+        delegate?.didTapComment(cell: self, indexPath: indexPath)
     }
 
     @objc func tapSettingButton() {
 
-        didTapSettingButton?()
+        delegate?.didTapSettingButton(cell: self, indexPath: indexPath)
     }
 
     @IBAction func showMore(_ sender: UIButton) {
 
-        didTapMoreButton?()
+        delegate?.didTapMoreButton(cell: self, indexPath: indexPath)
 
     }
 
