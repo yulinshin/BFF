@@ -240,13 +240,13 @@ class HomePageViewModel: NSObject {
 
                 var showNotifications = [Notification]()
                 notifications.forEach { notification in
-                    if notification.notifyTime.dateValue() < Date() {
+                    if notification.notifyTime.dateValue() < Date(timeInterval: 6, since: Date()) {
                         showNotifications.append(notification)
                 }
                 }
                 showNotifications = showNotifications.sorted(by: { $0.notifyTime.dateValue() > $1.notifyTime.dateValue()})
                 self.notifications.value = showNotifications
-
+                UIApplication.shared.applicationIconBadgeNumber = showNotifications.count
                 self.coverToNotificationVM()
                 print("upDated NotificationData at HomeVM")
 
