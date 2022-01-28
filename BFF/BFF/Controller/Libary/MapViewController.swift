@@ -62,14 +62,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         allButton.isSelected = true
-        normalButton.isSelected = false
-        specialButton.isSelected = false
-        locationsNormal.forEach { marker in
-            marker.map = mapView
-        }
-        locationsSpecial.forEach { marker in
-            marker.map = mapView
-        }
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation] ) {
