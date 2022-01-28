@@ -525,6 +525,15 @@ PODS:
   - NotificationBannerSwift (3.0.6):
     - MarqueeLabel (~> 4.0.5)
     - SnapKit (~> 5.0.1)
+  - PromiseKit (6.15.3):
+    - PromiseKit/CorePromise (= 6.15.3)
+    - PromiseKit/Foundation (= 6.15.3)
+    - PromiseKit/UIKit (= 6.15.3)
+  - PromiseKit/CorePromise (6.15.3)
+  - PromiseKit/Foundation (6.15.3):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.15.3):
+    - PromiseKit/CorePromise
   - PromisesObjC (2.0.0)
   - SnapKit (5.0.1)
   - SwiftLint (0.45.0)
@@ -546,6 +555,7 @@ DEPENDENCIES:
   - lottie-ios
   - MJRefresh
   - NotificationBannerSwift (~> 3.0.0)
+  - PromiseKit
   - SwiftLint
 
 SPEC REPOS:
@@ -580,6 +590,7 @@ SPEC REPOS:
     - MJRefresh
     - nanopb
     - NotificationBannerSwift
+    - PromiseKit
     - PromisesObjC
     - SnapKit
     - SwiftLint
@@ -615,10 +626,11 @@ SPEC CHECKSUMS:
   MJRefresh: ec9c53ff4abf3a9237b4283862f1bd51c2ee3fdb
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   NotificationBannerSwift: 7021be2338f8f29cf424b0aca43da462bf9e2a1a
+  PromiseKit: 3b2b6995e51a954c46dbc550ce3da44fbfb563c5
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
 
-PODFILE CHECKSUM: ba976371bd8ac5e5a3bfc58ee2bba4bf95fc70c7
+PODFILE CHECKSUM: 91b9577983006ecc577888444289b5a6be25ad3b
 
 COCOAPODS: 1.11.2
