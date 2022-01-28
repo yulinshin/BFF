@@ -109,8 +109,6 @@ class HomePageViewModel: NSObject {
 
                 self.usersPetsIds.value = user.petsIds ?? [String]()
 
-                print("upDate UserData at HomeVM")
-
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
 
                     let context = appDelegate.persistentContainer.viewContext
@@ -122,7 +120,6 @@ class HomePageViewModel: NSObject {
                             let userMo = UserMO(context:
                                                     appDelegate.persistentContainer.viewContext)
                             userMo.name = user.userName
-                            print("HEEEEEEEE\(user.userName)")
                             userMo.petsIds = user.petsIds
                             userMo.userId = user.userId
 
@@ -304,17 +301,20 @@ class NotificationViewModel {
         self.content.value = notification.content
         self.petId.value = notification.fromPets.first ?? ""
         self.type.value = notification.type
-        FirebaseManager.shared.fetchPet(petId: self.petId.value) { result in
-            switch result {
+        if petId.value != "" {
+            FirebaseManager.shared.fetchPet(petId: self.petId.value) { result in
+                switch result {
 
-            case .success(let pet):
-                self.petPicUrl.value = pet.petThumbnail?.url ?? ""
-                self.petName.value = pet.name
-            case .failure(let error):
-                print(error)
+                case .success(let pet):
+                    self.petPicUrl.value = pet.petThumbnail?.url ?? ""
+                    self.petName.value = pet.name
+                case .failure(let error):
+                    print(error)
 
+                }
             }
         }
+
         if let diaryId = notification.diaryId {
             self.diaryId.value = diaryId
         }

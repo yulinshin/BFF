@@ -4,7 +4,6 @@
 //
 //  Created by yulin on 2021/10/18.
 //
-
 import Foundation
 import Firebase
 import FirebaseAuth
@@ -12,7 +11,6 @@ import FirebaseFirestoreSwift
 import FirebaseStorage
 import UIKit
 import Network
-import SwiftUI
 
 enum FireBaseError: Error {
 
