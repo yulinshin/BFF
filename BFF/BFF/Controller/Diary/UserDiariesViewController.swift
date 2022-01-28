@@ -29,15 +29,9 @@ class UserDiariesViewController: UIViewController {
         diariesCollectionView.delegate = self
         diariesCollectionView.dataSource = userDiaryWallViewModel.diariesDataSource
         userDiaryWallViewModel.fetchUserDiaries()
-        userDiaryWallViewModel.didUpDateData = { [weak self] in
-            if self?.userDiaryWallViewModel.showingDiaries.value.count == 0 {
-                self?.statusLabel.text = "尚無新增毛小孩的日誌！"
-                self?.statusImage.image = UIImage(named: "NoDiary")
-            } else {
-                self?.statusImage.isHidden = true
-                self?.statusLabel.isHidden = true
-            }
-
+        userDiaryWallViewModel.didUpDateData = {
+            self.statusImage.isHidden = true
+            self.statusLabel.isHidden = true
         }
         let diaryNib = UINib(nibName: "DairyPhotoCell", bundle: nil)
         diariesCollectionView.register(diaryNib, forCellWithReuseIdentifier: DairyPhotoCell.identifier)

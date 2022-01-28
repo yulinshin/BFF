@@ -87,7 +87,7 @@ extension FirebaseManager {
     }
 
     func fetchPet(petId: String, completion: @escaping(Result<Pet, Error>) -> Void) {
-        
+
         dataBase.collection(Collection.pets.rawValue).document(petId).getDocument { (document, error) in
 
             if let document = document, document.exists {

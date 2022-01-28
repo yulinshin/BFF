@@ -101,7 +101,7 @@ class NetStatusManger {
         self.monitor = nil
         isMonitoring = false
         didStopMonitoringHandler?()
-        self.netWorkBanner.dismiss()
+
     }
 
     func checkContentStatus() {

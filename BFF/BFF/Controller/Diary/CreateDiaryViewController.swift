@@ -74,7 +74,6 @@ class CreateDiaryViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         NetStatusManger.share.stopMonitoring()
-
     }
 
     @objc func saveDiary() {

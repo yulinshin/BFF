@@ -1,4 +1,4 @@
- pod "PromiseKit"# Uncomment the next line to define a global platform for your project
+# Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
 target 'BFF' do
@@ -23,7 +23,6 @@ target 'BFF' do
  pod 'Firebase/Crashlytics'
  pod 'NotificationBannerSwift', '~> 3.0.0'
  pod 'MJRefresh'
- pod "PromiseKit"
 
     target 'BFFTests' do
         inherit! :search_paths
