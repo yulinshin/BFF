@@ -312,21 +312,21 @@ extension HomePageViewController: UICollectionViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
-        guard let tempScrollYPosition = tempScrollYPosition else {
+        DispatchQueue.main.async {
 
-            tempScrollYPosition = scrollView.contentOffset.y
+            guard let tempScrollYPosition = self.tempScrollYPosition else {
+
+                self.tempScrollYPosition = scrollView.contentOffset.y
 
             return
         }
 
         let temp = tempScrollYPosition - scrollView.contentOffset.y
 
-        DispatchQueue.main.async {
             self.backGroundCardConstraint.constant += temp * 2.8
+            self.tempScrollYPosition = scrollView.contentOffset.y
+
         }
-
-        self.tempScrollYPosition = scrollView.contentOffset.y
-
     }
 }
 
