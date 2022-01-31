@@ -35,27 +35,28 @@ class SocialDiaryWallViewModel {
             switch result {
 
             case .success(let diaries):
-
-                if  diaries.count == 0 {
-                    self.noMoreData?() 
-                } else {
-                    if isFetchMore {
-                        self.diaries.value += diaries
+                DispatchQueue.main.async {
+                    if  diaries.count == 0 {
+                        self.noMoreData?()
                     } else {
-                        self.diaries.value = diaries
-                    }
+                        if isFetchMore {
+                            self.diaries.value += diaries
+                        } else {
+                            self.diaries.value = diaries
+                        }
 
-                    if let petIds = self.petIds {
+                        if let petIds = self.petIds {
 
-                        self.diaries.value = self.diaries.value.filter({ diary in
-                            if petIds.contains(diary.petId) {
-                                return true
-                            } else { return false }
-                        })
+                            self.diaries.value = self.diaries.value.filter({ diary in
+                                if petIds.contains(diary.petId) {
+                                    return true
+                                } else { return false }
+                            })
 
-                    }
+                        }
 
-                    self.updatePetData()
+                        self.updatePetData()
+                }
                 }
 
             case.failure(let error):
@@ -77,16 +78,17 @@ class SocialDiaryWallViewModel {
             switch result {
 
             case .success(let diaries):
-
-                if  diaries.count == 0 {
-                    self.noMoreData?()
-                } else {
-                    if isFetchMore {
-                        self.diaries.value += diaries
+                DispatchQueue.main.async {
+                    if  diaries.count == 0 {
+                        self.noMoreData?()
                     } else {
-                        self.diaries.value = diaries
+                        if isFetchMore {
+                            self.diaries.value += diaries
+                        } else {
+                            self.diaries.value = diaries
+                        }
+                        self.updatePetData()
                     }
-                    self.updatePetData()
                 }
 
             case.failure(let error):
@@ -99,9 +101,12 @@ class SocialDiaryWallViewModel {
 
     func updatePetData() {
         let group: DispatchGroup = DispatchGroup()
+        var groupCount = 0
+        var leaveGroupCount = 0
         for (index, diary) in diaries.value.enumerated() {
             group.enter()
-            print("group: enter")
+            groupCount += 1
+            print("group: enter \(groupCount) \(diary.petId)")
             FirebaseManager.shared.fetchPet(petId: diary.petId) { result in
 
                 switch result {
@@ -111,11 +116,13 @@ class SocialDiaryWallViewModel {
                     self.diaries.value[index].petName = pet.name
                     self.diaries.value[index].petThumbnail = pet.petThumbnail ?? Pic(url: "", fileName: "")
                     group.leave()
-                    print("group: leave")
+                    leaveGroupCount += 1
+                    print("group: leave \(leaveGroupCount)\(diary.petId)")
 
                 case.failure(let error):
                     group.leave()
-                    print("group:leave")
+                    leaveGroupCount += 1
+                    print("group:leave \(leaveGroupCount)\(diary.petId) ")
                         print(error)
                 }
 
